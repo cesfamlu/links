@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="1E.png" type="image/x-icon">
     <title>Links Salud</title>
-    <!-- Materialize CSS -->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <style>
         html, body {
@@ -16,7 +16,7 @@
         }
 
         body {
-            background-color: #4c3889; /* Fondo púrpura */
+            background-color: #4c3889;
             color: white;
             font-family: Arial, sans-serif;
         }
@@ -35,29 +35,29 @@
 
     
         .header img {
-            max-width: 600px; /* Ajuste proporcional del tamaño del logo */
-            height: auto; /* Mantener proporciones */
+            max-width: 600px; 
+            height: auto; 
             margin-bottom: -5rem;
             margin-top: -5rem;
         }
         .header h1 {
             margin-top: 20px;
-            font-size: 3rem; /* Ajuste para mayor énfasis */
+            font-size: 3rem; 
             font-weight: bold;
         }
 
         .button {
             display: block;
             margin: 20px auto;
-            padding: 5px 30px; /* Incremento de padding para mejor separación */
+            padding: 5px 30px; 
             font-size: 1.2rem;
             color: white;
-            background-color: #00a676; /* Verde */
+            background-color: #00a676; 
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-align: center; /* Asegura el centrado del texto */
+            text-align: center; 
         }
 
         .button:hover {
@@ -72,7 +72,7 @@
         }
 
         .links.open {
-            max-height: 1000px; /* Ajustar según el contenido */
+            max-height: 1000px; 
             opacity: 1;
         }
 
@@ -85,28 +85,28 @@
             color: white;
             display: inline-block;
             text-align: center;
-            font-size: 1.4rem; /* Ajustar tamaño de letra */
+            font-size: 1.4rem; 
             font-weight: bold;
-            padding: 10px 20px; /* Espaciado dinámico */
-            background-color: #5e35b1; /* Morado más vibrante */
-            border-radius: 10px; /* Bordes más suaves */
-            margin: 10px; /* Mayor espacio entre botones */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+            padding: 10px 20px;
+            background-color: #5e35b1; 
+            border-radius: 10px; //
+            margin: 10px; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
             transition: all 0.3s ease;
-            width: 220px; /* Estandarizar tamaño del botón */
-            height: 60px; /* Estandarizar altura del botón */
-            line-height: 1.4; /* Ajustar espaciado de línea */
+            width: 220px;
+            height: 60px; 
+            line-height: 1.4; 
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            word-wrap: break-word; /* Ajustar texto largo */
+            word-wrap: break-word; 
         }
 
         .links a:hover {
-            background-color: orange; /* Cambiar color en hover */
-            transform: scale(1.1); /* Efecto de agrandamiento */
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            background-color: orange;
+            transform: scale(1.1); 
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); 
         }
 
         .sub-links {
@@ -123,21 +123,21 @@
 
         @media (max-width: 768px) {
             .links a {
-                width: 100%; /* Botones más anchos en pantallas pequeñas */
+                width: 100%;
                 margin-bottom: 10px;
             }
         }
 
         footer {
-            background-color: #1f1235; /* Footer púrpura oscuro */
+            background-color: #1f1235;
             color: white;
             text-align: center;
             padding: 20px 0;
             position: relative;
             bottom: 0;
             width: 100%;
-            border-top: 3px solid #7e57c2; /* Borde superior */
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2); /* Sombra superior */
+            border-top: 3px solid #7e57c2; 
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2); 
         }
 
         footer a {
@@ -152,16 +152,16 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        
         <div class="header">
             <img src="1.png" alt="Logo CESFAM">
             <h1>Links Salud</h1>
         </div>
 
-        <!-- Botón para mostrar links -->
+       
         <button class="button btn waves-effect waves-light" onclick="toggleMenu()">Mostrar Links</button>
 
-        <!-- Links -->
+        
         <div class="links" id="menu">
             <div class="row">
 
@@ -286,7 +286,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+   
     <footer>
         <p>&copy; 2025 CESFAM Dr. Alfredo Gantz Mann</p>
         <p>

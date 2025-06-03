@@ -1,0 +1,561 @@
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+
+/*VARIABLES*/
+
+
+:root {
+    --bg-page: #121212;
+    --bg-content: #141414;
+    --bg-element: #222222;
+    --text-primary: #f5f5f5;
+    --text-secondary: #aaaaaa;
+    --text-on-accent: #ffffff; 
+    --text-on-button: #ffffff; 
+    
+    --accent-primary: #4c3889;       
+    --accent-primary-hover: #0b5ed7;
+    --accent-secondary: #0dcaf0; 
+    
+    /* COLORES  MODO OSCURO */
+    --button-links-bg: #4c3889;         
+    --button-links-hover-bg: #3a2b6d;   
+    --button-links-border: #5e49a2;   
+    --button-links-text: #f0f0f0;     
+
+    --border-color: #333333;
+    --shadow-color-base: rgba(0,0,0,0.6);
+
+    --rg-font-heading: 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;
+    --rg-font-body: 'Roboto', Arial, sans-serif;
+}
+
+
+
+
+
+body.dark-mode {
+  background-color: #121212; /* Color de fondo oscuro */
+  color: white; /* Color de texto por defecto a blanco */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.page-container {
+  padding-top: 64px; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrap {
+  flex: 1; 
+  padding: 0 20px; 
+  padding-bottom: 60px;
+}
+
+
+
+nav, .sidenav {
+  background-color: #1c1c1e; 
+  color: white; 
+}
+
+
+nav .nav-wrapper a {
+  color: white; 
+}
+
+nav .brand-logo {
+  color: white; 
+  font-size: 2.8rem; 
+  
+}
+
+
+.sidenav li > a {
+  color: white; 
+  padding: 15px; 
+}
+
+.sidenav .subheader {
+  color: #aaaaaa; 
+}
+
+
+.btn {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  opacity: 0.9;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn-floating {
+  background-color: #6e6e73;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.btn-floating:hover {
+  background-color: white;
+  color: #333; 
+}
+
+
+.btn.green,
+.btn.red {
+  color: white !important; 
+}
+
+
+.export-buttons .btn {
+  padding: 15px 30px; 
+  font-size: 1rem; 
+  height: auto; 
+  line-height: normal; 
+}
+
+
+.export-buttons .btn i {
+  margin-right: 10px; 
+}
+
+
+.btn.green:hover {
+  background-color: #218838 !important; 
+}
+
+.btn.red:hover {
+  background-color: #c82333 !important; 
+}
+
+
+/* Buscador */
+.input-field input[type="text"] {
+  background: #2c2c2e;
+  color: #f5f5f7;
+  border-radius: 12px;
+  padding-left: 45px !important; 
+  border-bottom: 1px solid transparent !important; 
+  box-shadow: none !important; 
+  margin-bottom: 0; 
+}
+
+/* Estilo del input al enfocar */
+.input-field input[type="text"]:focus {
+  border-bottom: 1px solid #555 !important; 
+  box-shadow: 0 1px 0 0 #555 !important; 
+}
+
+
+.input-field .material-icons.prefix {
+  color: #8e8e93;
+  top: 10px; 
+  left: 10px; 
+}
+
+.sticky-search-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+ 
+}
+
+
+.collapsibles-container {
+    margin-top: 20px;
+    margin-bottom: 30px; 
+}
+
+
+.collapsible {
+  border: 1px solid #333; 
+  border-radius: 16px; 
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+}
+
+.collapsible li {
+  background-color: #1e1e1e; 
+  border-bottom: 1px solid #333; 
+}
+
+
+.collapsible li:last-child {
+    border-bottom: none;
+}
+
+
+.collapsible-header {
+  background-color: #282828; 
+  color: white; 
+  padding: 15px; 
+  border-bottom: none !important; 
+    font-weight: 600; 
+}
+
+.collapsible-header i {
+    color: #bbbbbb; 
+    margin-right: 10px;
+}
+
+.collapsible-body {
+  background-color: #1e1e1e; 
+  color: white; 
+  padding: 15px; 
+}
+
+
+.responsive-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+}
+
+
+.collapsible-body table.telefonos-section {
+  color: white; 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-bottom: 0; 
+}
+
+
+.collapsible-body table.telefonos-section thead {
+   background-color: #2c2c2e; 
+}
+
+.collapsible-body table.telefonos-section thead th {
+   color: #f5f5f7; 
+   font-weight: 600;
+   padding: 12px;
+   text-align: left; 
+}
+
+
+
+.collapsible-body table.telefonos-section td {
+  color: white; 
+  border-bottom: 1px solid #3a3a3c; 
+  padding: 14px; 
+}
+
+
+.collapsible-body table.telefonos-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+.collapsible-body table.telefonos-section.highlight tbody tr:hover {
+  background-color: #2a2a2a; 
+}
+
+/.collapsible-body table.telefonos-section a {
+    color: #80c0ff; 
+    text-decoration: none;
+}
+
+.collapsible-body table.telefonos-section a:hover {
+    text-decoration: underline;
+}
+
+
+.highlight {
+    background-color: grey; 
+    color: #333; 
+    padding: 2px 0;
+    border-radius: 2px;
+}
+
+
+.collapsible-body .telefonos-section .input-field input {
+  max-width: 100%;   
+  width: auto;       
+  box-sizing: border-box; 
+}
+
+
+  footer {
+            background-color: var(--bg-primary);
+            color: var(--text-content-secondary); 
+            text-align: center;
+            padding: 25px 0; 
+            width: 100%;
+            border-top: 0.4px solid ; 
+            margin-top: auto; 
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        footer a {
+            font-family: var(--rg-font-body);
+            color: var(--text-content-secondary); 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-primary);
+            text-decoration: underline;
+        }
+
+
+
+.btn-floating {
+   position:fixed;
+   bottom:20px;
+   right:20px;
+   background-color: #673ab7; 
+   z-index: 998; /* Asegurar  qe esté por encima de la mayoría de elementos */
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  
+  .page-container {
+    padding-top: 56px; 
+  }
+
+  .content-wrap {
+    padding: 0 15px; 
+    padding-bottom: 60px; 
+  }
+
+
+   nav .brand-logo {
+      font-size: 1.8rem; 
+      left: 15px; 
+      transform: none; 
+   }
+
+  /* Buscador en móviles */
+  .sticky-search-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+  }
+
+  .input-field {
+      margin-bottom: 0; 
+  }
+
+  .input-field input[type="text"] {
+     padding-left: 35px !important;
+     font-size: 1rem; 
+  }
+
+   .input-field .material-icons.prefix {
+       top: 8px; 
+       left: 8px; 
+       font-size: 1.5rem; 
+   }
+
+
+  
+  .export-buttons {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 15px;
+  }
+
+  .export-buttons button {
+    width: 80%; 
+    margin: 5px 0; 
+    padding: 12px 20px; 
+    font-size: 0.9rem; 
+  }
+
+
+  .collapsibles-container {
+      margin-top: 15px;
+      margin-bottom: 20px;
+  }
+
+
+   .collapsible-header {
+       padding: 12px; 
+       font-size: 1rem; 
+   }
+
+   .collapsible-header i {
+       margin-right: 8px; 
+       font-size: 1.2rem; 
+   }
+
+  .collapsible-body {
+     padding: 12px; 
+  }
+
+
+   .collapsible-body table.telefonos-section thead th {
+       padding: 10px; 
+       font-size: 0.9rem;
+   }
+
+  .collapsible-body table.telefonos-section td {
+     padding: 10px; 
+     font-size: 0.9rem; 
+  }
+
+  
+ footer p {
+            margin: 4px 0;
+        }
+
+        footer a {
+            font-family: var(--rg-font-body);
+            color: var(--text-content-secondary); 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-primary);
+            text-decoration: underline;
+        }
+
+
+
+   .btn-floating {
+       bottom: 15px;
+       right: 15px;
+       width: 50px; 
+       height: 50px;
+   }
+
+    .btn-floating i {
+        line-height: 50px; 
+        font-size: 1.8rem; 
+    }
+}
+
+nav .sidenav-trigger {
+  position: absolute;
+  right: 16px;   
+  left: auto;    
+}
+
+
+@media screen and (min-width: 601px) {
+  nav .sidenav-trigger {
+    display: none;
+  }
+}
+
+.sticky-search-container .input-field {
+  display: flex;
+  align-items: center;
+  background: #2c2c2e;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+
+.sticky-search-container .input-field input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0 0 0 10px !important;
+  color: #f5f5f7;
+}
+
+
+.sticky-search-container .input-field .material-icons.prefix {
+  position: static;
+  margin-right: 8px;
+  color: #8e8e93;
+}
+/* Centrar el icono del botón de cambiar tema */
+#toggleTheme i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.8rem; 
+}
+
+#toggleTheme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: -2; 
+  width: 35px;
+  height: 35px;
+  min-width: 50px; 
+  border-radius: 25px; 
+  margin-top: 15px; 
+}
+
+/*aqui va la magIII*/
+
+
+@media screen and (max-width: 600px) {
+  .collapsible-body table.telefonos-section,
+  .collapsible-body table.telefonos-section thead,
+  .collapsible-body table.telefonos-section tbody,
+  .collapsible-body table.telefonos-section tr {
+    display: block;
+    width: 100%;
+  }
+
+  .collapsible-body table.telefonos-section thead {
+    display: none; 
+  }
+
+  .collapsible-body table.telefonos-section tr {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background: #242424;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #2d2d2d;
+    padding: 8px 0;
+  }
+
+  .collapsible-body table.telefonos-section td {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid #333;
+    padding: 10px 10px;
+    position: relative;
+    font-size: 1rem;
+  }
+
+  .collapsible-body table.telefonos-section td:last-child {
+    border-bottom: none;
+  }
+
+  .collapsible-body table.telefonos-section td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #aaa;
+    min-width: 110px;
+    display: inline-block;
+    margin-right: 12px;
+    flex-shrink: 0;
+    font-size: 0.96em;
+    letter-spacing: 0.5px;
+  }
+}

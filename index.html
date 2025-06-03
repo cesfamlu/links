@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="1E.png" type="image/x-icon">
+    <title>Links Salud</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="navbar-fixed">
+        <nav class="navbar-custom">
+            <div class="nav-wrapper container"> <a href="#" class="brand-logo">Links Salud</a> <a href="#" data-target="mobile-nav-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/Links-sistem/accesoTelefonico.html">Accesos Telefónicos</a></li>
+                    <li><a href="https://cesfamlu.github.io/FormularioSoporte/">Soporte Informático</a></li>
+                    <li>
+                        <a href="#!" id="theme-toggle-btn" class="tooltipped" data-position="bottom" data-tooltip="Cambiar Tema">
+                            <i class="material-icons">brightness_6</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <ul class="sidenav" id="mobile-nav-menu">
+        <li><a href="/Links-sistem/accesoTelefonico.html">Accesos Telefónicos</a></li>
+        <li><a href="http://localhost/FormularioSoporte/">Soporte Informático</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#!" id="theme-toggle-btn-mobile"><i class="material-icons left">brightness_6</i>Cambiar Tema</a></li>
+    </ul>
+
+    <div class="container content-wrapper"> 
+        <div class="header">
+            <img src="img/1.png" alt="Logo CESFAM" id="header-logo"> 
+            <h1>Directorio de enlaces</h1> </div>
+
+        <button class="button btn waves-effect waves-light">
+            <span id="menu-label">Mostrar Links</span> <span id="menu-icon" class="toggle-icon">➡</span>
+        </button>
+
+        <div class="links" id="menu"> 
+            <div class="row">
+                <div class="col s12 m4">
+                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-ras', this)">
+                        RAS <span class="toggle-icon">➡</span>
+                    </a>
+                    <div class="sub-links" id="sub-links-ras">
+                        <a href="https://www.rasvaldivia.cl" target="_blank">RAS Principal</a>
+                        <a href="https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" target="_blank">RAS Contingencia</a>
+                        <a href="http://10.8.102.72" target="_blank">RAS IP 1</a>
+                        <a href="http://10.8.102.74" target="_blank">RAS IP 2</a>
+                        <a href="numeros.html" target="_blank">RAS IP 3</a>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-core', this)">
+                        CORE <span class="toggle-icon">➡</span>
+                    </a>
+                    <div class="sub-links" id="sub-links-core">
+                        <a href="https://www.hbvaldivia.cl/core/" target="_blank">CORE Principal</a>
+                        <a href="https://10.6.206.62/core" target="_blank">CORE IP</a>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-Examenes', this)">
+                        Examenes <span class="toggle-icon">➡</span>
+                    </a>
+                    <div class="sub-links" id="sub-links-Examenes">
+                        <a href="http://10.66.50.47/"  target="_blank"> Exámenes </a>
+                        <a href="http://10.4.59.246:90/"  target="_blank">Exámenes Contingencia</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <a href="https://www.munilaunioninfo.com" class="waves-effect waves-light" target="_blank">Muni La Union</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://desamlu.cl/" class="waves-effect waves-light" target="_blank">DESAMLU</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://intranetlaunion.smc.cl/login.aspx" class="waves-effect waves-light" target="_blank">Intranet</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <a href="https://clientes.isatec.cl" class="waves-effect waves-light" target="_blank">Isatec</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="http://10.6.67.166" class="waves-effect waves-light" target="_blank">Isis View</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://www.licencia.cl" class="waves-effect waves-light" target="_blank">Imed</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <a href="https://tinyurl.com/centro-integral" class="waves-effect waves-light" target="_blank">Centro Integral</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-sigges', this)">
+                        SIGGES 🆕 <span class="toggle-icon">➡</span>
+                    </a>
+                    <div class="sub-links" id="sub-links-sigges">
+                        <a href="https://www.hbvaldivia.cl/core/" target="_blank">Nuevo SIGGES </a>
+                        <a href="https://10.6.206.62/core" target="_blank">SIGGES </a>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://teleoftalmologia.minsal.cl/es/login" class="waves-effect waves-light" target="_blank">Dart</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <a href="https://interconsulta.minsal.cl/" class="waves-effect waves-light" target="_blank">Hospital Digital</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://srdm.crececontigo.gob.cl/login" class="waves-effect waves-light" target="_blank">Crece Contigo</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="https://fonasa.cl/sites/fonasa/prestadores/tramites/certificado-previsional" class="waves-effect waves-light" target="_blank">FONASA</a>
+                </div>
+            </div>
+        </div> 
+    </div> 
+
+    <footer>
+        <p>&copy; 2025 CESFAM Dr. Alfredo Gantz Mann</p>
+        <p>
+            <a href="http://cesfamlu.github.io/links">Política de Privacidad</a> |
+            <a href="http://cesfamlu.github.io/links">Términos y Condiciones</a>
+        </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/fcn.js"></script> 
+</html>

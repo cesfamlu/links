@@ -2,7 +2,7 @@
 
       :root {
             --bg-primary: #1c1c1e;
-            --bg-secondary: rgba(28, 28, 30, 0.85); /* Ligeramente más opaco para navbar sin blur directo */
+            --bg-secondary: rgba(28, 28, 30, 0.85); 
             --bg-content: #2c2c2e;
             --bg-content-alt: #3a3a3c;
             
@@ -11,8 +11,8 @@
             --text-content-secondary: #a0a0a5;
             --text-on-accent: #ffffff; 
             
-            --accent-primary: #6a5acd; /* SlateBlue */
-            --accent-primary-hover: #7b68ee; /* MediumSlateBlue */
+            --accent-primary: #6a5acd;
+            --accent-primary-hover: #7b68ee; 
             --accent-primary-active: #5d4bbf;
 
             --border-primary-separator: #38383a;
@@ -21,11 +21,11 @@
             --shadow-button-hover: rgba(106, 90, 205, 0.35);
             --shadow-container: rgba(0, 0, 0, 0.1);
 
-            /* Variables de fuente adaptadas */
+          
             --rg-font-heading: 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;
             --rg-font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-            --border-radius-main: 1rem; /* Un poco más redondeado para contenedores principales */
+            --border-radius-main: 1rem; 
             --border-radius-elements: 0.75rem; 
         }
 
@@ -39,7 +39,7 @@
             --text-content-primary: #1d1d1f;
             --text-content-secondary: #6e6e73;
             
-            --accent-primary: #5856d6; /* Apple Blue */
+            --accent-primary: #5856d6; 
             --accent-primary-hover: #6b69e0;
             --accent-primary-active: #4a48b8;
 
@@ -51,7 +51,7 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Para scrollIntoView */
+            scroll-behavior: smooth; 
         }
 
         body {
@@ -69,32 +69,32 @@
         
         /* Navbar adaptada */
         .navbar-fixed {
-            height: 60px; /* Ajustar altura si es necesario */
+            height: 60px; 
         }
         .navbar-custom {
             background-color: var(--bg-secondary); 
             box-shadow: 0 1px 0px var(--border-primary-separator); /* Sombra/borde sutil inferior */
-            padding: 0; /* Remover padding para control total con nav-wrapper */
+            padding: 0; 
             transition: background-color 0.35s ease, box-shadow 0.35s ease;
         }
         .navbar-custom .nav-wrapper {
-            padding: 0 20px; /* Padding interno para el contenido de la navbar */
+            padding: 0 20px; 
             height: 60px;
         }
 
         .navbar-custom .brand-logo {
-            color: var(--text-primary); /* Color de texto primario para el logo */
+            color: var(--text-primary); 
             font-weight: 600; 
             font-size: 1.5rem; 
             letter-spacing: 0.5px;
             padding: 0;
-            line-height: 60px; /* Centrar verticalmente */
+            line-height: 60px; 
         }
         
         .navbar-custom ul.right li a { 
             color: var(--text-content-secondary); 
             font-weight: 500;
-            text-transform: none; /* Estilo más sutil, sin uppercase */
+            text-transform: none; 
             font-size: 0.9rem;
             letter-spacing: 0.2px;
             padding: 0 15px;
@@ -108,7 +108,7 @@
 
         .navbar-custom ul.right li a#theme-toggle-btn {
             color: var(--text-content-secondary); 
-            padding: 0 10px; /* Ajustar padding para icono */
+            padding: 0 10px; 
         }
         .navbar-custom ul.right li a#theme-toggle-btn:hover {
             color: var(--accent-primary);
@@ -162,7 +162,7 @@
             align-items: center; 
             justify-content: flex-start; 
             flex-grow: 1; 
-            padding-top: calc(60px + 3vh); /* Espacio para navbar fija + un poco más */
+            padding-top: calc(60px + 3vh); 
             padding-bottom: 5vh; 
         }
 
@@ -188,7 +188,7 @@
         
         .header h1 {
             font-family: var(--rg-font-heading);
-            color: var(--text-content-primary); /* Color más brillante para el título */
+            color: var(--text-content-primary); 
             font-size: 3.2rem; 
             font-weight: normal; 
             letter-spacing: 1.5px;
@@ -241,9 +241,9 @@
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.4s 0.1s ease-in-out; 
             width: 100%; 
-            background-color: var(--bg-content); /* Fondo para la sección de links */
+            background-color: var(--bg-content); 
             border-radius: var(--border-radius-main);
-            padding: 0px; /* Padding se manejará en .open */
+            padding: 0px; 
             margin-top: 1rem;
             box-shadow: 0 8px 20px var(--shadow-container);
             border: 1px solid var(--border-primary-separator);
@@ -252,7 +252,7 @@
         .links.open {
             max-height: 2000px; 
             opacity: 1;
-            padding: 20px 15px; /* Padding cuando está abierto */
+            padding: 20px 15px; 
         }
 
         .links .row {
@@ -285,7 +285,7 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
             border-radius: var(--border-radius-elements);
-            box-shadow: none; /* Sombra más sutil o ninguna para links internos */
+            box-shadow: none; 
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease; 
             box-sizing: border-box; 
             word-wrap: break-word; 

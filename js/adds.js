@@ -199,7 +199,7 @@ function performSearch() {
 }
 
 
-const debouncedSearch = debounce(performSearch, 250); // 250ms de retraso
+const debouncedSearch = debounce(performSearch, 250); 
 
 searchInput.addEventListener("input", debouncedSearch);
 
@@ -245,7 +245,7 @@ function exportTableToExcel() {
         }
     });
 
-     if (ws_data.length <= 1) { // Si solo están los encabezados, no hay datos
+     if (ws_data.length <= 1) { 
         alert("No hay datos para exportar.");
         return;
     }
@@ -269,17 +269,17 @@ async function exportTableToPDF() {
     const collapsibleItems = document.querySelectorAll(".collapsible li");
 
      collapsibleItems.forEach(item => {
-        // Obtener el nombre de la sección limpiando iconos y espacios extra
+       
         const headerElement = item.querySelector(".collapsible-header");
-        if (!headerElement) return; // Asegurarse de que el encabezado existe
+        if (!headerElement) return; 
 
-        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); // Limpiar iconos
+        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); 
         const tbody = item.querySelector("tbody");
         if (!tbody) return;
 
         const rowsToExport = tbody.querySelectorAll("tr");
 
-        // Recopilar las filas visibles de esta sección
+   
          const sectionRowsData = [];
          rowsToExport.forEach(row => {
              if (row.style.display !== 'none') {
@@ -289,9 +289,9 @@ async function exportTableToPDF() {
             }
         });
 
-        // Añadir el nombre de la sección y sus datos si hay filas visibles
+     
         if (sectionRowsData.length > 0) {
-             // Añadir el nombre de la sección como una fila con colspan
+             
             bodyRows.push([{ content: sectionHeader.toUpperCase(), colSpan: 3, styles: { fontStyle: 'bold', halign: 'center', fillColor: [200, 200, 200] } }]);
              bodyRows.push(...sectionRowsData); // Añadir las filas de datos
         }
@@ -312,10 +312,10 @@ async function exportTableToPDF() {
         theme: 'grid',
         headStyles: { fillColor: [106, 27, 154] },
         styles: { cellPadding: 3, fontSize: 9 },
-        // Añadir el hook para manejar las celdas con colspan (nombres de sección)
+        
         didParseCell: function(data) {
             if (data.cell.raw.content && data.cell.raw.colSpan === 3) {
-                 data.cell.styles.cellPadding = 5; // Ajustar padding para celdas de sección
+                 data.cell.styles.cellPadding = 5; 
              }
         }
     });
@@ -324,27 +324,24 @@ async function exportTableToPDF() {
 }
 
 
-// === Inicialización ===
+
 document.addEventListener('DOMContentLoaded', () => {
-    // *** INICIALIZAR SIDENAV ***
+   
     var sidenavElems = document.querySelectorAll('.sidenav');
     M.Sidenav.init(sidenavElems);
 
-    // Aplicar tema guardado ANTES de renderizar para evitar FOUC
+   
     applySavedTheme();
 
-    // Renderizar datos en las nuevas secciones colapsables
+    
     renderCollapsibleData();
 
-    // *** INICIALIZAR COLLAPSIBLES ***
-    // Inicializamos DESPUÉS de renderizar los datos para que Materialize los encuentre
+
     var collapsibleElems = document.querySelectorAll('.collapsible');
-    // Si usas la clase 'expandable' en el HTML, el segundo argumento (options) no necesita {accordion: false}
-    // Si quieres que solo se pueda abrir una a la vez, usa {accordion: true} (por defecto es true si no usas 'expandable')
-    M.Collapsible.init(collapsibleElems, {}); // Inicializa los colapsables
+  
+    M.Collapsible.init(collapsibleElems, {}); 
 
-
-    // *** AÑADIR LISTENER AL BOTÓN TEMA MÓVIL ***
+    
     const mobileButton = document.getElementById('toggleThemeMobile');
     if (mobileButton) { // Verificar que exista
         mobileButton.addEventListener('click', toggleTheme);
@@ -355,10 +352,8 @@ if (desktopButton) {
   desktopButton.addEventListener('click', toggleTheme);
 }
 
-    // Opcional: Inicializar otros componentes Materialize si los usas
-    // M.AutoInit(); // Inicializa automáticamente la mayoría de componentes si no los inicializas individualmente
+  
 });
 
-// Hacer las funciones de exportación accesibles globalmente si son llamadas desde onclick en el HTML
 window.exportTableToExcel = exportTableToExcel;
 window.exportTableToPDF = exportTableToPDF;

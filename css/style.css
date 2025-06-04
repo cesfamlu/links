@@ -73,7 +73,7 @@
         }
         .navbar-custom {
             background-color: var(--bg-secondary); 
-            box-shadow: 0 1px 0px var(--border-primary-separator); /* Sombra/borde sutil inferior */
+            box-shadow: 0 1px 0px var(--border-primary-separator); 
             padding: 0; 
             transition: background-color 0.35s ease, box-shadow 0.35s ease;
         }
@@ -115,7 +115,7 @@
         }
         .navbar-custom ul.right li a#theme-toggle-btn i.material-icons {
             line-height: 60px;
-            font-size: 1.5rem; /* Tamaño del icono de tema */
+            font-size: 1.5rem; 
         }
         .navbar-custom .sidenav-trigger i.material-icons {
             line-height: 60px;
@@ -127,7 +127,7 @@
 
 
         ul.sidenav#mobile-nav-menu {
-            background-color: var(--bg-content); /* Fondo de sidenav */
+            background-color: var(--bg-content); 
             border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0; 
             box-shadow: 5px 0 15px var(--shadow-navbar);
         }

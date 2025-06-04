@@ -1,4 +1,4 @@
-// ==== DATA ARRAY (sin cambios) ====
+
 const data = {
     municipalidad: [
         ["Asesor Jurídico alcalde", "7135", "64 2 527135"],["Administración, Vehículos y Caminos", "7000", "64 2 527000"],["Administración, Vehículos, Secretaría y Obras Menores", "7111", "64 2 527111"],["Administración, Vehículos, Prevencionista", "", "472239"],["Administración, Seguridad Pública", "", "322033"],["Administración, Dpto. Aseo y Ornato", "7102", "64 2 527102"],["Administración, Dpto. Aseo Parque Municipal", "", "472297"],["Administración, Unidad Académica", "", "472366"],["Administración, Oficina de Comunicaciones", "", "324387"],["Secretaria Municipal", "7139", "64 2 527139"],["Secretaría Municipal, Secretaria", "7120", "64 2 527120"],["Secretaría Municipal, Central Telefónica", "", "322441"],["Secretaría Municipal, Oficina de Concejales", "7114", "64 2 527114"],["Secretaría Municipal, Oficina de Partes", "7141", "64 2 527141"],["Secretaría Municipal, Transparencia Municipal", "7144", "64 2 527144"],["Salón Consistorial", "", "322031"],["Portería", "", "472376"],["Dirección de Control, directora", "384", "64 2 201384"],["Dirección de Control administrativo", "421", "64 2 200421"],["Dirección de Control, Informática", "983", "64 2 524983"],["Dirección de Control, fiscalizador", "580", "64 2 200580"],["Cultura y Turismo, Dirección", "Sin Anexo", "64 2 346116"],["Cultura y Turismo, Secretaría", "", "346117/346118"],["Cultura y Turismo, Biblioteca", "", "472215"],["Cultura y Turismo, Turismo", "", "9 9958 1816"],["Cultura y Turismo, Pueblos Originarios", "", "9 4743 2447"],["Estadio Carlos Vogel", "", "472296"],["Dirección de Obras Municipales, Director", "7138", "64 2 527138"],["Dirección de Obras Municipales, Secretaría", "7138", "64 2 527138"],["Fomento Productivo", "Sin Anexo", "64 2 346116"],["Jefa Dto. Social.", "266", "472266"],["Dideco, Dirección", "271", "422271"],["Dideco, Secretaría", "270", "472270"],["Dideco, OMIL", "267 - 268", "472340"],["Dideco, Programa Jefas de Hogar - Oficina Mujer", "246", "472246"],["Dideco, Organizaciones Comunitarias", "281", "472281"],["Dideco, OPD", "276", "472276"],["Dideco, Senda Previene", "204-390", "472204"],["Dideco, Oficina del Deporte", "306", "472306"],["Dideco, Gimnasio Municipal", "205", "472205"],["Dideco Desarrollo Rural", "386", "472386"],["Dideco, Prodesal", "214", "472214"],["Dideco, PDTI", "388", "472388"],["Dideco, Programas Sociales, Jefa", "224", "472224"],["Dideco, Programas Familias", "232-233", "472232"],["Oficina de la Juventud", "Sin Anexo", "99527388"],["Finanzas, Director", "351", "472350"],["Finanzas, Adquisiciones", "355-395", "472355"],["Finanzas, Rentas y patentes", "265", "472265"],["Finanzas, Inspección", "262", "472262"],["Finanzas, Personal", "350 - 352", "472233/472352"],["Finanzas, Tesorería Jefa", "353", "472353"],["Finanzas, Tesorería Cajeras", "354", "472354"],["Finanzas, Contabilidad e Inventario", "356", "472356"],["Finanzas, Cementerio Municipal", "120", "322384"],["Finanzas, Bodega Municipal", "337", "472337"],["Finanzas, Bodega Camilo Henriquez", "371", "472298/324362"],["Secretario", "", "9 8973 7374"],["Secplan, Dirección", "286", "472286"],["Secplan, Secretaría", "458", "472358"],["Secplan, Asesor Urbanista", "247", "472247"],["Secplan, Vivienda", "241", "472236"],["Secplan, Inversiones", "671", "324671"],["Secplan, profesionales", "202", "472202"],["Secplan, ITO", "263", "472263"],["Secplan, Compras", "221", "472221"],["Secplan, Medio Ambiente", "245", "472245"]
@@ -14,13 +14,13 @@ const data = {
 const tbodyMunicipalidad = document.querySelector(".tbody-municipalidad");
 const tbodySalud = document.querySelector(".tbody-salud");
 const tbodyDaem = document.querySelector(".tbody-daem");
-// Añade referencias para otros tbody si tienes más secciones
+
 
 const searchInput = document.getElementById("search");
 const toggleThemeButtonDesktop = document.getElementById("toggleTheme");
 const toggleThemeButtonMobile = document.getElementById("toggleThemeMobile");
 
-// --- Función de Debounce ---
+
 function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -73,16 +73,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 function observeRows() {
-    // Seleccionar todas las filas dentro de las tablas dentro de los collapsible-body
+  
     const allTableRows = document.querySelectorAll(".collapsible-body table.telefonos-section tbody tr");
 
-    // Desconectar observer anterior si existiera para evitar observar duplicados
+
     allTableRows.forEach(row => observer.unobserve(row));
 
     allTableRows.forEach(row => observer.observe(row));
 }
 
-// --- Cambio de Tema (sin cambios, funciona con body class) ---
 function toggleTheme() {
     document.body.classList.toggle("dark-mode");
     document.body.classList.toggle("light-mode");
@@ -101,13 +100,13 @@ function updateMobileThemeButton() {
         } else {
             toggleThemeButtonMobile.classList.remove('purple', 'darken-2');
             toggleThemeButtonMobile.classList.add('orange', 'lighten-2');
-            toggleThemeButtonMobile.style.color = '#333'; // Texto oscuro en botón claro
+            toggleThemeButtonMobile.style.color = '#333'; 
         }
     }
 }
 
 
-// --- Aplicar Tema Guardado ---
+
 function applySavedTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -117,82 +116,81 @@ function applySavedTheme() {
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
     }
-    updateMobileThemeButton(); // Asegurar que el botón móvil refleje el tema inicial
+    updateMobileThemeButton(); 
 }
 
 
-// --- Lógica de Búsqueda (Corregida) ---
 function performSearch() {
   const filter = searchInput.value.toLowerCase().trim();
   document.querySelectorAll(".collapsible li").forEach(item => {
     const tbody = item.querySelector("tbody");
     if (!tbody) return;
 
-    let sectionMatch = false; // Para saber si algún row de esta sección coincide
+    let sectionMatch = false; 
 
     tbody.querySelectorAll("tr").forEach(row => {
-      let rowMatch = false; // Para saber si esta fila coincide con el filtro
+      let rowMatch = false; 
       row.querySelectorAll("td").forEach(cell => {
         const text = cell.getAttribute("data-text").toLowerCase();
-        let content = cell.getAttribute("data-text"); // Usamos el texto original
+        let content = cell.getAttribute("data-text"); 
 
-        // Remover cualquier resaltado previo antes de verificar coincidencias
+       
          cell.querySelectorAll('.highlight').forEach(span => {
              const parent = span.parentNode;
-             // Reemplazar el span.highlight con su contenido de texto original
+            
              parent.replaceChild(document.createTextNode(span.textContent), span);
-             parent.normalize(); // Combinar nodos de texto adyacentes
+             parent.normalize(); 
          });
 
 
         if (filter !== "" && text.includes(filter)) {
           rowMatch = true;
-          sectionMatch = true; // Si una fila coincide, la sección entera coincide
+          sectionMatch = true; 
           const regex = new RegExp(`(${filter.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')})`, "gi");
           content = cell.getAttribute("data-text").replace(regex, '<span class="highlight">$1</span>');
         } else {
-             // Si no hay filtro o no coincide, restaurar el contenido original sin resaltar
+           
              content = cell.getAttribute("data-text");
         }
 
 
-        // Reconstruir celda: FONO? (Ícono y enlace)
+        
         if (cell.querySelector("a")) {
           const tel = cell.getAttribute("data-text").replace(/[\s-/]/g, "");
-          // Mantenemos el icono original si existía en el enlace
+          
           const phoneIconHTML = cell.querySelector('a i.material-icons.left') ? '<i class="material-icons left">phone</i>' : '';
           cell.innerHTML = `<a href="tel:${tel}">${phoneIconHTML}${content}</a>`;
         }
-        // UNIDAD? (Ícono)
-        else if (cell.querySelector("i.material-icons.left")) { // Aseguramos que sea el icono de unidad
-          // Corregido: Eliminado el </a> sobrante
+        
+        else if (cell.querySelector("i.material-icons.left")) { 
+          
           cell.innerHTML = `<i class="material-icons left">business</i>${content}`;
         }
-        // RESTO (Anexo…)
+      
         else {
-           // Para celdas sin ícono ni enlace, simplemente ponemos el contenido (con o sin highlight)
-           cell.innerHTML = content; // Usar innerHTML para que el <span> del highlight se interprete
+           
+           cell.innerHTML = content; 
         }
       });
 
-      // Mostrar u ocultar la fila según si coincide con el filtro o si el filtro está vacío
+
       row.style.display = (rowMatch || filter === "") ? "" : "none";
     });
 
-    // Mostrar/ocultar el item colapsable completo y abrir/cerrar según la lógica de búsqueda
+
   if (filter === "" || sectionMatch) {
   item.style.display = "";
 
-  // Si hay filtro y esta sección tiene match, abrirla
+
   if (filter !== "" && sectionMatch) {
     item.classList.add("active");
   }
-  // Si NO hay filtro, cerramos todo (estado normal)
+
   else if (filter === "") {
     item.classList.remove("active");
   }
 } else {
-  // Si no hay coincidencia en la sección, ocultarla y cerrarla
+      
   item.style.display = "none";
   item.classList.remove("active");
 }
@@ -200,36 +198,35 @@ function performSearch() {
   });
 }
 
-// Aplicar debounce a la función de búsqueda
+
 const debouncedSearch = debounce(performSearch, 250); // 250ms de retraso
 
-// Cambiar el event listener para usar la función con debounce
 searchInput.addEventListener("input", debouncedSearch);
 
 
-// --- Exportación (adaptado para los Collapsibles - sin cambios significativos) ---
+
 function exportTableToExcel() {
     const wb = XLSX.utils.book_new();
     const ws_data = [];
 
-    // Encabezados de la tabla (son los mismos para todas las secciones)
+
     const headers = ['Unidad', 'Anexo(s)', 'Teléfono'];
     ws_data.push(headers);
 
     const collapsibleItems = document.querySelectorAll(".collapsible li");
 
     collapsibleItems.forEach(item => {
-        // Obtener el nombre de la sección limpiando iconos y espacios extra
+
         const headerElement = item.querySelector(".collapsible-header");
         if (!headerElement) return;
 
-        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); // Limpiar iconos
+        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); 
         const tbody = item.querySelector("tbody");
         if (!tbody) return;
 
         const rowsToExport = tbody.querySelectorAll("tr");
 
-        // Recopilar las filas visibles de esta sección
+        
          const sectionRowsData = [];
     rowsToExport.forEach(row => {
  if (row.style.display !== 'none') {
@@ -242,9 +239,9 @@ function exportTableToExcel() {
 
 
         if (sectionRowsData.length > 0) {
-             ws_data.push([sectionHeader.toUpperCase()]); // Añadir el nombre de la sección como una fila
-             ws_data.push(...sectionRowsData); // Añadir las filas de datos de la sección
-             ws_data.push([]); // Añadir una fila vacía para separar secciones en el Excel
+             ws_data.push([sectionHeader.toUpperCase()]); 
+             ws_data.push(...sectionRowsData); 
+             ws_data.push([]); 
         }
     });
 

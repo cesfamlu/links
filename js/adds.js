@@ -1,4 +1,4 @@
-
+// ==== DATA ARRAY ====
 const data = {
     municipalidad: [
         ["Asesor Jurídico alcalde", "7135", "64 2 527135"],["Administración, Vehículos y Caminos", "7000", "64 2 527000"],["Administración, Vehículos, Secretaría y Obras Menores", "7111", "64 2 527111"],["Administración, Vehículos, Prevencionista", "", "472239"],["Administración, Seguridad Pública", "", "322033"],["Administración, Dpto. Aseo y Ornato", "7102", "64 2 527102"],["Administración, Dpto. Aseo Parque Municipal", "", "472297"],["Administración, Unidad Académica", "", "472366"],["Administración, Oficina de Comunicaciones", "", "324387"],["Secretaria Municipal", "7139", "64 2 527139"],["Secretaría Municipal, Secretaria", "7120", "64 2 527120"],["Secretaría Municipal, Central Telefónica", "", "322441"],["Secretaría Municipal, Oficina de Concejales", "7114", "64 2 527114"],["Secretaría Municipal, Oficina de Partes", "7141", "64 2 527141"],["Secretaría Municipal, Transparencia Municipal", "7144", "64 2 527144"],["Salón Consistorial", "", "322031"],["Portería", "", "472376"],["Dirección de Control, directora", "384", "64 2 201384"],["Dirección de Control administrativo", "421", "64 2 200421"],["Dirección de Control, Informática", "983", "64 2 524983"],["Dirección de Control, fiscalizador", "580", "64 2 200580"],["Cultura y Turismo, Dirección", "Sin Anexo", "64 2 346116"],["Cultura y Turismo, Secretaría", "", "346117/346118"],["Cultura y Turismo, Biblioteca", "", "472215"],["Cultura y Turismo, Turismo", "", "9 9958 1816"],["Cultura y Turismo, Pueblos Originarios", "", "9 4743 2447"],["Estadio Carlos Vogel", "", "472296"],["Dirección de Obras Municipales, Director", "7138", "64 2 527138"],["Dirección de Obras Municipales, Secretaría", "7138", "64 2 527138"],["Fomento Productivo", "Sin Anexo", "64 2 346116"],["Jefa Dto. Social.", "266", "472266"],["Dideco, Dirección", "271", "422271"],["Dideco, Secretaría", "270", "472270"],["Dideco, OMIL", "267 - 268", "472340"],["Dideco, Programa Jefas de Hogar - Oficina Mujer", "246", "472246"],["Dideco, Organizaciones Comunitarias", "281", "472281"],["Dideco, OPD", "276", "472276"],["Dideco, Senda Previene", "204-390", "472204"],["Dideco, Oficina del Deporte", "306", "472306"],["Dideco, Gimnasio Municipal", "205", "472205"],["Dideco Desarrollo Rural", "386", "472386"],["Dideco, Prodesal", "214", "472214"],["Dideco, PDTI", "388", "472388"],["Dideco, Programas Sociales, Jefa", "224", "472224"],["Dideco, Programas Familias", "232-233", "472232"],["Oficina de la Juventud", "Sin Anexo", "99527388"],["Finanzas, Director", "351", "472350"],["Finanzas, Adquisiciones", "355-395", "472355"],["Finanzas, Rentas y patentes", "265", "472265"],["Finanzas, Inspección", "262", "472262"],["Finanzas, Personal", "350 - 352", "472233/472352"],["Finanzas, Tesorería Jefa", "353", "472353"],["Finanzas, Tesorería Cajeras", "354", "472354"],["Finanzas, Contabilidad e Inventario", "356", "472356"],["Finanzas, Cementerio Municipal", "120", "322384"],["Finanzas, Bodega Municipal", "337", "472337"],["Finanzas, Bodega Camilo Henriquez", "371", "472298/324362"],["Secretario", "", "9 8973 7374"],["Secplan, Dirección", "286", "472286"],["Secplan, Secretaría", "458", "472358"],["Secplan, Asesor Urbanista", "247", "472247"],["Secplan, Vivienda", "241", "472236"],["Secplan, Inversiones", "671", "324671"],["Secplan, profesionales", "202", "472202"],["Secplan, ITO", "263", "472263"],["Secplan, Compras", "221", "472221"],["Secplan, Medio Ambiente", "245", "472245"]
@@ -11,16 +11,7 @@ const data = {
     ]
 };
 
-const tbodyMunicipalidad = document.querySelector(".tbody-municipalidad");
-const tbodySalud = document.querySelector(".tbody-salud");
-const tbodyDaem = document.querySelector(".tbody-daem");
-
-
-const searchInput = document.getElementById("search");
-const toggleThemeButtonDesktop = document.getElementById("toggleTheme");
-const toggleThemeButtonMobile = document.getElementById("toggleThemeMobile");
-
-
+// --- Función de Debounce ---
 function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -31,274 +22,200 @@ function debounce(func, wait) {
 }
 
 
-function insertRows(tbodyElement, entries) {
-    tbodyElement.innerHTML = ""; 
+function insertCards(container, entries, labels) {
+    container.innerHTML = "";
     entries.forEach(rowData => {
-        const tr = document.createElement("tr");
-        rowData.forEach((cellContent, index) => {
-            const td = document.createElement("td");
-            const cleanContent = cellContent || "";
-            td.setAttribute("data-text", cleanContent); 
+        const card = document.createElement("div");
+        card.className = "card-fila";
 
-            if (index === 0) {
-                td.innerHTML = `<i class="material-icons left">business</i>${cleanContent}`;
-            } else if (index === 2 && cleanContent) {
-                const telLink = cleanContent.replace(/[\s-/]/g, "");
-                td.innerHTML = `<a href="tel:${telLink}"><i class="material-icons left">phone</i>${cleanContent}</a>`;
-            } else {
-                td.textContent = cleanContent;
-            }
-            tr.appendChild(td);
-        });
-        tbodyElement.appendChild(tr);
+        card.dataset.unidad = rowData[0] || '';
+        card.dataset.anexo = rowData[1] || '';
+        card.dataset.telefono = rowData[2] || '';
+
+        const unidad = document.createElement("div");
+        unidad.className = "card-label unidad";
+        unidad.innerHTML = `<span class="label">${labels[0]}</span> <span class="valor"><i class="material-icons">business</i>${rowData[0] || ''}</span>`;
+        card.appendChild(unidad);
+
+        const anexo = document.createElement("div");
+        anexo.className = "card-label anexo";
+        anexo.innerHTML = `<span class="label">${labels[1]}</span> <span class="valor">${rowData[1] || ''}</span>`;
+        card.appendChild(anexo);
+
+        const telefono = document.createElement("div");
+        telefono.className = "card-label telefono";
+        if (rowData[2]) {
+            const telLink = rowData[2].replace(/[^\d+]/g, "");
+            telefono.innerHTML = `<span class="label">${labels[2]}</span> <span class="valor"><a href="tel:${telLink}"><i class="material-icons">phone</i>${rowData[2]}</a></span>`;
+        } else {
+            telefono.innerHTML = `<span class="label">${labels[2]}</span> <span class="valor"></span>`;
+        }
+        card.appendChild(telefono);
+
+        container.appendChild(card);
     });
 }
 
 
 function renderCollapsibleData() {
-    insertRows(tbodyMunicipalidad, data.municipalidad);
-    insertRows(tbodySalud, data.salud);
-    insertRows(tbodyDaem, data.daem);
-    
-
-    
-    observeRows();
-}
-
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("reveal");
-    });
-}, { threshold: 0.1 });
-
-function observeRows() {
-  
-    const allTableRows = document.querySelectorAll(".collapsible-body table.telefonos-section tbody tr");
-
-
-    allTableRows.forEach(row => observer.unobserve(row));
-
-    allTableRows.forEach(row => observer.observe(row));
-}
-
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
-    document.body.classList.toggle("light-mode");
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    updateMobileThemeButton();
-}
-
-function updateMobileThemeButton() {
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    if (toggleThemeButtonMobile) {
-        if (isDarkMode) {
-            toggleThemeButtonMobile.classList.remove('orange', 'lighten-2');
-            toggleThemeButtonMobile.classList.add('purple', 'darken-2');
-            toggleThemeButtonMobile.style.color = 'white';
-        } else {
-            toggleThemeButtonMobile.classList.remove('purple', 'darken-2');
-            toggleThemeButtonMobile.classList.add('orange', 'lighten-2');
-            toggleThemeButtonMobile.style.color = '#333'; 
-        }
-    }
-}
-
-
-
-function applySavedTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
-    } else {
-        document.body.classList.add('dark-mode');
-        document.body.classList.remove('light-mode');
-    }
-    updateMobileThemeButton(); 
+    insertCards(document.querySelector('.tbody-municipalidad'), data.municipalidad, ['Unidad', 'Anexo(s)', 'Teléfono']);
+    insertCards(document.querySelector('.tbody-salud'), data.salud, ['Unidad', 'Anexo(s)', 'Teléfono']);
+    insertCards(document.querySelector('.tbody-daem'), data.daem, ['Unidad', 'Anexo(s)', 'Teléfono']);
 }
 
 
 function performSearch() {
-  const filter = searchInput.value.toLowerCase().trim();
-  document.querySelectorAll(".collapsible li").forEach(item => {
-    const tbody = item.querySelector("tbody");
-    if (!tbody) return;
+    const searchInput = document.getElementById("search");
+    const filter = searchInput.value.toLowerCase().trim();
+    const collapsibleItems = document.querySelectorAll(".collapsible > li");
+    const collapsible = M.Collapsible.getInstance(document.querySelector('.collapsible'));
 
-    let sectionMatch = false; 
+    collapsibleItems.forEach((item, index) => {
+        const container = item.querySelector(".tbody-municipalidad, .tbody-salud, .tbody-daem");
+        if (!container) return;
 
-    tbody.querySelectorAll("tr").forEach(row => {
-      let rowMatch = false; 
-      row.querySelectorAll("td").forEach(cell => {
-        const text = cell.getAttribute("data-text").toLowerCase();
-        let content = cell.getAttribute("data-text"); 
-
-       
-         cell.querySelectorAll('.highlight').forEach(span => {
-             const parent = span.parentNode;
+        let sectionHasVisibleCards = false;
+        container.querySelectorAll(".card-fila").forEach(card => {
+            const cardText = (card.dataset.unidad + card.dataset.anexo + card.dataset.telefono).toLowerCase();
+            const isMatch = cardText.includes(filter);
             
-             parent.replaceChild(document.createTextNode(span.textContent), span);
-             parent.normalize(); 
-         });
+            card.style.display = isMatch ? "" : "none";
+            if(isMatch) sectionHasVisibleCards = true;
+        });
 
-
-        if (filter !== "" && text.includes(filter)) {
-          rowMatch = true;
-          sectionMatch = true; 
-          const regex = new RegExp(`(${filter.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')})`, "gi");
-          content = cell.getAttribute("data-text").replace(regex, '<span class="highlight">$1</span>');
+        if (sectionHasVisibleCards || filter === "") {
+            item.style.display = "";
+            if (filter !== "" && sectionHasVisibleCards && !item.classList.contains('active')) {
+                 collapsible.open(index);
+            }
         } else {
-           
-             content = cell.getAttribute("data-text");
+            item.style.display = "none";
         }
-
-
-        
-        if (cell.querySelector("a")) {
-          const tel = cell.getAttribute("data-text").replace(/[\s-/]/g, "");
-          
-          const phoneIconHTML = cell.querySelector('a i.material-icons.left') ? '<i class="material-icons left">phone</i>' : '';
-          cell.innerHTML = `<a href="tel:${tel}">${phoneIconHTML}${content}</a>`;
-        }
-        
-        else if (cell.querySelector("i.material-icons.left")) { 
-          
-          cell.innerHTML = `<i class="material-icons left">business</i>${content}`;
-        }
-      
-        else {
-           
-           cell.innerHTML = content; 
-        }
-      });
-
-
-      row.style.display = (rowMatch || filter === "") ? "" : "none";
     });
-
-
-  if (filter === "" || sectionMatch) {
-  item.style.display = "";
-
-
-  if (filter !== "" && sectionMatch) {
-    item.classList.add("active");
-  }
-
-  else if (filter === "") {
-    item.classList.remove("active");
-  }
-} else {
-      
-  item.style.display = "none";
-  item.classList.remove("active");
 }
 
-  });
+// --- GESTIÓN DE TEMA ---
+function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    body.classList.toggle('light-mode');
+    
+    const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    updateThemeIcons();
 }
 
+function updateThemeIcons() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const icon = isDarkMode ? 'brightness_4' : 'brightness_7';
+    document.querySelectorAll('#toggleTheme i, #toggleThemeMobile i').forEach(el => el.textContent = icon);
+}
 
-const debouncedSearch = debounce(performSearch, 250); 
+function applySavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+   
+    document.body.classList.remove('dark-mode', 'light-mode');
 
-searchInput.addEventListener("input", debouncedSearch);
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+    } else if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else if (prefersDark) {
+         document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.add('light-mode'); 
+    }
+    updateThemeIcons();
+}
 
+// --- BOTÓN IR ARRIBA ---
+function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-
+function toggleScrollToTopButton() {
+    const scrollButton = document.querySelector('.btn-floating');
+    if (scrollButton) {
+        scrollButton.style.display = (window.pageYOffset > 300) ? 'block' : 'none';
+    }
+}
 function exportTableToExcel() {
     const wb = XLSX.utils.book_new();
-    const ws_data = [];
+    const ws_data = [['Unidad', 'Anexo(s)', 'Teléfono']];
+    let hasData = false;
 
+    document.querySelectorAll(".collapsible > li").forEach(item => {
+        if (item.style.display === 'none') return;
 
-    const headers = ['Unidad', 'Anexo(s)', 'Teléfono'];
-    ws_data.push(headers);
+        const sectionHeader = item.querySelector(".collapsible-header").textContent.replace(/.*(city|hospital|school).*/i, "").trim();
+        const cards = item.querySelectorAll(".card-fila");
+        const sectionRows = [];
 
-    const collapsibleItems = document.querySelectorAll(".collapsible li");
-
-    collapsibleItems.forEach(item => {
-
-        const headerElement = item.querySelector(".collapsible-header");
-        if (!headerElement) return;
-
-        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); 
-        const tbody = item.querySelector("tbody");
-        if (!tbody) return;
-
-        const rowsToExport = tbody.querySelectorAll("tr");
-
+        cards.forEach(card => {
+            if (card.style.display !== 'none') {
+                hasData = true;
+                sectionRows.push([
+                    card.dataset.unidad,
+                    card.dataset.anexo,
+                    card.dataset.telefono
+                ]);
+            }
+        });
         
-         const sectionRowsData = [];
-    rowsToExport.forEach(row => {
- if (row.style.display !== 'none') {
- const rowData = [];
- row.querySelectorAll("td").forEach(cell => rowData.push(cell.getAttribute("data-text")));
- sectionRowsData.push(rowData);
- }
-});
-
-
-
-        if (sectionRowsData.length > 0) {
-             ws_data.push([sectionHeader.toUpperCase()]); 
-             ws_data.push(...sectionRowsData); 
-             ws_data.push([]); 
+        if (sectionRows.length > 0) {
+            ws_data.push([sectionHeader.toUpperCase()]);
+            ws_data.push(...sectionRows);
+            ws_data.push([]);
         }
     });
 
-     if (ws_data.length <= 1) { 
-        alert("No hay datos para exportar.");
+    if (!hasData) {
+        M.toast({html: 'No hay datos visibles para exportar.'});
         return;
     }
-
-    // Eliminar la última fila vacía si existe
-    if (ws_data.length > 0 && ws_data[ws_data.length - 1].length === 0) {
-        ws_data.pop();
-    }
-
+    
+    ws_data.pop();
 
     const ws = XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, "Teléfonos");
     XLSX.writeFile(wb, "telefonos_municipales.xlsx");
 }
 
-async function exportTableToPDF() {
+function exportTableToPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const bodyRows = [];
+    let hasData = false;
 
-    const collapsibleItems = document.querySelectorAll(".collapsible li");
+    document.querySelectorAll(".collapsible > li").forEach(item => {
+        if (item.style.display === 'none') return;
 
-     collapsibleItems.forEach(item => {
-       
-        const headerElement = item.querySelector(".collapsible-header");
-        if (!headerElement) return; 
+        const sectionHeader = item.querySelector(".collapsible-header").textContent.replace(/.*(city|hospital|school).*/i, "").trim();
+        const cards = item.querySelectorAll(".card-fila");
+        const sectionRowsData = [];
 
-        const sectionHeader = headerElement.textContent.replace(/location_city|local_hospital|school|business/g, "").trim(); 
-        const tbody = item.querySelector("tbody");
-        if (!tbody) return;
-
-        const rowsToExport = tbody.querySelectorAll("tr");
-
-   
-         const sectionRowsData = [];
-         rowsToExport.forEach(row => {
-             if (row.style.display !== 'none') {
-                const rowData = [];
-                row.querySelectorAll("td").forEach(cell => rowData.push(cell.getAttribute("data-text")));
-                sectionRowsData.push(rowData);
+        cards.forEach(card => {
+            if (card.style.display !== 'none') {
+                hasData = true;
+                sectionRowsData.push([
+                    card.dataset.unidad,
+                    card.dataset.anexo,
+                    card.dataset.telefono
+                ]);
             }
         });
 
-     
         if (sectionRowsData.length > 0) {
-             
-            bodyRows.push([{ content: sectionHeader.toUpperCase(), colSpan: 3, styles: { fontStyle: 'bold', halign: 'center', fillColor: [200, 200, 200] } }]);
-             bodyRows.push(...sectionRowsData); // Añadir las filas de datos
+            bodyRows.push([{ content: sectionHeader.toUpperCase(), colSpan: 3, styles: { fontStyle: 'bold', halign: 'center', fillColor: [220, 220, 220] } }]);
+            bodyRows.push(...sectionRowsData);
         }
     });
 
-    if (bodyRows.length === 0) {
-        alert("No hay datos para exportar.");
+    if (!hasData) {
+        M.toast({html: 'No hay datos visibles para exportar.'});
         return;
     }
 
@@ -310,50 +227,34 @@ async function exportTableToPDF() {
         body: bodyRows,
         startY: 30,
         theme: 'grid',
-        headStyles: { fillColor: [106, 27, 154] },
-        styles: { cellPadding: 3, fontSize: 9 },
-        
-        didParseCell: function(data) {
-            if (data.cell.raw.content && data.cell.raw.colSpan === 3) {
-                 data.cell.styles.cellPadding = 5; 
-             }
-        }
+        headStyles: { fillColor: [106, 90, 205] },
+        styles: { cellPadding: 2, fontSize: 8 },
     });
 
     doc.save("telefonos_municipales.pdf");
 }
 
-
-
+// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
-   
-    var sidenavElems = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(sidenavElems);
-
-   
     applySavedTheme();
-
-    
     renderCollapsibleData();
-
-
-    var collapsibleElems = document.querySelectorAll('.collapsible');
-  
-    M.Collapsible.init(collapsibleElems, {}); 
-
+    M.AutoInit();
     
-    const mobileButton = document.getElementById('toggleThemeMobile');
-    if (mobileButton) { // Verificar que exista
-        mobileButton.addEventListener('click', toggleTheme);
+    const searchInput = document.getElementById("search");
+    const toggleThemeDesktop = document.getElementById("toggleTheme");
+    const toggleThemeMobile = document.getElementById("toggleThemeMobile");
+    const scrollTopButton = document.querySelector('.btn-floating');
+
+    const debouncedSearch = debounce(performSearch, 300);
+    if (searchInput) {
+        searchInput.addEventListener('input', debouncedSearch);
     }
-
-    const desktopButton = document.getElementById('toggleTheme');
-if (desktopButton) {
-  desktopButton.addEventListener('click', toggleTheme);
-}
-
-  
+    
+    if (toggleThemeDesktop) toggleThemeDesktop.addEventListener('click', toggleTheme);
+    if (toggleThemeMobile) toggleThemeMobile.addEventListener('click', toggleTheme);
+    
+    if (scrollTopButton) {
+        scrollTopButton.style.display = 'none';
+        window.addEventListener('scroll', toggleScrollToTopButton);
+    }
 });
-
-window.exportTableToExcel = exportTableToExcel;
-window.exportTableToPDF = exportTableToPDF;

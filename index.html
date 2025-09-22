@@ -3,167 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="1E.png" type="image/x-icon">
-    <title>Links Salud</title>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/style.css">
+    <title>Portal de Enlaces Avanzado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 antialiased transition-colors duration-300">
 
-    <div class="navbar-fixed">
-        <nav class="navbar-custom">
-            <div class="nav-wrapper container"> <a href="#" class="brand-logo">Links Salud</a> <a href="#" data-target="mobile-nav-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="/links/accesoTelefonico.html">Accesos Telefónicos</a></li>
-                    <li><a href="https://cesfamlu.github.io/FormularioSoporte/">Soporte Informático</a></li>
-                    <li>
-                        <a href="#!" id="theme-toggle-btn" class="tooltipped" data-position="bottom" data-tooltip="Cambiar Tema">
-                            <i class="material-icons">brightness_6</i>
+    <header class="navbar bg-white/80 dark:bg-gray-900/85 sticky top-0 z-50 border-b border-gray-200/80 dark:border-gray-800/80">
+        <nav class="h-20 px-6">
+            <div class="flex items-center justify-between h-full max-w-7xl mx-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="ph-fill ph-buildings text-3xl text-blue-600"></i>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Portal Links Salud
+                    </h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden lg:flex items-center space-x-4">
+                        <a href="https://cesfamlu.github.io/links/accesoTelefonico.html" class="nav-link active px-4 py-2 rounded-lg font-medium">📞 Accesos Telefónicos</a>
+                        <a href="https://cesfamlu.github.io/FormularioSoporte/" class="nav-link px-4 py-2 rounded-lg font-medium">⚙ Soporte Informático</a>
+                        <a href="https://cesfamlaunion.cl" class="nav-link px-4 py-2 rounded-lg font-medium relative">🏥 CESFAM La Unión
+                            <span id="favorites-badge" class="badge hidden">0</span>
                         </a>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="flex items-center space-x-2 sm:space-x-3">
+                        <button class="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/80">
+                            <i class="ph ph-bell text-xl"></i>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/80">
+                            <i id="theme-icon" class="ph-fill ph-sun text-xl"></i>
+                        </button>
+                        <div class="lg:hidden">
+                            <button id="mobile-menu-button" class="mobile-menu-btn p-2 rounded-lg space-y-1.5">
+                                <span class="hamburger-line"></span>
+                                <span class="hamburger-line"></span>
+                                <span class="hamburger-line"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white/95 dark:bg-gray-900/95">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="#" class="block px-3 py-2 rounded-lg text-base font-semibold text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-gray-800">Accesos Telefonicos</a>
+                <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">SoporteInformatico</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-2 md:py-4">
+        <div class="text-center mb-10">
+             <img src="img/CESFAM.png" alt="Logo CESFAM" class="mx-auto h-48 dark:hidden mb-3">
+             <img src="img/CESFAM_BLANCO.png" alt="Logo CESFAM Blanco" class="mx-auto h-48 hidden dark:block mb-4">
+        </div>
+        <main>
+            <div class="mb-10 max-w-2xl mx-auto">
+                <div class="relative">
+                    <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="search" id="searchInput" placeholder="Buscar un enlace..." class="w-full p-3 pl-12 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-500 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow duration-300">
+                </div>
+            </div>
+            <div class="text-center mb-6">
+                <button id="toggle-all-links" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 ease-in-out shadow-lg flex items-center justify-center mx-auto gap-2">
+                    <i id="toggle-all-links-icon" class="ph-fill ph-eye-slash text-xl"></i>
+                    <span id="toggle-all-links-text">Mostrar Todos los Enlaces</span>
+                </button>
+            </div>
+            <div id="links-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="no-results" class="text-center py-12 text-gray-500 hidden">
+                <i class="ph ph-file-magnifying-glass text-6xl mb-4"></i>
+                <h3 class="text-xl font-semibold">No se encontraron resultados</h3>
+                <p>Intenta con otro término de búsqueda.</p>
+            </div>
+        </main>
     </div>
-    
-   <ul class="sidenav" id="mobile-nav-menu">      
-<li><a href="/links/accesoTelefonico.html">Accesos Telefónicos</a></li>
-<li><a href="https://cesfamlu.github.io/FormularioSoporte/">Soporte Informático</a></li>
-        <li><div class="divider"></div></li>
-        <li><a href="#!" id="theme-toggle-btn-mobile"><i class="material-icons left">brightness_6</i>Cambiar Tema</a></li>
-    </ul>
 
-    <div class="container content-wrapper"> 
-        <div class="header">
-            <img src="img/1.png" alt="Logo CESFAM" id="header-logo"> 
-            <h1>Directorio de enlaces</h1> </div>
-
-        <button class="button btn waves-effect waves-light">
-            <span id="menu_label">Mostrar Links</span> <span id="menu_icon" class="toggle_icon">➡</span>
-        <button
-
-        <div class="links" id="menu"> 
-            <div class="row">
-                <div class="col s12 m4">
-                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-ras', this)">
-                        RAS <span class="toggle-icon">➡</span>
-                    </a>
-                    <div class="sub-links" id="sub-links-ras">
-                        <a href="https://www.rasvaldivia.cl" target="_blank">RAS Principal</a>
-                        <a href="https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" target="_blank">RAS Contingencia</a>
-                        <a href="http://10.8.102.72" target="_blank">RAS IP 1</a>
-                        <a href="http://10.8.102.74" target="_blank">RAS IP 2</a>
-                        <a href="http://10.8.102.95" target="_blank">RAS IP 3</a>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-core', this)">
-                        CORE <span class="toggle-icon">➡</span>
-                    </a>
-                    <div class="sub-links" id="sub-links-core">
-                        <a href="https://www.hbvaldivia.cl/core/" target="_blank">CORE Principal</a>
-                        <a href="https://10.6.206.62/core" target="_blank">CORE IP</a>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-Examenes', this)">
-                        Examenes <span class="toggle-icon">➡</span>
-                    </a>
-                    <div class="sub-links" id="sub-links-Examenes">
-                        <a href="http://10.66.50.47/"  target="_blank"> Exámenes </a>
-                        <a href="http://10.4.59.246:90/"  target="_blank">Exámenes Contingencia</a>
-                    </div>
-                </div>
+    <footer class="bg-gray-800 dark:bg-gray-950 text-gray-300 dark:text-gray-500 py-8 border-t border-gray-700 dark:border-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <p class="text-sm">Centro de Salud Familiar Dr. Alfredo Gantz Mann</p>
+                <p class="text-xs text-gray-400">La Unión, Región de Los Ríos, Chile</p>
             </div>
-
-            <div class="row">
-                <div class="col s12 m4">
-                    <a href="https://www.munilaunioninfo.com" class="waves-effect waves-light" target="_blank">Muni La Union</a>
-                </div>
-                <div class="col s12 m4">
-                    <a href="https://desamlu.cl/" class="waves-effect waves-light" target="_blank">DESAMLU</a>
-                </div>
-                <div class="col s12 m4">
-                    <a href="https://intranetlaunion.smc.cl/login.aspx" class="waves-effect waves-light" target="_blank">Intranet</a>
-                </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.facebook.com/cesfamlu/?locale=es_LA" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-facebook-logo text-xl"></i></a>
+                <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-twitter-logo text-xl"></i></a>
+                <a href="https://www.instagram.com/cesfamlu/?hl=es" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
             </div>
-
-            <div class="row">
-                <div class="col s12 m4">
-                    <a href="https://clientes.isatec.cl" class="waves-effect waves-light" target="_blank">Isatec</a>
-                </div>
-                <div class="col s12 m4">
-                    <a href="https://recetaelectronica.minsal.cl/" class="waves-effect waves-light" target="_blank">Receta Electrónica</a>
-                </div>
-                <div class="col s12 m4">
-                    <a href="https://www.licencia.cl" class="waves-effect waves-light" target="_blank">Imed</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s12 m4">
-                    <a href="https://tinyurl.com/centro-integral" class="waves-effect waves-light" target="_blank">Centro Integral</a>
-                </div>
-                <div class="col s12 m4">
-                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-sigges', this)">
-                        SIGGES 🆕 <span class="toggle-icon">➡</span>
-                    </a>
-                    <div class="sub-links" id="sub-links-sigges">
-                        <a href="https://nuevo.sigges.cl/#/login" target="_blank">Nuevo SIGGES </a>
-                        <a href="https://www.sigges.cl" target="_blank">SIGGES </a>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <a href="https://teleoftalmologia.minsal.cl/es/login" class="waves-effect waves-light" target="_blank">Dart</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s12 m4">
-                    <a href="https://interconsulta.minsal.cl/" class="waves-effect waves-light" target="_blank">Hospital Digital</a>
-                </div>
-                
-                <div class="col s12 m4">
-                    <a href="https://srdm.crececontigo.gob.cl/login" class="waves-effect waves-light" target="_blank">Crece Contigo</a>
-                </div>
-
-
-                
-
-                   <div class="col s12 m4">
-                    <a href="#" class="waves-effect waves-light" onclick="toggleSubLinks(event, 'sub-links-fonasa', this)">
-                        FONASA 🆕 <span class="toggle-icon">➡</span>
-                    </a>
-                    <div class="sub-links" id="sub-links-fonasa">
-                        <a href="https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" target="_blank">Front Integrado FONASA </a>
-                            <a href="https://fonasa.cl/sites/fonasa/prestadores/tramites/certificado-previsional" class="waves-effect waves-light" target="_blank">FONASA</a>
-                    </div>
-                </div>
-                
-                
-            </div>
-
-            
-        </div> 
-    </div> 
-
-    <footer>
-        <p>&copy; 2025 CESFAM Dr. Alfredo Gantz Mann</p>
-        <p>
-            <a href="http://cesfamlu.github.io/links">Política de Privacidad</a> |
-            <a href="http://cesfamlu.github.io/links">Términos y Condiciones</a>
-        </p>
+            <p class="text-xs">&copy; <span id="current-year"></span> Portal CESFAM. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/fcn.js"></script>
+   <script src="js/fcn.js"></script>
+</body>
 </html>

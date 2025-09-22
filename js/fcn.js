@@ -10,8 +10,11 @@ tailwind.config = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Tu línea para forzar el modo oscuro está perfecta aquí.
     localStorage.setItem('theme', 'dark');
+    
     const linksData = [
+        // ... (tus datos de enlaces no cambian)
         { name: "RAS", isGroup: true, icon: 'ph-first-aid-kit', sublinks: [
             { name: "RAS Principal", url: "https://www.rasvaldivia.cl" },
             { name: "RAS Contingencia", url: "https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" },
@@ -60,8 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const favoritesBadge = document.getElementById('favorites-badge');
 
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    let allLinksVisible = true;
+    
+    // --- CAMBIO 1: Establecer el estado inicial como falso ---
+    // Los enlaces deben comenzar ocultos.
+    let allLinksVisible = false;
 
+    // ... (todas tus funciones setupTheme, updateFavoritesBadge, saveFavorites, etc. no cambian)
     function setupTheme() {
         const isDarkMode = localStorage.getItem('theme') === 'dark';
         document.documentElement.classList.toggle('dark', isDarkMode);
@@ -96,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const linkItemWrapper = document.createElement('div');
             linkItemWrapper.className = 'relative fade-in-item link-item bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:border-sky-500/50 hover:-translate-y-1';
             linkItemWrapper.style.setProperty('--stagger-index', index);
+            // Esta línea ahora usará `allLinksVisible = false` y ocultará los elementos al crearlos.
             linkItemWrapper.style.display = allLinksVisible ? 'block' : 'none';
             
             if (item.isGroup) {
@@ -194,18 +202,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!allLinksVisible) {
             searchInput.value = '';
         }
+        // Actualizamos el icono y texto del botón
+        if(allLinksVisible) {
+            toggleAllLinksIcon.className = 'ph-fill ph-eye-slash text-xl';
+            toggleAllLinksText.textContent = 'Ocultar Todos los Enlaces';
+        } else {
+            toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
+            toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
+        }
         filterLinks();
     }
-
+    
+    // Inicialización de la página
     setupTheme();
     renderLinks();
     updateFavoritesBadge();
-    
+
+    // --- CAMBIO 2: Eliminar este bloque de código ---
+    // Ya no es necesario porque los enlaces se crean ocultos gracias al CAMBIO 1.
+    /*
     allLinksVisible = false;
     toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
     toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
     linksContainer.querySelectorAll('.link-item').forEach(item => item.style.display = 'none');
+    */
 
+    // Se mantiene el texto inicial del botón, ya que `allLinksVisible` es `false`.
+    toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
+    toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
+
+    // Event Listeners
     searchInput.addEventListener('input', filterLinks);
     toggleAllLinksButton.addEventListener('click', toggleAllLinks);
 
@@ -220,5 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.focus();
         }
     });
+    
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });

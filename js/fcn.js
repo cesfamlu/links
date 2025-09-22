@@ -10,6 +10,9 @@ tailwind.config = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Forzar el modo oscuro al iniciar
+    localStorage.setItem('theme', 'dark');
+    
     const linksData = [
         { name: "RAS", isGroup: true, icon: 'ph-first-aid-kit', sublinks: [
             { name: "RAS Principal", url: "https://www.rasvaldivia.cl" },
@@ -59,19 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const favoritesBadge = document.getElementById('favorites-badge');
 
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    let allLinksVisible = true;
+    let allLinksVisible = false; // Estado inicial: oculto
 
     function setupTheme() {
         const isDarkMode = localStorage.getItem('theme') === 'dark';
         document.documentElement.classList.toggle('dark', isDarkMode);
         themeIcon.className = isDarkMode ? 'ph-fill ph-moon text-xl' : 'ph-fill ph-sun text-xl';
     }
-
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeIcon.className = isDark ? 'ph-fill ph-moon text-xl' : 'ph-fill ph-sun text-xl';
-    });
 
     function updateFavoritesBadge() {
         const count = favorites.length;
@@ -116,21 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         `).join('')}
                     </div>
                 `;
+                
                 const mainLink = linkItemWrapper.querySelector('.group-toggle');
-                const icon = mainLink.querySelector('.ph-caret-down');
                 const subLinksContainer = linkItemWrapper.querySelector('.sub-links');
+                
                 mainLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (subLinksContainer.style.maxHeight) {
-                        subLinksContainer.style.maxHeight = null;
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        subLinksContainer.style.maxHeight = subLinksContainer.scrollHeight + "px";
-                        icon.style.transform = 'rotate(180deg)';
-                        setTimeout(() => {
-                            mainLink.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 300);
-                    }
+                    mainLink.classList.toggle('is-active');
+                    subLinksContainer.classList.toggle('is-open');
                 });
 
             } else {
@@ -171,15 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         const allLinks = linksContainer.querySelectorAll('.link-item');
         let visibleCount = 0;
+        
         allLinks.forEach(item => {
             const itemText = item.textContent.toLowerCase();
-            if (itemText.includes(searchTerm)) {
-                if (allLinksVisible || searchTerm.length > 0) {
-                    item.style.display = 'block';
-                    visibleCount++;
-                } else {
-                     item.style.display = 'none';
-                }
+            const matchesSearch = itemText.includes(searchTerm);
+            
+            if (matchesSearch && (allLinksVisible || searchTerm.length > 0)) {
+                item.style.display = 'block';
+                visibleCount++;
             } else {
                 item.style.display = 'none';
             }
@@ -193,17 +182,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!allLinksVisible) {
             searchInput.value = '';
         }
+
+        if(allLinksVisible) {
+            toggleAllLinksIcon.className = 'ph-fill ph-eye-slash text-xl';
+            toggleAllLinksText.textContent = 'Ocultar Todos los Enlaces';
+        } else {
+            toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
+            toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
+        }
         filterLinks();
     }
-
+    
+    // --- Inicialización de la Aplicación ---
     setupTheme();
     renderLinks();
     updateFavoritesBadge();
-    
-    allLinksVisible = false;
+
+    // Configurar el estado inicial del botón "Mostrar/Ocultar"
     toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
     toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
-    linksContainer.querySelectorAll('.link-item').forEach(item => item.style.display = 'none');
+
+    // --- Event Listeners ---
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeIcon.className = isDark ? 'ph-fill ph-moon text-xl' : 'ph-fill ph-sun text-xl';
+    });
 
     searchInput.addEventListener('input', filterLinks);
     toggleAllLinksButton.addEventListener('click', toggleAllLinks);
@@ -219,5 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.focus();
         }
     });
+    
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });

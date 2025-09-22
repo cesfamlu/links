@@ -10,7 +10,6 @@ tailwind.config = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    
     const linksData = [
         { name: "RAS", isGroup: true, icon: 'ph-first-aid-kit', sublinks: [
             { name: "RAS Principal", url: "https://www.rasvaldivia.cl" },

@@ -10,11 +10,11 @@ tailwind.config = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Tu línea para forzar el modo oscuro está perfecta aquí.
+
     localStorage.setItem('theme', 'dark');
     
     const linksData = [
-        // ... (tus datos de enlaces no cambian)
+
         { name: "RAS", isGroup: true, icon: 'ph-first-aid-kit', sublinks: [
             { name: "RAS Principal", url: "https://www.rasvaldivia.cl" },
             { name: "RAS Contingencia", url: "https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" },
@@ -64,11 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     
-    // --- CAMBIO 1: Establecer el estado inicial como falso ---
-    // Los enlaces deben comenzar ocultos.
+
     let allLinksVisible = false;
 
-    // ... (todas tus funciones setupTheme, updateFavoritesBadge, saveFavorites, etc. no cambian)
+  
     function setupTheme() {
         const isDarkMode = localStorage.getItem('theme') === 'dark';
         document.documentElement.classList.toggle('dark', isDarkMode);
@@ -202,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!allLinksVisible) {
             searchInput.value = '';
         }
-        // Actualizamos el icono y texto del botón
+        // Actualizamo el icono y texto del boton
         if(allLinksVisible) {
             toggleAllLinksIcon.className = 'ph-fill ph-eye-slash text-xl';
             toggleAllLinksText.textContent = 'Ocultar Todos los Enlaces';
@@ -218,16 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLinks();
     updateFavoritesBadge();
 
-    // --- CAMBIO 2: Eliminar este bloque de código ---
-    // Ya no es necesario porque los enlaces se crean ocultos gracias al CAMBIO 1.
-    /*
-    allLinksVisible = false;
-    toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
-    toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
-    linksContainer.querySelectorAll('.link-item').forEach(item => item.style.display = 'none');
-    */
-
-    // Se mantiene el texto inicial del botón, ya que `allLinksVisible` es `false`.
+ 
     toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
     toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
 

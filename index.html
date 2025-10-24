@@ -1,490 +1,190 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Enlaces</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            --stagger-delay: 50ms;
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #e5e7eb; }
-        .dark ::-webkit-scrollbar-track { background: #1f2937; }
-        ::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 4px; }
-        .dark ::-webkit-scrollbar-thumb { background: #4b5563; }
-        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
-        .dark ::-webkit-scrollbar-thumb:hover { background: #0150ef; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CESFAM La Unión — Área de Informática | Sitio en Mantenimiento</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --primary:#0066cc;
+      --primary-600:#0054a6;
+      --accent:#10b981;
+      --bg:linear-gradient(135deg,#0e1a2b 0%,#162941 35%,#1e3a5f 100%);
+      --card-bg:rgba(255,255,255,.08);
+      --stroke:rgba(255,255,255,.25);
+      --text:#eaf2ff;
+      --muted:#c9d6ef;
+      --shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:linear-gradient(135deg,#eaf3ff 0%,#e6eefc 35%,#e9f0ff 100%);
+        --card-bg:rgba(255,255,255,.7);
+        --stroke:rgba(0,0,0,.08);
+        --text:#0b1a2c;
+        --muted:#35527a;
+        --shadow:0 20px 40px rgba(0,0,0,.12);
+      }
+    }
 
-        .sub-links {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:var(--bg); color:var(--text); display:grid; place-items:center;
+    }
 
-        /* Staggered entry animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in-item {
-            animation: fadeIn 0.4s ease-out forwards;
-            opacity: 0;
-            animation-delay: calc(var(--stagger-index) * var(--stagger-delay));
-        }
-        
-        /* Favorite Star Animation */
-        .star-favorite.favorited {
-            color: #facc15; /* yellow-400 */
-            transform: scale(1.2);
-        }
+    .wrap{
+      width:min(960px,92vw);
+      display:flex; flex-direction:column; align-items:center; gap:28px;
+      padding:28px 0;
+    }
 
-        /* Professional Navbar Styles */
-        .navbar {
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-        }
+    .brand{
+      display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;
+      user-select:none;
+    }
+    .brand .logo{
+      width:42px; height:42px; border-radius:12px;
+      background:conic-gradient(from 120deg at 50% 50%, var(--primary), var(--accent), var(--primary));
+      box-shadow:inset 0 0 0 2px var(--stroke), 0 6px 18px rgba(0,0,0,.25);
+      display:grid; place-items:center;
+    }
+    .brand .logo svg{width:26px; height:26px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+    .brand .txt{line-height:1}
+    .brand .txt b{font-weight:700; letter-spacing:.2px; font-size:15px}
+    .brand .txt span{display:block; font-size:12px; opacity:.8}
 
-        .nav-link {
-            position: relative;
-            color: #4b5563; /* text-gray-600 */
-            transition: all 0.2s ease;
-        }
-        .dark .nav-link {
-            color: #d1d5db; /* text-gray-300 */
-        }
+    .card{
+      width:100%;
+      background:var(--card-bg);
+      border:1px solid var(--stroke);
+      box-shadow:var(--shadow);
+      border-radius:20px;
+      backdrop-filter:blur(14px);
+      padding:32px 26px;
+      display:grid; grid-template-columns:92px 1fr; gap:20px;
+    }
+    @media (max-width:640px){
+      .card{grid-template-columns:1fr; text-align:center}
+    }
 
-        .nav-link:hover {
-            color: #2563eb; /* text-blue-600 */
-            background-color: #eff6ff; /* bg-blue-50 */
-            transform: translateY(-1px);
-        }
-        .dark .nav-link:hover {
-            color: #60a5fa; /* text-blue-400 */
-            background-color: #1f2937; /* bg-gray-800 */
-        }
+    .illustration{
+      display:grid; place-items:center;
+      background:radial-gradient(120px 120px at 50% 40%,rgba(255,255,255,.12),transparent);
+      border-radius:16px; padding:10px;
+    }
+    .gear{
+      width:72px; height:72px;
+      stroke:currentColor; color:var(--primary);
+      animation:spin 6s linear infinite;
+      filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-        .nav-link.active {
-            color: #2563eb; /* text-blue-600 */
-            background-color: #eff6ff; /* bg-blue-50 */
-            font-weight: 600;
-        }
-        .dark .nav-link.active {
-            color: #60a5fa; /* text-blue-400 */
-            background-color: #1f2937; /* bg-gray-800 */
-        }
+    h1{
+      margin:0 0 6px; font-size:clamp(22px,3.6vw,30px);
+      letter-spacing:.2px;
+    }
+    p{margin:0; color:var(--muted); font-size:15.5px}
+    .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .badge{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--stroke); background:rgba(255,255,255,.06);
+      white-space:nowrap;
+    }
 
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px; /* Adjust if nav height changes */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 3px;
-            background: #2563eb; /* bg-blue-600 */
-            border-radius: 2px;
-        }
-        .dark .nav-link.active::after {
-            background: #60a5fa; /* bg-blue-400 */
-        }
+    .cta{
+      margin-top:18px; display:flex; flex-wrap:wrap; gap:10px
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:12px; text-decoration:none; cursor:pointer;
+      font-weight:600; border:1px solid transparent;
+      background:var(--primary); color:white;
+      box-shadow:0 10px 18px rgba(0,102,204,.25);
+    }
+    .btn.secondary{
+      background:transparent; color:var(--text); border-color:var(--stroke);
+      box-shadow:none;
+    }
+    .btn svg{width:18px;height:18px}
 
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -8px;
-            background: #ef4444; /* bg-red-500 */
-            color: white;
-            font-size: 10px;
-            padding: 1px 5px;
-            border-radius: 10px;
-            font-weight: 600;
-            border: 1px solid white;
-        }
-        .dark .badge {
-            border-color: #111827; /* dark:bg-gray-900 */
-        }
+    .meta{
+      width:100%; display:flex; justify-content:space-between; gap:12px;
+      opacity:.8; font-size:12.5px; margin-top:6px
+    }
+    @media (max-width:640px){.meta{flex-direction:column; align-items:center; text-align:center}}
 
-        .notification-dot {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 8px;
-            height: 8px;
-            background: #22c55e; /* bg-green-500 */
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-        .dark .notification-dot {
-            border-color: #1f2937;
-        }
-
-        /* Hamburger Menu */
-        .hamburger-line {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background-color: #4b5563; /* text-gray-600 */
-            transition: all 0.3s ease-in-out;
-        }
-        .dark .hamburger-line {
-            background-color: #d1d5db; /* text-gray-300 */
-        }
-
-        .mobile-menu-btn.open .hamburger-line:nth-child(1) {
-            transform: translateY(6px) rotate(45deg);
-        }
-        .mobile-menu-btn.open .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-        .mobile-menu-btn.open .hamburger-line:nth-child(3) {
-            transform: translateY(-6px) rotate(-45deg);
-        }
-    </style>
+    .wave{
+      position:fixed; inset:auto 0 0 0; height:120px; pointer-events:none; opacity:.12;
+      background:
+        radial-gradient(120px 40px at 20% 0, rgba(255,255,255,.7), transparent 60%),
+        radial-gradient(180px 60px at 70% 0, rgba(255,255,255,.7), transparent 60%);
+      mask:linear-gradient(to top, black 30%, transparent 100%);
+    }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 antialiased transition-colors duration-300">
+<body>
+  <a class="brand" href="#" aria-label="CESFAM La Unión — Área de Informática">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v18M3 12h18"/>
+      </svg>
+    </span>
+    <span class="txt">
+      <b>CESFAM La Unión</b>
+      <span>Área de Informática</span>
+    </span>
+  </a>
 
-    <header class="navbar bg-white/80 dark:bg-gray-900/85 sticky top-0 z-50 border-b border-gray-200/80 dark:border-gray-800/80">
-        <nav class="h-20 px-6">
-            <div class="flex items-center justify-between h-full max-w-7xl mx-auto">
-                <!-- Logo con más presencia -->
-                <div class="flex items-center space-x-3">
-                    <i class="ph-fill ph-buildings text-3xl text-blue-600"></i>
-                    <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                         Links Salud
-                    </h1>
-                </div>
-    
-                <!-- Nav items con estados activos -->
-                <div class="flex items-center space-x-4"> <!-- Contenedor principal para alinear a la derecha -->
-                    <!-- Nav items con estados activos -->
-                    <div class="hidden lg:flex items-center space-x-4"> <!-- Aumentar espacio entre enlaces -->
-                        <a href="https://cesfamlu.github.io/links/accesoTelefonico.html" class="nav-link active px-4 py-2 rounded-lg font-medium">📱 Accesos Telefónicos</a>
-                        <a href="https://cesfamlaunion.cl" class="nav-link px-4 py-2 rounded-lg font-medium relative"> CESFAM La Unión
-                            
-                            <span id="favorites-badge" class="badge hidden">0</span>
-                        </a>
-                    </div>
-        
-                    <!-- Search + User actions -->
-                    <div class="flex items-center space-x-2 sm:space-x-3">
-                        <!-- Notifications -->
-                        <button class="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/80">
-                            <i class="ph ph-bell text-xl"></i>
-                            <span class="notification-dot"></span>
-                        </button>
-                        <!-- Theme toggle mejorado -->
-                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/80">
-                            <i id="theme-icon" class="ph-fill ph-sun text-xl"></i>
-                        </button>
-                        <!-- Mobile menu más elegante -->
-                        <div class="lg:hidden">
-                            <button id="mobile-menu-button" class="mobile-menu-btn p-2 rounded-lg space-y-1.5">
-                                <span class="hamburger-line"></span>
-                                <span class="hamburger-line"></span>
-                                <span class="hamburger-line"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="lg:hidden hidden bg-white/95 dark:bg-gray-900/95">
-            <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="#" class="block px-3 py-2 rounded-lg text-base font-semibold text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-gray-800">Accesos Telefonicos</a>
-                <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">SoporteInformatico</a>
+  <main class="wrap" role="main">
+    <section class="card" aria-labelledby="title">
+      <div class="illustration" aria-hidden="true">
+        <svg class="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09c0 .65.39 1.24 1 1.51.58.26 1.26.22 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06c-.48.48-.6 1.2-.33 1.82.27.61.86 1 1.51 1H21a2 2 0 0 1 0 4h-.09c-.65 0-1.24.39-1.51 1Z"/>
+        </svg>
+      </div>
 
-            </div>
+      <div>
+        <h1 id="title">Sitio en mantenimiento</h1>
+        <p>. Gracias por la paciencia.</p>
+
+        <div class="badges" role="list" aria-label="Etiquetas de estado">
+          <span class="badge">Estado: <strong>Programado</strong></span>
+          <span class="badge">Unidad: <strong>Informática</strong></span>
+          <span class="badge">Centro: <strong>CESFAM La Unión</strong></span>
         </div>
-    </header>
 
-    <div class="container mx-auto px-4 py-2 md:py-4">
-        <div class="text-center mb-10">
-             <img src="img/2.png" alt="Logo CESFAM" class="mx-auto h-48 dark:hidden mb-3">
-             <img src="img/1.png" alt="Logo CESFAM Blanco" class="mx-auto h-48 hidden dark:block mb-4">
+        <div class="cta">
+          <a class="btn" href="mailto:mauricio.inzunza.r@gmail.com?subject=[Mantenimiento]%20Consulta" aria-label="Contactar por correo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+            Soporte: Informática
+          </a>
+          <a class="btn secondary" href="/" aria-label="Volver al inicio">Volver al inicio</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="meta" aria-label="Información adicional">
+      <span id="today">Actualizado: —</span>
+      <span>© <span id="year"></span> CESFAM La Unión — Área de Informática</span>
     </div>
-        <main>
-            <!-- Search Input -->
-            <div class="mb-10 max-w-2xl mx-auto">
-                <div class="relative">
-                    <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="search" id="searchInput" placeholder="Buscar un enlace..." class="w-full p-3 pl-12 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-500 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow duration-300">
-                </div>
-                </div>
-            
-            <div class="text-center mb-6">
-                <button id="toggle-all-links" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 ease-in-out shadow-lg flex items-center justify-center mx-auto gap-2">
-                    <i id="toggle-all-links-icon" class="ph-fill ph-eye-slash text-xl"></i>
-                    <span id="toggle-all-links-text">Mostrar Todos los Enlaces</span>
-                </button>
-            </div>
+  </main>
 
-            <!-- Eliminar la sección completa de Accedidos Recientemente -->
+  <div class="wave" aria-hidden="true"></div>
 
-            <!-- Links Container -->
-            <div id="links-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Links will be dynamically inserted here by JavaScript -->
-                    </div>
-            
-            <div id="no-results" class="text-center py-12 text-gray-500 hidden">
-                <i class="ph ph-file-magnifying-glass text-6xl mb-4"></i>
-                <h3 class="text-xl font-semibold">No se encontraron resultados</h3>
-                <p>Intenta con otro término de búsqueda.</p>
-                    </div>
-    </main>
+  <span class="sr-only" aria-live="polite" id="srStatus">Página en mantenimiento. Contacto disponible por correo.</span>
 
-        </div>
-
-    <footer class="bg-gray-800 dark:bg-gray-950 text-gray-300 dark:text-gray-500 py-8 border-t border-gray-700 dark:border-gray-800">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-4">
-            
-                <p class="text-sm">Centro de Salud Familiar Dr. Alfredo Gantz Mann</p>
-                <p class="text-xs text-gray-400">La Unión, Región de Los Ríos, Chile</p>
-            </div>
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.facebook.com/cesfamlu/?locale=es_LA" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-facebook-logo text-xl"></i></a>
-                <a href="https://www.youtube.com/@cesfamlu" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-youtube-logo text-xl"></i></a>
-                <a href="https://www.instagram.com/cesfamlu/?hl=es" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
-            </div>
-            <p class="text-xs">&copy; <span id="current-year"></span> Portal CESFAM. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            localStorage.setItem('theme', 'dark'); // Fuerza modo oscuro al iniciar
-            const linksData = [
-                { name: "RAS", isGroup: true, icon: 'ph-first-aid-kit', sublinks: [
-                    { name: "RAS Principal", url: "https://www.rasvaldivia.cl" },
-                    { name: "RAS Contingencia", url: "https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" },
-                    { name: "RAS IP 1", url: "http://10.8.102.72" },
-                    { name: "RAS IP 2", url: "http://10.8.102.74" },
-                    { name: "RAS IP 3", url: "#" }
-                ]},
-                { name: "CORE", isGroup: true, icon: 'ph-heartbeat', sublinks: [
-                    { name: "CORE Principal", url: "https://www.hbvaldivia.cl/core/" },
-                    { name: "CORE IP", url: "https://10.6.206.62/core" }
-                ]},
-                { name: "Examenes", isGroup: true, icon: 'ph-test-tube', sublinks: [
-                    { name: "Exámenes", url: "http://10.66.50.47/" },
-                    { name: "Exámenes Contingencia", url: "http://10.4.59.246:90/" }
-                ]},
-                { name: "Muni La Union", url: "https://www.munilaunioninfo.com", icon: 'ph-buildings' },
-                { name: "DESAMLU", url: "https://desamlu.cl/", icon: 'ph-hospital' },
-                { name: "Intranet", url: "https://intranetlaunion.smc.cl/login.aspx", icon: 'ph-identification-card' },
-                { name: "Isatec", url: "https://clientes.isatec.cl", icon: 'ph-headset' },
-                { name: "Isis View", url: "http://10.6.67.166", icon: 'ph-eye' },
-                { name: "Imed", url: "https://www.licencia.cl", icon: 'ph-file-text' },
-                { name: "Centro Integral", url: "https://tinyurl.com/centro-integral", icon: 'ph-users-three' },
-                { name: "SIGGES 🆕", isGroup: true, icon: 'ph-folder-simple-plus', sublinks: [
-                    { name: "Nuevo SIGGES", url: "https://nuevo.sigges.cl/#/login"  },
-                    { name: "SIGGES", url:"https://www.sigges.cl" }
-                ]},
-                { name: "Dart", url: "https://teleoftalmologia.minsal.cl/es/login", icon: 'ph-camera' },
-                { name: "Hospital Digital", url: "https://interconsulta.minsal.cl/", icon: 'ph-monitor-play' },
-                { name: "Crece Contigo", url: "https://srdm.crececontigo.gob.cl/login", icon: 'ph-baby' },
-                { name: "FONASA 🆕", isGroup: true, icon: 'ph-coins', sublinks: [
-                    { name: "Front Integrado FONASA", url: "https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" },
-                    { name: "FONASA", url: "https://fonasa.cl/sites/fonasa/prestadores/tramites/certificado-previsional" }
-                ]}
-            ];
-
-            const linksContainer = document.getElementById('links-container');
-            const searchInput = document.getElementById('searchInput');
-            const noResultsMessage = document.getElementById('no-results');
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
-            const toggleAllLinksButton = document.getElementById('toggle-all-links');
-            const toggleAllLinksIcon = document.getElementById('toggle-all-links-icon');
-            const toggleAllLinksText = document.getElementById('toggle-all-links-text');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const favoritesBadge = document.getElementById('favorites-badge');
-
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            let allLinksVisible = true;
-
-            function setupTheme() {
-                const isDarkMode = localStorage.getItem('theme') === 'dark';
-                document.documentElement.classList.toggle('dark', isDarkMode);
-                themeIcon.className = isDarkMode ? 'ph-fill ph-moon text-xl' : 'ph-fill ph-sun text-xl';
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = document.documentElement.classList.toggle('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                themeIcon.className = isDark ? 'ph-fill ph-moon text-xl' : 'ph-fill ph-sun text-xl';
-            });
-
-            function updateFavoritesBadge() {
-                const count = favorites.length;
-                if (count > 0) {
-                    favoritesBadge.textContent = count;
-                    favoritesBadge.classList.remove('hidden');
-                } else {
-                    favoritesBadge.classList.add('hidden');
-                }
-            }
-
-            function saveFavorites() {
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                updateFavoritesBadge();
-            }
-
-            function renderLinks() {
-                linksContainer.innerHTML = '';
-                linksData.forEach((item, index) => {
-                    const isFavorited = favorites.includes(item.url || item.name);
-                    const linkItemWrapper = document.createElement('div');
-                    linkItemWrapper.className = 'relative fade-in-item link-item bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:border-sky-500/50 hover:-translate-y-1';
-                    linkItemWrapper.style.setProperty('--stagger-index', index);
-                    linkItemWrapper.style.display = allLinksVisible ? 'block' : 'none';
-                    
-                    if (item.isGroup) {
-                        const linkCount = item.sublinks.length;
-                        linkItemWrapper.innerHTML = `
-                            <a href="#" class="group-toggle flex justify-between items-center w-full p-4 font-bold text-gray-800 dark:text-white">
-                                <span class="flex items-center gap-3">
-                                    <i class="${item.icon || 'ph ph-folder'} text-2xl text-sky-500"></i>
-                                    <span>${item.name}</span>
-                                    <span class="text-xs font-mono text-gray-400 dark:text-gray-500">[${linkCount}]</span>
-                                </span>
-                                <i class="ph ph-caret-down text-xl text-gray-400 transition-transform duration-300"></i>
-                            </a>
-                            <div class="sub-links border-t border-gray-200 dark:border-gray-700/50">
-                                ${item.sublinks.map(sublink => `
-                                    <a href="${sublink.url}" target="_blank" rel="noopener noreferrer" class="sub-link-item block p-3 pl-12 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-200 text-sm">
-                                        ${sublink.name}
-                                    </a>
-                                `).join('')}
-                            </div>
-                        `;
-                        const mainLink = linkItemWrapper.querySelector('.group-toggle');
-                        const icon = mainLink.querySelector('.ph-caret-down');
-                        const subLinksContainer = linkItemWrapper.querySelector('.sub-links');
-                        mainLink.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            if (subLinksContainer.style.maxHeight) {
-                                subLinksContainer.style.maxHeight = null;
-                                icon.style.transform = 'rotate(0deg)';
-                            } else {
-                                subLinksContainer.style.maxHeight = subLinksContainer.scrollHeight + "px";
-                                icon.style.transform = 'rotate(180deg)';
-                                setTimeout(() => {
-                                    mainLink.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }, 300);
-                            }
-                        });
-
-                    } else {
-                        linkItemWrapper.innerHTML = `
-                            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="single-link-item flex justify-between items-center p-4 font-bold text-gray-800 dark:text-white">
-                                <span class="flex items-center gap-3">
-                                    <i class="${item.icon || 'ph ph-link-simple'} text-2xl text-sky-500"></i>
-                                    ${item.name}
-                                </span>
-                            </a>
-                             <button class="star-favorite absolute top-3 right-3 text-gray-300 dark:text-gray-600 hover:text-yellow-400 transition-all duration-200 text-xl ${isFavorited ? 'favorited' : ''}">
-                                <i class="ph-fill ph-star"></i>
-                            </button>
-                        `;
-                    }
-
-                    const starButton = linkItemWrapper.querySelector('.star-favorite');
-                    if (starButton) {
-                        starButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const key = item.url || item.name;
-                            if (favorites.includes(key)) {
-                                favorites = favorites.filter(fav => fav !== key);
-                                starButton.classList.remove('favorited');
-                            } else {
-                                favorites.push(key);
-                                starButton.classList.add('favorited');
-                            }
-                            saveFavorites();
-                        });
-                    }
-
-                    linksContainer.appendChild(linkItemWrapper);
-                });
-            }
-
-            function filterLinks() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                const allLinks = linksContainer.querySelectorAll('.link-item');
-                let visibleCount = 0;
-                allLinks.forEach(item => {
-                    const itemText = item.textContent.toLowerCase();
-                    if (itemText.includes(searchTerm)) {
-                        if (allLinksVisible || searchTerm.length > 0) {
-                            item.style.display = 'block';
-                            visibleCount++;
-                        } else {
-                             item.style.display = 'none';
-                        }
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-                
-                noResultsMessage.style.display = visibleCount === 0 && (allLinksVisible || searchTerm.length > 0) ? 'block' : 'none';
-            }
-
-            function toggleAllLinks() {
-                allLinksVisible = !allLinksVisible;
-                if (!allLinksVisible) { // Si ahora estamos ocultando todos los enlaces
-                    searchInput.value = ''; // Limpiar el campo de búsqueda
-                }
-                filterLinks(); // Volver a aplicar el filtro/visibilidad basado en el nuevo estado de allLinksVisible
-            }
-
-            setupTheme();
-            renderLinks();
-            updateFavoritesBadge();
-            
-            // On load, links are hidden by default
-            allLinksVisible = false;
-            toggleAllLinksIcon.className = 'ph-fill ph-eye text-xl';
-            toggleAllLinksText.textContent = 'Mostrar Todos los Enlaces';
-            linksContainer.querySelectorAll('.link-item').forEach(item => item.style.display = 'none');
-
-
-            searchInput.addEventListener('input', filterLinks);
-            toggleAllLinksButton.addEventListener('click', toggleAllLinks);
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                mobileMenuButton.classList.toggle('open');
-            });
-
-            window.addEventListener('keydown', (e) => {
-                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
-            });
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-        });
-    </script>
+  <script>
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat('es-CL', { dateStyle:'long', timeStyle:'short' });
+    document.getElementById('today').textContent = 'Actualizado: ' + fmt.format(now);
+    document.getElementById('year').textContent = now.getFullYear();
+  </script>
 </body>
 </html>
-

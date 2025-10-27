@@ -613,6 +613,17 @@
                 if (themeToggle) {
                    themeToggle.checked = theme === 'dark';
                 }
+                // Cambiar logo según el tema
+                const logo = document.querySelector('.main-logo');
+                if (logo) {
+                    logo.src = theme === 'dark' ? '2.png' : 'logo.png';
+                    logo.onerror = function() {
+                        // Si el logo del tema oscuro no existe, mantener el original
+                        if (theme === 'dark') {
+                            this.src = 'logo.png';
+                        }
+                    };
+                }
             };
 
             const applyDensity = (compact) => {

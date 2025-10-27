@@ -356,7 +356,7 @@
     </header>
 
     <!-- Logo Principal --><div class="text-center my-4">
-        <img src="img/1.png" alt="Logo CESFAM" class="img-fluid main-logo" onerror="this.style.display='none'">
+        <img src="img/2.png" alt="Logo CESFAM" class="img-fluid main-logo" onerror="this.style.display='none'">
     </div>
 
     <main class="container my-4">
@@ -616,11 +616,11 @@
                 // Cambiar logo según el tema
                 const logo = document.querySelector('.main-logo');
                 if (logo) {
-                    logo.src = theme === 'dark' ? 'img/2.png' : 'logo.png';
+                    logo.src = theme === 'dark' ? 'img/1.png' : 'img/2.png';
                     logo.onerror = function() {
                         // Si el logo del tema oscuro no existe, mantener el original
                         if (theme === 'dark') {
-                            this.src = 'logo.png';
+                            this.src = 'img/2.png';
                         }
                     };
                 }

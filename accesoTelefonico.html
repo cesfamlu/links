@@ -3,1044 +3,498 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directorio Telefónico Moderno</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/1.5.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/1.5.png">
-    <link rel="shortcut icon" href="img/1.5.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>CESFAM La Unión</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="1.5.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="1.5.png">
+    <link rel="shortcut icon" href="1.5.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Librerías para PDF --><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <style>
-        /* Paleta de colores y sistema de diseño */
-        :root {
-            --color-primary: #0066cc;
-            --color-primary-dark: #127986e8;
-            --color-primary-light: #3385d6;
-            --color-clinical: #0066cc;
-            --color-clinical-light: #e6f2ff;
-            --color-admin: #7c3aed;
-            --color-admin-light: #f3e8ff;
-            --color-support: #059669;
-            --color-support-light: #d1fae5;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-error: #ef4444;
-            --color-info: #3b82f6;
-            --color-gray-50: #f9fafb;
-            --color-gray-100: #f3f4f6;
-            --color-gray-200: #e5e7eb;
-            --color-gray-300: #d1d5db;
-            --color-gray-400: #9ca3af;
-            --color-gray-500: #6b7280;
-            --color-gray-600: #4b5563;
-            --color-gray-700: #374151;
-            --color-gray-800: #1f2937;
-            --color-gray-900: #111827;
-            
-            /* Paleta base (Claro) */
-            --bg-color: var(--color-gray-50);
-            --text-color: var(--color-gray-800);
-            --card-bg: white;
-            --border-color: var(--color-gray-200);
-            --header-bg-color: white;
-            --accordion-header-bg: var(--color-primary);
-            --accordion-header-text: white;
-            --input-bg: white;
-            
-            /* Tipografía */
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-weight-light: 300;
-            --font-weight-normal: 400;
-            --font-weight-medium: 500;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
-            
-            /* Espaciado */
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            
-            /* Bordes y Sombras */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-            /* Transiciones */
-            --transition-fast: 150ms ease-in-out;
-            --transition-base: 200ms ease-in-out;
-            --transition-slow: 300ms ease-in-out;
-        }
-
-        [data-theme="dark"] {
-            --color-gray-50: #111827;
-            --color-gray-800: #f9fafb;
-            --color-primary: #0090ff;
-            --bg-color: var(--color-gray-900);
-            --text-color: var(--color-gray-200);
-            --card-bg: var(--color-gray-800);
-            --border-color: var(--color-gray-700);
-            --header-bg-color: var(--color-gray-800);
-            --accordion-header-bg: var(--color-primary-dark);
-            --input-bg: var(--color-gray-700);
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            transition: background-color var(--transition-base), color var(--transition-base);
-        }
-
-        header {
-            background: linear-gradient(135deg, #0066cc 0%, #127986 100%);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-            transition: all var(--transition-slow);
-            border-bottom: none;
-            position: sticky;
-            top: 0;
-            z-index: 1020;
-            backdrop-filter: blur(10px);
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        }
-        
-        [data-theme="dark"] header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        } 
-
-        .header-logo {
-            height: 100px;
-            width: auto;
-            object-fit: contain;
-            max-width: 120px;
-        }
-        
-        .main-logo {
-            max-height: 200px;
-            width: auto;
-            margin-top: -10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .main-logo:hover {
-            transform: scale(1.02);
-        }
-        
-        @media (max-width: 768px) {
-            .main-logo {
-                max-height: 150px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .main-logo {
-                max-height: 120px;
-            }
-        }
-        
-        .header-main-content {
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .header-title-section {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .header-title-section h1 {
-            font-size: 1.5rem;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-weight: var(--font-weight-bold);
-        }
-        
-        .header-title-section p {
-            font-size: 0.875rem;
-            margin-bottom: 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .header-actions {
-            flex-shrink: 0;
-            gap: 0.5rem;
-        }
-        
-        .header-actions .btn {
-            font-size: 0.875rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            backdrop-filter: blur(10px);
-            transition: all var(--transition-base);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .header-actions .btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        @media (max-width: 768px) {
-            .header-main-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            .header-actions {
-                justify-content: center !important;
-                flex-wrap: wrap;
-            }
-            .header-title-section h1 {
-                font-size: 1.25rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .header-actions .btn {
-                font-size: 0.8rem;
-                padding: 0.25rem 0.5rem;
-            }
-            .header-actions .btn span {
-                display: none;
-            }
-        }
-
-        .accordion-item {
-             background-color: var(--card-bg);
-             border: 1px solid var(--border-color);
-             border-radius: var(--radius-lg) !important;
-             margin-bottom: 1rem;
-             box-shadow: var(--shadow-md);
-             transition: background-color var(--transition-base), border-color var(--transition-base);
-        }
-        
-        .accordion-header .accordion-button {
-            background-color: var(--accordion-header-bg);
-            color: var(--accordion-header-text);
-            font-weight: var(--font-weight-semibold);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
-            transition: background-color var(--transition-base);
-        }
-
-        .accordion-button:not(.collapsed) { box-shadow: none; }
-        .accordion-button:focus { box-shadow: none; border-color: var(--border-color); }
-
-        .accordion-button::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-       
-        .contact-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            transition: background-color 150ms ease-in-out, padding 150ms ease-in-out;
-        }
-        
-        .contact-item:hover { background-color: var(--color-gray-100); }
-        [data-theme="dark"] .contact-item:hover { background-color: var(--color-gray-700); }
-        .contact-item:last-child { border-bottom: none; }
-        .contact-info { flex-grow: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .contact-info strong { font-size: 1.1rem; font-weight: var(--font-weight-medium); }
-        
-        .admin-fab { position: fixed; bottom: 25px; right: 25px; z-index: 1000; background-color: var(--color-primary); border: none; box-shadow: var(--shadow-lg); }
-        .admin-fab:hover { background-color: var(--color-primary-dark); }
-        
-        mark { padding: 0.1em; background-color: var(--color-warning); border-radius: 0.375rem; color: var(--color-gray-900); }
-        
-        /* Theme switcher */
-        .theme-switch-wrapper { display: flex; align-items: center; position: absolute; top: 1rem; right: 1rem; z-index: 1021; }
-        .theme-switch { display: inline-block; height: 24px; position: relative; width: 50px; }
-        .theme-switch input { display:none; }
-        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
-        .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--color-primary); }
-        input:checked + .slider:before { transform: translateX(26px); }
-        
-        /* Clear search button */
-        .search-wrapper { position: relative; }
-        #clear-search { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--color-gray-400); display: none; }
-
-        /* Nuevos estilos */
-        .compacto .contact-item { padding: .5rem 1.5rem; }
-        .badge-soft { background-color: var(--color-primary-light); color: var(--color-primary-dark); border-radius: 999px; padding: .25rem .5rem; font-size: .75rem; font-weight: var(--font-weight-medium); }
-        [data-theme="dark"] .badge-soft { background-color: var(--color-gray-700); color: var(--color-gray-200); }
-        .category-header-count { margin-left:.5rem; }
-        .contact-actions { display: flex; align-items: center; flex-shrink: 0; }
-        .contact-actions .btn { margin-left:.5rem; }
-        @media (min-width: 992px) {
-            .list-grid .contact-item { display:grid; grid-template-columns: 1fr auto; gap: .75rem; align-items:center; }
-            .list-grid .contact-actions { justify-self:end; }
-        }
-        .modal-content {
-             background-color: var(--card-bg);
-             color: var(--text-color);
-        }
-        .modal-header, .modal-footer {
-            border-color: var(--border-color);
-        }
-        
-        /* Footer Styles */
-        footer {
-            margin-top: auto;
-        }
-        
-        footer i {
-            margin-right: 0.25rem;
-        }
-        
-        @media (max-width: 768px) {
-            footer .row {
-                text-align: center !important;
-            }
-            
-            footer .text-md-start,
-            footer .text-md-end {
-                text-align: center !important;
-            }
-        }
-        
-        [data-theme="dark"] footer > div:first-child {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Theme Switcher --><div class="theme-switch-wrapper">
-        <label class="theme-switch" for="theme-checkbox">
-            <input type="checkbox" id="theme-checkbox" />
-            <div class="slider"></div>
-        </label>
-    </div>
-
-    <header class="py-3">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap header-main-content">
-            <div class="header-title-section">
-                <h1>Directorio Telefónico</h1>
-                <p>Guía de contactos centralizada.</p>
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-info">
+                    <div class="info-item">
+                        <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span id="currentDateTime">Cargando fecha y hora...</span>
+                    </div>
+                </div>
+                <div class="header-user">
+                    <a class="action-btn primary" href="https://cesfamlu.github.io/links/accesoTelefonico.html" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                            </path>
+                        </svg>
+                        <span>Directorio Telefónico</span>
+                    </a>
+                    
+                    <a class="action-btn secondary" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z">
+                            </path>
+                        </svg>
+                        <span>Soporte Informatica</span>
+                    </a>
+                    
+                    <a class="action-btn outline" href="https://www.cesfamlaunion.cl" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                        <span>CESFAM La Unión</span>
+                    </a>
+                </div>
+                
             </div>
-            <div class="header-actions">
-                <a href="https://cesfamlu.github.io/links" class="btn btn-outline-secondary">
-                    <i class="bi bi-link-45deg"></i> <span>Directorio Enlaces</span>
-                </a>
-                <a href="https://cesfamlu.github.io/FormularioSoporte" class="btn btn-outline-secondary">
-                    <i class="bi bi-link-45deg"></i> <span>Soporte Informático</span>
-                </a>
+        </div>
+        <div class="header-main">
+
+    
+            <div class="container header-main-content">
+                <div class="logo-section">
+                    <div class="logo-wrap">
+                        <img id="siteLogo" src="logo.png" alt="CESFAM La Unión" class="logo-image">
+                    </div>
+                </div>
+                <div class="search-section">
+                    <div class="search-box">
+                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="searchInput" placeholder="Buscar en todas las herramientas...">
+                        <button id="clearSearch" class="clear-btn hidden" aria-label="Limpiar búsqueda">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                
+           
             </div>
         </div>
     </header>
 
-    <!-- Logo Principal --><div class="text-center my-4">
-        <img src="img/2.png" alt="Logo CESFAM" class="img-fluid main-logo" onerror="this.style.display='none'">
-    </div>
-
-    <main class="container my-4">
-        <!-- Barra de Búsqueda --><div class="row justify-content-center mb-4">
-            <div class="col-md-8">
-                <div class="input-group input-group-lg search-wrapper">
-                    <span class="input-group-text" style="background-color: var(--input-bg); border-right: none; border-color: var(--border-color);"><i class="bi bi-search"></i></span>
-                    <input type="text" id="search-input" class="form-control" placeholder="Busca un anexo, nombre o categoría..." style="border-left: none; box-shadow: var(--shadow-sm); background-color: var(--input-bg); color: var(--text-color); border-color: var(--border-color);">
-                    <i class="bi bi-x-circle-fill" id="clear-search"></i>
+    <main class="main-content">
+        <div class="container">
+            <div class="controls-bar">
+                <div class="controls-left">
+                    <h2 class="page-title">Herramientas</h2>
+                    <span id="itemsCount" class="items-count"></span>
+                </div>
+                <div class="controls-right">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="clinical">Clínico</button>
+                        <button class="filter-btn" data-filter="admin">CESFAM</button>
+                        <button class="filter-btn" data-filter="support">Soporte</button>
+                    </div>
+                    <button id="toggleAllLinks" class="btn-toggle-all">
+                        <svg class="icon-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <span id="toggleAllText">Mostrar Enlaces</span>
+                    </button>
                 </div>
             </div>
-        </div>
-        
-        <div class="d-flex gap-2 justify-content-center mb-4 d-none" id="admin-backup-buttons">
-          <button id="btn-export" class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-download"></i> Exportar JSON
-          </button>
-          <label class="btn btn-outline-secondary btn-sm mb-0">
-            <i class="bi bi-upload"></i> Importar JSON
-            <input id="file-import" type="file" accept="application/json" hidden>
-          </label>
-        </div>
-        
-        <!-- Cards de resumen y Filtros rápidos --><div class="row g-3 mb-4" id="summary-cards"></div>
-        <div class="d-flex gap-2 flex-wrap mb-4" id="quick-filters">
-          <button class="btn btn-sm btn-primary" data-filter="all">Todos</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Municipalidad">Municipalidad</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Salud">Salud</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Daem">DAEM</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="hasAnexo">Con Anexo</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="mobile">Solo Celulares</button>
-          <div class="ms-auto d-flex align-items-center gap-3">
-            <button class="btn btn-sm btn-outline-danger" id="export-pdf-btn" title="Exportar a PDF">
-                <i class="bi bi-file-earmark-pdf"></i>
-                <span class="d-none d-lg-inline ms-1">Exportar PDF</span>
-            </button>
-            <span style="font-size:.9rem; color: var(--color-gray-500);">Densidad</span>
-            <div class="form-check form-switch m-0">
-              <input class="form-check-input" type="checkbox" id="density-switch" title="Alternar vista compacta">
-            </div>
-          </div>
-        </div>
 
-        <!-- Contenedor para el acordeón de categorías --><div class="accordion" id="directory-accordion">
-            <!-- El contenido se generará con JavaScript --></div>
-         <div id="no-results" class="text-center mt-5" style="display: none;">
-            <i class="bi bi-emoji-frown display-1" style="color: var(--color-gray-300);"></i>
-            <h3 class="mt-3" style="font-weight: var(--font-weight-semibold);">No se encontraron resultados</h3>
-            <p style="color: var(--color-gray-500);">Prueba con otros términos, por ejemplo: "Farmacia", "520" o "SOME".</p>
+            <div id="noResults" class="no-results hidden">
+                <svg class="no-results-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta con otras palabras clave o revisa los filtros aplicados.</p>
+            </div>
+            
+            <div id="cardsContainer" class="cards-grid">
+                
+                <!-- Card 1: RAS -->
+                <article class="card" data-category="clinical" data-keywords="ras registro atencion salud urgencia some valdivia">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">RAS</h3>
+                        <p class="card-description">Registro de Atenciones de Salud - Múltiples servidores disponibles.</p>
+                         <div class="sublinks hidden" id="sublinks-ras">
+                            <h4 class="sublinks-label">Servidores Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://www.rasvaldivia.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS Principal</a></li>
+                                <li><a href="https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS Contingencia</a></li>
+                                <li><a href="http://10.8.102.72" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 1</a></li>
+                                <li><a href="http://10.8.102.74" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 2</a></li>
+                                <li><a href="http://10.8.102.104" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-ras" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 2: CORE -->
+                <article class="card" data-category="clinical" data-keywords="core examenes laboratorio imagenes resultados valdivia">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">CORE</h3>
+                        <p class="card-description">Sistema de gestión de exámenes médicos.</p>
+                        <div class="sublinks hidden" id="sublinks-core">
+                            <h4 class="sublinks-label">Servidores</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://www.hbvaldivia.cl/core/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> CORE Principal</a></li>
+                                <li><a href="https://10.6.206.62/core" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> CORE IP</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                         <button class="btn-primary" data-target="sublinks-core" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 3: Exámenes -->
+                <article class="card" data-category="clinical" data-keywords="examenes laboratorio resultados pruebas clinicas">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Visor de Exámenes</h3>
+                        <p class="card-description">Acceso a resultados de exámenes de laboratorio.</p>
+                        <div class="sublinks hidden" id="sublinks-examenes">
+                            <h4 class="sublinks-label">Servidores</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="http://10.66.50.47/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Exámenes Principal</a></li>
+                                <li><a href="http://10.4.59.246:90/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Exámenes Contingencia</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                         <button class="btn-primary" data-target="sublinks-examenes" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+
+
+
+               <!-- Card 11: SIGGES -->
+                <article class="card" data-category="clinical" data-keywords="sigges ges garantias explicitas salud minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SIGGES</h3>
+                        <p class="card-description">Sistema de Información para la Gestión de Garantías en Salud.</p>
+                         <div class="sublinks hidden" id="sublinks-sigges">
+                            <h4 class="sublinks-label">Versiones Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://nuevo.sigges.cl/#/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Nuevo SIGGES</a></li>
+                                <li><a href="https://www.sigges.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> SIGGES </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-sigges" aria-expanded="false">
+                            <span class="btn-text">Ver Versiones</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>     
+
+
+ <!-- Card 5.5: biblioteca -->
+                 
+                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge support">admin</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Biblioteca CESFAM</h3>
+                        <p class="card-description">Bibliote con recursos para funcionarios.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+                
+                <!-- Card 5: DESAMLU -->
+                <article class="card" data-category="admin" data-keywords="desamlu desarrollo">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <span class="card-badge admin">Admin</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DESAMLU</h3>
+                        <p class="card-description">Plataforma Departamento de salud.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://desamlu.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 6: Intranet -->
+                 
+                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg></div>
+                        <span class="card-badge support">admin</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Intranet</h3>
+                        <p class="card-description">Red interna de comunicación institucional.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://intranetlaunion.smc.cl/login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 7: Isatec -->
+                <article class="card" data-category="support" data-keywords="isatec clientes portal soporte">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge support">Soporte</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isatec</h3>
+                        <p class="card-description">Portal de clientes Isatec para soporte técnico.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://clientes.isatec.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 8: Isis View -->
+                <article class="card" data-category="clinical" data-keywords="isis view imagenes medicas radiologia pacs">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isis View</h3>
+                        <p class="card-description">Visor de imágenes médicas y radiología.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="http://10.6.67.166" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 9: Imed -->
+                <article class="card" data-category="clinical" data-keywords="imed licencias medicas certificados electronicas">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge admin">Admin</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Imed</h3>
+                        <p class="card-description">Sistema de licencias médicas electrónicas.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.licencia.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 10: Centro Integral -->
+                <article class="card" data-category="clinical" data-keywords="centro integral salud mental atencion psicologica">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Centro Integral</h3>
+                        <p class="card-description">Atención integral de salud mental.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tinyurl.com/centro-integral" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                <!-- Card 4: Muni La Unión -->
+                <article class="card" data-category="admin" data-keywords="municipalidad la union municipal tramites comunal">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+                        <span class="card-badge admin">Municipal</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Muni La Unión</h3>
+                        <p class="card-description">Portal de información municipal de La Unión.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.munilaunioninfo.com" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                
+
+                <!-- Card 12: DART -->
+                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DART</h3>
+                        <p class="card-description">Teleoftalmología y retinopatía diabética.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://teleoftalmologia.minsal.cl/es/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 13: Hospital Digital -->
+                <article class="card" data-category="clinical" data-keywords="hospital digital interconsulta derivaciones telemedicina minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Hospital Digital</h3>
+                        <p class="card-description">Plataforma de interconsultas y telemedicina.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://interconsulta.minsal.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- Card 14: Chile Crece Contigo -->
+                <article class="card" data-category="clinical" data-keywords="chile crece contigo infancia desarrollo infantil ninos bebes">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Chile Crece Contigo</h3>
+                        <p class="card-description">Programa de desarrollo infantil temprano.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://srdm.crececontigo.gob.cl/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                
+
+                <!-- Card 15: FONASA -->
+<article class="card" data-category="clinical" data-keywords="fonasa sigges ges garantias explicitas salud minsal">
+    <div class="card-header">
+        <div class="card-icon clinical">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+        </div>
+        <span class="card-badge clinical">soporte</span>
+    </div>
+
+    <div class="card-body">
+        <h3 class="card-title">FONASA</h3>
+        <p class="card-description">FONASA</p>
+        <div class="sublinks hidden" id="sublinks-fonasa">
+            <h4 class="sublinks-label">Versiones Disponibles</h4>
+            <ul class="sublinks-list">
+                <li><a href="https://fonasa.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> FONASA</a></li>
+                <li><a href="https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Front Integrado</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn-primary" data-target="sublinks-fonasa" aria-expanded="false">
+            <span class="btn-text">Ver Opciones</span>
+            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+</article>
+
+
+            </div>
+
+            <!-- Footer spacing anchor --> 
         </div>
     </main>
-    
- <footer class="mt-5">
-    <div style="background: linear-gradient(135deg, #0066cc 0%, #127986 100%); padding: var(--spacing-xl) 0; border-top: 3px solid rgba(255, 255, 255, 0.1);">
+
+    <footer class="main-footer">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0" style="color: white; font-weight: var(--font-weight-medium); font-size: 0.95rem;">
-                        <i class="bi bi-building me-2"></i>CESFAM La Unión
+
+
+
+            <div class="footer-content">
+                <section class="footer-section">
+                    <h3 class="footer-title">Enlaces</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;">Volver arriba</a></li>
+                        <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
+                        <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
+                    </ul>
+                </section>
+
+
+
+                
+                <section class="footer-section">
+                    <h3 class="footer-title">Contactos</h3>
+                    <p class="footer-text">
+                        <a href="mailto:informacionescesfamlaunión@gmail.cl" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-envelope text-xl"></i></a>
+                        informacionescesfamlaunión@gmail.cl
                     </p>
-                    <p class="mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem;">
-                        <i class="bi bi-cpu me-2"></i>Área de Informática
+                    <p class="footer-text">
+                        <a href="mailto:some@munilaunion.cl" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-envelope text-xl"></i></a>
+                        some@munilaunion.cl
                     </p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0" style="color: white; font-weight: var(--font-weight-semibold); font-size: 0.9rem;">
-                        <i class="bi bi-telephone-fill me-2"></i>Directorio Telefónico 2025
+                    <p class="footer-text">
+                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l1.89 1.89a2 2 0 002.83 0L12 7l4.28 4.28a2 2 0 002.83 0L21 10"></path></svg>
+                        La Unión, Región de Los Ríos
                     </p>
-                    <p class="mb-0 mt-2" style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem;">
-                        <i class="bi bi-shield-check me-2"></i>Sistema de gestión numeros telefónicos
-                    </p>
-                </div>
+                </section>
+
+
+
+                <section class="footer-section">
+                    <h3 class="footer-title">CESFAM La Unión</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA target="_blank">Facebook</a></li>
+                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu"" target="_blank">Youtube</a></li>
+                        <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank">Instagram</a></li>
+                    </ul>
+                </section>
+                <section class="footer-section">
+                    <h3 class="footer-title">Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank">Soporte Informatica</a></li>
+                        <li><a class="footer-link" href="https://www.fonasa.cl" target="_blank">FONASA</a></li>
+                    </ul>
+                </section>
             </div>
-            <div class="mt-3 pt-3 text-center" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <p class="mb-0" style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">
-                    &copy; 2025 Directorio Telefónico | Versión 2.0
-                </p>
-            </div>
-        </div>
-    </div>
-    <div style="background: var(--color-gray-900); padding: var(--spacing-sm) 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        
-    </div>
-</footer>
-
-    <!-- Botón Flotante de Administrador --><button class="btn btn-primary btn-lg rounded-circle admin-fab" id="admin-login-btn" title="Acceso Administrador">
-        <i class="bi bi-person-fill-gear"></i>
-    </button>
-    
-    <!-- Toast de Notificación --><div class="position-fixed bottom-0 end-0 p-3" style="z-index:1100">
-      <div id="toast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body" id="toast-body"></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal CRUD --><div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <form class="modal-content" id="contactForm">
-          <div class="modal-header">
-            <h5 class="modal-title" id="contactModalLabel">Nuevo contacto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-2">
-              <label class="form-label">Categoría</label>
-              <select class="form-select" id="f-category" required>
-                <option>Municipalidad</option>
-                <option>Salud</option>
-                <option>Daem</option>
-              </select>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Nombre</label>
-              <input class="form-control" id="f-name" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Anexo</label>
-              <input class="form-control" id="f-anexo" placeholder="(opcional)">
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Teléfono</label>
-              <input class="form-control" id="f-phone">
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" id="f-email" placeholder="(opcional)">
-            </div>
-            <input type="hidden" id="f-edit-key" value="">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Guardar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    
-    <!-- Scripts --><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Datos con iconos por categoría
-            const initialData = [
-              {
-                "category": "Municipalidad", "icon": "bi-building",
-                "contacts": [
-                  { "name": "Asesor Jurídico alcalde", "anexo": "7135", "phone": "64 2 527135", "email": "" }, { "name": "Administración, Vehículos y Caminos", "anexo": "7000", "phone": "64 2 527000", "email": "" }, { "name": "Administración, Vehículos, Secretaría y Obras Menores", "anexo": "7111", "phone": "64 2 527111", "email": "" }, { "name": "Administración, Vehículos, Prevencionista", "anexo": "", "phone": "472239", "email": "" }, { "name": "Administración, Seguridad Pública", "anexo": "", "phone": "322033", "email": "" }, { "name": "Administración, Dpto. Aseo y Ornato", "anexo": "7102", "phone": "64 2 527102", "email": "" }, { "name": "Administración, Dpto. Aseo Parque Municipal", "anexo": "", "phone": "472297", "email": "" }, { "name": "Administración, Unidad Académica", "anexo": "", "phone": "472366", "email": "" }, { "name": "Administración, Oficina de Comunicaciones", "anexo": "", "phone": "324387", "email": "" }, { "name": "Secretaria Municipal", "anexo": "7139", "phone": "64 2 527139", "email": "" }, { "name": "Secretaría Municipal, Secretaria", "anexo": "7120", "phone": "64 2 527120", "email": "" }, { "name": "Secretaría Municipal, Central Telefónica", "anexo": "", "phone": "322441", "email": "" }, { "name": "Secretaría Municipal, Oficina de Concejales", "anexo": "7114", "phone": "64 2 527114", "email": "" }, { "name": "Secretaría Municipal, Oficina de Partes", "anexo": "7141", "phone": "64 2 527141", "email": "" }, { "name": "Secretaría Municipal, Transparencia Municipal", "anexo": "7144", "phone": "64 2 527144", "email": "" }, { "name": "Salón Consistorial", "anexo": "", "phone": "322031", "email": "" }, { "name": "Portería", "anexo": "", "phone": "472376", "email": "" }, { "name": "Dirección de Control, directora", "anexo": "384", "phone": "64 2 201384", "email": "" }, { "name": "Dirección de Control administrativo", "anexo": "421", "phone": "64 2 200421", "email": "" }, { "name": "Dirección de Control, Informática", "anexo": "983", "phone": "64 2 524983", "email": "" }, { "name": "Dirección de Control, fiscalizador", "anexo": "580", "phone": "64 2 200580", "email": "" }, { "name": "Cultura y Turismo, Dirección", "anexo": "Sin Anexo", "phone": "64 2 346116", "email": "" }, { "name": "Cultura y Turismo, Secretaría", "anexo": "", "phone": "346117/346118", "email": "" }, { "name": "Cultura y Turismo, Biblioteca", "anexo": "", "phone": "472215", "email": "" }, { "name": "Cultura y Turismo, Turismo", "anexo": "", "phone": "9 9958 1816", "email": "" }, { "name": "Cultura y Turismo, Pueblos Originarios", "anexo": "", "phone": "9 4743 2447", "email": "" }, { "name": "Estadio Carlos Vogel", "anexo": "", "phone": "472296", "email": "" }, { "name": "Dirección de Obras Municipales, Director", "anexo": "7138", "phone": "64 2 527138", "email": "" }, { "name": "Dirección de Obras Municipales, Secretaría", "anexo": "7138", "phone": "64 2 527138", "email": "" }, { "name": "Fomento Productivo", "anexo": "Sin Anexo", "phone": "64 2 346116", "email": "" }, { "name": "Jefa Dto. Social.", "anexo": "266", "phone": "472266", "email": "" }, { "name": "Dideco, Dirección", "anexo": "271", "phone": "422271", "email": "" }, { "name": "Dideco, Secretaría", "anexo": "270", "phone": "472270", "email": "" }, { "name": "Dideco, OMIL", "anexo": "267 - 268", "phone": "472340", "email": "" }, { "name": "Dideco, Programa Jefas de Hogar - Oficina Mujer", "anexo": "246", "phone": "472246", "email": "" }, { "name": "Dideco, Organizaciones Comunitarias", "anexo": "281", "phone": "472281", "email": "" }, { "name": "Dideco, OPD", "anexo": "276", "phone": "472276", "email": "" }, { "name": "Dideco, Senda Previene", "anexo": "204-390", "phone": "472204", "email": "" }, { "name": "Dideco, Oficina del Deporte", "anexo": "306", "phone": "472306", "email": "" }, { "name": "Dideco, Gimnasio Municipal", "anexo": "205", "phone": "472205", "email": "" }, { "name": "Dideco Desarrollo Rural", "anexo": "386", "phone": "472386", "email": "" }, { "name": "Dideco, Prodesal", "anexo": "214", "phone": "472214", "email": "" }, { "name": "Dideco, PDTI", "anexo": "388", "phone": "472388", "email": "" }, { "name": "Dideco, Programas Sociales, Jefa", "anexo": "224", "phone": "472224", "email": "" }, { "name": "Dideco, Programas Familias", "anexo": "232-233", "phone": "472232", "email": "" }, { "name": "Oficina de la Juventud", "anexo": "Sin Anexo", "phone": "99527388", "email": "" }, { "name": "Finanzas, Director", "anexo": "351", "phone": "472350", "email": "" }, { "name": "Finanzas, Adquisiciones", "anexo": "355-395", "phone": "472355", "email": "" }, { "name": "Finanzas, Rentas y patentes", "anexo": "265", "phone": "472265", "email": "" }, { "name": "Finanzas, Inspección", "anexo": "262", "phone": "472262", "email": "" }, { "name": "Finanzas, Personal", "anexo": "350 - 352", "phone": "472233/472352", "email": "" }, { "name": "Finanzas, Tesorería Jefa", "anexo": "353", "phone": "472353", "email": "" }, { "name": "Finanzas, Tesorería Cajeras", "anexo": "354", "phone": "472354", "email": "" }, { "name": "Finanzas, Contabilidad e Inventario", "anexo": "356", "phone": "472356", "email": "" }, { "name": "Finanzas, Cementerio Municipal", "anexo": "120", "phone": "322384", "email": "" }, { "name": "Finanzas, Bodega Municipal", "anexo": "337", "phone": "472337", "email": "" }, { "name": "Finanzas, Bodega Camilo Henriquez", "anexo": "371", "phone": "472298/324362", "email": "" }, { "name": "Secretario", "anexo": "", "phone": "9 8973 7374", "email": "" }, { "name": "Secplan, Dirección", "anexo": "286", "phone": "472286", "email": "" }, { "name": "Secplan, Secretaría", "anexo": "458", "phone": "472358", "email": "" }, { "name": "Secplan, Asesor Urbanista", "anexo": "247", "phone": "472247", "email": "" }, { "name": "Secplan, Vivienda", "anexo": "241", "phone": "472236", "email": "" }, { "name": "Secplan, Inversiones", "anexo": "671", "phone": "324671", "email": "" }, { "name": "Secplan, profesionales", "anexo": "202", "phone": "472202", "email": "" }, { "name": "Secplan, ITO", "anexo": "263", "phone": "472263", "email": "" }, { "name": "Secplan, Compras", "anexo": "221", "phone": "472221", "email": "" }, { "name": "Secplan, Medio Ambiente", "anexo": "245", "phone": "472245", "email": "" }
-                ]
-              },
-              {
-                "category": "Salud", "icon": "bi-heart-pulse",
-                "contacts": [
-                    { "name": "Jefe Departamento de Salud", "anexo": "752", "phone": "207752", "email": "" }, { "name": "Secretaria", "anexo": "334", "phone": "472334", "email": "" }, { "name": "Finanzas Jefa", "anexo": "208", "phone": "322553", "email": "" }, { "name": "Finanzas", "anexo": "753", "phone": "207753", "email": "" }, { "name": "Finanzas", "anexo": "336", "phone": "472336", "email": "" }, { "name": "Personal", "anexo": "335", "phone": "472335", "email": "" }, { "name": "Constructor Civil", "anexo": "448", "phone": "322048", "email": "" }, { "name": "Adquisiciones", "anexo": "449", "phone": "472449", "email": "" }, { "name": "Adquisiciones", "anexo": "323", "phone": "322323", "email": "" }, { "name": "Farmacia Comunitaria", "anexo": "472", "phone": "207754", "email": "" }, { "name": "CESFAM P. Hurtado: UAPO Externo", "anexo": "520", "phone": "642346120", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Azul", "anexo": "521", "phone": "642346121", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Verde", "anexo": "522", "phone": "642346122", "email": "" }, { "name": "CESFAM P. Hurtado: CCR", "anexo": "523", "phone": "642346123", "email": "" }, { "name": "CESFAM P. Hurtado: Sala TIC", "anexo": "524", "phone": "642346124", "email": "" }, { "name": "CESFAM P. Hurtado: Sala Soporte y Comunicaciones", "anexo": "525", "phone": "642346125", "email": "" }, { "name": "CESFAM P. Hurtado: Jefe Unidades Transversales", "anexo": "526", "phone": "642346126", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Multiproposito Sector Transversal", "anexo": "527", "phone": "642346127", "email": "" }, { "name": "CESFAM P. Hurtado: Farmacia", "anexo": "528", "phone": "642346128", "email": "" }, { "name": "CESFAM P. Hurtado: Some adm", "anexo": "529", "phone": "642346129", "email": "" }, { "name": "CESFAM P. Hurtado: Secretaria", "anexo": "530", "phone": "642346130", "email": "" }, { "name": "CESFAM P. Hurtado: Toma de Muestra", "anexo": "531", "phone": "642346131", "email": "" }, { "name": "CESFAM P. Hurtado: Dirección", "anexo": "532", "phone": "642346132", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Vinculación y Promoción", "anexo": "533", "phone": "642346133", "email": "" }, { "name": "CESFAM P. Hurtado: Some Transversal", "anexo": "634", "phone": "642346134", "email": "" }, { "name": "CESFAM P. Hurtado: Bodega Dental", "anexo": "535", "phone": "642346135", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Verde", "anexo": "536", "phone": "642346136", "email": "" }, { "name": "CESFAM P. Hurtado: Vacunatorio", "anexo": "537", "phone": "642346137", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Amarillo", "anexo": "538", "phone": "642346138", "email": "" }, { "name": "CESFAM P. Hurtado: Esterilización", "anexo": "539", "phone": "642346139", "email": "" }, { "name": "CESFAM P. Hurtado: Calificador de Derecho", "anexo": "540", "phone": "642346140", "email": "" }, { "name": "CESFAM P. Hurtado: Sala IRA", "anexo": "541", "phone": "642346141", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Amarillo", "anexo": "542", "phone": "642346142", "email": "" }, { "name": "CESFAM P. Hurtado: JEFE SOME Sector Amarillo", "anexo": "543", "phone": "642346143", "email": "" }, { "name": "CESFAM P. Hurtado: Electrocardiograma", "anexo": "544", "phone": "642346144", "email": "" }, { "name": "CESFAM P. Hurtado: Estadística", "anexo": "545", "phone": "642346145", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Azul", "anexo": "546", "phone": "642346146", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Enfermera Coordinadora Transversales", "anexo": "547", "phone": "642346147", "email": "" }, { "name": "CESFAM P. Hurtado: Entrega de Leche", "anexo": "548", "phone": "642346148", "email": "" }, { "name": "CESFAM P. Hurtado: Epidemiologia", "anexo": "549", "phone": "642346149", "email": "" }, { "name": "CESFAM P. Hurtado: OIRS", "anexo": "550", "phone": "642346150", "email": "" }, { "name": "CESFAM P. Hurtado: Sala ERA", "anexo": "551", "phone": "642346151", "email": "" }, { "name": "CESFAM P. Hurtado: GES", "anexo": "552", "phone": "642346152", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 1", "anexo": "393", "phone": "472393", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 2", "anexo": "491", "phone": "472391", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 4", "anexo": "389", "phone": "472389", "email": "" }, { "name": "Clínica Dental Escolar: Escuela Radimadi", "anexo": "392", "phone": "472392", "email": "" }, { "name": "Clínica Dental Escolar: Escuela El Maitén", "anexo": "383", "phone": "472383", "email": "" }, { "name": "Clínica Dental Escolar: Liceo RAAC", "anexo": "394", "phone": "472394", "email": "" }, { "name": "CECOSF Los Lagos (Some, Farmacia, Leche)", "anexo": "211-212", "phone": "472211-472212", "email": "" }, { "name": "CECOSF Irene Daiber", "anexo": "307", "phone": "472307", "email": "" }, { "name": "Consultorio La Unión: Farmacia", "anexo": "314", "phone": "472314", "email": "" }, { "name": "Consultorio La Unión: S.O.M.E.", "anexo": "313", "phone": "472313", "email": "" }, { "name": "Consultorio La Unión: Secretaria", "anexo": "310", "phone": "472310", "email": "" }, { "name": "Consultorio La Unión: Box Medico", "anexo": "316", "phone": "472316", "email": "" }, { "name": "Consultorio La Unión: Curaciones", "anexo": "343", "phone": "472343", "email": "" }, { "name": "Consultorio La Unión: Nutricionista", "anexo": "322", "phone": "472322", "email": "" }, { "name": "Consultorio La Unión: Entrega de Leche", "anexo": "321", "phone": "472321", "email": "" }, { "name": "Consultorio La Unión: SOME Salud Mental", "anexo": "255", "phone": "470255", "email": "" }, { "name": "Consultorio La Unión: Nutricionista Vida Sana", "anexo": "312", "phone": "472312", "email": "" }, { "name": "SAR", "anexo": "502", "phone": "325002", "email": "" }
-                ]
-              },
-              {
-                "category": "Daem", "icon": "bi-book",
-                "contacts": [
-                    { "name": "Recursos Humanos", "anexo": "607", "phone": "472363", "email": "" }, { "name": "Secretaria Dirección", "anexo": "601", "phone": "472361", "email": "" }, { "name": "Secretario Finanzas", "anexo": "604", "phone": "472365", "email": "" }, { "name": "Secretaria Recursos Humanos", "anexo": "608", "phone": "472362", "email": "" }, { "name": "Remuneraciones", "anexo": "609", "phone": "472249", "email": "" }, { "name": "Licencias Médicas", "anexo": "610", "phone": "472364", "email": "" }, { "name": "Oficina de Partes", "anexo": "611", "phone": "472360", "email": "" }, { "name": "Evaluación Docente", "anexo": "612", "phone": "322012", "email": "" }, { "name": "Unidad Académica", "anexo": "613", "phone": "322019", "email": "" }, { "name": "Inventario", "anexo": "605", "phone": "472371", "email": "" }, { "name": "Secretaria", "anexo": "614", "phone": "472372", "email": "" }, { "name": "Coord. Acad. Básica", "anexo": "615", "phone": "322617", "email": "" }, { "name": "Coord. Acad. Básica", "anexo": "616", "phone": "472370", "email": "" }, { "name": "JUNAEB", "anexo": "617", "phone": "472218", "email": "" }, { "name": "Encargada de Pagos", "anexo": "618", "phone": "472380", "email": "" }, { "name": "Sala de Reuniones 1 piso", "anexo": "619", "phone": "472217", "email": "" }, { "name": "Extraescolar/comunicaciones", "anexo": "620", "phone": "322002", "email": "" }, { "name": "Adquisiciones", "anexo": "621", "phone": "472367", "email": "" }, { "name": "Compras", "anexo": "622", "phone": "472379", "email": "" }, { "name": "Planificación/infraestructura", "anexo": "623", "phone": "472201", "email": "" }, { "name": "Secretaria", "anexo": "624", "phone": "472373", "email": "" }, { "name": "Transporte", "anexo": "625", "phone": "472368", "email": "" }, { "name": "Bodega", "anexo": "626", "phone": "321928", "email": "" }, { "name": "Escuela N° 1 La Unión", "anexo": "140", "phone": "322723", "email": "" }, { "name": "Colegio Cultura y Difusión Art.", "anexo": "Sin Anexo", "phone": "570320", "email": "" }, { "name": "Liceo Rector Andrade Coloma", "anexo": "133", "phone": "322437", "email": "" }, { "name": "Escuela Aldea Campesina", "anexo": "132/628", "phone": "321098", "email": "" }, { "name": "Escuela Pdte. Jorge Alessandri", "anexo": "138/269", "phone": "322623", "email": "" }, { "name": "Escuela N°2 La Unión", "anexo": "136", "phone": "322372", "email": "" }, { "name": "Escuela Radimadi", "anexo": "139", "phone": "322721", "email": "" }, { "name": "Escuela El Maitén", "anexo": "345", "phone": "472345", "email": "" }, { "name": "Escuela Diferencial Villa San José", "anexo": "137", "phone": "322392", "email": "" }, { "name": "Escuela Especial de Lenguaje Municipal", "anexo": "Sin Anexo", "phone": "472302", "email": "" }
-                ]
-              }
-            ];
-
-            const directoryContainer = document.getElementById('directory-accordion');
-            const searchInput = document.getElementById('search-input');
-            const clearSearchBtn = document.getElementById('clear-search');
-            const noResultsMessage = document.getElementById('no-results');
-            const adminLoginBtn = document.getElementById('admin-login-btn');
-            const themeToggle = document.getElementById('theme-checkbox');
-            const htmlElement = document.documentElement;
-            const densitySwitch = document.getElementById('density-switch');
-            const exportPdfBtn = document.getElementById('export-pdf-btn');
-            const btnExport = document.getElementById('btn-export'); 
-            const fileImport = document.getElementById('file-import'); 
-            const adminBackupButtons = document.getElementById('admin-backup-buttons'); // Reference for backup buttons div
-            
-            let directoryData = JSON.parse(localStorage.getItem('phoneDirectoryData')) || initialData;
-            let favorites = JSON.parse(localStorage.getItem('favContacts') || '[]');
-            let isAdmin = false;
-            let currentFilter = '';
-            const ADMIN_PIN = "2468";
-
-            // --- Utils ---
-            const debounce = (fn, ms=200) => {
-              let t; return (...args) => { clearTimeout(t); t=setTimeout(()=>fn(...args), ms); };
-            };
-            const showToast = (msg) => {
-              const toastEl = document.getElementById('toast');
-              const toastBody = document.getElementById('toast-body');
-              if (toastEl && toastBody && typeof bootstrap !== 'undefined') {
-                 toastBody.textContent = msg;
-                 new bootstrap.Toast(toastEl).show();
-              } else {
-                 console.warn('Toast elements or Bootstrap JS not found.');
-              }
-            };
-            const isMobile = (p) => /^(9|09)(\d{8})$/.test((p||'').replace(/\D/g,''));
-            const hasAnexo = (a) => a && a.toLowerCase() !== 'sin anexo' && a.trim() !== '';
-            
-            const highlightMatch = (text, filter) => {
-                if (!filter || !text) return text;
-                const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                return text.replace(regex, '<mark>$1</mark>');
-            };
-            
-            const exportData = () => {
-              const blob = new Blob([JSON.stringify(directoryData, null, 2)], {type: "application/json"});
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url; a.download = `directorio_${new Date().toISOString().slice(0,10)}.json`;
-              a.click(); URL.revokeObjectURL(url);
-              showToast("Exportado ✅");
-            };
-            
-            // --- Admin ---
-            const adminActive = () => isAdmin;
-            const adminLogin = () => {
-              const pin = prompt("PIN de administrador:");
-              if (pin === null) return;
-              if (pin === ADMIN_PIN) { 
-                  isAdmin = true; 
-                  showToast("Modo admin activo");
-                  renderSummary(directoryData);
-                  refreshAdminUI();
-                  renderDirectory(searchInput.value||''); 
-              }
-              else { alert("PIN incorrecto."); }
-            };
-            const adminLogout = () => { 
-                isAdmin = false; 
-                showToast("Admin cerrado");
-                renderSummary(directoryData);
-                refreshAdminUI();
-                renderDirectory(searchInput.value||''); 
-            };
-            const refreshAdminUI = () => {
-              const btnAddElement = document.getElementById('btn-add');
-              if (btnAddElement) {
-                 btnAddElement.classList.toggle('d-none', !adminActive());
-              }
-              // Toggle visibility of backup buttons
-              if (adminBackupButtons) {
-                 adminBackupButtons.classList.toggle('d-none', !adminActive());
-              }
-            };
-
-
-            // --- Managers ---
-            const applyTheme = (theme) => {
-                htmlElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                if (themeToggle) {
-                   themeToggle.checked = theme === 'dark';
-                }
-                // Cambiar logo según el tema
-                const logo = document.querySelector('.main-logo');
-                if (logo) {
-                    logo.src = theme === 'dark' ? 'img/1.png' : 'img/2.png';
-                    logo.onerror = function() {
-                        // Si el logo del tema oscuro no existe, mantener el original
-                        if (theme === 'dark') {
-                            this.src = 'img/2.png';
-                        }
-                    };
-                }
-            };
-
-            const applyDensity = (compact) => {
-              document.body.classList.toggle('compacto', compact);
-              localStorage.setItem('density', compact ? 'compact' : 'comfortable');
-            };
-            
-            window.copyToClipboard = async (text) => {
-              try {
-                await navigator.clipboard.writeText(text);
-                showToast('Teléfono copiado');
-              } catch { showToast('No se pudo copiar'); }
-            };
-
-            const renderSummary = (data) => {
-              const el = document.getElementById('summary-cards');
-              if (!el) return; // Add check for element existence
-              const total = data.reduce((acc,c) => acc + c.contacts.length, 0);
-              el.innerHTML = data.map(cat => `
-                <div class="col-6 col-lg-3">
-                  <div class="card shadow-sm h-100" style="background-color: var(--card-bg); border-color: var(--border-color);">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                          <div style="color: var(--color-gray-500);">${cat.category}</div>
-                          <div class="h3 m-0">${cat.contacts.length}</div>
-                        </div>
-                        <i class="bi ${cat.icon} fs-1 text-primary opacity-50"></i>
-                      </div>
-                      <button class="btn btn-sm btn-primary mt-3" data-jump="${cat.category}">Ver</button>
-                    </div>
-                  </div>
-                </div>`).join('') + `
-                <div class="col-6 col-lg-3">
-                  <div class="card h-100" style="background-color: var(--card-bg); border-color: var(--border-color);">
-                    <div class="card-body">
-                      <div style="color: var(--color-gray-500);">Total</div>
-                      <div class="h3 m-0">${total}</div>
-                      <button class="btn btn-sm btn-outline-secondary mt-3" data-jump="ALL">Expandir 1°</button>
-                    </div>
-                  </div>
-                </div>`;
-              el.querySelectorAll('button[data-jump]').forEach(b=>{
-                b.addEventListener('click', ()=>{
-                  const target = b.getAttribute('data-jump');
-                  if (target === 'ALL') {
-                    const firstButton = document.querySelector('.accordion-button');
-                    if (firstButton) {
-                        const collapseElement = document.getElementById(firstButton.getAttribute('data-bs-target').substring(1));
-                        if (collapseElement && typeof bootstrap !== 'undefined') {
-                            new bootstrap.Collapse(collapseElement).show();
-                            firstButton.scrollIntoView({behavior:'smooth', block:'center'});
-                        }
-                    }
-                  } else {
-                    const btn = [...document.querySelectorAll('.accordion-button')]
-                      .find(x => x.textContent.trim().toLowerCase().includes(target.toLowerCase()));
-                    if(btn) {
-                        const collapseElement = document.getElementById(btn.getAttribute('data-bs-target').substring(1));
-                         if (collapseElement && typeof bootstrap !== 'undefined') {
-                            new bootstrap.Collapse(collapseElement).show();
-                            btn.scrollIntoView({behavior:'smooth', block:'center'});
-                         }
-                    }
-                  }
-                });
-              });
-            };
-            
-            const renderDirectory = (filter = '') => {
-              currentFilter = filter || '';
-              if (!directoryContainer) return; // Add check
-              directoryContainer.innerHTML = '';
-              let resultsFound = false;
-              const normalizedFilter = currentFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-              const specialFilter = normalizedFilter.startsWith('filter:') ? normalizedFilter.split(':')[1] : null;
-
-              directoryData.forEach((categoryData, categoryIndex) => {
-                const contactsWithOriginalIndex = categoryData.contacts.map((contact, originalIndex) => ({ contact, originalIndex }));
-
-                contactsWithOriginalIndex.sort((a,b)=>{
-                  const aAn = hasAnexo(a.contact.anexo) ? 0 : 1;
-                  const bAn = hasAnexo(b.contact.anexo) ? 0 : 1;
-                  if (aAn !== bAn) return aAn - bAn;
-                  const aMob = isMobile(a.contact.phone) ? 1 : 0;
-                  const bMob = isMobile(b.contact.phone) ? 1 : 0;
-                  if (aMob !== bMob) return bMob - aMob;
-                  return (a.contact.name||'').localeCompare(b.contact.name||'');
-                });
-
-                const filteredContacts = contactsWithOriginalIndex.filter(({ contact }) => {
-                  if (specialFilter === 'anexo' && !hasAnexo(contact.anexo)) return false;
-                  if (specialFilter === 'mobile' && !isMobile(contact.phone)) return false;
-                  if (!specialFilter && normalizedFilter) {
-                    if (['municipalidad','salud','daem'].includes(normalizedFilter)) {
-                        return categoryData.category.toLowerCase().includes(normalizedFilter);
-                    }
-                    return (contact.name||'').toLowerCase().includes(normalizedFilter) ||
-                           (contact.phone||'').toLowerCase().includes(normalizedFilter) ||
-                           (contact.anexo||'').toLowerCase().includes(normalizedFilter);
-                  }
-                  return true;
-                });
-
-                if (filteredContacts.length > 0) {
-                  resultsFound = true;
-
-                  let contactsHtml = filteredContacts.map(({ contact, originalIndex }) => {
-                    const anexoDisplay = hasAnexo(contact.anexo) ? contact.anexo : '';
-                    const phoneDisplay = contact.phone || '';
-                    const combinedDisplay = anexoDisplay ? (phoneDisplay ? `${anexoDisplay} / ${phoneDisplay}` : anexoDisplay) : phoneDisplay;
-                    const callablePhone = (contact.phone || '').replace(/[^\d+]/g, '');
-                    const favKey = `${categoryData.category}|${contact.name}|${contact.phone}|${contact.anexo}`;
-                    const isFav = favorites.includes(favKey);
-                    const favCls = isFav ? 'text-warning' : 'text-secondary';
+            <div class="footer-bottom">
+                <div class="footer-copyright">© <span id="year"></span> CESFAM La Unión. Area de Informática.</div>
+                <div class="footer-meta">
+                    <span>Versión 3.0</span>
+                    <span class="footer-separator"></span>
                     
-                    const adminTools = adminActive() ? `
-                      <button class="btn btn-sm btn-outline-secondary" title="Editar" data-edit="${categoryIndex}:${originalIndex}" aria-label="Editar contacto">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" title="Eliminar" data-del="${categoryIndex}:${originalIndex}" aria-label="Eliminar contacto">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    ` : '';
+                </div>
+            </div>
+        </div>
+    </footer>
 
-                    return `
-                    <li class="list-group-item contact-item">
-                      <div class="contact-info">
-                        <strong>${highlightMatch(contact.name, normalizedFilter)}</strong>
-                        ${anexoDisplay ? `<span class="badge-soft ms-2">Anexo ${anexoDisplay}</span>` : ''}
-                      </div>
-                      <div class="contact-actions">
-                        <button class="btn btn-sm btn-link ${favCls}" title="Marcar como Favorito" data-fav='${favKey}' aria-label="Marcar como Favorito">
-                          <i class="bi ${isFav ? 'bi-star-fill' : 'bi-star'}"></i>
-                        </button>
-                        <a href="tel:${callablePhone}" class="btn btn-sm btn-primary" title="Llamar ${contact.phone}" aria-label="Llamar al número">
-                          <i class="bi bi-telephone"></i> <span class="d-none d-sm-inline">${highlightMatch(phoneDisplay, normalizedFilter)}</span>
-                        </a>
-                        <button class="btn btn-sm btn-outline-secondary" title="Copiar Teléfono" data-copy="${combinedDisplay}" aria-label="Copiar teléfono">
-                          <i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline">Copiar</span>
-                        </button>
-                        ${adminTools}
-                      </div>
-                    </li>`;
-                  }).join('');
+    <div id="toast" class="toast hidden" role="status" aria-live="polite">
+        <div class="toast-content">
+            <svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <span class="toast-message" id="toastMessage">Acción realizada</span>
+        </div>
+    </div>
 
-                  const accordionItem = document.createElement('div');
-                  accordionItem.className = 'accordion-item';
-                  const isSearching = normalizedFilter.length > 0 || specialFilter;
-                  const showClass = isSearching ? 'show' : '';
-                  const collapsedClass = isSearching ? '' : 'collapsed';
-
-                  accordionItem.innerHTML = `
-                    <h2 class="accordion-header" id="heading-${categoryIndex}">
-                      <button class="accordion-button ${collapsedClass}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${categoryIndex}" aria-expanded="${isSearching}">
-                        <i class="bi ${categoryData.icon} me-2"></i> ${highlightMatch(categoryData.category, normalizedFilter)}
-                        <span class="badge bg-light text-dark ms-auto category-header-count">${filteredContacts.length}</span>
-                      </button>
-                    </h2>
-                    <div id="collapse-${categoryIndex}" class="accordion-collapse collapse ${showClass}" data-bs-parent="#directory-accordion">
-                      <ul class="list-group list-group-flush ${window.innerWidth>=992 ? 'list-grid' : ''}">
-                        ${contactsHtml}
-                      </ul>
-                    </div>`;
-                  directoryContainer.appendChild(accordionItem);
-                }
-              });
-              
-              if(noResultsMessage) noResultsMessage.style.display = resultsFound ? 'none' : 'block';
-              if(clearSearchBtn) clearSearchBtn.style.display = (filter && !filter.startsWith('FILTER:')) ? 'block' : 'none';
-              
-              directoryContainer.querySelectorAll('[data-copy]').forEach(btn=>{
-                btn.addEventListener('click', ()=>window.copyToClipboard(btn.getAttribute('data-copy')));
-              });
-              directoryContainer.querySelectorAll('[data-fav]').forEach(btn=>{
-                btn.addEventListener('click', ()=>{
-                  const key = btn.getAttribute('data-fav');
-                  const i = favorites.indexOf(key);
-                  if (i>=0) favorites.splice(i,1); else favorites.push(key);
-                  localStorage.setItem('favContacts', JSON.stringify(favorites));
-                  showToast(i>=0 ? 'Quitado de Favoritos' : 'Agregado a Favoritos');
-                  const currentSearchValue = searchInput ? searchInput.value : '';
-                  renderDirectory(currentSearchValue || (document.querySelector('#quick-filters .btn-primary')?.getAttribute('data-filter') || 'all').replace('all', ''));
-                });
-              });
-            };
-
-            // --- Event Listeners ---
-            if (themeToggle) {
-                themeToggle.addEventListener('change', () => applyTheme(themeToggle.checked ? 'dark' : 'light'));
-            }
-            if (densitySwitch) {
-                densitySwitch.addEventListener('change', () => applyDensity(densitySwitch.checked));
-            }
-            if (searchInput) {
-                searchInput.addEventListener('input', debounce(() => {
-                    document.querySelectorAll('#quick-filters button').forEach(b=>b.classList.remove('btn-primary')||b.classList.add('btn-outline-secondary'));
-                    const allFilterButton = document.querySelector('#quick-filters [data-filter="all"]');
-                    if (allFilterButton) allFilterButton.classList.add('btn-primary');
-                    renderDirectory(searchInput.value);
-                }, 200));
-            }
-
-            if (clearSearchBtn) {
-                clearSearchBtn.addEventListener('click', () => { if(searchInput) searchInput.value = ''; renderDirectory(); });
-            }
-            if (adminLoginBtn) {
-                adminLoginBtn.addEventListener('click', () => {
-                  if (adminActive()) adminLogout(); else adminLogin();
-                });
-            }
-
-            // Listeners for export/import JSON
-            if (btnExport) {
-                btnExport.addEventListener("click", exportData);
-            }
-            if (fileImport) {
-                fileImport.addEventListener("change", async (e) => {
-                  const file = e.target.files?.[0]; if (!file) return;
-                  try {
-                    const json = JSON.parse(await file.text());
-                    if (!Array.isArray(json) || !json.every(cat => cat.category && Array.isArray(cat.contacts))) throw new Error("Formato inválido");
-                    directoryData = json;
-                    localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                    renderSummary(directoryData);
-                    renderDirectory(searchInput ? searchInput.value : '');
-                    showToast("Importado ✅");
-                  } catch(err) { console.error(err); showToast("Error al importar"); }
-                  finally { if (e.target) e.target.value = ""; }
-                });
-            }
-            
-            const quickFilters = document.getElementById('quick-filters');
-            if(quickFilters) {
-                quickFilters.addEventListener('click', (e)=>{
-                  const targetButton = e.target.closest('button'); // Ensure it's a button click
-                  if (!targetButton) return; 
-                  const f = targetButton.getAttribute('data-filter');
-                  if(!f) return;
-                  
-                  document.querySelectorAll('#quick-filters button').forEach(b=>b.classList.replace('btn-primary', 'btn-outline-secondary'));
-                  targetButton.classList.replace('btn-outline-secondary', 'btn-primary');
-                  if(searchInput) searchInput.value = '';
-
-                  if (f === 'all') renderDirectory('');
-                  else if (['Municipalidad','Salud','Daem'].includes(f)) renderDirectory(f);
-                  else if (f === 'hasAnexo') renderDirectory('FILTER:ANEXO');
-                  else if (f === 'mobile') renderDirectory('FILTER:MOBILE');
-                });
-            }
-            if (exportPdfBtn) {
-                 exportPdfBtn.addEventListener('click', () => {
-                    showToast('Generando PDF...');
-                    const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF();
-
-                    doc.autoTable({
-                        didDrawPage: function (data) {
-                            doc.setFontSize(18);
-                            doc.text("Directorio Telefónico Institucional", data.settings.margin.left, 15);
-                            doc.setFontSize(11);
-                            doc.setTextColor(100);
-                            const date = new Date().toLocaleDateString('es-CL');
-                            doc.text(`Generado el ${date}`, data.settings.margin.left, 22);
-                        },
-                        startY: 30
-                    });
-
-                    const norm = (currentFilter||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    const special = norm.startsWith('filter:') ? norm.split(':')[1] : null;
-
-                    directoryData.forEach(category => {
-                        let list = category.contacts.slice().filter(c => {
-                            if (special === 'anexo' && !hasAnexo(c.anexo)) return false;
-                            if (special === 'mobile' && !isMobile(c.phone)) return false;
-                            if (!special && norm) {
-                                if (['municipalidad','salud','daem'].includes(norm)) return category.category.toLowerCase().includes(norm);
-                                return (c.name||'').toLowerCase().includes(norm) ||
-                                       (c.phone||'').toLowerCase().includes(norm) ||
-                                       (c.anexo||'').toLowerCase().includes(norm);
-                            }
-                            return true;
-                        });
-                        if (!list.length) return;
-
-                        doc.autoTable({
-                            head: [[{content: category.category, styles: {fillColor: [0, 102, 204], textColor: 255}}]],
-                            startY: doc.autoTable.previous ? doc.autoTable.previous.finalY : 30,
-                            theme: 'grid'
-                        });
-                        
-                        const head = [['Nombre', 'Anexo', 'Teléfono', 'Email']];
-                        const body = list.map(c => [c.name||'-', c.anexo||'-', c.phone||'-', c.email||'-']);
-                        doc.autoTable({
-                            head: head,
-                            body: body,
-                            startY: doc.autoTable.previous.finalY,
-                            theme: 'striped',
-                            headStyles: { fillColor: [41, 128, 185], textColor: 255 }
-                        });
-                    });
-
-                    doc.save(`directorio-${new Date().toISOString().slice(0,10)}.pdf`);
-                });
-            }
-            
-            // --- Modal and CRUD ---
-            const btnAdd = document.getElementById('btn-add');
-            let contactModalInstance = null; // Initialize variable for Modal instance
-            const contactModalEl = document.getElementById('contactModal');
-             if (contactModalEl && typeof bootstrap !== 'undefined') {
-                 contactModalInstance = new bootstrap.Modal(contactModalEl);
-            }
-            const contactForm = document.getElementById('contactForm');
-            
-            if (btnAdd) {
-                btnAdd.addEventListener('click', () => {
-                  if(contactForm) contactForm.reset();
-                  const label = document.getElementById('contactModalLabel');
-                  if (label) label.textContent = 'Nuevo contacto';
-                  const editKeyInput = document.getElementById('f-edit-key');
-                  if (editKeyInput) editKeyInput.value = '';
-                  if(contactModalInstance) contactModalInstance.show();
-                });
-            }
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e)=>{
-                  e.preventDefault();
-                  const payload = {
-                    name: document.getElementById('f-name').value.trim(),
-                    anexo: document.getElementById('f-anexo').value.trim(),
-                    phone: document.getElementById('f-phone').value.trim(),
-                    email: document.getElementById('f-email').value.trim()
-                  };
-                  const catName = document.getElementById('f-category').value;
-                  const editKey = document.getElementById('f-edit-key').value;
-
-                  if (editKey) {
-                    const [ci, idx] = editKey.split(':').map(Number);
-                    if (directoryData[ci] && directoryData[ci].contacts[idx]) {
-                       directoryData[ci].contacts[idx] = payload;
-                    }
-                  } else {
-                    const ci = directoryData.findIndex(d => d.category === catName);
-                    if (ci >= 0) {
-                        directoryData[ci].contacts.push(payload);
-                    } else if (directoryData.length > 0) { // Fallback por si la categoría no existe
-                        directoryData[0].contacts.push(payload);
-                    }
-                  }
-                  localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                  if(contactModalInstance) contactModalInstance.hide();
-                  renderSummary(directoryData);
-                  renderDirectory(currentFilter);
-                  showToast("Guardado ✅");
-                });
-            }
-            
-            if (directoryContainer) {
-                directoryContainer.addEventListener('click', (e)=>{
-                  const editBtn = e.target.closest('[data-edit]');
-                  if (editBtn) {
-                      if (!adminActive()) return alert("Sesión admin requerida");
-                      const [ci, idx] = editBtn.getAttribute('data-edit').split(':').map(Number);
-                      const cat = directoryData[ci]; 
-                      if (!cat || !cat.contacts[idx]) return; // Safety check
-                      const c = cat.contacts[idx];
-                      const label = document.getElementById('contactModalLabel');
-                      if (label) label.textContent = 'Editar contacto';
-                      document.getElementById('f-category').value = cat.category;
-                      document.getElementById('f-name').value = c.name || '';
-                      document.getElementById('f-anexo').value = c.anexo || '';
-                      document.getElementById('f-phone').value = c.phone || '';
-                      document.getElementById('f-email').value = c.email || '';
-                      document.getElementById('f-edit-key').value = `${ci}:${idx}`;
-                      if(contactModalInstance) contactModalInstance.show();
-                      return;
-                  }
-
-                  const delBtn = e.target.closest('[data-del]');
-                  if (delBtn) {
-                      if (!adminActive()) return alert("Sesión admin requerida");
-                      const [ci, idx] = delBtn.getAttribute('data-del').split(':').map(Number);
-                      if (!directoryData[ci] || !directoryData[ci].contacts[idx]) return; // Safety check
-                      if (!confirm("¿Eliminar este contacto?")) return;
-                      directoryData[ci].contacts.splice(idx,1);
-                      localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                      renderSummary(directoryData);
-                      renderDirectory(currentFilter);
-                      showToast("Eliminado");
-                      return;
-                  }
-                });
-            }
-
-
-            // --- Initial Load ---
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else {
-                applyTheme('light'); // Default to light theme
-            }
-
-            applyDensity((localStorage.getItem('density')||'comfortable')==='compact');
-            if (densitySwitch) {
-                densitySwitch.checked = document.body.classList.contains('compacto');
-            }
-            refreshAdminUI(); // Ensure backup buttons are hidden initially if not admin
-            renderSummary(directoryData);
-            renderDirectory();
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
-

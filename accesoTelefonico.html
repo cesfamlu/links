@@ -3,68 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Telefónico Comunal</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="1.5.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="1.5.png">
+    <title>LINKS | Acceso Telefónico Comunal</title>
+    
+    <!-- Favicons solicitados -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/1.5.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/1.5.png">
     <link rel="shortcut icon" href="img/1.5.png">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS BASE --- */
+        /* --- PALETA SOLICITADA (Integrada al sistema) --- */
         :root {
-            /* Colores Institucionales */
-            --color-health: #0066cc;      /* Salud */
+            /* Colores Base App */
+            --color-health: #0066cc;
             --color-health-light: #e6f2ff;
-            --color-muni: #374151;        /* Municipal */
+            --color-muni: #374151;
             --color-muni-light: #f3f4f6;
-            --color-daem: #d97706;        /* DAEM */
+            --color-daem: #d97706;
             --color-daem-light: #fef3c7;
-            
             --color-warning: #f59e0b;
-            --color-gray-50: #f9fafb;
-            --color-gray-100: #f3f4f6;
-            --color-gray-200: #e5e7eb;
-            --color-gray-300: #d1d5db;
-            --color-gray-800: #1f2937;
             
-            --bg-color: var(--color-gray-50);
-            --text-color: var(--color-gray-800);
-            --card-bg: white;
-            --border-color: var(--color-gray-200);
+            /* Colores Generales del Cuerpo (Mantenemos tu paleta clara) */
+            --bg-color: #f2f2f7; 
+            --text-color: #1d1d1f; 
+            --card-bg: #ffffff;    
+            --border-color: #e5e5ea;
             
-            /* Header Specific */
-            --header-top-bg: #f8fafc;
-            --header-top-text: #64748b;
-            --header-main-bg: white;
-            
-            /* Footer Specific */
-            --footer-bg: #e5e7eb;
-            --footer-text: #4b5563;
-            --footer-title: #1f2937;
+            /* Header Specific (AZUL INSTITUCIONAL SOLICITADO) */
+            --header-bg-gradient: linear-gradient(135deg, #0066cc 0%, #127986 100%);
+            --header-text-main: #ffffff;
+            --header-text-sub: rgba(255, 255, 255, 0.9);
+            --header-border: rgba(255, 255, 255, 0.2);
+            --header-btn-bg: rgba(255, 255, 255, 0.15);
+            --header-btn-hover: rgba(255, 255, 255, 0.25);
+
+            /* Footer */
+            --footer-bg: #e5e5ea;
+            --footer-text: #6e6e73;
             
             --font-family: 'Inter', system-ui, -apple-system, sans-serif;
             --radius-lg: 0.75rem;
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --text-color: #f1f5f9;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --color-gray-100: #334155;
-            --color-gray-200: #334155;
-            --color-gray-300: #475569;
+            --bg-color: #000000;
+            --text-color: #f5f5f7;
+            --card-bg: #1c1c1e;
+            --border-color: #38383a;
             
-            /* Header Dark */
-            --header-top-bg: #1e293b;
-            --header-top-text: #94a3b8;
-            --header-main-bg: #0f172a;
+            /* Header Dark Mode overrides (Mantenemos azul profundo pero adaptado) */
+            --header-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             
-            /* Footer Dark */
-            --footer-bg: #1e293b;
-            --footer-text: #94a3b8;
-            --footer-title: #e2e8f0;
+            --footer-bg: #1c1c1e;
+            --footer-text: #86868b;
         }
 
         body {
@@ -78,30 +70,32 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* --- NEW HEADER STRUCTURE --- */
+        /* --- NUEVO HEADER ESTRUCTURA (AZUL) --- */
         .main-header {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
+            background: var(--header-bg-gradient); /* El azul que pediste */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            color: var(--header-text-main);
         }
 
         /* Top Bar */
         .header-top {
-            background-color: var(--header-top-bg);
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            color: var(--header-top-text);
-            padding: 0.5rem 0;
+            background-color: rgba(0, 0, 0, 0.1); /* Ligeramente más oscuro para separar */
+            border-bottom: 1px solid var(--header-border);
+            padding: 6px 0;
+            font-size: 12px;
+            color: var(--header-text-sub);
         }
 
         .header-top-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .header-info {
@@ -112,83 +106,75 @@
         .info-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .info-item i, .info-item svg {
-            color: var(--color-health);
+            gap: 6px;
+            font-weight: 500;
         }
 
+        .icon-small {
+            width: 14px;
+            height: 14px;
+            opacity: 0.9;
+        }
+
+        /* Action Buttons (Estilo Glass sobre Azul) */
         .header-user {
             display: flex;
-            gap: 0.5rem;
+            gap: 8px;
             align-items: center;
         }
 
-        /* Action Buttons (Top Bar) */
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 6px;
             text-decoration: none;
-            padding: 0.3rem 0.8rem;
+            padding: 5px 12px;
             border-radius: 6px;
             font-weight: 500;
             transition: all 0.2s;
-            font-size: 0.8rem;
+            font-size: 11px;
+            letter-spacing: 0.02em;
+            color: white;
+            background-color: var(--header-btn-bg);
+            border: 1px solid transparent;
         }
-        
-        .action-btn svg { width: 16px; height: 16px; }
 
-        .action-btn.primary {
-            background-color: var(--color-health-light);
-            color: var(--color-health);
+        .action-btn:hover {
+            background-color: var(--header-btn-hover);
+            transform: translateY(-1px);
         }
-        .action-btn.secondary {
-            background-color: var(--color-gray-100);
-            color: var(--color-muni);
-        }
-        .action-btn.outline {
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-        
-        .action-btn:hover { transform: translateY(-1px); filter: brightness(0.95); }
 
-        /* Main Header Area */
+        .action-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Main Header */
         .header-main {
-            background-color: var(--header-main-bg);
-            padding: 1rem 0;
-            transition: background-color 0.3s;
+            padding: 15px 0 20px; /* Un poco más de aire abajo */
         }
 
         .header-main-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+            display: flex;
+            align-items: center;
             gap: 2rem;
-            flex-wrap: wrap;
         }
 
         .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
             flex-shrink: 0;
         }
 
-        /* --- LOGO UPDATED --- */
         .logo-image {
-            height: 75px; /* Aumentado de 45px a 75px */
+            height: 75px; /* Logo grande como pediste */
             width: auto;
-            object-fit: contain;
-            /* Eliminado background y padding */
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        /* Search Section inside Header */
+        /* Search Section */
         .search-section {
             flex-grow: 1;
             max-width: 600px;
@@ -198,45 +184,72 @@
             position: relative;
             display: flex;
             align-items: center;
-            background: var(--bg-color); /* Contrast inside header */
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            transition: all 0.2s;
+            background: white; /* Blanco para resaltar sobre el azul */
+            border: none;
+            border-radius: 50px; /* Redondo estilo Google/iOS */
+            padding: 10px 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .search-box:focus-within {
-            border-color: var(--color-health);
-            box-shadow: 0 0 0 3px var(--color-health-light);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            color: #64748b; /* Gris texto */
+            margin-right: 10px;
         }
 
         .search-box input {
             border: none;
             background: transparent;
             flex-grow: 1;
-            padding: 0.5rem;
-            font-size: 1rem;
-            color: var(--text-color);
+            font-size: 15px;
+            color: #1e293b;
             outline: none;
+            width: 100%;
         }
 
-        .search-box svg {
-            color: #9ca3af;
-            width: 20px;
-            height: 20px;
-        }
-        
         .clear-btn {
             background: none;
             border: none;
             cursor: pointer;
-            color: #9ca3af;
-            padding: 0.2rem;
+            color: #94a3b8;
+            padding: 4px;
             display: flex;
             align-items: center;
         }
         .clear-btn:hover { color: var(--color-warning); }
-        .hidden { display: none; }
+        .clear-btn svg { width: 16px; height: 16px; }
+        .hidden { display: none !important; }
+
+        /* Mic Button inside search */
+        .mic-btn {
+            background: none;
+            border: none;
+            color: var(--color-health);
+            cursor: pointer;
+            padding: 0 0 0 8px;
+            border-left: 1px solid #e2e8f0;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .mic-btn:hover { color: #0056b3; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .header-top-content { flex-direction: column; gap: 8px; text-align: center; }
+            .header-user { flex-wrap: wrap; justify-content: center; width: 100%; }
+            .action-btn { flex: 1; justify-content: center; }
+            .header-main-content { flex-direction: column; gap: 15px; align-items: stretch; }
+            .logo-section { text-align: center; display: flex; justify-content: center; }
+            .logo-image { height: 60px; }
+            .search-section { max-width: 100%; }
+        }
 
         /* --- QUICK FILTERS --- */
         .quick-filters {
@@ -244,44 +257,34 @@
             margin: 1.5rem auto;
             padding: 0 1rem;
             display: flex;
-            gap: 0.5rem;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 0.5rem;
+            padding-bottom: 8px;
             scrollbar-width: none;
             justify-content: center;
         }
         
-        @media (max-width: 768px) {
-            .header-main-content { flex-direction: column; gap: 1rem; align-items: stretch; }
-            .logo-section { justify-content: center; }
-            .header-top-content { flex-direction: column; gap: 0.5rem; text-align: center; }
-            .header-user { justify-content: center; flex-wrap: wrap; }
-            .quick-filters { justify-content: flex-start; }
-            .search-section { max-width: 100%; }
-        }
-
         .quick-filters::-webkit-scrollbar { display: none; }
 
         .filter-chip {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 0.5rem 1rem;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 13px;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         
-        .filter-chip:hover { transform: translateY(-2px); }
-        .filter-chip.active { color: white; border-color: transparent; }
-        .chip-all.active { background: var(--color-gray-800); }
+        .filter-chip:hover { transform: translateY(-1px); border-color: var(--color-health); }
+        .filter-chip.active { color: white; border-color: transparent; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Colores Chips */
+        .chip-all.active { background: #334155; }
         .chip-muni.active { background: var(--color-muni); }
         .chip-salud.active { background: var(--color-health); }
         .chip-daem.active { background: var(--color-daem); }
@@ -296,32 +299,31 @@
             box-sizing: border-box;
         }
 
-        /* Grid & Cards */
         #directoryContainer {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 16px;
             align-items: start;
         }
 
         @media (min-width: 768px) {
             #directoryContainer {
                 grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-                gap: 1.5rem;
+                gap: 20px;
             }
         }
 
         .category-card {
             background: var(--card-bg);
-            border-radius: var(--radius-lg);
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
         }
 
         .category-header {
-            padding: 1rem 1.5rem;
+            padding: 12px 20px;
             color: white;
             font-weight: 600;
             cursor: pointer;
@@ -329,6 +331,7 @@
             justify-content: space-between;
             align-items: center;
             user-select: none;
+            font-size: 14px;
         }
         .header-salud { background-color: var(--color-health); }
         .header-muni { background-color: var(--color-muni); }
@@ -340,53 +343,38 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
+            padding: 12px 20px;
             border-bottom: 1px solid var(--border-color);
         }
         .contact-item:last-child { border-bottom: none; }
 
-        .contact-info strong { display: block; font-size: 1rem; margin-bottom: 0.2rem; }
-        .contact-info span { font-size: 0.85rem; color: #64748b; }
-        .contact-actions { display: flex; gap: 0.5rem; }
+        .contact-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
+        .contact-info span { font-size: 12px; color: #6e6e73; }
+        .contact-actions { display: flex; gap: 8px; }
 
         .btn-action {
-            width: 38px; height: 38px; border-radius: 50%; border: none;
+            width: 32px; height: 32px; border-radius: 50%; border: none;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: transform 0.2s; font-size: 1rem;
+            cursor: pointer; transition: transform 0.2s; font-size: 14px;
         }
-        .btn-call { background: var(--color-gray-100); color: var(--color-gray-800); }
+        .btn-call { background: var(--color-muni-light); color: var(--color-muni); }
         .btn-fav { background: transparent; color: #cbd5e1; border: 1px solid var(--border-color); }
         .btn-fav.active { color: var(--color-warning); border-color: var(--color-warning); background: #fffbeb; }
 
         .badge {
-            padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.75rem;
-            font-weight: 700; margin-left: 0.5rem; letter-spacing: 0.5px;
+            padding: 2px 8px; border-radius: 12px; font-size: 11px;
+            font-weight: 700; margin-left: 6px; letter-spacing: 0.3px;
         }
         .badge-salud { background: var(--color-health-light); color: var(--color-health); }
         .badge-muni { background: var(--color-muni-light); color: var(--color-muni); }
         .badge-daem { background: var(--color-daem-light); color: var(--color-daem); }
 
-        /* Utils */
-        .theme-toggle {
-            background: transparent; border: 1px solid var(--border-color);
-            color: var(--text-color); padding: 0.5rem; border-radius: 50%;
-            cursor: pointer; margin-left: 1rem; width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        
-        .section-title {
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            color: #64748b; margin: 1.5rem 0 0.8rem; font-weight: 700;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .clear-history { font-size: 0.7rem; color: var(--color-health); cursor: pointer; }
-
         /* Toast */
         #toast {
-            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: #10b981; color: white; padding: 0.75rem 1.5rem; border-radius: 50px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #34c759; color: white; padding: 10px 24px; border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000; font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 14px;
         }
         #toast.show { transform: translateX(-50%) translateY(0); }
         .fade-in { animation: fadeIn 0.3s ease-out forwards; }
@@ -394,8 +382,11 @@
 
         /* --- FOOTER --- */
         .main-footer {
-            background-color: var(--footer-bg); color: var(--footer-text);
-            padding: 3rem 0 1.5rem; margin-top: 3rem; font-size: 0.9rem;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            font-size: 13px;
             border-top: 1px solid var(--border-color);
         }
         .footer-content {
@@ -403,89 +394,103 @@
             gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; padding: 0 1rem;
         }
         .footer-bottom {
-            max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 0;
-            border-top: 1px solid rgba(0,0,0,0.1); display: flex;
-            flex-direction: column; align-items: center; gap: 0.5rem; text-align: center;
+            max-width: 1200px; margin: 0 auto; padding: 20px 1rem 0;
+            border-top: 1px solid rgba(0,0,0,0.05); display: flex;
+            flex-direction: column; align-items: center; gap: 8px; text-align: center;
         }
         [data-theme="dark"] .footer-bottom { border-top-color: rgba(255,255,255,0.1); }
         
         .footer-section h3 {
-            color: var(--footer-title); font-size: 1rem; font-weight: 700;
-            margin-bottom: 1rem; text-transform: uppercase;
+            color: var(--text-color); font-size: 14px; font-weight: 700;
+            margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
         }
         .footer-links { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links li { margin-bottom: 8px; }
         .footer-link {
             color: var(--footer-text); text-decoration: none; display: inline-flex;
-            align-items: center; gap: 0.5rem; transition: color 0.2s;
+            align-items: center; gap: 6px; transition: color 0.2s;
         }
         .footer-link:hover { color: var(--color-health); }
-        .footer-text { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; line-height: 1.4; }
-        .footer-meta { font-size: 0.75rem; opacity: 0.7; display: flex; gap: 1rem; align-items: center; }
-        .footer-separator { width: 4px; height: 4px; background: currentColor; border-radius: 50%; opacity: 0.5; }
+        .footer-text { display: flex; gap: 8px; margin-bottom: 8px; line-height: 1.5; }
+        .footer-meta { font-size: 11px; opacity: 0.6; display: flex; gap: 12px; align-items: center; }
+        .footer-separator { width: 3px; height: 3px; background: currentColor; border-radius: 50%; opacity: 0.5; }
 
         @media (min-width: 768px) {
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
         }
+        
+        /* Utils */
+        .section-title {
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+            color: #6e6e73; margin: 24px 0 12px; font-weight: 700;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .theme-toggle-btn {
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body>
 
-    <!-- Nuevo Header Estilo Portal -->
+    <!-- Header Estilo Portal Solicitado AZUL -->
     <header class="main-header">
         <!-- Top Bar -->
         <div class="header-top">
             <div class="header-top-content">
                 <div class="header-info">
                     <div class="info-item">
-                        <i class="far fa-clock"></i>
-                        <span id="currentDateTime">Cargando...</span>
+                        <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span id="currentDateTime">Cargando fecha y hora...</span>
                     </div>
                 </div>
                 <div class="header-user">
-                    <a class="action-btn primary" href="#" onclick="window.location.reload();return false;">
-                        <i class="fas fa-phone-alt"></i> <span>Directorio</span>
+                    <a class="action-btn" href="#" onclick="window.location.reload();return false;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        <span>Directorio</span>
                     </a>
-                    <a class="action-btn secondary" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank">
-                        <i class="fas fa-headset"></i> <span>Soporte</span>
+                    
+                    <a class="action-btn" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z"></path></svg>
+                        <span>Soporte</span>
                     </a>
-                    <a class="action-btn outline" href="https://www.cesfamlaunion.cl" target="_blank">
-                        <i class="fas fa-globe"></i> <span>Web</span>
+                    
+                    <a class="action-btn" href="https://www.cesfamlaunion.cl" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <span>Web Institucional</span>
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Main Bar -->
         <div class="header-main">
             <div class="header-main-content">
                 <div class="logo-section">
-                    <img src="img/1.png" alt="Logo Institucional" class="logo-image" onerror="this.style.display='none'">
-                       <img id="siteLogo" src="img/1.png" alt="CESFAM La Unión" class="logo-image">
+                    <!-- Logo Sin fondo -->
+                    <img id="siteLogo" src="img/1.png" alt="CESFAM La Unión" class="logo-image" onerror="this.style.display='none'">
                 </div>
                 
                 <div class="search-section">
                     <div class="search-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <input type="text" id="searchInput" placeholder="Buscar persona, unidad o anexo..." onkeyup="handleSearch()">
+                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="searchInput" placeholder="Buscar funcionario o unidad..." onkeyup="handleSearch()">
                         
-                        <!-- Botón Limpiar -->
-                        <button id="clearSearch" class="clear-btn hidden" onclick="clearSearchInput()" title="Borrar">
-                            <i class="fas fa-times"></i>
+                        <!-- Micrófono -->
+                        <button class="mic-btn" id="micBtn" onclick="toggleVoiceSearch()" title="Dictar" style="border:none; padding:0 8px;">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                         </button>
-                        
-                        <!-- Micrófono integrado -->
-                        <button class="mic-btn" id="micBtn" onclick="toggleVoiceSearch()" title="Dictar búsqueda" style="border:none; padding: 0.2rem 0.5rem;">
-                            <i class="fas fa-microphone"></i>
+
+                        <button id="clearSearch" class="clear-btn hidden" onclick="clearSearchInput()" aria-label="Limpiar">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="header-tools">
-                    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
-                        <i class="fas fa-moon" id="themeIcon"></i>
-                    </button>
-                </div>
+                <!-- Botón de Tema (Blanco para contrastar) -->
+                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar modo">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
             </div>
         </div>
     </header>
@@ -493,16 +498,16 @@
     <!-- Quick Filters -->
     <div class="quick-filters">
         <button class="filter-chip chip-all active" onclick="filterByGroup('all', this)">
-            <i class="fas fa-layer-group"></i> Todos
+            Todos
         </button>
         <button class="filter-chip chip-muni" onclick="filterByGroup('muni', this)">
-            <i class="fas fa-building-columns"></i> Municipal
+            Municipal
         </button>
         <button class="filter-chip chip-salud" onclick="filterByGroup('salud', this)">
-            <i class="fas fa-user-doctor"></i> Salud
+            Salud
         </button>
         <button class="filter-chip chip-daem" onclick="filterByGroup('daem', this)">
-            <i class="fas fa-graduation-cap"></i> DAEM
+            DAEM
         </button>
     </div>
 
@@ -510,7 +515,7 @@
         <!-- Recents Section -->
         <div id="recentsSection" style="display:none;">
             <div class="section-title">
-                <span><i class="fas fa-history text-secondary"></i> Recientes</span>
+                <span>Recientes</span>
                 <span class="clear-history" onclick="clearRecents()">Borrar</span>
             </div>
             <div class="category-card">
@@ -520,7 +525,7 @@
 
         <!-- Favorites Section -->
         <div id="favoritesSection" style="display:none;">
-            <div class="section-title"><span><i class="fas fa-star" style="color:var(--color-warning)"></i> Favoritos</span></div>
+            <div class="section-title"><span>Favoritos</span></div>
             <div class="category-card">
                 <ul class="contact-list" id="favoritesList" style="display:block"></ul>
             </div>
@@ -530,9 +535,9 @@
         <div id="directoryContainer"></div>
 
         <!-- Empty State -->
-        <div id="emptyState" style="display:none; text-align:center; padding: 3rem 1rem; color: #9ca3af;">
-            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-            <p>No encontramos nada con ese nombre.</p>
+        <div id="emptyState" style="display:none; text-align:center; padding: 4rem 1rem; color: #6e6e73;">
+            <svg style="width:48px; height:48px; margin-bottom:1rem; opacity:0.3;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <p>No encontramos resultados.</p>
         </div>
     </div>
 
@@ -540,15 +545,15 @@
     <footer class="main-footer">
         <div class="footer-content">
             <section class="footer-section">
-                <h3 class="footer-title">Enlaces</h3>
+                <h3>Enlaces</h3>
                 <ul class="footer-links">
-                    <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;"><i class="fas fa-arrow-up"></i> Volver arriba</a></li>
+                    <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;">Volver arriba</a></li>
                     <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
                     <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
                 </ul>
             </section>
             <section class="footer-section">
-                <h3 class="footer-title">Contacto</h3>
+                <h3>Contacto</h3>
                 <div class="footer-text">
                     <i class="fas fa-envelope"></i>
                     <a href="mailto:cesfam@munilaunion.cl" class="footer-link">cesfam@munilaunion.cl</a>
@@ -559,14 +564,14 @@
                 </div>
             </section>
             <section class="footer-section">
-                <h3 class="footer-title">CESFAM La Unión</h3>
+                <h3>CESFAM La Unión</h3>
                 <ul class="footer-links">
                     <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
                     <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank"><i class="fab fa-youtube"></i> Youtube</a></li>
                 </ul>
             </section>
             <section class="footer-section">
-                <h3 class="footer-title">Recursos</h3>
+                <h3>Recursos</h3>
                 <ul class="footer-links">
                     <li><a class="footer-link" href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Biblioteca CESFAM</a></li>
                 </ul>
@@ -575,9 +580,9 @@
         <div class="footer-bottom">
             <div class="footer-copyright">© <span id="year">2025</span> CESFAM La Unión. Area de Informática.</div>
             <div class="footer-meta">
-                <span>Versión M.I.R 4.0</span>
+                <span>Versión M.I.R 5.1</span>
                 <span class="footer-separator"></span>
-                <span><i class="fas fa-cloud"></i> Estado: OK</span>
+                <span>Estado: OK</span>
             </div>
         </div>
     </footer>
@@ -590,7 +595,6 @@
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             const dateString = now.toLocaleDateString('es-CL', options);
-            // Capitalize first letter
             document.getElementById('currentDateTime').textContent = dateString.charAt(0).toUpperCase() + dateString.slice(1);
         }
         setInterval(updateDateTime, 1000);
@@ -598,8 +602,8 @@
 
         // --- DATA ESTRUCTURADA ---
         const directoryData = [
-            // ... (MANTENEMOS LOS MISMOS DATOS ANTERIORES) ...
-             {
+            // ================= GRUPO: MUNICIPAL =================
+            {
                 group: "muni",
                 category: "Administración Municipal",
                 headerClass: "header-muni",
@@ -877,7 +881,9 @@
             renderDirectory(directoryData);
             renderFavorites();
             renderRecents();
-            applyTheme();
+            // Mantener preferencia de tema
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
         });
 
         // --- RENDER CORE ---
@@ -891,11 +897,11 @@
                 // Dataset for filtering logic
                 section.dataset.group = cat.group;
                 
-                // --- CAMBIO IMPORTANTE: Lista colapsada por defecto (style="display:none") y el icono rotado (-90deg) ---
+                // Lista colapsada por defecto
                 section.innerHTML = `
                     <div class="category-header ${cat.headerClass}" onclick="toggleCategory(this)">
                         <span>${cat.category}</span>
-                        <i class="fas fa-chevron-down" style="transform: rotate(-90deg)"></i>
+                        <i class="fas fa-chevron-down" style="transform: rotate(-90deg); transition: transform 0.3s"></i>
                     </div>
                     <ul class="contact-list" style="display:none">
                         ${cat.contacts.map(c => createContactHTML(c, index, cat.badgeClass)).join('')}
@@ -904,13 +910,11 @@
                 container.appendChild(section);
             });
             
-            // Apply current filter immediately to hide non-default if needed
             applyFilterVisibility();
         }
 
         function createContactHTML(contact, catIndex, badgeClass) {
             const isFav = favorites.some(f => f.ext === contact.ext);
-            // Unique ID logic simplified
             const contactObj = JSON.stringify({
                 name: contact.name, 
                 ext: contact.ext, 
@@ -918,7 +922,6 @@
                 badgeClass 
             }).replace(/"/g, '&quot;');
             
-            // Si el anexo es igual al detalle (número directo) o es muy largo, ajustamos visualización
             const displayExt = contact.ext.length > 5 ? 'Directo' : contact.ext;
             
             return `
@@ -952,7 +955,6 @@
             const input = document.getElementById('searchInput');
             const clearBtn = document.getElementById('clearSearch');
             
-            // Show/Hide Clear Button
             if (input.value.length > 0) {
                 clearBtn.classList.remove('hidden');
             } else {
@@ -978,7 +980,6 @@
                 const items = card.querySelectorAll('.contact-item');
                 let cardHasVisibleItems = false;
 
-                // 1. Check if card belongs to current tab group
                 const belongsToGroup = (currentGroup === 'all') || (currentGroup === cardGroup);
 
                 if (!belongsToGroup) {
@@ -986,7 +987,6 @@
                     return; 
                 }
 
-                // 2. Process items for search
                 items.forEach(item => {
                     const text = item.getAttribute('data-search');
                     const matchesSearch = text.includes(query);
@@ -1000,15 +1000,11 @@
                     }
                 });
 
-                // 3. Show/Hide card based on items content
                 if (cardHasVisibleItems) {
                     card.style.display = 'block';
-                    // Auto-expand if searching
                     if (query !== '') {
                         card.querySelector('.contact-list').style.display = 'block';
                         card.querySelector('.category-header i').style.transform = 'rotate(0deg)';
-                    } else {
-                         // Keep collapsed if default
                     }
                 } else {
                     card.style.display = 'none';
@@ -1018,7 +1014,7 @@
             document.getElementById('emptyState').style.display = globalHasResults ? 'none' : 'block';
         }
 
-        // --- RECENTS & FAVORITES ---
+        // --- LOGIC: RECENTS, FAVORITES, ACTIONS ---
         function handleAction(ext, contactObj) {
             copyToClipboard(ext);
             addToRecents(contactObj);
@@ -1057,6 +1053,7 @@
             localStorage.setItem('linksFavorites', JSON.stringify(favorites));
             renderFavorites();
             
+            // Sync UI
             const btns = document.querySelectorAll(`.contact-item[data-search*="${ext}"] .btn-fav`);
             btns.forEach(b => b.classList.toggle('active'));
             renderRecents();
@@ -1081,7 +1078,7 @@
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast(`Anexo ${text} copiado`);
+                showToast(`Copiado: ${text}`);
             }).catch(() => {
                 const ta = document.createElement("textarea");
                 ta.value = text;
@@ -1089,7 +1086,7 @@
                 ta.select();
                 document.execCommand("copy");
                 document.body.removeChild(ta);
-                showToast(`Anexo ${text} copiado`);
+                showToast(`Copiado: ${text}`);
             });
         }
 
@@ -1100,43 +1097,11 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // --- VOICE SEARCH ---
-        function toggleVoiceSearch() {
-            const btn = document.getElementById('micBtn');
-            if (!('webkitSpeechRecognition' in window)) {
-                alert("Tu navegador no soporta búsqueda por voz.");
-                return;
-            }
-            const recognition = new webkitSpeechRecognition();
-            recognition.lang = 'es-CL';
-            recognition.interimResults = false;
-            recognition.onstart = () => btn.classList.add('listening');
-            recognition.onend = () => btn.classList.remove('listening');
-            recognition.onresult = (event) => {
-                const text = event.results[0][0].transcript;
-                document.getElementById('searchInput').value = text;
-                handleSearch();
-            };
-            recognition.start();
-        }
-
-        // --- THEME ---
         function toggleTheme() {
             const html = document.documentElement;
             const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        }
-
-        function applyTheme() {
-            const saved = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', saved);
-            updateThemeIcon(saved);
-        }
-
-        function updateThemeIcon(theme) {
-            document.getElementById('themeIcon').className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
     </script>
 </body>

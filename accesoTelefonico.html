@@ -75,7 +75,7 @@
         }
 
         .header-content {
-            max-width: 800px;
+            max-width: 1200px; /* Ancho aumentado para desktop */
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -90,11 +90,11 @@
         }
 
         .header-logo {
-            height: 50px; /* Tamaño controlado */
+            height: 50px;
             width: auto;
             object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            background: rgba(255,255,255,0.9); /* Fondo blanco sutil para resaltar si el logo es oscuro */
+            background: rgba(255,255,255,0.9);
             padding: 2px;
             border-radius: 8px;
         }
@@ -117,7 +117,7 @@
 
         /* --- SEARCH BAR & MIC --- */
         .search-container {
-            max-width: 800px;
+            max-width: 800px; /* Buscador centrado más angosto */
             margin: -25px auto 10px;
             padding: 0 1rem;
             position: relative;
@@ -173,7 +173,7 @@
 
         /* --- QUICK FILTERS (CHIPS) --- */
         .quick-filters {
-            max-width: 800px;
+            max-width: 1200px; /* Alineado con container */
             margin: 0 auto 1.5rem;
             padding: 0 1rem;
             display: flex;
@@ -181,7 +181,13 @@
             overflow-x: auto;
             padding-bottom: 0.5rem;
             scrollbar-width: none;
+            justify-content: center; /* Centrados en desktop */
         }
+        
+        @media (max-width: 768px) {
+            .quick-filters { justify-content: flex-start; }
+        }
+
         .quick-filters::-webkit-scrollbar { display: none; }
 
         .filter-chip {
@@ -213,10 +219,10 @@
 
         /* --- CONTENT AREA --- */
         .container {
-            max-width: 800px;
+            max-width: 1200px; /* Más ancho para desktop */
             margin: 0 auto;
             padding: 0 1rem;
-            flex: 1; /* Pushes footer down */
+            flex: 1; 
             width: 100%;
             box-sizing: border-box;
         }
@@ -240,14 +246,30 @@
             text-transform: none;
         }
 
+        /* --- GRID LAYOUT FOR DIRECTORY --- */
+        #directoryContainer {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile default */
+            gap: 1rem;
+            align-items: start; /* Evita que las tarjetas se estiren verticalmente */
+        }
+
+        @media (min-width: 768px) {
+            #directoryContainer {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Desktop Grid */
+                gap: 1.5rem;
+            }
+        }
+
         /* --- CARDS & LISTS --- */
         .category-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            margin-bottom: 1rem;
+            margin-bottom: 0; /* Margin handled by grid gap */
             border: 1px solid var(--border-color);
             overflow: hidden;
             box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
         }
 
         /* Dynamic Header Colors */
@@ -259,6 +281,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
+        }
+        
+        .category-header i {
+            transition: transform 0.3s ease;
         }
         
         .header-salud { background-color: var(--color-health); }
@@ -269,6 +296,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            display: none; /* COLLAPSED BY DEFAULT */
         }
 
         .contact-item {
@@ -371,6 +399,21 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .footer-bottom {
+             max-width: 1200px;
+             margin: 0 auto;
+             padding: 1.5rem 1rem 0;
+             border-top: 1px solid rgba(0,0,0,0.1);
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             gap: 0.5rem;
+             text-align: center;
         }
 
         .footer-section h3 {
@@ -417,16 +460,6 @@
             margin-top: 3px;
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(0,0,0,0.1);
-            padding-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            text-align: center;
-        }
-
         [data-theme="dark"] .footer-bottom {
             border-top-color: rgba(255,255,255,0.1);
         }
@@ -461,7 +494,7 @@
     <header>
         <div class="header-content">
             <div class="brand-wrapper">
-                <img src="img/logo1.png" alt="Logo Institucional" class="header-logo" onerror="this.style.display='none'">
+                <img src="img/Logo1.png" alt="Logo Institucional" class="header-logo" onerror="this.style.display='none'">
                 <div class="app-title">
                     <h1>DirectorioTelefónico</h1>
                     <p>Directorio Comunal Unificado</p>
@@ -509,7 +542,8 @@
                 <span class="clear-history" onclick="clearRecents()">Borrar</span>
             </div>
             <div class="category-card">
-                <ul class="contact-list" id="recentsList"></ul>
+                <!-- Para recientes no necesitamos header, así que se mostrará directo la lista si hay items -->
+                 <ul class="contact-list" id="recentsList" style="display:block"></ul>
             </div>
         </div>
 
@@ -517,7 +551,7 @@
         <div id="favoritesSection" style="display:none;">
             <div class="section-title"><span><i class="fas fa-star" style="color:var(--color-warning)"></i> Favoritos</span></div>
             <div class="category-card">
-                <ul class="contact-list" id="favoritesList"></ul>
+                <ul class="contact-list" id="favoritesList" style="display:block"></ul>
             </div>
         </div>
 
@@ -533,54 +567,52 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <section class="footer-section">
-                    <h3 class="footer-title">Enlaces</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;"><i class="fas fa-arrow-up"></i> Volver arriba</a></li>
-                        <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
-                        <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
-                    </ul>
-                </section>
+        <div class="footer-content">
+            <section class="footer-section">
+                <h3 class="footer-title">Enlaces</h3>
+                <ul class="footer-links">
+                    <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;"><i class="fas fa-arrow-up"></i> Volver arriba</a></li>
+                    <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
+                    <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
+                </ul>
+            </section>
 
-                <section class="footer-section">
-                    <h3 class="footer-title">Contacto</h3>
-                    <div class="footer-text">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:cesfam@munilaunion.cl" class="footer-link">cesfam@munilaunion.cl</a>
-                    </div>
-                    <div class="footer-text">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>La Unión, Región de Los Ríos</span>
-                    </div>
-                </section>
-
-                <section class="footer-section">
-                    <h3 class="footer-title">CESFAM La Unión</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank"><i class="fab fa-youtube"></i> Youtube</a></li>
-                        <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-                    </ul>
-                </section>
-
-                <section class="footer-section">
-                    <h3 class="footer-title">Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Biblioteca CESFAM</a></li>
-                        <li><a class="footer-link" href="https://onedrive.live.com/?id=69AA6CC0DFCF3C18!223356&resid=69AA6CC0DFCF3C18!223356&ithint=folder&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2YvcyFBaGc4ejlfQWJLcHBqZEI4Mm5mLU5iM1JqVTVKS0E&cid=69aa6cc0dfcf3c18" target="_blank"><i class="fas fa-folder-open"></i> Centro Integral</a></li>
-                    </ul>
-                </section>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copyright">© <span id="year">2025</span> CESFAM La Unión. Area de Informática.</div>
-                <div class="footer-meta">
-                    <span>Versión M.I.R </span>
-                    <span class="footer-separator"></span>
-                    <span><i class="fas fa-cloud"></i> Estado: OK</span>
+            <section class="footer-section">
+                <h3 class="footer-title">Contacto</h3>
+                <div class="footer-text">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:cesfam@munilaunion.cl" class="footer-link">cesfam@munilaunion.cl</a>
                 </div>
+                <div class="footer-text">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>La Unión, Región de Los Ríos</span>
+                </div>
+            </section>
+
+            <section class="footer-section">
+                <h3 class="footer-title">CESFAM La Unión</h3>
+                <ul class="footer-links">
+                    <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank"><i class="fab fa-youtube"></i> Youtube</a></li>
+                    <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h3 class="footer-title">Recursos</h3>
+                <ul class="footer-links">
+                    <li><a class="footer-link" href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Biblioteca CESFAM</a></li>
+                    <li><a class="footer-link" href="https://onedrive.live.com/?id=69AA6CC0DFCF3C18!223356&resid=69AA6CC0DFCF3C18!223356&ithint=folder&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2YvcyFBaGc4ejlfQWJLcHBqZEI4Mm5mLU5iM1JqVTVKS0E&cid=69aa6cc0dfcf3c18" target="_blank"><i class="fas fa-folder-open"></i> Centro Integral</a></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copyright">© <span id="year">2025</span> CESFAM La Unión. Area de Informática.</div>
+            <div class="footer-meta">
+                <span>Versión M.I.R </span>
+                <span class="footer-separator"></span>
+                <span><i class="fas fa-cloud"></i> Estado: OK</span>
             </div>
         </div>
     </footer>
@@ -883,12 +915,13 @@
                 // Dataset for filtering logic
                 section.dataset.group = cat.group;
                 
+                // --- CAMBIO IMPORTANTE: Lista colapsada por defecto (style="display:none") y el icono rotado (-90deg) ---
                 section.innerHTML = `
                     <div class="category-header ${cat.headerClass}" onclick="toggleCategory(this)">
                         <span>${cat.category}</span>
-                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down" style="transform: rotate(-90deg)"></i>
                     </div>
-                    <ul class="contact-list">
+                    <ul class="contact-list" style="display:none">
                         ${cat.contacts.map(c => createContactHTML(c, index, cat.badgeClass)).join('')}
                     </ul>
                 `;
@@ -985,6 +1018,11 @@
                     if (query !== '') {
                         card.querySelector('.contact-list').style.display = 'block';
                         card.querySelector('.category-header i').style.transform = 'rotate(0deg)';
+                    } else {
+                        // Keep collapsed if not searching and was initially collapsed by default
+                         // But we don't want to auto-collapse if user opened it manually.
+                         // For simplicity in search, if query is empty, we respect manual toggle or default state.
+                         // Currently, `renderDirectory` resets state. We are fine.
                     }
                 } else {
                     card.style.display = 'none';

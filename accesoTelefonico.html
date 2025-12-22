@@ -1,1053 +1,1123 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directorio Telefónico Moderno</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/1.5.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/1.5.png">
-    <link rel="shortcut icon" href="img/1.5.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Librerías para PDF --><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <title>LINKS | Acceso Telefónico Comunal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        /* Paleta de colores y sistema de diseño */
+        /* --- ESTILOS BASE --- */
         :root {
-            --color-primary: #0066cc;
-            --color-primary-dark: #127986e8;
-            --color-primary-light: #3385d6;
-            --color-clinical: #0066cc;
-            --color-clinical-light: #e6f2ff;
-            --color-admin: #7c3aed;
-            --color-admin-light: #f3e8ff;
-            --color-support: #059669;
-            --color-support-light: #d1fae5;
-            --color-success: #10b981;
+            /* Colores Institucionales */
+            --color-health: #0066cc;      /* Salud */
+            --color-health-light: #e6f2ff;
+            --color-muni: #374151;        /* Municipal */
+            --color-muni-light: #f3f4f6;
+            --color-daem: #d97706;        /* DAEM */
+            --color-daem-light: #fef3c7;
+            
             --color-warning: #f59e0b;
-            --color-error: #ef4444;
-            --color-info: #3b82f6;
             --color-gray-50: #f9fafb;
             --color-gray-100: #f3f4f6;
             --color-gray-200: #e5e7eb;
-            --color-gray-300: #d1d5db;
-            --color-gray-400: #9ca3af;
-            --color-gray-500: #6b7280;
-            --color-gray-600: #4b5563;
-            --color-gray-700: #374151;
             --color-gray-800: #1f2937;
-            --color-gray-900: #111827;
             
-            /* Paleta base (Claro) */
             --bg-color: var(--color-gray-50);
             --text-color: var(--color-gray-800);
             --card-bg: white;
             --border-color: var(--color-gray-200);
-            --header-bg-color: white;
-            --accordion-header-bg: var(--color-primary);
-            --accordion-header-text: white;
-            --input-bg: white;
+            --header-bg-grad: linear-gradient(135deg, #0066cc 0%, #127986 100%);
             
-            /* Tipografía */
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-weight-light: 300;
-            --font-weight-normal: 400;
-            --font-weight-medium: 500;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
+            /* Footer Specific */
+            --footer-bg: #e5e7eb;
+            --footer-text: #4b5563;
+            --footer-title: #1f2937;
             
-            /* Espaciado */
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            
-            /* Bordes y Sombras */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
             --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-            /* Transiciones */
-            --transition-fast: 150ms ease-in-out;
-            --transition-base: 200ms ease-in-out;
-            --transition-slow: 300ms ease-in-out;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         [data-theme="dark"] {
-            --color-gray-50: #111827;
-            --color-gray-800: #f9fafb;
-            --color-primary: #0090ff;
-            --bg-color: var(--color-gray-900);
-            --text-color: var(--color-gray-200);
-            --card-bg: var(--color-gray-800);
-            --border-color: var(--color-gray-700);
-            --header-bg-color: var(--color-gray-800);
-            --accordion-header-bg: var(--color-primary-dark);
-            --input-bg: var(--color-gray-700);
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --color-gray-100: #334155;
+            --header-bg-grad: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            
+            /* Footer Dark */
+            --footer-bg: #1e293b;
+            --footer-text: #94a3b8;
+            --footer-title: #e2e8f0;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-family);
-            transition: background-color var(--transition-base), color var(--transition-base);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
         }
 
+        /* --- HEADER --- */
         header {
-            background: linear-gradient(135deg, #0066cc 0%, #127986 100%);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-            transition: all var(--transition-slow);
-            border-bottom: none;
+            background: var(--header-bg-grad);
+            padding: 1rem 1rem 3rem 1rem;
             position: sticky;
             top: 0;
-            z-index: 1020;
-            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        [data-theme="dark"] header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        } 
+
+        /* Wrapper para agrupar Logo + Título a la izquierda */
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
         .header-logo {
-            height: 100px;
+            height: 50px; /* Tamaño controlado */
             width: auto;
             object-fit: contain;
-            max-width: 120px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            background: rgba(255,255,255,0.9); /* Fondo blanco sutil para resaltar si el logo es oscuro */
+            padding: 2px;
+            border-radius: 8px;
+        }
+
+        .app-title h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .app-title p {
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        /* --- SEARCH BAR & MIC --- */
+        .search-container {
+            max-width: 800px;
+            margin: -25px auto 10px;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 101;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 50px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 1.2rem 1rem 1.2rem 3.5rem;
+            border: none;
+            font-size: 1.1rem;
+            background: transparent;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            color: #9ca3af;
+        }
+
+        /* Mic Button */
+        .mic-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            color: var(--color-health);
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-left: 1px solid var(--border-color);
+            transition: color 0.2s;
+        }
+        .mic-btn.listening {
+            color: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- QUICK FILTERS (CHIPS) --- */
+        .quick-filters {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            padding: 0 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+        }
+        .quick-filters::-webkit-scrollbar { display: none; }
+
+        .filter-chip {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
         
-        .main-logo {
-            max-height: 200px;
-            width: auto;
-            margin-top: -10px;
-            transition: transform 0.3s ease;
-        }
+        .filter-chip:hover { transform: translateY(-2px); }
         
-        .main-logo:hover {
-            transform: scale(1.02);
-        }
+        /* Active States per Category */
+        .filter-chip.active { color: white; border-color: transparent; }
         
-        @media (max-width: 768px) {
-            .main-logo {
-                max-height: 150px;
-            }
+        .chip-all.active { background: var(--color-gray-800); }
+        .chip-muni.active { background: var(--color-muni); }
+        .chip-salud.active { background: var(--color-health); }
+        .chip-daem.active { background: var(--color-daem); }
+
+        /* --- CONTENT AREA --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            flex: 1; /* Pushes footer down */
+            width: 100%;
+            box-sizing: border-box;
         }
-        
-        @media (max-width: 576px) {
-            .main-logo {
-                max-height: 120px;
-            }
+
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        .header-main-content {
-            gap: 1rem;
+        .clear-history {
+            font-size: 0.7rem;
+            color: var(--color-health);
+            cursor: pointer;
+            text-transform: none;
+        }
+
+        /* --- CARDS & LISTS --- */
+        .category-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Dynamic Header Colors */
+        .category-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         
-        .header-title-section {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .header-title-section h1 {
-            font-size: 1.5rem;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-weight: var(--font-weight-bold);
-        }
-        
-        .header-title-section p {
-            font-size: 0.875rem;
-            margin-bottom: 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .header-actions {
-            flex-shrink: 0;
-            gap: 0.5rem;
-        }
-        
-        .header-actions .btn {
-            font-size: 0.875rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            backdrop-filter: blur(10px);
-            transition: all var(--transition-base);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .header-actions .btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        @media (max-width: 768px) {
-            .header-main-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            .header-actions {
-                justify-content: center !important;
-                flex-wrap: wrap;
-            }
-            .header-title-section h1 {
-                font-size: 1.25rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .header-actions .btn {
-                font-size: 0.8rem;
-                padding: 0.25rem 0.5rem;
-            }
-            .header-actions .btn span {
-                display: none;
-            }
+        .header-salud { background-color: var(--color-health); }
+        .header-muni { background-color: var(--color-muni); }
+        .header-daem { background-color: var(--color-daem); }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .accordion-item {
-             background-color: var(--card-bg);
-             border: 1px solid var(--border-color);
-             border-radius: var(--radius-lg) !important;
-             margin-bottom: 1rem;
-             box-shadow: var(--shadow-md);
-             transition: background-color var(--transition-base), border-color var(--transition-base);
-        }
-        
-        .accordion-header .accordion-button {
-            background-color: var(--accordion-header-bg);
-            color: var(--accordion-header-text);
-            font-weight: var(--font-weight-semibold);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
-            transition: background-color var(--transition-base);
-        }
-
-        .accordion-button:not(.collapsed) { box-shadow: none; }
-        .accordion-button:focus { box-shadow: none; border-color: var(--border-color); }
-
-        .accordion-button::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-       
         .contact-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--border-color);
-            transition: background-color 150ms ease-in-out, padding 150ms ease-in-out;
         }
-        
-        .contact-item:hover { background-color: var(--color-gray-100); }
-        [data-theme="dark"] .contact-item:hover { background-color: var(--color-gray-700); }
         .contact-item:last-child { border-bottom: none; }
-        .contact-info { flex-grow: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .contact-info strong { font-size: 1.1rem; font-weight: var(--font-weight-medium); }
-        
-        .admin-fab { position: fixed; bottom: 25px; right: 25px; z-index: 1000; background-color: var(--color-primary); border: none; box-shadow: var(--shadow-lg); }
-        .admin-fab:hover { background-color: var(--color-primary-dark); }
-        
-        mark { padding: 0.1em; background-color: var(--color-warning); border-radius: 0.375rem; color: var(--color-gray-900); }
-        
-        /* Theme switcher */
-        .theme-switch-wrapper { display: flex; align-items: center; position: absolute; top: 1rem; right: 1rem; z-index: 1021; }
-        .theme-switch { display: inline-block; height: 24px; position: relative; width: 50px; }
-        .theme-switch input { display:none; }
-        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
-        .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--color-primary); }
-        input:checked + .slider:before { transform: translateX(26px); }
-        
-        /* Clear search button */
-        .search-wrapper { position: relative; }
-        #clear-search { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--color-gray-400); display: none; }
 
-        /* Nuevos estilos */
-        .compacto .contact-item { padding: .5rem 1.5rem; }
-        .badge-soft { background-color: var(--color-primary-light); color: var(--color-primary-dark); border-radius: 999px; padding: .25rem .5rem; font-size: .75rem; font-weight: var(--font-weight-medium); }
-        [data-theme="dark"] .badge-soft { background-color: var(--color-gray-700); color: var(--color-gray-200); }
-        .category-header-count { margin-left:.5rem; }
-        .contact-actions { display: flex; align-items: center; flex-shrink: 0; }
-        .contact-actions .btn { margin-left:.5rem; }
-        @media (min-width: 992px) {
-            .list-grid .contact-item { display:grid; grid-template-columns: 1fr auto; gap: .75rem; align-items:center; }
-            .list-grid .contact-actions { justify-self:end; }
+        .contact-info strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
         }
-        .modal-content {
-             background-color: var(--card-bg);
-             color: var(--text-color);
+
+        .contact-info span {
+            font-size: 0.85rem;
+            color: #64748b;
         }
-        .modal-header, .modal-footer {
-            border-color: var(--border-color);
+
+        /* Actions */
+        .contact-actions { display: flex; gap: 0.5rem; }
+        .btn-action {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 1rem;
         }
-        
-        /* Footer Styles */
-        footer {
-            margin-top: auto;
+        .btn-action:active { transform: scale(0.95); }
+        .btn-call { background: var(--color-gray-100); color: var(--color-gray-800); }
+        .btn-fav { background: transparent; color: #cbd5e1; border: 1px solid var(--border-color); }
+        .btn-fav.active { color: var(--color-warning); border-color: var(--color-warning); background: #fffbeb; }
+
+        /* Badges */
+        .badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            letter-spacing: 0.5px;
         }
-        
-        footer i {
-            margin-right: 0.25rem;
+        .badge-salud { background: var(--color-health-light); color: var(--color-health); }
+        .badge-muni { background: var(--color-muni-light); color: var(--color-muni); }
+        .badge-daem { background: var(--color-daem-light); color: var(--color-daem); }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
         }
-        
-        @media (max-width: 768px) {
-            footer .row {
-                text-align: center !important;
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
+
+        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- FOOTER STYLES --- */
+        .main-footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--footer-title);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-link:hover {
+            color: var(--color-health);
+        }
+
+        .footer-text {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .footer-text i {
+            color: var(--color-health);
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .footer-bottom {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+
+        .footer-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-separator {
+            width: 4px;
+            height: 4px;
+            background: currentColor;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
             }
-            
-            footer .text-md-start,
-            footer .text-md-end {
-                text-align: center !important;
-            }
-        }
-        
-        [data-theme="dark"] footer > div:first-child {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
         }
     </style>
 </head>
 <body>
-    <!-- Theme Switcher --><div class="theme-switch-wrapper">
-        <label class="theme-switch" for="theme-checkbox">
-            <input type="checkbox" id="theme-checkbox" />
-            <div class="slider"></div>
-        </label>
-    </div>
 
-    <header class="py-3">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap header-main-content">
-            <div class="header-title-section">
-                <h1>Directorio Telefónico</h1>
-                <p>Guía de contactos centralizada.</p>
+    <header>
+        <div class="header-content">
+            <div class="brand-wrapper">
+                <img src="img/Logo1.png" alt="Logo Institucional" class="header-logo" onerror="this.style.display='none'">
+                <div class="app-title">
+                    <h1>DirectorioTelefónico</h1>
+                    <p>Directorio Comunal Unificado</p>
+                </div>
             </div>
-            <div class="header-actions">
-                <a href="https://cesfamlu.github.io/links" class="btn btn-outline-secondary">
-                    <i class="bi bi-link-45deg"></i> <span>Directorio Enlaces</span>
-                </a>
-                <a href="https://cesfamlu.github.io/FormularioSoporte" class="btn btn-outline-secondary">
-                    <i class="bi bi-link-45deg"></i> <span>Soporte Informático</span>
-                </a>
-            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Logo Principal --><div class="text-center my-4">
-        <img src="img/2.png" alt="Logo CESFAM" class="img-fluid main-logo" onerror="this.style.display='none'">
-    </div>
-
-    <main class="container my-4">
-        <!-- Barra de Búsqueda --><div class="row justify-content-center mb-4">
-            <div class="col-md-8">
-                <div class="input-group input-group-lg search-wrapper">
-                    <span class="input-group-text" style="background-color: var(--input-bg); border-right: none; border-color: var(--border-color);"><i class="bi bi-search"></i></span>
-                    <input type="text" id="search-input" class="form-control" placeholder="Busca un anexo, nombre o categoría..." style="border-left: none; box-shadow: var(--shadow-sm); background-color: var(--input-bg); color: var(--text-color); border-color: var(--border-color);">
-                    <i class="bi bi-x-circle-fill" id="clear-search"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="d-flex gap-2 justify-content-center mb-4 d-none" id="admin-backup-buttons">
-          <button id="btn-export" class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-download"></i> Exportar JSON
-          </button>
-          <label class="btn btn-outline-secondary btn-sm mb-0">
-            <i class="bi bi-upload"></i> Importar JSON
-            <input id="file-import" type="file" accept="application/json" hidden>
-          </label>
-        </div>
-        
-        <!-- Cards de resumen y Filtros rápidos --><div class="row g-3 mb-4" id="summary-cards"></div>
-        <div class="d-flex gap-2 flex-wrap mb-4" id="quick-filters">
-          <button class="btn btn-sm btn-primary" data-filter="all">Todos</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Municipalidad">Municipalidad</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Salud">Salud</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="Daem">DAEM</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="hasAnexo">Con Anexo</button>
-          <button class="btn btn-sm btn-outline-secondary" data-filter="mobile">Solo Celulares</button>
-          <div class="ms-auto d-flex align-items-center gap-3">
-            <button class="btn btn-sm btn-outline-danger" id="export-pdf-btn" title="Exportar a PDF">
-                <i class="bi bi-file-earmark-pdf"></i>
-                <span class="d-none d-lg-inline ms-1">Exportar PDF</span>
+    <!-- Search Bar + Voice -->
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Busca persona, unidad o anexo..." onkeyup="handleSearch()">
+            <button class="mic-btn" id="micBtn" onclick="toggleVoiceSearch()" title="Dictar búsqueda">
+                <i class="fas fa-microphone"></i>
             </button>
-            <span style="font-size:.9rem; color: var(--color-gray-500);">Densidad</span>
-            <div class="form-check form-switch m-0">
-              <input class="form-check-input" type="checkbox" id="density-switch" title="Alternar vista compacta">
-            </div>
-          </div>
-        </div>
-
-        <!-- Contenedor para el acordeón de categorías --><div class="accordion" id="directory-accordion">
-            <!-- El contenido se generará con JavaScript --></div>
-         <div id="no-results" class="text-center mt-5" style="display: none;">
-            <i class="bi bi-emoji-frown display-1" style="color: var(--color-gray-300);"></i>
-            <h3 class="mt-3" style="font-weight: var(--font-weight-semibold);">No se encontraron resultados</h3>
-            <p style="color: var(--color-gray-500);">Prueba con otros términos, por ejemplo: "Farmacia", "520" o "SOME".</p>
-        </div>
-    </main>
-    
- <footer class="mt-5">
-    <div style="background: linear-gradient(135deg, #0066cc 0%, #127986 100%); padding: var(--spacing-xl) 0; border-top: 3px solid rgba(255, 255, 255, 0.1);">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0" style="color: white; font-weight: var(--font-weight-medium); font-size: 0.95rem;">
-                        <i class="bi bi-building me-2"></i>CESFAM La Unión
-                    </p>
-                    <p class="mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem;">
-                        <i class="bi bi-cpu me-2"></i>Área de Informática
-                    </p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0" style="color: white; font-weight: var(--font-weight-semibold); font-size: 0.9rem;">
-                        <i class="bi bi-telephone-fill me-2"></i>Directorio Telefónico 2025
-                    </p>
-                    <p class="mb-0 mt-2" style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem;">
-                        <i class="bi bi-shield-check me-2"></i>Sistema de gestión numeros telefónicos
-                    </p>
-                </div>
-            </div>
-            <div class="mt-3 pt-3 text-center" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <p class="mb-0" style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">
-                    &copy; 2025 Directorio Telefónico | Versión 2.0
-                </p>
-            </div>
         </div>
     </div>
-    <div style="background: var(--color-gray-900); padding: var(--spacing-sm) 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+
+    <!-- Quick Filters -->
+    <div class="quick-filters">
+        <button class="filter-chip chip-all active" onclick="filterByGroup('all', this)">
+            <i class="fas fa-layer-group"></i> Todos
+        </button>
+        <button class="filter-chip chip-muni" onclick="filterByGroup('muni', this)">
+            <i class="fas fa-building-columns"></i> Municipal
+        </button>
+        <button class="filter-chip chip-salud" onclick="filterByGroup('salud', this)">
+            <i class="fas fa-user-doctor"></i> Salud
+        </button>
+        <button class="filter-chip chip-daem" onclick="filterByGroup('daem', this)">
+            <i class="fas fa-graduation-cap"></i> DAEM
+        </button>
+    </div>
+
+    <div class="container">
         
-    </div>
-</footer>
-
-    <!-- Botón Flotante de Administrador --><button class="btn btn-primary btn-lg rounded-circle admin-fab" id="admin-login-btn" title="Acceso Administrador">
-        <i class="bi bi-person-fill-gear"></i>
-    </button>
-    
-    <!-- Toast de Notificación --><div class="position-fixed bottom-0 end-0 p-3" style="z-index:1100">
-      <div id="toast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body" id="toast-body"></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <!-- Recents Section -->
+        <div id="recentsSection" style="display:none;">
+            <div class="section-title">
+                <span><i class="fas fa-history text-secondary"></i> Recientes</span>
+                <span class="clear-history" onclick="clearRecents()">Borrar</span>
+            </div>
+            <div class="category-card">
+                <ul class="contact-list" id="recentsList"></ul>
+            </div>
         </div>
-      </div>
+
+        <!-- Favorites Section -->
+        <div id="favoritesSection" style="display:none;">
+            <div class="section-title"><span><i class="fas fa-star" style="color:var(--color-warning)"></i> Favoritos</span></div>
+            <div class="category-card">
+                <ul class="contact-list" id="favoritesList"></ul>
+            </div>
+        </div>
+
+        <!-- Directory Container -->
+        <div id="directoryContainer"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" style="display:none; text-align:center; padding: 3rem 1rem; color: #9ca3af;">
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+            <p>No encontramos nada con ese nombre.<br><small>Intenta verificar la ortografía.</small></p>
+        </div>
     </div>
 
-    <!-- Modal CRUD --><div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <form class="modal-content" id="contactForm">
-          <div class="modal-header">
-            <h5 class="modal-title" id="contactModalLabel">Nuevo contacto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-2">
-              <label class="form-label">Categoría</label>
-              <select class="form-select" id="f-category" required>
-                <option>Municipalidad</option>
-                <option>Salud</option>
-                <option>Daem</option>
-              </select>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <section class="footer-section">
+                    <h3 class="footer-title">Enlaces</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;"><i class="fas fa-arrow-up"></i> Volver arriba</a></li>
+                        <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
+                        <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
+                    </ul>
+                </section>
+
+                <section class="footer-section">
+                    <h3 class="footer-title">Contacto</h3>
+                    <div class="footer-text">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:cesfam@munilaunion.cl" class="footer-link">cesfam@munilaunion.cl</a>
+                    </div>
+                    <div class="footer-text">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>La Unión, Región de Los Ríos</span>
+                    </div>
+                </section>
+
+                <section class="footer-section">
+                    <h3 class="footer-title">CESFAM La Unión</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank"><i class="fab fa-youtube"></i> Youtube</a></li>
+                        <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </section>
+
+                <section class="footer-section">
+                    <h3 class="footer-title">Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Biblioteca CESFAM</a></li>
+                        <li><a class="footer-link" href="https://onedrive.live.com/?id=69AA6CC0DFCF3C18!223356&resid=69AA6CC0DFCF3C18!223356&ithint=folder&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2YvcyFBaGc4ejlfQWJLcHBqZEI4Mm5mLU5iM1JqVTVKS0E&cid=69aa6cc0dfcf3c18" target="_blank"><i class="fas fa-folder-open"></i> Centro Integral</a></li>
+                    </ul>
+                </section>
             </div>
-            <div class="mb-2">
-              <label class="form-label">Nombre</label>
-              <input class="form-control" id="f-name" required>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">© <span id="year">2025</span> CESFAM La Unión. Area de Informática.</div>
+                <div class="footer-meta">
+                    <span>Versión M.I.R </span>
+                    <span class="footer-separator"></span>
+                    <span><i class="fas fa-cloud"></i> Estado: OK</span>
+                </div>
             </div>
-            <div class="mb-2">
-              <label class="form-label">Anexo</label>
-              <input class="form-control" id="f-anexo" placeholder="(opcional)">
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Teléfono</label>
-              <input class="form-control" id="f-phone">
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" id="f-email" placeholder="(opcional)">
-            </div>
-            <input type="hidden" id="f-edit-key" value="">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Guardar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    
-    <!-- Scripts --><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        </div>
+    </footer>
+
+    <div id="toast"><i class="fas fa-check-circle"></i> Anexo copiado</div>
+
     <script>
+        // --- DATA ESTRUCTURADA ---
+        const directoryData = [
+            // ================= GRUPO: MUNICIPAL =================
+            {
+                group: "muni",
+                category: "Administración Municipal",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "Asesor Jurídico Alcalde", ext: "7135", detail: "64 2 527135" },
+                    { name: "Admin. Vehículos y Caminos", ext: "7000", detail: "64 2 527000" },
+                    { name: "Admin. Obras Menores", ext: "7111", detail: "64 2 527111" },
+                    { name: "Admin. Prevencionista", ext: "472239", detail: "Directo" },
+                    { name: "Seguridad Pública", ext: "322033", detail: "Directo" },
+                    { name: "Aseo y Ornato", ext: "7102", detail: "64 2 527102" },
+                    { name: "Aseo Parque Municipal", ext: "472297", detail: "Directo" },
+                    { name: "Admin. Unidad Académica", ext: "472366", detail: "Directo" },
+                    { name: "Comunicaciones", ext: "324387", detail: "Directo" },
+                    { name: "Salón Consistorial", ext: "322031", detail: "Directo" },
+                    { name: "Portería", ext: "472376", detail: "Directo" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "Secretaría Municipal",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "Secretario Municipal", ext: "7139", detail: "64 2 527139" },
+                    { name: "Secretaria", ext: "7120", detail: "64 2 527120" },
+                    { name: "Central Telefónica", ext: "322441", detail: "Directo" },
+                    { name: "Oficina de Concejales", ext: "7114", detail: "64 2 527114" },
+                    { name: "Oficina de Partes", ext: "7141", detail: "64 2 527141" },
+                    { name: "Transparencia Municipal", ext: "7144", detail: "64 2 527144" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "Dirección de Control",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "Directora Control", ext: "384", detail: "64 2 201384" },
+                    { name: "Control Administrativo", ext: "421", detail: "64 2 200421" },
+                    { name: "Informática", ext: "983", detail: "64 2 524983" },
+                    { name: "Fiscalizador", ext: "580", detail: "64 2 200580" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "DIDECO y Social",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "DIDECO Dirección", ext: "271", detail: "422271" },
+                    { name: "DIDECO Secretaría", ext: "270", detail: "472270" },
+                    { name: "Jefa Dto. Social", ext: "266", detail: "472266" },
+                    { name: "OMIL", ext: "267", detail: "472340" },
+                    { name: "Prog. Jefas de Hogar", ext: "246", detail: "472246" },
+                    { name: "Organizaciones Comunitarias", ext: "281", detail: "472281" },
+                    { name: "OPD", ext: "276", detail: "472276" },
+                    { name: "Senda Previene", ext: "204", detail: "472204" },
+                    { name: "Oficina del Deporte", ext: "306", detail: "472306" },
+                    { name: "Gimnasio Municipal", ext: "205", detail: "472205" },
+                    { name: "Desarrollo Rural", ext: "386", detail: "472386" },
+                    { name: "Prodesal", ext: "214", detail: "472214" },
+                    { name: "PDTI", ext: "388", detail: "472388" },
+                    { name: "Programas Sociales Jefa", ext: "224", detail: "472224" },
+                    { name: "Programas Familias", ext: "232", detail: "472232" },
+                    { name: "Oficina de la Juventud", ext: "99527388", detail: "Directo" },
+                    { name: "Fomento Productivo", ext: "642346116", detail: "Directo" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "Finanzas",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "Finanzas Director", ext: "351", detail: "472350" },
+                    { name: "Adquisiciones", ext: "355", detail: "472355" },
+                    { name: "Rentas y Patentes", ext: "265", detail: "472265" },
+                    { name: "Inspección", ext: "262", detail: "472262" },
+                    { name: "Personal", ext: "350", detail: "472233" },
+                    { name: "Tesorería Jefa", ext: "353", detail: "472353" },
+                    { name: "Tesorería Cajeras", ext: "354", detail: "472354" },
+                    { name: "Contabilidad e Inventario", ext: "356", detail: "472356" },
+                    { name: "Cementerio Municipal", ext: "120", detail: "322384" },
+                    { name: "Bodega Municipal", ext: "337", detail: "472337" },
+                    { name: "Bodega Camilo Henriquez", ext: "371", detail: "472298" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "SECPLAN y Obras",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "SECPLAN Dirección", ext: "286", detail: "472286" },
+                    { name: "SECPLAN Secretaría", ext: "458", detail: "472358" },
+                    { name: "Asesor Urbanista", ext: "247", detail: "472247" },
+                    { name: "Vivienda", ext: "241", detail: "472236" },
+                    { name: "Inversiones", ext: "671", detail: "324671" },
+                    { name: "Profesionales", ext: "202", detail: "472202" },
+                    { name: "ITO", ext: "263", detail: "472263" },
+                    { name: "Compras", ext: "221", detail: "472221" },
+                    { name: "Medio Ambiente", ext: "245", detail: "472245" },
+                    { name: "DOM Director/Secretaría", ext: "7138", detail: "64 2 527138" }
+                ]
+            },
+            {
+                group: "muni",
+                category: "Cultura y Turismo",
+                headerClass: "header-muni",
+                badgeClass: "badge-muni",
+                contacts: [
+                    { name: "Cultura Dirección", ext: "642346116", detail: "Directo" },
+                    { name: "Cultura Secretaría", ext: "346117", detail: "Directo" },
+                    { name: "Biblioteca", ext: "472215", detail: "Directo" },
+                    { name: "Turismo", ext: "999581816", detail: "Móvil" },
+                    { name: "Pueblos Originarios", ext: "947432447", detail: "Móvil" },
+                    { name: "Estadio Carlos Vogel", ext: "472296", detail: "Directo" }
+                ]
+            },
+
+            // ================= GRUPO: SALUD =================
+            {
+                group: "salud",
+                category: "Depto. de Salud (Admin)",
+                headerClass: "header-salud",
+                badgeClass: "badge-salud",
+                contacts: [
+                    { name: "Jefe Departamento", ext: "752", detail: "207752" },
+                    { name: "Secretaria", ext: "334", detail: "472334" },
+                    { name: "Finanzas Jefa", ext: "208", detail: "322553" },
+                    { name: "Finanzas", ext: "753", detail: "207753" },
+                    { name: "Personal", ext: "335", detail: "472335" },
+                    { name: "Constructor Civil", ext: "448", detail: "322048" },
+                    { name: "Adquisiciones", ext: "449", detail: "472449" },
+                    { name: "Farmacia Comunitaria", ext: "472", detail: "207754" }
+                ]
+            },
+            {
+                group: "salud",
+                category: "CESFAM P. Hurtado",
+                headerClass: "header-salud",
+                badgeClass: "badge-salud",
+                contacts: [
+                    { name: "Dirección", ext: "532", detail: "642346132" },
+                    { name: "Secretaria", ext: "530", detail: "642346130" },
+                    { name: "OIRS", ext: "550", detail: "642346150" },
+                    { name: "UAPO Externo", ext: "520", detail: "642346120" },
+                    { name: "CCR", ext: "523", detail: "642346123" },
+                    { name: "Farmacia", ext: "528", detail: "642346128" },
+                    { name: "Vacunatorio", ext: "537", detail: "642346137" },
+                    { name: "Toma de Muestra", ext: "531", detail: "642346131" },
+                    { name: "Esterilización", ext: "539", detail: "642346139" },
+                    { name: "SOME Central/Adm", ext: "529", detail: "642346129" },
+                    { name: "SOME Transversal", ext: "634", detail: "642346134" },
+                    { name: "SOME Sector Azul", ext: "546", detail: "642346146" },
+                    { name: "SOME Sector Verde", ext: "522", detail: "642346122" },
+                    { name: "SOME Sector Amarillo", ext: "542", detail: "642346142" },
+                    { name: "Jefe SOME Amarillo", ext: "543", detail: "642346143" },
+                    { name: "Asistente Social Azul", ext: "521", detail: "642346121" },
+                    { name: "Asistente Social Verde", ext: "536", detail: "642346136" },
+                    { name: "Asistente Social Amarillo", ext: "538", detail: "642346138" },
+                    { name: "Enfermera Coordinadora", ext: "547", detail: "642346147" },
+                    { name: "Jefe Unid. Transversales", ext: "526", detail: "642346126" },
+                    { name: "Sala IRA", ext: "541", detail: "642346141" },
+                    { name: "Sala ERA", ext: "551", detail: "642346151" },
+                    { name: "Electrocardiograma", ext: "544", detail: "642346144" },
+                    { name: "Estadística", ext: "545", detail: "642346145" },
+                    { name: "Epidemiologia", ext: "549", detail: "642346149" },
+                    { name: "Entrega de Leche", ext: "548", detail: "642346148" },
+                    { name: "GES", ext: "552", detail: "642346152" },
+                    { name: "Calificador de Derecho", ext: "540", detail: "642346140" },
+                    { name: "Of. Vinculación y Promoción", ext: "533", detail: "642346133" },
+                    { name: "Soporte y Comunicaciones", ext: "525", detail: "642346125" }
+                ]
+            },
+            {
+                group: "salud",
+                category: "Consultorio La Unión",
+                headerClass: "header-salud",
+                badgeClass: "badge-salud",
+                contacts: [
+                    { name: "Secretaria", ext: "310", detail: "472310" },
+                    { name: "S.O.M.E.", ext: "313", detail: "472313" },
+                    { name: "Farmacia", ext: "314", detail: "472314" },
+                    { name: "Entrega de Leche", ext: "321", detail: "472321" },
+                    { name: "Box Medico", ext: "316", detail: "472316" },
+                    { name: "Curaciones", ext: "343", detail: "472343" },
+                    { name: "Nutricionista", ext: "322", detail: "472322" },
+                    { name: "Nutricionista Vida Sana", ext: "312", detail: "472312" },
+                    { name: "SOME Salud Mental", ext: "255", detail: "470255" }
+                ]
+            },
+            {
+                group: "salud",
+                category: "Clínica Dental Escolar",
+                headerClass: "header-salud",
+                badgeClass: "badge-salud",
+                contacts: [
+                    { name: "Escuela 1", ext: "393", detail: "472393" },
+                    { name: "Escuela 2", ext: "491", detail: "472391" },
+                    { name: "Escuela 4", ext: "389", detail: "472389" },
+                    { name: "Escuela Radimadi", ext: "392", detail: "472392" },
+                    { name: "Escuela El Maitén", ext: "383", detail: "472383" },
+                    { name: "Liceo RAAC", ext: "394", detail: "472394" }
+                ]
+            },
+            {
+                group: "salud",
+                category: "Otros Centros",
+                headerClass: "header-salud",
+                badgeClass: "badge-salud",
+                contacts: [
+                    { name: "SAR", ext: "502", detail: "325002" },
+                    { name: "CECOSF Los Lagos", ext: "211", detail: "472211" },
+                    { name: "CECOSF Irene Daiber", ext: "307", detail: "472307" }
+                ]
+            },
+
+            // ================= GRUPO: DAEM =================
+            {
+                group: "daem",
+                category: "Administración DAEM",
+                headerClass: "header-daem",
+                badgeClass: "badge-daem",
+                contacts: [
+                    { name: "Secretaria Dirección", ext: "601", detail: "472361" },
+                    { name: "Recursos Humanos", ext: "607", detail: "472363" },
+                    { name: "Secretaria RRHH", ext: "608", detail: "472362" },
+                    { name: "Remuneraciones", ext: "609", detail: "472249" },
+                    { name: "Finanzas Secretario", ext: "604", detail: "472365" },
+                    { name: "Licencias Médicas", ext: "610", detail: "472364" },
+                    { name: "Oficina de Partes", ext: "611", detail: "472360" },
+                    { name: "Evaluación Docente", ext: "612", detail: "322012" },
+                    { name: "Unidad Académica", ext: "613", detail: "322019" },
+                    { name: "Coord. Acad. Básica", ext: "615", detail: "322617" },
+                    { name: "JUNAEB", ext: "617", detail: "472218" },
+                    { name: "Encargada de Pagos", ext: "618", detail: "472380" },
+                    { name: "Extraescolar", ext: "620", detail: "322002" },
+                    { name: "Adquisiciones", ext: "621", detail: "472367" },
+                    { name: "Compras", ext: "622", detail: "472379" },
+                    { name: "Planif./Infraestructura", ext: "623", detail: "472201" },
+                    { name: "Transporte", ext: "625", detail: "472368" },
+                    { name: "Bodega", ext: "626", detail: "321928" },
+                    { name: "Inventario", ext: "605", detail: "472371" }
+                ]
+            },
+            {
+                group: "daem",
+                category: "Establecimientos Educ.",
+                headerClass: "header-daem",
+                badgeClass: "badge-daem",
+                contacts: [
+                    { name: "Escuela N° 1 La Unión", ext: "140", detail: "322723" },
+                    { name: "Escuela N° 2 La Unión", ext: "136", detail: "322372" },
+                    { name: "Escuela 4 Pdte. Alessandri", ext: "138", detail: "322623" },
+                    { name: "Escuela Radimadi", ext: "139", detail: "322721" },
+                    { name: "Escuela El Maitén", ext: "345", detail: "472345" },
+                    { name: "Escuela Aldea Campesina", ext: "132", detail: "321098" },
+                    { name: "Escuela Dif. Villa San José", ext: "137", detail: "322392" },
+                    { name: "Escuela Lenguaje Municipal", ext: "472302", detail: "Directo" },
+                    { name: "Liceo Rector Andrade C.", ext: "133", detail: "322437" },
+                    { name: "Colegio Cultura y Difusión", ext: "570320", detail: "Directo" }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let favorites = JSON.parse(localStorage.getItem('linksFavorites')) || [];
+        let recents = JSON.parse(localStorage.getItem('linksRecents')) || [];
+        let currentGroup = 'all';
+
+        // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Datos con iconos por categoría
-            const initialData = [
-              {
-                "category": "Municipalidad", "icon": "bi-building",
-                "contacts": [
-                  { "name": "Asesor Jurídico alcalde", "anexo": "7135", "phone": "64 2 527135", "email": "" }, { "name": "Administración, Vehículos y Caminos", "anexo": "7000", "phone": "64 2 527000", "email": "" }, { "name": "Administración, Vehículos, Secretaría y Obras Menores", "anexo": "7111", "phone": "64 2 527111", "email": "" }, { "name": "Administración, Vehículos, Prevencionista", "anexo": "", "phone": "472239", "email": "" }, { "name": "Administración, Seguridad Pública", "anexo": "", "phone": "322033", "email": "" }, { "name": "Administración, Dpto. Aseo y Ornato", "anexo": "7102", "phone": "64 2 527102", "email": "" }, { "name": "Administración, Dpto. Aseo Parque Municipal", "anexo": "", "phone": "472297", "email": "" }, { "name": "Administración, Unidad Académica", "anexo": "", "phone": "472366", "email": "" }, { "name": "Administración, Oficina de Comunicaciones", "anexo": "", "phone": "324387", "email": "" }, { "name": "Secretaria Municipal", "anexo": "7139", "phone": "64 2 527139", "email": "" }, { "name": "Secretaría Municipal, Secretaria", "anexo": "7120", "phone": "64 2 527120", "email": "" }, { "name": "Secretaría Municipal, Central Telefónica", "anexo": "", "phone": "322441", "email": "" }, { "name": "Secretaría Municipal, Oficina de Concejales", "anexo": "7114", "phone": "64 2 527114", "email": "" }, { "name": "Secretaría Municipal, Oficina de Partes", "anexo": "7141", "phone": "64 2 527141", "email": "" }, { "name": "Secretaría Municipal, Transparencia Municipal", "anexo": "7144", "phone": "64 2 527144", "email": "" }, { "name": "Salón Consistorial", "anexo": "", "phone": "322031", "email": "" }, { "name": "Portería", "anexo": "", "phone": "472376", "email": "" }, { "name": "Dirección de Control, directora", "anexo": "384", "phone": "64 2 201384", "email": "" }, { "name": "Dirección de Control administrativo", "anexo": "421", "phone": "64 2 200421", "email": "" }, { "name": "Dirección de Control, Informática", "anexo": "983", "phone": "64 2 524983", "email": "" }, { "name": "Dirección de Control, fiscalizador", "anexo": "580", "phone": "64 2 200580", "email": "" }, { "name": "Cultura y Turismo, Dirección", "anexo": "Sin Anexo", "phone": "64 2 346116", "email": "" }, { "name": "Cultura y Turismo, Secretaría", "anexo": "", "phone": "346117/346118", "email": "" }, { "name": "Cultura y Turismo, Biblioteca", "anexo": "", "phone": "472215", "email": "" }, { "name": "Cultura y Turismo, Turismo", "anexo": "", "phone": "9 9958 1816", "email": "" }, { "name": "Cultura y Turismo, Pueblos Originarios", "anexo": "", "phone": "9 4743 2447", "email": "" }, { "name": "Estadio Carlos Vogel", "anexo": "", "phone": "472296", "email": "" }, { "name": "Dirección de Obras Municipales, Director", "anexo": "7138", "phone": "64 2 527138", "email": "" }, { "name": "Dirección de Obras Municipales, Secretaría", "anexo": "7138", "phone": "64 2 527138", "email": "" }, { "name": "Fomento Productivo", "anexo": "Sin Anexo", "phone": "64 2 346116", "email": "" }, { "name": "Jefa Dto. Social.", "anexo": "266", "phone": "472266", "email": "" }, { "name": "Dideco, Dirección", "anexo": "271", "phone": "422271", "email": "" }, { "name": "Dideco, Secretaría", "anexo": "270", "phone": "472270", "email": "" }, { "name": "Dideco, OMIL", "anexo": "267 - 268", "phone": "472340", "email": "" }, { "name": "Dideco, Programa Jefas de Hogar - Oficina Mujer", "anexo": "246", "phone": "472246", "email": "" }, { "name": "Dideco, Organizaciones Comunitarias", "anexo": "281", "phone": "472281", "email": "" }, { "name": "Dideco, OPD", "anexo": "276", "phone": "472276", "email": "" }, { "name": "Dideco, Senda Previene", "anexo": "204-390", "phone": "472204", "email": "" }, { "name": "Dideco, Oficina del Deporte", "anexo": "306", "phone": "472306", "email": "" }, { "name": "Dideco, Gimnasio Municipal", "anexo": "205", "phone": "472205", "email": "" }, { "name": "Dideco Desarrollo Rural", "anexo": "386", "phone": "472386", "email": "" }, { "name": "Dideco, Prodesal", "anexo": "214", "phone": "472214", "email": "" }, { "name": "Dideco, PDTI", "anexo": "388", "phone": "472388", "email": "" }, { "name": "Dideco, Programas Sociales, Jefa", "anexo": "224", "phone": "472224", "email": "" }, { "name": "Dideco, Programas Familias", "anexo": "232-233", "phone": "472232", "email": "" }, { "name": "Oficina de la Juventud", "anexo": "Sin Anexo", "phone": "99527388", "email": "" }, { "name": "Finanzas, Director", "anexo": "351", "phone": "472350", "email": "" }, { "name": "Finanzas, Adquisiciones", "anexo": "355-395", "phone": "472355", "email": "" }, { "name": "Finanzas, Rentas y patentes", "anexo": "265", "phone": "472265", "email": "" }, { "name": "Finanzas, Inspección", "anexo": "262", "phone": "472262", "email": "" }, { "name": "Finanzas, Personal", "anexo": "350 - 352", "phone": "472233/472352", "email": "" }, { "name": "Finanzas, Tesorería Jefa", "anexo": "353", "phone": "472353", "email": "" }, { "name": "Finanzas, Tesorería Cajeras", "anexo": "354", "phone": "472354", "email": "" }, { "name": "Finanzas, Contabilidad e Inventario", "anexo": "356", "phone": "472356", "email": "" }, { "name": "Finanzas, Cementerio Municipal", "anexo": "120", "phone": "322384", "email": "" }, { "name": "Finanzas, Bodega Municipal", "anexo": "337", "phone": "472337", "email": "" }, { "name": "Finanzas, Bodega Camilo Henriquez", "anexo": "371", "phone": "472298/324362", "email": "" }, { "name": "Secretario", "anexo": "", "phone": "9 8973 7374", "email": "" }, { "name": "Secplan, Dirección", "anexo": "286", "phone": "472286", "email": "" }, { "name": "Secplan, Secretaría", "anexo": "458", "phone": "472358", "email": "" }, { "name": "Secplan, Asesor Urbanista", "anexo": "247", "phone": "472247", "email": "" }, { "name": "Secplan, Vivienda", "anexo": "241", "phone": "472236", "email": "" }, { "name": "Secplan, Inversiones", "anexo": "671", "phone": "324671", "email": "" }, { "name": "Secplan, profesionales", "anexo": "202", "phone": "472202", "email": "" }, { "name": "Secplan, ITO", "anexo": "263", "phone": "472263", "email": "" }, { "name": "Secplan, Compras", "anexo": "221", "phone": "472221", "email": "" }, { "name": "Secplan, Medio Ambiente", "anexo": "245", "phone": "472245", "email": "" }
-                ]
-              },
-              {
-                "category": "Salud", "icon": "bi-heart-pulse",
-                "contacts": [
-                    { "name": "Jefe Departamento de Salud", "anexo": "752", "phone": "207752", "email": "" }, { "name": "Secretaria", "anexo": "334", "phone": "472334", "email": "" }, { "name": "Finanzas Jefa", "anexo": "208", "phone": "322553", "email": "" }, { "name": "Finanzas", "anexo": "753", "phone": "207753", "email": "" }, { "name": "Finanzas", "anexo": "336", "phone": "472336", "email": "" }, { "name": "Personal", "anexo": "335", "phone": "472335", "email": "" }, { "name": "Constructor Civil", "anexo": "448", "phone": "322048", "email": "" }, { "name": "Adquisiciones", "anexo": "449", "phone": "472449", "email": "" }, { "name": "Adquisiciones", "anexo": "323", "phone": "322323", "email": "" }, { "name": "Farmacia Comunitaria", "anexo": "472", "phone": "207754", "email": "" }, { "name": "CESFAM P. Hurtado: UAPO Externo", "anexo": "520", "phone": "642346120", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Azul", "anexo": "521", "phone": "642346121", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Verde", "anexo": "522", "phone": "642346122", "email": "" }, { "name": "CESFAM P. Hurtado: CCR", "anexo": "523", "phone": "642346123", "email": "" }, { "name": "CESFAM P. Hurtado: Sala TIC", "anexo": "524", "phone": "642346124", "email": "" }, { "name": "CESFAM P. Hurtado: Sala Soporte y Comunicaciones", "anexo": "525", "phone": "642346125", "email": "" }, { "name": "CESFAM P. Hurtado: Jefe Unidades Transversales", "anexo": "526", "phone": "642346126", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Multiproposito Sector Transversal", "anexo": "527", "phone": "642346127", "email": "" }, { "name": "CESFAM P. Hurtado: Farmacia", "anexo": "528", "phone": "642346128", "email": "" }, { "name": "CESFAM P. Hurtado: Some adm", "anexo": "529", "phone": "642346129", "email": "" }, { "name": "CESFAM P. Hurtado: Secretaria", "anexo": "530", "phone": "642346130", "email": "" }, { "name": "CESFAM P. Hurtado: Toma de Muestra", "anexo": "531", "phone": "642346131", "email": "" }, { "name": "CESFAM P. Hurtado: Dirección", "anexo": "532", "phone": "642346132", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Vinculación y Promoción", "anexo": "533", "phone": "642346133", "email": "" }, { "name": "CESFAM P. Hurtado: Some Transversal", "anexo": "634", "phone": "642346134", "email": "" }, { "name": "CESFAM P. Hurtado: Bodega Dental", "anexo": "535", "phone": "642346135", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Verde", "anexo": "536", "phone": "642346136", "email": "" }, { "name": "CESFAM P. Hurtado: Vacunatorio", "anexo": "537", "phone": "642346137", "email": "" }, { "name": "CESFAM P. Hurtado: Asistente Social Sector Amarillo", "anexo": "538", "phone": "642346138", "email": "" }, { "name": "CESFAM P. Hurtado: Esterilización", "anexo": "539", "phone": "642346139", "email": "" }, { "name": "CESFAM P. Hurtado: Calificador de Derecho", "anexo": "540", "phone": "642346140", "email": "" }, { "name": "CESFAM P. Hurtado: Sala IRA", "anexo": "541", "phone": "642346141", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Amarillo", "anexo": "542", "phone": "642346142", "email": "" }, { "name": "CESFAM P. Hurtado: JEFE SOME Sector Amarillo", "anexo": "543", "phone": "642346143", "email": "" }, { "name": "CESFAM P. Hurtado: Electrocardiograma", "anexo": "544", "phone": "642346144", "email": "" }, { "name": "CESFAM P. Hurtado: Estadística", "anexo": "545", "phone": "642346145", "email": "" }, { "name": "CESFAM P. Hurtado: SOME Sector Azul", "anexo": "546", "phone": "642346146", "email": "" }, { "name": "CESFAM P. Hurtado: Oficina Enfermera Coordinadora Transversales", "anexo": "547", "phone": "642346147", "email": "" }, { "name": "CESFAM P. Hurtado: Entrega de Leche", "anexo": "548", "phone": "642346148", "email": "" }, { "name": "CESFAM P. Hurtado: Epidemiologia", "anexo": "549", "phone": "642346149", "email": "" }, { "name": "CESFAM P. Hurtado: OIRS", "anexo": "550", "phone": "642346150", "email": "" }, { "name": "CESFAM P. Hurtado: Sala ERA", "anexo": "551", "phone": "642346151", "email": "" }, { "name": "CESFAM P. Hurtado: GES", "anexo": "552", "phone": "642346152", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 1", "anexo": "393", "phone": "472393", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 2", "anexo": "491", "phone": "472391", "email": "" }, { "name": "Clínica Dental Escolar: Escuela 4", "anexo": "389", "phone": "472389", "email": "" }, { "name": "Clínica Dental Escolar: Escuela Radimadi", "anexo": "392", "phone": "472392", "email": "" }, { "name": "Clínica Dental Escolar: Escuela El Maitén", "anexo": "383", "phone": "472383", "email": "" }, { "name": "Clínica Dental Escolar: Liceo RAAC", "anexo": "394", "phone": "472394", "email": "" }, { "name": "CECOSF Los Lagos (Some, Farmacia, Leche)", "anexo": "211-212", "phone": "472211-472212", "email": "" }, { "name": "CECOSF Irene Daiber", "anexo": "307", "phone": "472307", "email": "" }, { "name": "Consultorio La Unión: Farmacia", "anexo": "314", "phone": "472314", "email": "" }, { "name": "Consultorio La Unión: S.O.M.E.", "anexo": "313", "phone": "472313", "email": "" }, { "name": "Consultorio La Unión: Secretaria", "anexo": "310", "phone": "472310", "email": "" }, { "name": "Consultorio La Unión: Box Medico", "anexo": "316", "phone": "472316", "email": "" }, { "name": "Consultorio La Unión: Curaciones", "anexo": "343", "phone": "472343", "email": "" }, { "name": "Consultorio La Unión: Nutricionista", "anexo": "322", "phone": "472322", "email": "" }, { "name": "Consultorio La Unión: Entrega de Leche", "anexo": "321", "phone": "472321", "email": "" }, { "name": "Consultorio La Unión: SOME Salud Mental", "anexo": "255", "phone": "470255", "email": "" }, { "name": "Consultorio La Unión: Nutricionista Vida Sana", "anexo": "312", "phone": "472312", "email": "" }, { "name": "SAR", "anexo": "502", "phone": "325002", "email": "" }
-                ]
-              },
-              {
-                "category": "Hospital de Valdivia", "icon": "bi-heart-pulse",
-                  "contacts":[
-                      {name:"BOX Enfermeria","phone":"63 2 263973"},{name:"Secretaría","phone":"63 2 263539"},{name:"Salud Responde","phone":"600 360 7777"}
-                  ]
-                  
-                
-              },
-              {
-                "category": "Daem", "icon": "bi-book",
-                "contacts": [
-                    { "name": "Recursos Humanos", "anexo": "607", "phone": "472363", "email": "" }, { "name": "Secretaria Dirección", "anexo": "601", "phone": "472361", "email": "" }, { "name": "Secretario Finanzas", "anexo": "604", "phone": "472365", "email": "" }, { "name": "Secretaria Recursos Humanos", "anexo": "608", "phone": "472362", "email": "" }, { "name": "Remuneraciones", "anexo": "609", "phone": "472249", "email": "" }, { "name": "Licencias Médicas", "anexo": "610", "phone": "472364", "email": "" }, { "name": "Oficina de Partes", "anexo": "611", "phone": "472360", "email": "" }, { "name": "Evaluación Docente", "anexo": "612", "phone": "322012", "email": "" }, { "name": "Unidad Académica", "anexo": "613", "phone": "322019", "email": "" }, { "name": "Inventario", "anexo": "605", "phone": "472371", "email": "" }, { "name": "Secretaria", "anexo": "614", "phone": "472372", "email": "" }, { "name": "Coord. Acad. Básica", "anexo": "615", "phone": "322617", "email": "" }, { "name": "Coord. Acad. Básica", "anexo": "616", "phone": "472370", "email": "" }, { "name": "JUNAEB", "anexo": "617", "phone": "472218", "email": "" }, { "name": "Encargada de Pagos", "anexo": "618", "phone": "472380", "email": "" }, { "name": "Sala de Reuniones 1 piso", "anexo": "619", "phone": "472217", "email": "" }, { "name": "Extraescolar/comunicaciones", "anexo": "620", "phone": "322002", "email": "" }, { "name": "Adquisiciones", "anexo": "621", "phone": "472367", "email": "" }, { "name": "Compras", "anexo": "622", "phone": "472379", "email": "" }, { "name": "Planificación/infraestructura", "anexo": "623", "phone": "472201", "email": "" }, { "name": "Secretaria", "anexo": "624", "phone": "472373", "email": "" }, { "name": "Transporte", "anexo": "625", "phone": "472368", "email": "" }, { "name": "Bodega", "anexo": "626", "phone": "321928", "email": "" }, { "name": "Escuela N° 1 La Unión", "anexo": "140", "phone": "322723", "email": "" }, { "name": "Colegio Cultura y Difusión Art.", "anexo": "Sin Anexo", "phone": "570320", "email": "" }, { "name": "Liceo Rector Andrade Coloma", "anexo": "133", "phone": "322437", "email": "" }, { "name": "Escuela Aldea Campesina", "anexo": "132/628", "phone": "321098", "email": "" }, { "name": "Escuela Pdte. Jorge Alessandri", "anexo": "138/269", "phone": "322623", "email": "" }, { "name": "Escuela N°2 La Unión", "anexo": "136", "phone": "322372", "email": "" }, { "name": "Escuela Radimadi", "anexo": "139", "phone": "322721", "email": "" }, { "name": "Escuela El Maitén", "anexo": "345", "phone": "472345", "email": "" }, { "name": "Escuela Diferencial Villa San José", "anexo": "137", "phone": "322392", "email": "" }, { "name": "Escuela Especial de Lenguaje Municipal", "anexo": "Sin Anexo", "phone": "472302", "email": "" }
-                ]
-              }
-            ];
-
-            const directoryContainer = document.getElementById('directory-accordion');
-            const searchInput = document.getElementById('search-input');
-            const clearSearchBtn = document.getElementById('clear-search');
-            const noResultsMessage = document.getElementById('no-results');
-            const adminLoginBtn = document.getElementById('admin-login-btn');
-            const themeToggle = document.getElementById('theme-checkbox');
-            const htmlElement = document.documentElement;
-            const densitySwitch = document.getElementById('density-switch');
-            const exportPdfBtn = document.getElementById('export-pdf-btn');
-            const btnExport = document.getElementById('btn-export'); 
-            const fileImport = document.getElementById('file-import'); 
-            const adminBackupButtons = document.getElementById('admin-backup-buttons'); // Reference for backup buttons div
-            
-            let directoryData = JSON.parse(localStorage.getItem('phoneDirectoryData')) || initialData;
-            let favorites = JSON.parse(localStorage.getItem('favContacts') || '[]');
-            let isAdmin = false;
-            let currentFilter = '';
-            const ADMIN_PIN = "2468";
-
-            // --- Utils ---
-            const debounce = (fn, ms=200) => {
-              let t; return (...args) => { clearTimeout(t); t=setTimeout(()=>fn(...args), ms); };
-            };
-            const showToast = (msg) => {
-              const toastEl = document.getElementById('toast');
-              const toastBody = document.getElementById('toast-body');
-              if (toastEl && toastBody && typeof bootstrap !== 'undefined') {
-                 toastBody.textContent = msg;
-                 new bootstrap.Toast(toastEl).show();
-              } else {
-                 console.warn('Toast elements or Bootstrap JS not found.');
-              }
-            };
-            const isMobile = (p) => /^(9|09)(\d{8})$/.test((p||'').replace(/\D/g,''));
-            const hasAnexo = (a) => a && a.toLowerCase() !== 'sin anexo' && a.trim() !== '';
-            
-            const highlightMatch = (text, filter) => {
-                if (!filter || !text) return text;
-                const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                return text.replace(regex, '<mark>$1</mark>');
-            };
-            
-            const exportData = () => {
-              const blob = new Blob([JSON.stringify(directoryData, null, 2)], {type: "application/json"});
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url; a.download = `directorio_${new Date().toISOString().slice(0,10)}.json`;
-              a.click(); URL.revokeObjectURL(url);
-              showToast("Exportado ✅");
-            };
-            
-            // --- Admin ---
-            const adminActive = () => isAdmin;
-            const adminLogin = () => {
-              const pin = prompt("PIN de administrador:");
-              if (pin === null) return;
-              if (pin === ADMIN_PIN) { 
-                  isAdmin = true; 
-                  showToast("Modo admin activo");
-                  renderSummary(directoryData);
-                  refreshAdminUI();
-                  renderDirectory(searchInput.value||''); 
-              }
-              else { alert("PIN incorrecto."); }
-            };
-            const adminLogout = () => { 
-                isAdmin = false; 
-                showToast("Admin cerrado");
-                renderSummary(directoryData);
-                refreshAdminUI();
-                renderDirectory(searchInput.value||''); 
-            };
-            const refreshAdminUI = () => {
-              const btnAddElement = document.getElementById('btn-add');
-              if (btnAddElement) {
-                 btnAddElement.classList.toggle('d-none', !adminActive());
-              }
-              // Toggle visibility of backup buttons
-              if (adminBackupButtons) {
-                 adminBackupButtons.classList.toggle('d-none', !adminActive());
-              }
-            };
-
-
-            // --- Managers ---
-            const applyTheme = (theme) => {
-                htmlElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                if (themeToggle) {
-                   themeToggle.checked = theme === 'dark';
-                }
-                // Cambiar logo según el tema
-                const logo = document.querySelector('.main-logo');
-                if (logo) {
-                    logo.src = theme === 'dark' ? 'img/1.png' : 'img/2.png';
-                    logo.onerror = function() {
-                        // Si el logo del tema oscuro no existe, mantener el original
-                        if (theme === 'dark') {
-                            this.src = 'img/2.png';
-                        }
-                    };
-                }
-            };
-
-            const applyDensity = (compact) => {
-              document.body.classList.toggle('compacto', compact);
-              localStorage.setItem('density', compact ? 'compact' : 'comfortable');
-            };
-            
-            window.copyToClipboard = async (text) => {
-              try {
-                await navigator.clipboard.writeText(text);
-                showToast('Teléfono copiado');
-              } catch { showToast('No se pudo copiar'); }
-            };
-
-            const renderSummary = (data) => {
-              const el = document.getElementById('summary-cards');
-              if (!el) return; // Add check for element existence
-              const total = data.reduce((acc,c) => acc + c.contacts.length, 0);
-              el.innerHTML = data.map(cat => `
-                <div class="col-6 col-lg-3">
-                  <div class="card shadow-sm h-100" style="background-color: var(--card-bg); border-color: var(--border-color);">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                          <div style="color: var(--color-gray-500);">${cat.category}</div>
-                          <div class="h3 m-0">${cat.contacts.length}</div>
-                        </div>
-                        <i class="bi ${cat.icon} fs-1 text-primary opacity-50"></i>
-                      </div>
-                      <button class="btn btn-sm btn-primary mt-3" data-jump="${cat.category}">Ver</button>
-                    </div>
-                  </div>
-                </div>`).join('') + `
-                <div class="col-6 col-lg-3">
-                  <div class="card h-100" style="background-color: var(--card-bg); border-color: var(--border-color);">
-                    <div class="card-body">
-                      <div style="color: var(--color-gray-500);">Total</div>
-                      <div class="h3 m-0">${total}</div>
-                      <button class="btn btn-sm btn-outline-secondary mt-3" data-jump="ALL">Expandir 1°</button>
-                    </div>
-                  </div>
-                </div>`;
-              el.querySelectorAll('button[data-jump]').forEach(b=>{
-                b.addEventListener('click', ()=>{
-                  const target = b.getAttribute('data-jump');
-                  if (target === 'ALL') {
-                    const firstButton = document.querySelector('.accordion-button');
-                    if (firstButton) {
-                        const collapseElement = document.getElementById(firstButton.getAttribute('data-bs-target').substring(1));
-                        if (collapseElement && typeof bootstrap !== 'undefined') {
-                            new bootstrap.Collapse(collapseElement).show();
-                            firstButton.scrollIntoView({behavior:'smooth', block:'center'});
-                        }
-                    }
-                  } else {
-                    const btn = [...document.querySelectorAll('.accordion-button')]
-                      .find(x => x.textContent.trim().toLowerCase().includes(target.toLowerCase()));
-                    if(btn) {
-                        const collapseElement = document.getElementById(btn.getAttribute('data-bs-target').substring(1));
-                         if (collapseElement && typeof bootstrap !== 'undefined') {
-                            new bootstrap.Collapse(collapseElement).show();
-                            btn.scrollIntoView({behavior:'smooth', block:'center'});
-                         }
-                    }
-                  }
-                });
-              });
-            };
-            
-            const renderDirectory = (filter = '') => {
-              currentFilter = filter || '';
-              if (!directoryContainer) return; // Add check
-              directoryContainer.innerHTML = '';
-              let resultsFound = false;
-              const normalizedFilter = currentFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-              const specialFilter = normalizedFilter.startsWith('filter:') ? normalizedFilter.split(':')[1] : null;
-
-              directoryData.forEach((categoryData, categoryIndex) => {
-                const contactsWithOriginalIndex = categoryData.contacts.map((contact, originalIndex) => ({ contact, originalIndex }));
-
-                contactsWithOriginalIndex.sort((a,b)=>{
-                  const aAn = hasAnexo(a.contact.anexo) ? 0 : 1;
-                  const bAn = hasAnexo(b.contact.anexo) ? 0 : 1;
-                  if (aAn !== bAn) return aAn - bAn;
-                  const aMob = isMobile(a.contact.phone) ? 1 : 0;
-                  const bMob = isMobile(b.contact.phone) ? 1 : 0;
-                  if (aMob !== bMob) return bMob - aMob;
-                  return (a.contact.name||'').localeCompare(b.contact.name||'');
-                });
-
-                const filteredContacts = contactsWithOriginalIndex.filter(({ contact }) => {
-                  if (specialFilter === 'anexo' && !hasAnexo(contact.anexo)) return false;
-                  if (specialFilter === 'mobile' && !isMobile(contact.phone)) return false;
-                  if (!specialFilter && normalizedFilter) {
-                    if (['municipalidad','salud','daem'].includes(normalizedFilter)) {
-                        return categoryData.category.toLowerCase().includes(normalizedFilter);
-                    }
-                    return (contact.name||'').toLowerCase().includes(normalizedFilter) ||
-                           (contact.phone||'').toLowerCase().includes(normalizedFilter) ||
-                           (contact.anexo||'').toLowerCase().includes(normalizedFilter);
-                  }
-                  return true;
-                });
-
-                if (filteredContacts.length > 0) {
-                  resultsFound = true;
-
-                  let contactsHtml = filteredContacts.map(({ contact, originalIndex }) => {
-                    const anexoDisplay = hasAnexo(contact.anexo) ? contact.anexo : '';
-                    const phoneDisplay = contact.phone || '';
-                    const combinedDisplay = anexoDisplay ? (phoneDisplay ? `${anexoDisplay} / ${phoneDisplay}` : anexoDisplay) : phoneDisplay;
-                    const callablePhone = (contact.phone || '').replace(/[^\d+]/g, '');
-                    const favKey = `${categoryData.category}|${contact.name}|${contact.phone}|${contact.anexo}`;
-                    const isFav = favorites.includes(favKey);
-                    const favCls = isFav ? 'text-warning' : 'text-secondary';
-                    
-                    const adminTools = adminActive() ? `
-                      <button class="btn btn-sm btn-outline-secondary" title="Editar" data-edit="${categoryIndex}:${originalIndex}" aria-label="Editar contacto">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" title="Eliminar" data-del="${categoryIndex}:${originalIndex}" aria-label="Eliminar contacto">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    ` : '';
-
-                    return `
-                    <li class="list-group-item contact-item">
-                      <div class="contact-info">
-                        <strong>${highlightMatch(contact.name, normalizedFilter)}</strong>
-                        ${anexoDisplay ? `<span class="badge-soft ms-2">Anexo ${anexoDisplay}</span>` : ''}
-                      </div>
-                      <div class="contact-actions">
-                        <button class="btn btn-sm btn-link ${favCls}" title="Marcar como Favorito" data-fav='${favKey}' aria-label="Marcar como Favorito">
-                          <i class="bi ${isFav ? 'bi-star-fill' : 'bi-star'}"></i>
-                        </button>
-                        <a href="tel:${callablePhone}" class="btn btn-sm btn-primary" title="Llamar ${contact.phone}" aria-label="Llamar al número">
-                          <i class="bi bi-telephone"></i> <span class="d-none d-sm-inline">${highlightMatch(phoneDisplay, normalizedFilter)}</span>
-                        </a>
-                        <button class="btn btn-sm btn-outline-secondary" title="Copiar Teléfono" data-copy="${combinedDisplay}" aria-label="Copiar teléfono">
-                          <i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline">Copiar</span>
-                        </button>
-                        ${adminTools}
-                      </div>
-                    </li>`;
-                  }).join('');
-
-                  const accordionItem = document.createElement('div');
-                  accordionItem.className = 'accordion-item';
-                  const isSearching = normalizedFilter.length > 0 || specialFilter;
-                  const showClass = isSearching ? 'show' : '';
-                  const collapsedClass = isSearching ? '' : 'collapsed';
-
-                  accordionItem.innerHTML = `
-                    <h2 class="accordion-header" id="heading-${categoryIndex}">
-                      <button class="accordion-button ${collapsedClass}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${categoryIndex}" aria-expanded="${isSearching}">
-                        <i class="bi ${categoryData.icon} me-2"></i> ${highlightMatch(categoryData.category, normalizedFilter)}
-                        <span class="badge bg-light text-dark ms-auto category-header-count">${filteredContacts.length}</span>
-                      </button>
-                    </h2>
-                    <div id="collapse-${categoryIndex}" class="accordion-collapse collapse ${showClass}" data-bs-parent="#directory-accordion">
-                      <ul class="list-group list-group-flush ${window.innerWidth>=992 ? 'list-grid' : ''}">
-                        ${contactsHtml}
-                      </ul>
-                    </div>`;
-                  directoryContainer.appendChild(accordionItem);
-                }
-              });
-              
-              if(noResultsMessage) noResultsMessage.style.display = resultsFound ? 'none' : 'block';
-              if(clearSearchBtn) clearSearchBtn.style.display = (filter && !filter.startsWith('FILTER:')) ? 'block' : 'none';
-              
-              directoryContainer.querySelectorAll('[data-copy]').forEach(btn=>{
-                btn.addEventListener('click', ()=>window.copyToClipboard(btn.getAttribute('data-copy')));
-              });
-              directoryContainer.querySelectorAll('[data-fav]').forEach(btn=>{
-                btn.addEventListener('click', ()=>{
-                  const key = btn.getAttribute('data-fav');
-                  const i = favorites.indexOf(key);
-                  if (i>=0) favorites.splice(i,1); else favorites.push(key);
-                  localStorage.setItem('favContacts', JSON.stringify(favorites));
-                  showToast(i>=0 ? 'Quitado de Favoritos' : 'Agregado a Favoritos');
-                  const currentSearchValue = searchInput ? searchInput.value : '';
-                  renderDirectory(currentSearchValue || (document.querySelector('#quick-filters .btn-primary')?.getAttribute('data-filter') || 'all').replace('all', ''));
-                });
-              });
-            };
-
-            // --- Event Listeners ---
-            if (themeToggle) {
-                themeToggle.addEventListener('change', () => applyTheme(themeToggle.checked ? 'dark' : 'light'));
-            }
-            if (densitySwitch) {
-                densitySwitch.addEventListener('change', () => applyDensity(densitySwitch.checked));
-            }
-            if (searchInput) {
-                searchInput.addEventListener('input', debounce(() => {
-                    document.querySelectorAll('#quick-filters button').forEach(b=>b.classList.remove('btn-primary')||b.classList.add('btn-outline-secondary'));
-                    const allFilterButton = document.querySelector('#quick-filters [data-filter="all"]');
-                    if (allFilterButton) allFilterButton.classList.add('btn-primary');
-                    renderDirectory(searchInput.value);
-                }, 200));
-            }
-
-            if (clearSearchBtn) {
-                clearSearchBtn.addEventListener('click', () => { if(searchInput) searchInput.value = ''; renderDirectory(); });
-            }
-            if (adminLoginBtn) {
-                adminLoginBtn.addEventListener('click', () => {
-                  if (adminActive()) adminLogout(); else adminLogin();
-                });
-            }
-
-            // Listeners for export/import JSON
-            if (btnExport) {
-                btnExport.addEventListener("click", exportData);
-            }
-            if (fileImport) {
-                fileImport.addEventListener("change", async (e) => {
-                  const file = e.target.files?.[0]; if (!file) return;
-                  try {
-                    const json = JSON.parse(await file.text());
-                    if (!Array.isArray(json) || !json.every(cat => cat.category && Array.isArray(cat.contacts))) throw new Error("Formato inválido");
-                    directoryData = json;
-                    localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                    renderSummary(directoryData);
-                    renderDirectory(searchInput ? searchInput.value : '');
-                    showToast("Importado ✅");
-                  } catch(err) { console.error(err); showToast("Error al importar"); }
-                  finally { if (e.target) e.target.value = ""; }
-                });
-            }
-            
-            const quickFilters = document.getElementById('quick-filters');
-            if(quickFilters) {
-                quickFilters.addEventListener('click', (e)=>{
-                  const targetButton = e.target.closest('button'); // Ensure it's a button click
-                  if (!targetButton) return; 
-                  const f = targetButton.getAttribute('data-filter');
-                  if(!f) return;
-                  
-                  document.querySelectorAll('#quick-filters button').forEach(b=>b.classList.replace('btn-primary', 'btn-outline-secondary'));
-                  targetButton.classList.replace('btn-outline-secondary', 'btn-primary');
-                  if(searchInput) searchInput.value = '';
-
-                  if (f === 'all') renderDirectory('');
-                  else if (['Municipalidad','Salud','Daem'].includes(f)) renderDirectory(f);
-                  else if (f === 'hasAnexo') renderDirectory('FILTER:ANEXO');
-                  else if (f === 'mobile') renderDirectory('FILTER:MOBILE');
-                });
-            }
-            if (exportPdfBtn) {
-                 exportPdfBtn.addEventListener('click', () => {
-                    showToast('Generando PDF...');
-                    const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF();
-
-                    doc.autoTable({
-                        didDrawPage: function (data) {
-                            doc.setFontSize(18);
-                            doc.text("Directorio Telefónico Institucional", data.settings.margin.left, 15);
-                            doc.setFontSize(11);
-                            doc.setTextColor(100);
-                            const date = new Date().toLocaleDateString('es-CL');
-                            doc.text(`Generado el ${date}`, data.settings.margin.left, 22);
-                        },
-                        startY: 30
-                    });
-
-                    const norm = (currentFilter||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    const special = norm.startsWith('filter:') ? norm.split(':')[1] : null;
-
-                    directoryData.forEach(category => {
-                        let list = category.contacts.slice().filter(c => {
-                            if (special === 'anexo' && !hasAnexo(c.anexo)) return false;
-                            if (special === 'mobile' && !isMobile(c.phone)) return false;
-                            if (!special && norm) {
-                                if (['municipalidad','salud','daem'].includes(norm)) return category.category.toLowerCase().includes(norm);
-                                return (c.name||'').toLowerCase().includes(norm) ||
-                                       (c.phone||'').toLowerCase().includes(norm) ||
-                                       (c.anexo||'').toLowerCase().includes(norm);
-                            }
-                            return true;
-                        });
-                        if (!list.length) return;
-
-                        doc.autoTable({
-                            head: [[{content: category.category, styles: {fillColor: [0, 102, 204], textColor: 255}}]],
-                            startY: doc.autoTable.previous ? doc.autoTable.previous.finalY : 30,
-                            theme: 'grid'
-                        });
-                        
-                        const head = [['Nombre', 'Anexo', 'Teléfono', 'Email']];
-                        const body = list.map(c => [c.name||'-', c.anexo||'-', c.phone||'-', c.email||'-']);
-                        doc.autoTable({
-                            head: head,
-                            body: body,
-                            startY: doc.autoTable.previous.finalY,
-                            theme: 'striped',
-                            headStyles: { fillColor: [41, 128, 185], textColor: 255 }
-                        });
-                    });
-
-                    doc.save(`directorio-${new Date().toISOString().slice(0,10)}.pdf`);
-                });
-            }
-            
-            // --- Modal and CRUD ---
-            const btnAdd = document.getElementById('btn-add');
-            let contactModalInstance = null; // Initialize variable for Modal instance
-            const contactModalEl = document.getElementById('contactModal');
-             if (contactModalEl && typeof bootstrap !== 'undefined') {
-                 contactModalInstance = new bootstrap.Modal(contactModalEl);
-            }
-            const contactForm = document.getElementById('contactForm');
-            
-            if (btnAdd) {
-                btnAdd.addEventListener('click', () => {
-                  if(contactForm) contactForm.reset();
-                  const label = document.getElementById('contactModalLabel');
-                  if (label) label.textContent = 'Nuevo contacto';
-                  const editKeyInput = document.getElementById('f-edit-key');
-                  if (editKeyInput) editKeyInput.value = '';
-                  if(contactModalInstance) contactModalInstance.show();
-                });
-            }
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e)=>{
-                  e.preventDefault();
-                  const payload = {
-                    name: document.getElementById('f-name').value.trim(),
-                    anexo: document.getElementById('f-anexo').value.trim(),
-                    phone: document.getElementById('f-phone').value.trim(),
-                    email: document.getElementById('f-email').value.trim()
-                  };
-                  const catName = document.getElementById('f-category').value;
-                  const editKey = document.getElementById('f-edit-key').value;
-
-                  if (editKey) {
-                    const [ci, idx] = editKey.split(':').map(Number);
-                    if (directoryData[ci] && directoryData[ci].contacts[idx]) {
-                       directoryData[ci].contacts[idx] = payload;
-                    }
-                  } else {
-                    const ci = directoryData.findIndex(d => d.category === catName);
-                    if (ci >= 0) {
-                        directoryData[ci].contacts.push(payload);
-                    } else if (directoryData.length > 0) { // Fallback por si la categoría no existe
-                        directoryData[0].contacts.push(payload);
-                    }
-                  }
-                  localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                  if(contactModalInstance) contactModalInstance.hide();
-                  renderSummary(directoryData);
-                  renderDirectory(currentFilter);
-                  showToast("Guardado ✅");
-                });
-            }
-            
-            if (directoryContainer) {
-                directoryContainer.addEventListener('click', (e)=>{
-                  const editBtn = e.target.closest('[data-edit]');
-                  if (editBtn) {
-                      if (!adminActive()) return alert("Sesión admin requerida");
-                      const [ci, idx] = editBtn.getAttribute('data-edit').split(':').map(Number);
-                      const cat = directoryData[ci]; 
-                      if (!cat || !cat.contacts[idx]) return; // Safety check
-                      const c = cat.contacts[idx];
-                      const label = document.getElementById('contactModalLabel');
-                      if (label) label.textContent = 'Editar contacto';
-                      document.getElementById('f-category').value = cat.category;
-                      document.getElementById('f-name').value = c.name || '';
-                      document.getElementById('f-anexo').value = c.anexo || '';
-                      document.getElementById('f-phone').value = c.phone || '';
-                      document.getElementById('f-email').value = c.email || '';
-                      document.getElementById('f-edit-key').value = `${ci}:${idx}`;
-                      if(contactModalInstance) contactModalInstance.show();
-                      return;
-                  }
-
-                  const delBtn = e.target.closest('[data-del]');
-                  if (delBtn) {
-                      if (!adminActive()) return alert("Sesión admin requerida");
-                      const [ci, idx] = delBtn.getAttribute('data-del').split(':').map(Number);
-                      if (!directoryData[ci] || !directoryData[ci].contacts[idx]) return; // Safety check
-                      if (!confirm("¿Eliminar este contacto?")) return;
-                      directoryData[ci].contacts.splice(idx,1);
-                      localStorage.setItem('phoneDirectoryData', JSON.stringify(directoryData));
-                      renderSummary(directoryData);
-                      renderDirectory(currentFilter);
-                      showToast("Eliminado");
-                      return;
-                  }
-                });
-            }
-
-
-            // --- Initial Load ---
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else {
-                applyTheme('light'); // Default to light theme
-            }
-
-            applyDensity((localStorage.getItem('density')||'comfortable')==='compact');
-            if (densitySwitch) {
-                densitySwitch.checked = document.body.classList.contains('compacto');
-            }
-            refreshAdminUI(); // Ensure backup buttons are hidden initially if not admin
-            renderSummary(directoryData);
-            renderDirectory();
+            renderDirectory(directoryData);
+            renderFavorites();
+            renderRecents();
+            applyTheme();
         });
+
+        // --- RENDER CORE ---
+        function renderDirectory(data) {
+            const container = document.getElementById('directoryContainer');
+            container.innerHTML = '';
+
+            data.forEach((cat, index) => {
+                const section = document.createElement('div');
+                section.className = 'category-card fade-in';
+                // Dataset for filtering logic
+                section.dataset.group = cat.group;
+                
+                section.innerHTML = `
+                    <div class="category-header ${cat.headerClass}" onclick="toggleCategory(this)">
+                        <span>${cat.category}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="contact-list">
+                        ${cat.contacts.map(c => createContactHTML(c, index, cat.badgeClass)).join('')}
+                    </ul>
+                `;
+                container.appendChild(section);
+            });
+            
+            // Apply current filter immediately to hide non-default if needed
+            applyFilterVisibility();
+        }
+
+        function createContactHTML(contact, catIndex, badgeClass) {
+            const isFav = favorites.some(f => f.ext === contact.ext);
+            // Unique ID logic simplified
+            const contactObj = JSON.stringify({
+                name: contact.name, 
+                ext: contact.ext, 
+                detail: contact.detail, 
+                badgeClass 
+            }).replace(/"/g, '&quot;');
+            
+            // Si el anexo es igual al detalle (número directo) o es muy largo, ajustamos visualización
+            const displayExt = contact.ext.length > 5 ? 'Directo' : contact.ext;
+            
+            return `
+                <li class="contact-item" data-search="${contact.name.toLowerCase()} ${contact.ext} ${contact.detail.toLowerCase()}">
+                    <div class="contact-info">
+                        <strong>${contact.name} <span class="badge ${badgeClass}">${displayExt}</span></strong>
+                        <span>${contact.detail}</span>
+                    </div>
+                    <div class="contact-actions">
+                        <button class="btn-action btn-call" title="Copiar" onclick="handleAction('${contact.ext}', ${contactObj})">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn-action btn-fav ${isFav ? 'active' : ''}" 
+                                onclick="toggleFavorite('${contact.name}', '${contact.ext}', '${contact.detail}', '${badgeClass}')">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </div>
+                </li>
+            `;
+        }
+
+        // --- FILTER LOGIC ---
+        function filterByGroup(group, btn) {
+            document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentGroup = group;
+            
+            // Clear search when switching tabs for cleaner experience? 
+            // Or keep search. Let's keep search.
+            applyFilterVisibility();
+        }
+
+        function handleSearch() {
+            applyFilterVisibility();
+        }
+
+        function applyFilterVisibility() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.category-card');
+            let globalHasResults = false;
+
+            cards.forEach(card => {
+                const cardGroup = card.dataset.group;
+                const items = card.querySelectorAll('.contact-item');
+                let cardHasVisibleItems = false;
+
+                // 1. Check if card belongs to current tab group
+                const belongsToGroup = (currentGroup === 'all') || (currentGroup === cardGroup);
+
+                if (!belongsToGroup) {
+                    card.style.display = 'none';
+                    return; // Skip processing items
+                }
+
+                // 2. Process items for search
+                items.forEach(item => {
+                    const text = item.getAttribute('data-search');
+                    const matchesSearch = text.includes(query);
+                    
+                    if (matchesSearch) {
+                        item.style.display = 'flex';
+                        cardHasVisibleItems = true;
+                        globalHasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // 3. Show/Hide card based on items content
+                if (cardHasVisibleItems) {
+                    card.style.display = 'block';
+                    // Auto-expand if searching
+                    if (query !== '') {
+                        card.querySelector('.contact-list').style.display = 'block';
+                        card.querySelector('.category-header i').style.transform = 'rotate(0deg)';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('emptyState').style.display = globalHasResults ? 'none' : 'block';
+        }
+
+        // --- RECENTS & FAVORITES ---
+        function handleAction(ext, contactObj) {
+            copyToClipboard(ext);
+            addToRecents(contactObj);
+        }
+
+        function addToRecents(contact) {
+            recents = recents.filter(r => r.ext !== contact.ext);
+            recents.unshift(contact);
+            if (recents.length > 3) recents.pop();
+            localStorage.setItem('linksRecents', JSON.stringify(recents));
+            renderRecents();
+        }
+
+        function renderRecents() {
+            const section = document.getElementById('recentsSection');
+            const list = document.getElementById('recentsList');
+            if (recents.length === 0) { section.style.display = 'none'; return; }
+            section.style.display = 'block';
+            list.innerHTML = recents.map(c => createContactHTML(c, 0, c.badgeClass)).join('');
+        }
+
+        function clearRecents() {
+            recents = [];
+            localStorage.removeItem('linksRecents');
+            renderRecents();
+        }
+
+        function toggleFavorite(name, ext, detail, badgeClass) {
+            const index = favorites.findIndex(f => f.ext === ext);
+            if (index === -1) {
+                favorites.push({ name, ext, detail, badgeClass });
+                showToast(`Favorito agregado`);
+            } else {
+                favorites.splice(index, 1);
+            }
+            localStorage.setItem('linksFavorites', JSON.stringify(favorites));
+            renderFavorites();
+            
+            // Re-render directory to update star icons
+            const container = document.getElementById('directoryContainer');
+            // We need to re-render without losing filter state
+            // Easier way: just toggle the class in DOM if found
+            const btns = document.querySelectorAll(`.contact-item[data-search*="${ext}"] .btn-fav`);
+            btns.forEach(b => b.classList.toggle('active'));
+            renderRecents();
+        }
+
+        function renderFavorites() {
+            const favSection = document.getElementById('favoritesSection');
+            const favList = document.getElementById('favoritesList');
+            if (favorites.length === 0) { favSection.style.display = 'none'; return; }
+            favSection.style.display = 'block';
+            favList.innerHTML = favorites.map(f => createContactHTML(f, 0, f.badgeClass)).join('');
+        }
+
+        // --- UTILS ---
+        function toggleCategory(header) {
+            const list = header.nextElementSibling;
+            const icon = header.querySelector('i');
+            const isOpen = list.style.display !== 'none';
+            list.style.display = isOpen ? 'none' : 'block';
+            icon.style.transform = isOpen ? 'rotate(-90deg)' : 'rotate(0deg)';
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Anexo ${text} copiado`);
+            }).catch(() => {
+                // Fallback
+                const ta = document.createElement("textarea");
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand("copy");
+                document.body.removeChild(ta);
+                showToast(`Anexo ${text} copiado`);
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // --- VOICE SEARCH ---
+        function toggleVoiceSearch() {
+            const btn = document.getElementById('micBtn');
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Tu navegador no soporta búsqueda por voz.");
+                return;
+            }
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'es-CL';
+            recognition.interimResults = false;
+            recognition.onstart = () => btn.classList.add('listening');
+            recognition.onend = () => btn.classList.remove('listening');
+            recognition.onresult = (event) => {
+                document.getElementById('searchInput').value = event.results[0][0].transcript;
+                handleSearch();
+            };
+            recognition.start();
+        }
+
+        // --- THEME ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function applyTheme() {
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            updateThemeIcon(saved);
+        }
+
+        function updateThemeIcon(theme) {
+            document.getElementById('themeIcon').className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
     </script>
 </body>
 </html>

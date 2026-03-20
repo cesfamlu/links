@@ -39,25 +39,51 @@
                         <span>Soporte Informatica</span>
                     </a>
                     
-             <a class="action-btn outline" href="https://www.cesfamtic.cl/cesfamteams" target="_blank" rel="noopener" 
-   style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid #3b82f6; border-radius: 8px; text-decoration: none; color: #1e40af; transition: all 0.3s ease; font-weight: 600;">
-    
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px; color: #2563eb;">
+             <<a class="action-btn gold-variant" href="https://www.cesfamtic.cl/cesfamteams" target="_blank" rel="noopener">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
         </path>
     </svg>
-    
     <span>TEAMS CESFAM</span>
 </a>
 
 <style>
-    .action-btn.outline:hover {
-        background-color: #eff6ff; /* Un azul muy suave de fondo al pasar el mouse */
-        border-color: #1d4ed8;
-        transform: translateY(-1px); /* Pequeño salto para feedback visual */
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
+.gold-variant {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    /* Degradado dorado sutil */
+    background: linear-gradient(135deg, #f6e05e 0%, #d4af37 100%);
+    color: #1a202c !important; /* Texto oscuro para máxima legibilidad */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #b8860b;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.gold-variant svg {
+    width: 20px;
+    height: 20px;
+    stroke: #1a202c; /* Icono oscuro para que haga juego con el texto */
+}
+
+.gold-variant:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(135deg, #ffffff 0%, #f6e05e 100%);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    filter: brightness(1.1);
+}
+
+.gold-variant:active {
+    transform: translateY(0);
+}
 </style>
                 </div>
                 

@@ -30,10 +30,8 @@
                         <span>Directorio Telefónico</span>
                     </a>
                     
-                   <a class="action-btn secondary" href="https://cesfamtic.com" target="_blank" rel="noopener" 
-                       style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background-color: #ff8c00; color: white; text-decoration: none; border-radius: 8px; font-family: sans-serif; font-weight: bold;">
-    
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                   <a class="action-btn" href="https://cesfamtic.com" target="_blank" rel="noopener">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
               d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z">
                 </path>
@@ -41,7 +39,7 @@
                     <span>Intranet TI</span>
                 </a>
 
-                    <a class="action-btn secondary" href="https://cesfamlu.github.io/FormularioSoporte/" target="_blank" rel="noopener">
+                    <a class="action-btn" href="https://cesfamlu.github.io/FormularioSoporte/" target="_blank" rel="noopener">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                   d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z">
@@ -49,8 +47,17 @@
                         </svg>
                         <span>Mesa de Ayuda TI</span>
                     </a>
+
+                    <a class="action-btn primary" href="https://cesfamtic.com/introduccionsuite" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                        <span>Introducción al Sistema</span>
+                    </a>
                     
-             <a class="action-btn gold-variant" href="https://www.cesfamtic.com/cesfamteams" target="_blank" rel="noopener">
+              <a class="action-btn" href="https://www.cesfamtic.com/cesfamteams" target="_blank" rel="noopener">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
@@ -58,44 +65,6 @@
     </svg>
     <span>TEAMS CESFAM</span>
 </a>
-
-<style>
-.gold-variant {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    /* Degradado dorado sutil */
-    background: linear-gradient(135deg, #f6e05e 0%, #d4af37 100%);
-    color: #1a202c !important; /* Texto oscuro para máxima legibilidad */
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #b8860b;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
-
-.gold-variant svg {
-    width: 20px;
-    height: 20px;
-    stroke: #1a202c; /* Icono oscuro para que haga juego con el texto */
-}
-
-.gold-variant:hover {
-    transform: translateY(-2px) scale(1.02);
-    background: linear-gradient(135deg, #ffffff 0%, #f6e05e 100%);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-    filter: brightness(1.1);
-}
-
-.gold-variant:active {
-    transform: translateY(0);
-}
-</style>
                 </div>
                 
             </div>
@@ -153,7 +122,8 @@
             
             <div id="cardsContainer" class="cards-grid">
                 
-                <!-- Card 1: RAS -->
+                <!-- CATEGORÍA: CLÍNICO -->
+                <!-- 1. RAS -->
                 <article class="card" data-category="clinical" data-keywords="ras registro atencion salud urgencia some valdivia">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
@@ -181,7 +151,32 @@
                     </div>
                 </article>
 
-                <!-- Card 2: CORE -->
+                <!-- 2. SIGGES -->
+                <article class="card" data-category="clinical" data-keywords="sigges ges garantias explicitas salud minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SIGGES</h3>
+                        <p class="card-description">Sistema de Información para la Gestión de Garantías en Salud.</p>
+                         <div class="sublinks hidden" id="sublinks-sigges">
+                            <h4 class="sublinks-label">Versiones Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://nuevo.sigges.cl/#/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Nuevo SIGGES</a></li>
+                                <li><a href="https://www.sigges.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> SIGGES </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-sigges" aria-expanded="false">
+                            <span class="btn-text">Ver Versiones</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>  
+
+                <!-- 3. CORE -->
                 <article class="card" data-category="clinical" data-keywords="core examenes laboratorio imagenes resultados valdivia">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg></div>
@@ -206,7 +201,7 @@
                     </div>
                 </article>
 
-                <!-- Card 3: Exámenes -->
+                <!-- 4. Visor de Exámenes -->
                 <article class="card" data-category="clinical" data-keywords="examenes laboratorio resultados pruebas clinicas">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
@@ -231,329 +226,7 @@
                     </div>
                 </article>
 
-
-
-              <!-- Card 4: SIGGES -->
-                <article class="card" data-category="clinical" data-keywords="sigges ges garantias explicitas salud minsal">
-                    <div class="card-header">
-                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
-                        <span class="card-badge clinical">Clínico</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">SIGGES</h3>
-                        <p class="card-description">Sistema de Información para la Gestión de Garantías en Salud.</p>
-                         <div class="sublinks hidden" id="sublinks-sigges">
-                            <h4 class="sublinks-label">Versiones Disponibles</h4>
-                            <ul class="sublinks-list">
-                                <li><a href="https://nuevo.sigges.cl/#/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Nuevo SIGGES</a></li>
-                                <li><a href="https://www.sigges.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> SIGGES </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn-primary" data-target="sublinks-sigges" aria-expanded="false">
-                            <span class="btn-text">Ver Versiones</span>
-                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                    </div>
-                </article>  
-                
-
-
-                   <article class="card" data-category="support" data-keywords="isatec clientes portal soporte">
-                    <div class="card-header">
-                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
-                        <span class="card-badge support">Soporte</span>
-                                 <span class="badge-new">NUEVO</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">BOT SOME</h3>
-                        <p class="card-description">BOT de apoyo a SOME.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://bot.desamlu.cl/login.php" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article
-
-
-     <!-- Card 5.2: Introudcción -->
-               
-   <article class="card" data-category="support" data-keywords="isatec clientes portal soporte">
-                    <div class="card-header">
-                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
-                        <span class="card-badge support">Soporte</span>
-                                 <span class="badge-new">NUEVO</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Introducción Sistema</h3>
-                        <p class="card-description">Manuales y documentos de la suite digital del CESFAM.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://cesfamtic.com/introduccionsuite" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article
-
-
-                         <!-- Card 5.2.5555: BLOQUEAPP -->
-
-
-                
-               
-<!-- Card BloqueApp - NUEVO CON EFECTOS -->
-<style>
-/* Tarjeta destacada - Versión sutil */
-.card-featured {
-    position: relative;
-    border: 2px solid #4CAF50 !important;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15) !important;
-}
-
-/* Badge NUEVO mejorado */
-.badge-new.shimmer {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-    color: white !important;
-}
-
-/* Botón con sutil efecto */
-.btn-glow {
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2) !important;
-    transition: all 0.3s ease;
-}
-
-.btn-glow:hover {
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
-    transform: translateY(-1px);
-}
-</style>
-
-<article class="card card-featured" data-category="support" data-keywords="bloqueapp bloqueo agenda citas horarios cesfam">
-    <div class="card-header">
-        <div class="card-icon support">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-            </svg>
-        </div>
-        <span class="card-badge support">Soporte</span>
-        <span class="badge-new shimmer">✨ NUEVO</span>
-    </div>
-    <div class="card-body">
-        <h3 class="card-title">BloqueApp</h3>
-        <p class="card-description">Sistema de gestión para bloqueos de agenda</p>
-    </div>
-    <div class="card-footer">
-        <a href="https://cesfamtic.com/BloqueAPP/login.html" target="_blank" class="btn-primary btn-direct btn-glow">
-            Ir al Sitio 
-            <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-        </a>
-    </div>
-</article>
-  
-<!-- Card 5.2.5: survhi -->
-                 <article class="card" data-category="support" data-keywords="isatec clientes portal soporte">
-                    <div class="card-header">
-                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
-                        <span class="card-badge clinical">Clínico</span>
-                                 <span class="badge-new">NUEVO</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">SURVIH MINSAL</h3>
-                        <p class="card-description"> Sistema de registro unico de VIH.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://survih.minsal.cl/Login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-
-    
-
-
-                <!-- Card 5.3: Derivaciones -->
-                <article class="card" data-category="admin" data-keywords="desamlu desarrollo">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
-                        <span class="card-badge admin">Admin</span>
-                        <span class="badge-new">NUEVO</span>
-
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Datos de Derivación</h3>
-                        <p class="card-description">Plataforma digital para funcionarios con datos útiles de derivación .</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://cesfamlu.github.io/DerivacionDatos" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-
- <!-- Card 5.5: biblioteca -->
-                 
-                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                        <span class="card-badge support">admin</span>
-                        <span class="badge-new">NUEVO</span>
-
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Biblioteca CESFAM</h3>
-                        <p class="card-description">Bibliote con recursos para funcionarios.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-
-                 <!-- Card 5.8: preescriptción -->
-                 
-                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                        <span class="card-badge support">admin</span>
-                        <span class="badge-new">NUEVO</span>
-
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Prescripcion receta MINSAL</h3>
-                        <p class="card-description">Plataforma Prescripción de receta MINSAL.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://prescripcion-receta.minsal.cl/auth/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-                
-                <!-- Card 5: DESAMLU -->
-                <article class="card" data-category="admin" data-keywords="desamlu desarrollo">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
-                        <span class="card-badge admin">Admin</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">DESAMLU</h3>
-                        <p class="card-description">Plataforma Departamento de salud.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://desamlu.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 6: Intranet -->
-                 
-                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
-                    <div class="card-header">
-                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg></div>
-                        <span class="card-badge support">admin</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Intranet</h3>
-                        <p class="card-description">Red interna de comunicación institucional.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://intranetlaunion.smc.cl/login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 7: Isatec -->
-                <article class="card" data-category="support" data-keywords="isatec clientes portal soporte">
-                    <div class="card-header">
-                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
-                        <span class="card-badge support">Soporte</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Isatec</h3>
-                        <p class="card-description">Portal de clientes Isatec para soporte técnico.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://clientes.isatec.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 8: Isis View -->
-                <article class="card" data-category="clinical" data-keywords="isis view imagenes medicas radiologia pacs">
-                    <div class="card-header">
-                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
-                        <span class="card-badge clinical">Clínico</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Isis View</h3>
-                        <p class="card-description">Visor de imágenes médicas y radiología.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="http://10.6.67.166" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 9: Imed -->
-                <article class="card" data-category="clinical" data-keywords="imed licencias medicas certificados electronicas">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                        <span class="card-badge admin">Admin</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Imed</h3>
-                        <p class="card-description">Sistema de licencias médicas electrónicas.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://www.licencia.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 10: Centro Integral -->
-                <article class="card" data-category="clinical" data-keywords="centro integral salud mental atencion psicologica">
-                    <div class="card-header">
-                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
-                        <span class="card-badge clinical">Clínico</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Centro Integral</h3>
-                        <p class="card-description">Atención integral de salud mental.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://tinyurl.com/centro-integral" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-
-                <!-- Card 4: Muni La Unión -->
-                <article class="card" data-category="admin" data-keywords="municipalidad la union municipal tramites comunal">
-                    <div class="card-header">
-                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
-                        <span class="card-badge admin">Municipal</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Muni La Unión</h3>
-                        <p class="card-description">Portal de información municipal de La Unión.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://www.munilaunioninfo.com" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-
-                
-
-                <!-- Card 12: DART -->
-                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
-                    <div class="card-header">
-                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
-                        <span class="card-badge clinical">Clínico</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">DART</h3>
-                        <p class="card-description">Teleoftalmología y retinopatía diabética.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://teleoftalmologia.minsal.cl/es/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
-                    </div>
-                </article>
-
-                <!-- Card 13: Hospital Digital -->
+                <!-- 5. Hospital Digital -->
                 <article class="card" data-category="clinical" data-keywords="hospital digital interconsulta derivaciones telemedicina minsal">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
@@ -568,7 +241,85 @@
                     </div>
                 </article>
 
-                <!-- Card 14: Chile Crece Contigo -->
+                <!-- 6. FONASA -->
+                <article class="card" data-category="clinical" data-keywords="fonasa aseguradora salud minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">FONASA</h3>
+                        <p class="card-description">Fondo Nacional de Salud e información pública para prestadores.</p>
+                        <div class="sublinks hidden" id="sublinks-fonasa">
+                            <h4 class="sublinks-label">Versiones Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://fonasa.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> FONASA</a></li>
+                                <li><a href="https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Front Integrado</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-fonasa" aria-expanded="false">
+                            <span class="btn-text">Ver Opciones</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 7. Imed -->
+                <article class="card" data-category="clinical" data-keywords="imed licencias medicas certificados electronicas">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Imed</h3>
+                        <p class="card-description">Sistema de licencias médicas electrónicas.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.licencia.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 8. DART -->
+                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DART</h3>
+                        <p class="card-description">Teleoftalmología y retinopatía diabética.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://teleoftalmologia.minsal.cl/es/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 9. SURVIH MINSAL -->
+                <article class="card" data-category="clinical" data-keywords="survih vih registro minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SURVIH MINSAL</h3>
+                        <p class="card-description">Sistema de registro único de VIH.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://survih.minsal.cl/Login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 10. Chile Crece Contigo -->
                 <article class="card" data-category="clinical" data-keywords="chile crece contigo infancia desarrollo infantil ninos bebes">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
@@ -583,62 +334,205 @@
                     </div>
                 </article>
 
+                <!-- 11. Centro Integral -->
+                <article class="card" data-category="clinical" data-keywords="centro integral salud mental atencion psicologica">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Centro Integral</h3>
+                        <p class="card-description">Atención integral de salud mental.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tinyurl.com/centro-integral" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
 
-            
-
-
-
-   <!-- Card 14: Chile Crece Contigo -->
-                <article class="card" data-category="clinical" data-keywords="">
+                <!-- 12. Epivigilia -->
+                <article class="card" data-category="clinical" data-keywords="epivigilia epidemiologia registro minsal">
                     <div class="card-header">
                         <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                         <span class="card-badge clinical">Clínico</span>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">Epivigilia</h3>
-                        <p class="card-description">Plataforma Epivigilia  </p>
+                        <p class="card-description">Plataforma de vigilancia epidemiológica MINSAL.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="https://epivigila.minsal.cl/ "target="_blank" class="btn-primary btn-direct" >Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                        <a href="https://epivigila.minsal.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
                     </div>
                 </article>
 
-                
+                <!-- 13. Prescripción receta MINSAL -->
+                <article class="card" data-category="clinical" data-keywords="prescripcion receta minsal medicamentos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Prescripción MINSAL</h3>
+                        <p class="card-description">Plataforma Prescripción de receta MINSAL.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://prescripcion-receta.minsal.cl/auth/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
 
-                <!-- Card 15: FONASA -->
-<article class="card" data-category="clinical" data-keywords="fonasa sigges ges garantias explicitas salud minsal">
-    <div class="card-header">
-        <div class="card-icon clinical">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-        </div>
-        <span class="card-badge clinical">soporte</span>
-    </div>
+                <!-- 14. Isis View -->
+                <article class="card" data-category="clinical" data-keywords="isis view imagenes medicas radiologia pacs">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isis View</h3>
+                        <p class="card-description">Visor de imágenes médicas y radiología.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="http://10.6.67.166" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
 
-    <div class="card-body">
-        <h3 class="card-title">FONASA</h3>
-        <p class="card-description">FONASA</p>
-        <div class="sublinks hidden" id="sublinks-fonasa">
-            <h4 class="sublinks-label">Versiones Disponibles</h4>
-            <ul class="sublinks-list">
-                <li><a href="https://fonasa.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> FONASA</a></li>
-                <li><a href="https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Front Integrado</a></li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="card-footer">
-        <button class="btn-primary" data-target="sublinks-fonasa" aria-expanded="false">
-            <span class="btn-text">Ver Opciones</span>
-            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-        </button>
-    </div>
-</article>
+                <!-- CATEGORÍA: CESFAM / ADMIN -->
 
+                <!-- 15. DESAMLU -->
+                <article class="card" data-category="admin" data-keywords="desamlu municipalidad salud municipal department">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DESAMLU</h3>
+                        <p class="card-description">Plataforma Departamento de salud municipal.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://desamlu.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 16. Intranet -->
+                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Intranet</h3>
+                        <p class="card-description">Red interna de comunicación institucional SMC.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://intranetlaunion.smc.cl/login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 17. Datos de Derivación -->
+                <article class="card" data-category="admin" data-keywords="derivaciones datos directorio">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Datos de Derivación</h3>
+                        <p class="card-description">Plataforma digital para funcionarios con datos útiles de derivación.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://cesfamlu.github.io/DerivacionDatos" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 18. Biblioteca CESFAM -->
+                <article class="card" data-category="admin" data-keywords="biblioteca recursos manuales documentos drive">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Biblioteca CESFAM</h3>
+                        <p class="card-description">Repositorio de biblioteca con recursos en Google Drive para funcionarios.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 19. Muni La Unión -->
+                <article class="card" data-category="admin" data-keywords="municipalidad la union municipal tramites comunal">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Muni La Unión</h3>
+                        <p class="card-description">Portal de información y trámites municipal de La Unión.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.munilaunioninfo.com" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                <!-- CATEGORÍA: SOPORTE -->
+
+                <!-- 20. BloqueApp -->
+                <article class="card card-featured" data-category="support" data-keywords="bloqueapp bloqueo agenda citas horarios cesfam">
+                    <div class="card-header">
+                        <div class="card-icon support">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <span class="card-badge support">Soporte</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">BloqueApp</h3>
+                        <p class="card-description">Sistema de gestión para bloqueos de agenda en CESFAM.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://cesfamtic.com/BloqueAPP/login.html" target="_blank" class="btn-primary btn-direct btn-glow">
+                            Ir al Sitio 
+                            <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 21. BOT SOME -->
+                <article class="card" data-category="support" data-keywords="bot some atencion consultas chatbot">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge support">Soporte</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">BOT SOME</h3>
+                        <p class="card-description">BOT de apoyo a agentes SOME para seguimiento rápido.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://bot.desamlu.cl/login.php" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 22. Isatec -->
+                <article class="card" data-category="support" data-keywords="isatec clientes portal soporte soporte tecnico averias">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge support">Soporte</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isatec</h3>
+                        <p class="card-description">Portal de clientes Isatec para soporte técnico.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://clientes.isatec.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
 
             </div>
 

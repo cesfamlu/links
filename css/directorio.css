@@ -20,7 +20,9 @@
    ================================================================ */
 
 .page-dir .header-main-content {
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .page-dir .header-top-content {
@@ -45,6 +47,7 @@
 
 .page-dir .logo-section {
     flex-wrap: wrap;
+    flex: 0 1 auto;
 }
 
 .page-dir .action-btn {
@@ -73,6 +76,21 @@
     line-height: 1.3;
 }
 
+.dir-search-hero {
+    flex: 1 1 440px;
+    min-width: 320px;
+    max-width: 560px;
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 14px 28px rgba(0, 30, 84, 0.18);
+}
+
+.dir-search-hero:focus-within {
+    background: #ffffff;
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14), 0 16px 34px rgba(0, 30, 84, 0.22);
+}
+
 /* ================================================================
    TOOLBAR (search + filters + stats)
    ================================================================ */
@@ -82,15 +100,15 @@
     position: sticky;
     top: var(--dir-header-offset);
     z-index: 90;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 .dir-toolbar-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 10px 24px;
+    padding: 8px 24px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
@@ -145,6 +163,7 @@
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    flex: 1 1 auto;
 }
 .dir-chip {
     display: inline-flex;
@@ -201,7 +220,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: #9ca3af;
     flex-shrink: 0;
 }
@@ -479,7 +498,7 @@
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     color: #fff;
     margin-top: auto;
-    padding: 36px 24px 22px;
+    padding: 24px 24px 14px;
 }
 .dir-footer-inner {
     max-width: 1400px;
@@ -488,9 +507,9 @@
 .dir-footer-content {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 24px;
-    margin-bottom: 22px;
-    padding-bottom: 22px;
+    gap: 18px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .dir-footer-section {
@@ -498,10 +517,10 @@
     flex-direction: column;
 }
 .dir-footer-title {
-    margin: 0 0 12px;
-    padding-bottom: 6px;
+    margin: 0 0 8px;
+    padding-bottom: 4px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -513,15 +532,15 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 .dir-footer-link {
     color: rgba(255, 255, 255, 0.72);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     display: inline-flex;
     align-items: center;
-    padding: 4px 0;
+    padding: 2px 0;
     border-bottom: 1px solid transparent;
     transition: color 0.15s, padding-left 0.15s, border-color 0.15s;
 }
@@ -531,10 +550,10 @@
     border-bottom-color: rgba(255, 255, 255, 0.3);
 }
 .dir-footer-text {
-    margin: 0 0 6px;
+    margin: 0 0 4px;
     color: rgba(255, 255, 255, 0.75);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: 0.8125rem;
+    line-height: 1.35;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -543,17 +562,17 @@
     margin-bottom: 0;
 }
 .dir-footer-icon {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     flex-shrink: 0;
     opacity: 0.7;
 }
 .dir-footer-bottom {
-    padding-top: 18px;
+    padding-top: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     position: relative;
 }
 .dir-footer-bottom::before {
@@ -567,12 +586,12 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
 }
 .dir-footer-copyright {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.72);
 }
 .dir-footer-meta {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: rgba(255, 255, 255, 0.5);
 }
 .dir-footer-legacy {
@@ -651,6 +670,11 @@
         gap: 0.875rem;
         text-align: center;
     }
+    .dir-search-hero {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
     .page-dir .logo-wrap {
         padding: 5px;
     }
@@ -663,11 +687,6 @@
         position: static;
     }
     .dir-toolbar-inner { padding: 8px 16px; gap: 10px; }
-    .dir-search {
-        max-width: 100%;
-        flex: 1 1 100%;
-        min-width: 0;
-    }
     .dir-filters {
         overflow-x: auto;
         flex-wrap: nowrap;
@@ -692,4 +711,59 @@
         white-space: normal;
     }
     .dir-row-actions { opacity: 1; }
-    .dir-footer-content { grid-te
+    .dir-footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .page-dir { --dir-header-offset: 0px; }
+    .page-dir .container {
+        padding: 0 1rem;
+    }
+    .page-dir .header-main {
+        padding: 0.875rem 0;
+    }
+    .page-dir .logo-image {
+        width: 82px;
+    }
+    .dir-brand-title { font-size: 1rem; }
+    .dir-brand-subtitle { font-size: 0.75rem; }
+    .dir-toolbar-inner {
+        padding: 8px 12px;
+    }
+    .dir-search-hero {
+        padding: 6px 10px;
+    }
+    .dir-chip {
+        padding: 5px 10px;
+        font-size: 0.6875rem;
+    }
+    .dir-main {
+        padding: 10px 10px 28px;
+    }
+    .dir-row {
+        gap: 8px;
+        padding: 10px 10px 10px 12px;
+    }
+    .dir-avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 0.5625rem;
+    }
+    .dir-row-name {
+        font-size: 0.75rem;
+    }
+    .dir-row-detail,
+    .dir-ext {
+        font-size: 0.625rem;
+    }
+    .dir-btn-copy, .dir-btn-fav {
+        width: 24px;
+        height: 24px;
+    }
+    .dir-card-tag { display: none; }
+    .dir-footer { padding: 20px 16px 14px; }
+    .dir-footer-content { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* Hidden utility */
+.hidden { display: none !important; }

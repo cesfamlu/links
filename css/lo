@@ -41,7 +41,7 @@
     gap: 14px;
 }
 .dir-logo {
-    height: 102px;
+    height: 130px;
     width: auto;
     display: block;
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
@@ -607,7 +607,7 @@
 
 @media (max-width: 480px) {
     .dir-h1 { font-size: 0.9375rem; }
-    .dir-logo { height: 72px; }
+    .dir-logo { height: 130px; }
     .dir-card-tag { display: none; }
     .dir-footer { padding: 28px 16px 20px; }
     .dir-footer-content { grid-template-columns: 1fr; gap: 18px; }

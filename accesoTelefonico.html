@@ -49,14 +49,12 @@
                         <p class="dir-brand-subtitle">Anexos y contactos institucionales</p>
                     </div>
                 </div>
-                <div class="search-section dir-search-section">
-                    <div class="search-box dir-search-box">
-                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        <input type="text" id="searchInput" placeholder="Buscar funcionario, unidad o anexo..." oninput="handleSearch()">
-                        <button id="clearSearch" class="clear-btn hidden dir-clear-btn" onclick="clearSearchInput()">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
+                <div class="dir-search dir-search-hero">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="searchInput" placeholder="Buscar funcionario, unidad o anexo..." oninput="handleSearch()">
+                    <button class="dir-search-clear hidden" id="clearSearch" onclick="clearSearchInput()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -462,4 +460,10 @@
 
     function showToast(msg) {
         const t = document.getElementById('toast');
-        document.getElementById('toastMsg').t
+        document.getElementById('toastMsg').textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
+    </script>
+</body>
+</html>

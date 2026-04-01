@@ -3,1106 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Acceso Telefónico Comunal</title>
-    
-    <!-- Favicons solicitados -->
+    <title>Directorio Telefónico — CESFAM La Unión</title>
     <link rel="icon" type="image/png" sizes="32x32" href="img/1.5.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/1.5.png">
     <link rel="shortcut icon" href="img/1.5.png">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <style>
-        /* --- PALETA SOLICITADA (Integrada al sistema) --- */
-        :root {
-            /* Colores Base App */
-            --color-health: #0066cc;
-            --color-health-light: #e6f2ff;
-            --color-muni: #374151;
-            --color-muni-light: #f3f4f6;
-            --color-daem: #d97706;
-            --color-daem-light: #fef3c7;
-            --color-warning: #f59e0b;
-            
-            /* Colores Generales del Cuerpo (Mantenemos tu paleta clara) */
-            --bg-color: #f2f2f7; 
-            --text-color: #1d1d1f; 
-            --card-bg: #ffffff;    
-            --border-color: #e5e5ea;
-            
-            /* Header Specific (AZUL INSTITUCIONAL SOLICITADO) */
-            --header-bg-gradient: linear-gradient(135deg, #0066cc 0%, #127986 100%);
-            --header-text-main: #ffffff;
-            --header-text-sub: rgba(255, 255, 255, 0.9);
-            --header-border: rgba(255, 255, 255, 0.2);
-            --header-btn-bg: rgba(255, 255, 255, 0.15);
-            --header-btn-hover: rgba(255, 255, 255, 0.25);
-
-            /* Footer */
-            --footer-bg: #e5e5ea;
-            --footer-text: #6e6e73;
-            
-            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            --radius-lg: 0.75rem;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #000000;
-            --text-color: #f5f5f7;
-            --card-bg: #1c1c1e;
-            --border-color: #38383a;
-            
-            /* Header Dark Mode overrides (Mantenemos azul profundo pero adaptado) */
-            --header-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            
-            --footer-bg: #1c1c1e;
-            --footer-text: #86868b;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* --- NUEVO HEADER ESTRUCTURA (AZUL) --- */
-        .main-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--header-bg-gradient); /* El azul que pediste */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            color: var(--header-text-main);
-        }
-
-        /* Top Bar */
-        .header-top {
-            background-color: rgba(0, 0, 0, 0.1); /* Ligeramente más oscuro para separar */
-            border-bottom: 1px solid var(--header-border);
-            padding: 6px 0;
-            font-size: 12px;
-            color: var(--header-text-sub);
-        }
-
-        .header-top-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-        }
-
-        .icon-small {
-            width: 14px;
-            height: 14px;
-            opacity: 0.9;
-        }
-
-        /* Action Buttons (Estilo Glass sobre Azul) */
-        .header-user {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: all 0.2s;
-            font-size: 11px;
-            letter-spacing: 0.02em;
-            color: white;
-            background-color: var(--header-btn-bg);
-            border: 1px solid transparent;
-        }
-
-        .action-btn:hover {
-            background-color: var(--header-btn-hover);
-            transform: translateY(-1px);
-        }
-
-        .action-btn svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        /* Main Header */
-        .header-main {
-            padding: 15px 0 20px; /* Un poco más de aire abajo */
-        }
-
-        .header-main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .logo-section {
-            flex-shrink: 0;
-        }
-
-        .logo-image {
-            height: 159px; /* Logo grande como pediste */
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-        }
-
-        /* Search Section */
-        .search-section {
-            flex-grow: 1;
-            max-width: 600px;
-        }
-
-        .search-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: white; /* Blanco para resaltar sobre el azul */
-            border: none;
-            border-radius: 50px; /* Redondo estilo Google/iOS */
-            padding: 10px 16px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .search-box:focus-within {
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-        }
-
-        .search-icon {
-            width: 18px;
-            height: 18px;
-            color: #64748b; /* Gris texto */
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            flex-grow: 1;
-            font-size: 15px;
-            color: #1e293b;
-            outline: none;
-            width: 100%;
-        }
-
-        .clear-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #94a3b8;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-        }
-        .clear-btn:hover { color: var(--color-warning); }
-        .clear-btn svg { width: 16px; height: 16px; }
-        .hidden { display: none !important; }
-
-        /* Mic Button inside search */
-        .mic-btn {
-            background: none;
-            border: none;
-            color: var(--color-health);
-            cursor: pointer;
-            padding: 0 0 0 8px;
-            border-left: 1px solid #e2e8f0;
-            margin-left: 8px;
-            display: flex;
-            align-items: center;
-        }
-        .mic-btn:hover { color: #0056b3; }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .header-top-content { flex-direction: column; gap: 8px; text-align: center; }
-            .header-user { flex-wrap: wrap; justify-content: center; width: 100%; }
-            .action-btn { flex: 1; justify-content: center; }
-            .header-main-content { flex-direction: column; gap: 15px; align-items: stretch; }
-            .logo-section { text-align: center; display: flex; justify-content: center; }
-            .logo-image { height: 60px; }
-            .search-section { max-width: 100%; }
-        }
-
-        /* --- QUICK FILTERS --- */
-        .quick-filters {
-            max-width: 1200px;
-            margin: 1.5rem auto;
-            padding: 0 1rem;
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            scrollbar-width: none;
-            justify-content: center;
-        }
-        
-        .quick-filters::-webkit-scrollbar { display: none; }
-
-        .filter-chip {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        
-        .filter-chip:hover { transform: translateY(-1px); border-color: var(--color-health); }
-        .filter-chip.active { color: white; border-color: transparent; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        
-        /* Colores Chips */
-        .chip-all.active { background: #334155; }
-        .chip-muni.active { background: var(--color-muni); }
-        .chip-salud.active { background: var(--color-health); }
-        .chip-daem.active { background: var(--color-daem); }
-
-        /* --- CONTENT AREA --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            flex: 1; 
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        #directoryContainer {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            align-items: start;
-        }
-
-        @media (min-width: 768px) {
-            #directoryContainer {
-                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-                gap: 20px;
-            }
-        }
-
-        .category-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: all 0.2s ease;
-        }
-
-        .category-header {
-            padding: 12px 20px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            font-size: 14px;
-        }
-        .header-salud { background-color: var(--color-health); }
-        .header-muni { background-color: var(--color-muni); }
-        .header-daem { background-color: var(--color-daem); }
-
-        .contact-list { list-style: none; padding: 0; margin: 0; display: none; }
-        
-        .contact-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .contact-item:last-child { border-bottom: none; }
-
-        .contact-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
-        .contact-info span { font-size: 12px; color: #6e6e73; }
-        .contact-actions { display: flex; gap: 8px; }
-
-        .btn-action {
-            width: 32px; height: 32px; border-radius: 50%; border: none;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: transform 0.2s; font-size: 14px;
-        }
-        .btn-call { background: var(--color-muni-light); color: var(--color-muni); }
-        .btn-fav { background: transparent; color: #cbd5e1; border: 1px solid var(--border-color); }
-        .btn-fav.active { color: var(--color-warning); border-color: var(--color-warning); background: #fffbeb; }
-
-        .badge {
-            padding: 2px 8px; border-radius: 12px; font-size: 11px;
-            font-weight: 700; margin-left: 6px; letter-spacing: 0.3px;
-        }
-        .badge-salud { background: var(--color-health-light); color: var(--color-health); }
-        .badge-muni { background: var(--color-muni-light); color: var(--color-muni); }
-        .badge-daem { background: var(--color-daem-light); color: var(--color-daem); }
-
-        /* Toast */
-        #toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: #34c759; color: white; padding: 10px 24px; border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2000; font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 14px;
-        }
-        #toast.show { transform: translateX(-50%) translateY(0); }
-        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- FOOTER --- */
-        .main-footer {
-            background-color: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 40px 0 20px;
-            margin-top: 40px;
-            font-size: 13px;
-            border-top: 1px solid var(--border-color);
-        }
-        .footer-content {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; padding: 0 1rem;
-        }
-        .footer-bottom {
-            max-width: 1200px; margin: 0 auto; padding: 20px 1rem 0;
-            border-top: 1px solid rgba(0,0,0,0.05); display: flex;
-            flex-direction: column; align-items: center; gap: 8px; text-align: center;
-        }
-        [data-theme="dark"] .footer-bottom { border-top-color: rgba(255,255,255,0.1); }
-        
-        .footer-section h3 {
-            color: var(--text-color); font-size: 14px; font-weight: 700;
-            margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .footer-links { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: 8px; }
-        .footer-link {
-            color: var(--footer-text); text-decoration: none; display: inline-flex;
-            align-items: center; gap: 6px; transition: color 0.2s;
-        }
-        .footer-link:hover { color: var(--color-health); }
-        .footer-text { display: flex; gap: 8px; margin-bottom: 8px; line-height: 1.5; }
-        .footer-meta { font-size: 11px; opacity: 0.6; display: flex; gap: 12px; align-items: center; }
-        .footer-separator { width: 3px; height: 3px; background: currentColor; border-radius: 50%; opacity: 0.5; }
-
-        @media (min-width: 768px) {
-            .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-        }
-        
-        /* Utils */
-        .section-title {
-            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
-            color: #6e6e73; margin: 24px 0 12px; font-weight: 700;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .theme-toggle-btn {
-            background: rgba(255,255,255,0.2); border: none; color: white;
-            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        }
-        .theme-toggle-btn:hover { background: rgba(255,255,255,0.3); }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/directorio.css">
 </head>
-<body>
+<body class="page-dir">
 
-    <!-- Header Estilo Portal Solicitado AZUL -->
-    <header class="main-header">
-        <!-- Top Bar -->
-        <div class="header-top">
-            <div class="header-top-content">
-                <div class="header-info">
-                    <div class="info-item">
-                        <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <span id="currentDateTime">Cargando fecha y hora...</span>
-                    </div>
-                </div>
-                <div class="header-user">
-                    <a class="action-btn" href="#" onclick="window.location.reload();return false;">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                        <span>Directorio</span>
-                    </a>
-                    
-                    <a class="action-btn" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z"></path></svg>
-                        <span>Soporte</span>
-                    </a>
-                    
-                    <a class="action-btn" href="https://www.cesfamlaunion.cl" target="_blank" rel="noopener">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                        <span>Web Institucional</span>
-                    </a>
+    <!-- ===== HEADER COMPACTO ===== -->
+    <header class="dir-header">
+        <div class="dir-header-inner">
+            <div class="dir-header-left">
+                <img src="img/1.png" alt="CESFAM" class="dir-logo" onerror="this.style.display='none'">
+                <div class="dir-header-text">
+                    <h1 class="dir-h1">Directorio Telefónico</h1>
+                    <p class="dir-h1-sub" id="currentDateTime">Cargando...</p>
                 </div>
             </div>
-        </div>
-
-        <div class="header-main">
-            <div class="header-main-content">
-                <div class="logo-section">
-                    <!-- Logo Sin fondo -->
-                    <img id="siteLogo" src="img/1.png" alt="CESFAM La Unión" class="logo-image" onerror="this.style.display='none'">
-                </div>
-                
-                <div class="search-section">
-                    <div class="search-box">
-                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <input type="text" id="searchInput" placeholder="Buscar funcionario o unidad..." onkeyup="handleSearch()">
-                        
-                        <!-- Micrófono -->
-                        <button class="mic-btn" id="micBtn" onclick="toggleVoiceSearch()" title="Dictar" style="border:none; padding:0 8px;">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                        </button>
-
-                        <button id="clearSearch" class="clear-btn hidden" onclick="clearSearchInput()" aria-label="Limpiar">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Botón de Tema (Blanco para contrastar) -->
-                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar modo">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-            </div>
+            <nav class="dir-nav">
+                <a href="index.html" class="dir-nav-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="15" height="15"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+                    Inicio
+                </a>
+                <a href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" class="dir-nav-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="15" height="15"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z"/></svg>
+                    Soporte
+                </a>
+            </nav>
         </div>
     </header>
 
-    <!-- Quick Filters -->
-    <div class="quick-filters">
-        <button class="filter-chip chip-all active" onclick="filterByGroup('all', this)">
-            Todos
-        </button>
-        <button class="filter-chip chip-muni" onclick="filterByGroup('muni', this)">
-            Municipal
-        </button>
-        <button class="filter-chip chip-salud" onclick="filterByGroup('salud', this)">
-            Salud
-        </button>
-        <button class="filter-chip chip-daem" onclick="filterByGroup('daem', this)">
-            DAEM
-        </button>
+    <!-- ===== TOOLBAR: Search + Filters + Stats ===== -->
+    <div class="dir-toolbar">
+        <div class="dir-toolbar-inner">
+            <div class="dir-search">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="searchInput" placeholder="Buscar funcionario, unidad o anexo..." oninput="handleSearch()">
+                <button class="dir-search-clear hidden" id="clearSearch" onclick="clearSearchInput()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="dir-filters">
+                <button class="dir-chip active" data-group="all" onclick="filterByGroup('all', this)">
+                    Todos <span class="dir-chip-n" id="countAll">0</span>
+                </button>
+                <button class="dir-chip" data-group="muni" onclick="filterByGroup('muni', this)">
+                    <span class="dir-dot" style="background:#374151"></span> Municipal <span class="dir-chip-n" id="countMuni">0</span>
+                </button>
+                <button class="dir-chip" data-group="salud" onclick="filterByGroup('salud', this)">
+                    <span class="dir-dot" style="background:#0066cc"></span> Salud <span class="dir-chip-n" id="countSalud">0</span>
+                </button>
+                <button class="dir-chip" data-group="daem" onclick="filterByGroup('daem', this)">
+                    <span class="dir-dot" style="background:#d97706"></span> DAEM <span class="dir-chip-n" id="countDaem">0</span>
+                </button>
+            </div>
+            <div class="dir-stats">
+                <span><strong id="statCategories">0</strong> categorías</span>
+                <span class="dir-stats-sep"></span>
+                <span><strong id="statContacts">0</strong> contactos</span>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <!-- Recents Section -->
-        <div id="recentsSection" style="display:none;">
-            <div class="section-title">
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="dir-main">
+
+        <!-- Recents -->
+        <div id="recentsSection" class="dir-aux" style="display:none;">
+            <div class="dir-aux-head">
                 <span>Recientes</span>
-                <span class="clear-history" onclick="clearRecents()">Borrar</span>
+                <button onclick="clearRecents()">Borrar</button>
             </div>
-            <div class="category-card">
-                 <ul class="contact-list" id="recentsList" style="display:block"></ul>
-            </div>
-        </div>
-
-        <!-- Favorites Section -->
-        <div id="favoritesSection" style="display:none;">
-            <div class="section-title"><span>Favoritos</span></div>
-            <div class="category-card">
-                <ul class="contact-list" id="favoritesList" style="display:block"></ul>
+            <div class="dir-card">
+                <ul class="dir-contacts" id="recentsList" style="display:block"></ul>
             </div>
         </div>
 
-        <!-- Directory Container -->
-        <div id="directoryContainer"></div>
-
-        <!-- Empty State -->
-        <div id="emptyState" style="display:none; text-align:center; padding: 4rem 1rem; color: #6e6e73;">
-            <svg style="width:48px; height:48px; margin-bottom:1rem; opacity:0.3;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <p>No encontramos resultados.</p>
+        <!-- Favorites -->
+        <div id="favoritesSection" class="dir-aux" style="display:none;">
+            <div class="dir-aux-head"><span>Favoritos</span></div>
+            <div class="dir-card">
+                <ul class="dir-contacts" id="favoritesList" style="display:block"></ul>
+            </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <section class="footer-section">
-                <h3>Enlaces</h3>
-                <ul class="footer-links">
-                    <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;">Volver arriba</a></li>
-                    <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
-                    <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
-                </ul>
-            </section>
-            <section class="footer-section">
-                <h3>Contacto</h3>
-                <div class="footer-text">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:cesfam@munilaunion.cl" class="footer-link">cesfam@munilaunion.cl</a>
-                </div>
-                <div class="footer-text">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>La Unión, Región de Los Ríos</span>
-                </div>
-            </section>
-            <section class="footer-section">
-                <h3>CESFAM La Unión</h3>
-                <ul class="footer-links">
-                    <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank"><i class="fab fa-youtube"></i> Youtube</a></li>
-                </ul>
-            </section>
-            <section class="footer-section">
-                <h3>Recursos</h3>
-                <ul class="footer-links">
-                    <li><a class="footer-link" href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Biblioteca CESFAM</a></li>
-                </ul>
-            </section>
+        <!-- Grid -->
+        <div id="directoryContainer" class="dir-grid"></div>
+
+        <!-- Empty -->
+        <div id="emptyState" class="dir-empty" style="display:none;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <p>Sin resultados para tu búsqueda</p>
         </div>
-        <div class="footer-bottom">
-            <div class="footer-copyright">© <span id="year">2025</span> CESFAM La Unión. Area de Informática.</div>
-            <div class="footer-meta">
-                <span>Versión M.I.R 5.1</span>
-                <span class="footer-separator"></span>
-                <span>Estado: OK</span>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="dir-footer">
+        <div class="dir-footer-inner">
+            <div class="dir-footer-content">
+                <section class="dir-footer-section">
+                    <h3 class="dir-footer-title">Enlaces</h3>
+                    <ul class="dir-footer-links">
+                        <li><a class="dir-footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;">Volver arriba</a></li>
+                        <li><a class="dir-footer-link" href="https://www.minsal.cl" target="_blank" rel="noopener">Ministerio de Salud</a></li>
+                        <li><a class="dir-footer-link" href="https://www.gob.cl" target="_blank" rel="noopener">Gobierno de Chile</a></li>
+                        <li><a class="dir-footer-link" href="https://www.cesfamtic.com" target="_blank" rel="noopener">Intranet TI</a></li>
+                    </ul>
+                </section>
+                <section class="dir-footer-section">
+                    <h3 class="dir-footer-title">Contactos</h3>
+                    <p class="dir-footer-text"><span>informacionescesfamlaunion@gmail.cl</span></p>
+                    <p class="dir-footer-text"><span>some@munilaunion.cl</span></p>
+                    <p class="dir-footer-text">
+                        <svg class="dir-footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l1.89 1.89a2 2 0 002.83 0L12 7l4.28 4.28a2 2 0 002.83 0L21 10"></path></svg>
+                        <span>La Union, Region de Los Rios</span>
+                    </p>
+                </section>
+                <section class="dir-footer-section">
+                    <h3 class="dir-footer-title">CESFAM La Union</h3>
+                    <ul class="dir-footer-links">
+                        <li><a class="dir-footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a class="dir-footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a class="dir-footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank" rel="noopener">Instagram</a></li>
+                    </ul>
+                </section>
+                <section class="dir-footer-section">
+                    <h3 class="dir-footer-title">Recursos</h3>
+                    <ul class="dir-footer-links">
+                        <li><a class="dir-footer-link" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">Soporte Informatica</a></li>
+                        <li><a class="dir-footer-link" href="https://www.fonasa.cl" target="_blank" rel="noopener">FONASA</a></li>
+                        <li><a class="dir-footer-link" href="https://www.cesfamtic.com" target="_blank" rel="noopener">Intranet TI</a></li>
+                    </ul>
+                </section>
+            </div>
+            <div class="dir-footer-bottom">
+                <div class="dir-footer-copyright">&copy; <span id="footerYear">2026</span> CESFAM La Union. Area de Informatica.</div>
+                <div class="dir-footer-meta">Version M.I.R 5.1</div>
+            </div>
+            <div class="dir-footer-legacy hidden" aria-hidden="true">
+            <span>&copy; 2025 CESFAM La Unión &middot; Área de Informática</span>
+            <span>Versión M.I.R 5.1</span>
             </div>
         </div>
     </footer>
 
-    <div id="toast"><i class="fas fa-check-circle"></i> Anexo copiado</div>
+    <!-- Toast -->
+    <div id="toast" class="dir-toast">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="toastMsg">Copiado</span>
+    </div>
 
     <script>
-        // --- CLOCK FUNCTION ---
-        function updateDateTime() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            const dateString = now.toLocaleDateString('es-CL', options);
-            document.getElementById('currentDateTime').textContent = dateString.charAt(0).toUpperCase() + dateString.slice(1);
-        }
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
+    // ===== CLOCK =====
+    function updateDateTime() {
+        const now = new Date();
+        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const s = now.toLocaleDateString('es-CL', opts);
+        document.getElementById('currentDateTime').textContent = s.charAt(0).toUpperCase() + s.slice(1);
+    }
+    setInterval(updateDateTime, 30000);
+    updateDateTime();
 
-        // --- DATA ESTRUCTURADA ---
-        const directoryData = [
-            // ================= GRUPO: MUNICIPAL =================
-            {
-                group: "muni",
-                category: "Administración Municipal",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "Asesor Jurídico Alcalde", ext: "7135", detail: "64 2 527135" },
-                    { name: "Admin. Vehículos y Caminos", ext: "7000", detail: "64 2 527000" },
-                    { name: "Admin. Obras Menores", ext: "7111", detail: "64 2 527111" },
-                    { name: "Admin. Prevencionista", ext: "472239", detail: "Directo" },
-                    { name: "Seguridad Pública", ext: "322033", detail: "Directo" },
-                    { name: "Aseo y Ornato", ext: "7102", detail: "64 2 527102" },
-                    { name: "Aseo Parque Municipal", ext: "472297", detail: "Directo" },
-                    { name: "Admin. Unidad Académica", ext: "472366", detail: "Directo" },
-                    { name: "Comunicaciones", ext: "324387", detail: "Directo" },
-                    { name: "Salón Consistorial", ext: "322031", detail: "Directo" },
-                    { name: "Portería", ext: "472376", detail: "Directo" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "Secretaría Municipal",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "Secretario Municipal", ext: "7139", detail: "64 2 527139" },
-                    { name: "Secretaria", ext: "7120", detail: "64 2 527120" },
-                    { name: "Central Telefónica", ext: "322441", detail: "Directo" },
-                    { name: "Oficina de Concejales", ext: "7114", detail: "64 2 527114" },
-                    { name: "Oficina de Partes", ext: "7141", detail: "64 2 527141" },
-                    { name: "Transparencia Municipal", ext: "7144", detail: "64 2 527144" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "Dirección de Control",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "Directora Control", ext: "384", detail: "64 2 201384" },
-                    { name: "Control Administrativo", ext: "421", detail: "64 2 200421" },
-                    { name: "Informática", ext: "983", detail: "64 2 524983" },
-                    { name: "Fiscalizador", ext: "580", detail: "64 2 200580" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "DIDECO y Social",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "DIDECO Dirección", ext: "271", detail: "422271" },
-                    { name: "DIDECO Secretaría", ext: "270", detail: "472270" },
-                    { name: "Jefa Dto. Social", ext: "266", detail: "472266" },
-                    { name: "OMIL", ext: "267", detail: "472340" },
-                    { name: "Prog. Jefas de Hogar", ext: "246", detail: "472246" },
-                    { name: "Organizaciones Comunitarias", ext: "281", detail: "472281" },
-                    { name: "OPD", ext: "276", detail: "472276" },
-                    { name: "Senda Previene", ext: "204", detail: "472204" },
-                    { name: "Oficina del Deporte", ext: "306", detail: "472306" },
-                    { name: "Gimnasio Municipal", ext: "205", detail: "472205" },
-                    { name: "Desarrollo Rural", ext: "386", detail: "472386" },
-                    { name: "Prodesal", ext: "214", detail: "472214" },
-                    { name: "PDTI", ext: "388", detail: "472388" },
-                    { name: "Programas Sociales Jefa", ext: "224", detail: "472224" },
-                    { name: "Programas Familias", ext: "232", detail: "472232" },
-                    { name: "Oficina de la Juventud", ext: "99527388", detail: "Directo" },
-                    { name: "Fomento Productivo", ext: "642346116", detail: "Directo" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "Finanzas",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "Finanzas Director", ext: "351", detail: "472350" },
-                    { name: "Adquisiciones", ext: "355", detail: "472355" },
-                    { name: "Rentas y Patentes", ext: "265", detail: "472265" },
-                    { name: "Inspección", ext: "262", detail: "472262" },
-                    { name: "Personal", ext: "350", detail: "472233" },
-                    { name: "Tesorería Jefa", ext: "353", detail: "472353" },
-                    { name: "Tesorería Cajeras", ext: "354", detail: "472354" },
-                    { name: "Contabilidad e Inventario", ext: "356", detail: "472356" },
-                    { name: "Cementerio Municipal", ext: "120", detail: "322384" },
-                    { name: "Bodega Municipal", ext: "337", detail: "472337" },
-                    { name: "Bodega Camilo Henriquez", ext: "371", detail: "472298" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "SECPLAN y Obras",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "SECPLAN Dirección", ext: "286", detail: "472286" },
-                    { name: "SECPLAN Secretaría", ext: "458", detail: "472358" },
-                    { name: "Asesor Urbanista", ext: "247", detail: "472247" },
-                    { name: "Vivienda", ext: "241", detail: "472236" },
-                    { name: "Inversiones", ext: "671", detail: "324671" },
-                    { name: "Profesionales", ext: "202", detail: "472202" },
-                    { name: "ITO", ext: "263", detail: "472263" },
-                    { name: "Compras", ext: "221", detail: "472221" },
-                    { name: "Medio Ambiente", ext: "245", detail: "472245" },
-                    { name: "DOM Director/Secretaría", ext: "7138", detail: "64 2 527138" }
-                ]
-            },
-            {
-                group: "muni",
-                category: "Cultura y Turismo",
-                headerClass: "header-muni",
-                badgeClass: "badge-muni",
-                contacts: [
-                    { name: "Cultura Dirección", ext: "642346116", detail: "Directo" },
-                    { name: "Cultura Secretaría", ext: "346117", detail: "Directo" },
-                    { name: "Biblioteca", ext: "472215", detail: "Directo" },
-                    { name: "Turismo", ext: "999581816", detail: "Móvil" },
-                    { name: "Pueblos Originarios", ext: "947432447", detail: "Móvil" },
-                    { name: "Estadio Carlos Vogel", ext: "472296", detail: "Directo" }
-                ]
-            },
+    // ===== DATA =====
+    const directoryData = [
+        { group:"muni", category:"Administración Municipal", contacts:[
+            {name:"Asesor Jurídico Alcalde",ext:"7135",detail:"64 2 527135"},{name:"Admin. Vehículos y Caminos",ext:"7000",detail:"64 2 527000"},{name:"Admin. Obras Menores",ext:"7111",detail:"64 2 527111"},{name:"Admin. Prevencionista",ext:"472239",detail:"Directo"},{name:"Seguridad Pública",ext:"322033",detail:"Directo"},{name:"Aseo y Ornato",ext:"7102",detail:"64 2 527102"},{name:"Aseo Parque Municipal",ext:"472297",detail:"Directo"},{name:"Admin. Unidad Académica",ext:"472366",detail:"Directo"},{name:"Comunicaciones",ext:"324387",detail:"Directo"},{name:"Salón Consistorial",ext:"322031",detail:"Directo"},{name:"Portería",ext:"472376",detail:"Directo"}
+        ]},
+        { group:"muni", category:"Secretaría Municipal", contacts:[
+            {name:"Secretario Municipal",ext:"7139",detail:"64 2 527139"},{name:"Secretaria",ext:"7120",detail:"64 2 527120"},{name:"Central Telefónica",ext:"322441",detail:"Directo"},{name:"Oficina de Concejales",ext:"7114",detail:"64 2 527114"},{name:"Oficina de Partes",ext:"7141",detail:"64 2 527141"},{name:"Transparencia Municipal",ext:"7144",detail:"64 2 527144"}
+        ]},
+        { group:"muni", category:"Dirección de Control", contacts:[
+            {name:"Directora Control",ext:"384",detail:"64 2 201384"},{name:"Control Administrativo",ext:"421",detail:"64 2 200421"},{name:"Informática",ext:"983",detail:"64 2 524983"},{name:"Fiscalizador",ext:"580",detail:"64 2 200580"}
+        ]},
+        { group:"muni", category:"DIDECO y Social", contacts:[
+            {name:"DIDECO Dirección",ext:"271",detail:"422271"},{name:"DIDECO Secretaría",ext:"270",detail:"472270"},{name:"Jefa Dto. Social",ext:"266",detail:"472266"},{name:"OMIL",ext:"267",detail:"472340"},{name:"Prog. Jefas de Hogar",ext:"246",detail:"472246"},{name:"Organizaciones Comunitarias",ext:"281",detail:"472281"},{name:"OPD",ext:"276",detail:"472276"},{name:"Senda Previene",ext:"204",detail:"472204"},{name:"Oficina del Deporte",ext:"306",detail:"472306"},{name:"Gimnasio Municipal",ext:"205",detail:"472205"},{name:"Desarrollo Rural",ext:"386",detail:"472386"},{name:"Prodesal",ext:"214",detail:"472214"},{name:"PDTI",ext:"388",detail:"472388"},{name:"Programas Sociales Jefa",ext:"224",detail:"472224"},{name:"Programas Familias",ext:"232",detail:"472232"},{name:"Oficina de la Juventud",ext:"99527388",detail:"Directo"},{name:"Fomento Productivo",ext:"642346116",detail:"Directo"}
+        ]},
+        { group:"muni", category:"Finanzas", contacts:[
+            {name:"Finanzas Director",ext:"351",detail:"472350"},{name:"Adquisiciones",ext:"355",detail:"472355"},{name:"Rentas y Patentes",ext:"265",detail:"472265"},{name:"Inspección",ext:"262",detail:"472262"},{name:"Personal",ext:"350",detail:"472233"},{name:"Tesorería Jefa",ext:"353",detail:"472353"},{name:"Tesorería Cajeras",ext:"354",detail:"472354"},{name:"Contabilidad e Inventario",ext:"356",detail:"472356"},{name:"Cementerio Municipal",ext:"120",detail:"322384"},{name:"Bodega Municipal",ext:"337",detail:"472337"},{name:"Bodega Camilo Henriquez",ext:"371",detail:"472298"}
+        ]},
+        { group:"muni", category:"SECPLAN y Obras", contacts:[
+            {name:"SECPLAN Dirección",ext:"286",detail:"472286"},{name:"SECPLAN Secretaría",ext:"458",detail:"472358"},{name:"Asesor Urbanista",ext:"247",detail:"472247"},{name:"Vivienda",ext:"241",detail:"472236"},{name:"Inversiones",ext:"671",detail:"324671"},{name:"Profesionales",ext:"202",detail:"472202"},{name:"ITO",ext:"263",detail:"472263"},{name:"Compras",ext:"221",detail:"472221"},{name:"Medio Ambiente",ext:"245",detail:"472245"},{name:"DOM Director/Secretaría",ext:"7138",detail:"64 2 527138"}
+        ]},
+        { group:"muni", category:"Cultura y Turismo", contacts:[
+            {name:"Cultura Dirección",ext:"642346116",detail:"Directo"},{name:"Cultura Secretaría",ext:"346117",detail:"Directo"},{name:"Biblioteca",ext:"472215",detail:"Directo"},{name:"Turismo",ext:"999581816",detail:"Móvil"},{name:"Pueblos Originarios",ext:"947432447",detail:"Móvil"},{name:"Estadio Carlos Vogel",ext:"472296",detail:"Directo"}
+        ]},
+        { group:"salud", category:"Depto. de Salud (Admin)", contacts:[
+            {name:"Jefe Departamento",ext:"752",detail:"207752"},{name:"Secretaria",ext:"334",detail:"472334"},{name:"Finanzas Jefa",ext:"208",detail:"322553"},{name:"Finanzas",ext:"753",detail:"207753"},{name:"Personal",ext:"335",detail:"472335"},{name:"Constructor Civil",ext:"448",detail:"322048"},{name:"Adquisiciones",ext:"449",detail:"472449"},{name:"Farmacia Comunitaria",ext:"472",detail:"207754"}
+        ]},
+        { group:"salud", category:"CESFAM P. Hurtado", contacts:[
+            {name:"Dirección",ext:"532",detail:"642346132"},{name:"Secretaria",ext:"530",detail:"642346130"},{name:"OIRS",ext:"550",detail:"642346150"},{name:"UAPO Externo",ext:"520",detail:"642346120"},{name:"CCR",ext:"523",detail:"642346123"},{name:"Farmacia",ext:"528",detail:"642346128"},{name:"Vacunatorio",ext:"537",detail:"642346137"},{name:"Toma de Muestra",ext:"531",detail:"642346131"},{name:"Esterilización",ext:"539",detail:"642346139"},{name:"SOME Central/Adm",ext:"529",detail:"642346129"},{name:"SOME Transversal",ext:"634",detail:"642346134"},{name:"SOME Sector Azul",ext:"546",detail:"642346146"},{name:"SOME Sector Verde",ext:"522",detail:"642346122"},{name:"SOME Sector Amarillo",ext:"542",detail:"642346142"},{name:"Jefe SOME Amarillo",ext:"543",detail:"642346143"},{name:"Asistente Social Azul",ext:"521",detail:"642346121"},{name:"Asistente Social Verde",ext:"536",detail:"642346136"},{name:"Asistente Social Amarillo",ext:"538",detail:"642346138"},{name:"Enfermera Coordinadora",ext:"547",detail:"642346147"},{name:"Jefe Unid. Transversales",ext:"526",detail:"642346126"},{name:"Sala IRA",ext:"541",detail:"642346141"},{name:"Sala ERA",ext:"551",detail:"642346151"},{name:"Electrocardiograma",ext:"544",detail:"642346144"},{name:"Estadística",ext:"545",detail:"642346145"},{name:"Epidemiologia",ext:"549",detail:"642346149"},{name:"Entrega de Leche",ext:"548",detail:"642346148"},{name:"GES",ext:"552",detail:"642346152"},{name:"Calificador de Derecho",ext:"540",detail:"642346140"},{name:"Of. Vinculación y Promoción",ext:"533",detail:"642346133"},{name:"Soporte y Comunicaciones",ext:"525",detail:"642346125"}
+        ]},
+        { group:"salud", category:"Consultorio La Unión", contacts:[
+            {name:"Secretaria",ext:"310",detail:"472310"},{name:"S.O.M.E.",ext:"313",detail:"472313"},{name:"Farmacia",ext:"314",detail:"472314"},{name:"Entrega de Leche",ext:"321",detail:"472321"},{name:"Box Medico",ext:"316",detail:"472316"},{name:"Curaciones",ext:"343",detail:"472343"},{name:"Nutricionista",ext:"322",detail:"472322"},{name:"Nutricionista Vida Sana",ext:"312",detail:"472312"},{name:"SOME Salud Mental",ext:"255",detail:"470255"}
+        ]},
+        { group:"salud", category:"Clínica Dental Escolar", contacts:[
+            {name:"Escuela 1",ext:"393",detail:"472393"},{name:"Escuela 2",ext:"491",detail:"472391"},{name:"Escuela 4",ext:"389",detail:"472389"},{name:"Escuela Radimadi",ext:"392",detail:"472392"},{name:"Escuela El Maitén",ext:"383",detail:"472383"},{name:"Liceo RAAC",ext:"394",detail:"472394"}
+        ]},
+        { group:"salud", category:"Otros Centros", contacts:[
+            {name:"SAR",ext:"502",detail:"325002"},{name:"CECOSF Los Lagos",ext:"211",detail:"472211"},{name:"CECOSF Irene Daiber",ext:"307",detail:"472307"}
+        ]},
+        { group:"daem", category:"Administración DAEM", contacts:[
+            {name:"Secretaria Dirección",ext:"601",detail:"472361"},{name:"Recursos Humanos",ext:"607",detail:"472363"},{name:"Secretaria RRHH",ext:"608",detail:"472362"},{name:"Remuneraciones",ext:"609",detail:"472249"},{name:"Finanzas Secretario",ext:"604",detail:"472365"},{name:"Licencias Médicas",ext:"610",detail:"472364"},{name:"Oficina de Partes",ext:"611",detail:"472360"},{name:"Evaluación Docente",ext:"612",detail:"322012"},{name:"Unidad Académica",ext:"613",detail:"322019"},{name:"Coord. Acad. Básica",ext:"615",detail:"322617"},{name:"JUNAEB",ext:"617",detail:"472218"},{name:"Encargada de Pagos",ext:"618",detail:"472380"},{name:"Extraescolar",ext:"620",detail:"322002"},{name:"Adquisiciones",ext:"621",detail:"472367"},{name:"Compras",ext:"622",detail:"472379"},{name:"Planif./Infraestructura",ext:"623",detail:"472201"},{name:"Transporte",ext:"625",detail:"472368"},{name:"Bodega",ext:"626",detail:"321928"},{name:"Inventario",ext:"605",detail:"472371"}
+        ]},
+        { group:"daem", category:"Establecimientos Educ.", contacts:[
+            {name:"Escuela N° 1 La Unión",ext:"140",detail:"322723"},{name:"Escuela N° 2 La Unión",ext:"136",detail:"322372"},{name:"Escuela 4 Pdte. Alessandri",ext:"138",detail:"322623"},{name:"Escuela Radimadi",ext:"139",detail:"322721"},{name:"Escuela El Maitén",ext:"345",detail:"472345"},{name:"Escuela Aldea Campesina",ext:"132",detail:"321098"},{name:"Escuela Dif. Villa San José",ext:"137",detail:"322392"},{name:"Escuela Lenguaje Municipal",ext:"472302",detail:"Directo"},{name:"Liceo Rector Andrade C.",ext:"133",detail:"322437"},{name:"Colegio Cultura y Difusión",ext:"570320",detail:"Directo"}
+        ]}
+    ];
 
-            // ================= GRUPO: SALUD =================
-            {
-                group: "salud",
-                category: "Depto. de Salud (Admin)",
-                headerClass: "header-salud",
-                badgeClass: "badge-salud",
-                contacts: [
-                    { name: "Jefe Departamento", ext: "752", detail: "207752" },
-                    { name: "Secretaria", ext: "334", detail: "472334" },
-                    { name: "Finanzas Jefa", ext: "208", detail: "322553" },
-                    { name: "Finanzas", ext: "753", detail: "207753" },
-                    { name: "Personal", ext: "335", detail: "472335" },
-                    { name: "Constructor Civil", ext: "448", detail: "322048" },
-                    { name: "Adquisiciones", ext: "449", detail: "472449" },
-                    { name: "Farmacia Comunitaria", ext: "472", detail: "207754" }
-                ]
-            },
-            {
-                group: "salud",
-                category: "CESFAM P. Hurtado",
-                headerClass: "header-salud",
-                badgeClass: "badge-salud",
-                contacts: [
-                    { name: "Dirección", ext: "532", detail: "642346132" },
-                    { name: "Secretaria", ext: "530", detail: "642346130" },
-                    { name: "OIRS", ext: "550", detail: "642346150" },
-                    { name: "UAPO Externo", ext: "520", detail: "642346120" },
-                    { name: "CCR", ext: "523", detail: "642346123" },
-                    { name: "Farmacia", ext: "528", detail: "642346128" },
-                    { name: "Vacunatorio", ext: "537", detail: "642346137" },
-                    { name: "Toma de Muestra", ext: "531", detail: "642346131" },
-                    { name: "Esterilización", ext: "539", detail: "642346139" },
-                    { name: "SOME Central/Adm", ext: "529", detail: "642346129" },
-                    { name: "SOME Transversal", ext: "634", detail: "642346134" },
-                    { name: "SOME Sector Azul", ext: "546", detail: "642346146" },
-                    { name: "SOME Sector Verde", ext: "522", detail: "642346122" },
-                    { name: "SOME Sector Amarillo", ext: "542", detail: "642346142" },
-                    { name: "Jefe SOME Amarillo", ext: "543", detail: "642346143" },
-                    { name: "Asistente Social Azul", ext: "521", detail: "642346121" },
-                    { name: "Asistente Social Verde", ext: "536", detail: "642346136" },
-                    { name: "Asistente Social Amarillo", ext: "538", detail: "642346138" },
-                    { name: "Enfermera Coordinadora", ext: "547", detail: "642346147" },
-                    { name: "Jefe Unid. Transversales", ext: "526", detail: "642346126" },
-                    { name: "Sala IRA", ext: "541", detail: "642346141" },
-                    { name: "Sala ERA", ext: "551", detail: "642346151" },
-                    { name: "Electrocardiograma", ext: "544", detail: "642346144" },
-                    { name: "Estadística", ext: "545", detail: "642346145" },
-                    { name: "Epidemiologia", ext: "549", detail: "642346149" },
-                    { name: "Entrega de Leche", ext: "548", detail: "642346148" },
-                    { name: "GES", ext: "552", detail: "642346152" },
-                    { name: "Calificador de Derecho", ext: "540", detail: "642346140" },
-                    { name: "Of. Vinculación y Promoción", ext: "533", detail: "642346133" },
-                    { name: "Soporte y Comunicaciones", ext: "525", detail: "642346125" }
-                ]
-            },
-            {
-                group: "salud",
-                category: "Consultorio La Unión",
-                headerClass: "header-salud",
-                badgeClass: "badge-salud",
-                contacts: [
-                    { name: "Secretaria", ext: "310", detail: "472310" },
-                    { name: "S.O.M.E.", ext: "313", detail: "472313" },
-                    { name: "Farmacia", ext: "314", detail: "472314" },
-                    { name: "Entrega de Leche", ext: "321", detail: "472321" },
-                    { name: "Box Medico", ext: "316", detail: "472316" },
-                    { name: "Curaciones", ext: "343", detail: "472343" },
-                    { name: "Nutricionista", ext: "322", detail: "472322" },
-                    { name: "Nutricionista Vida Sana", ext: "312", detail: "472312" },
-                    { name: "SOME Salud Mental", ext: "255", detail: "470255" }
-                ]
-            },
-            {
-                group: "salud",
-                category: "Clínica Dental Escolar",
-                headerClass: "header-salud",
-                badgeClass: "badge-salud",
-                contacts: [
-                    { name: "Escuela 1", ext: "393", detail: "472393" },
-                    { name: "Escuela 2", ext: "491", detail: "472391" },
-                    { name: "Escuela 4", ext: "389", detail: "472389" },
-                    { name: "Escuela Radimadi", ext: "392", detail: "472392" },
-                    { name: "Escuela El Maitén", ext: "383", detail: "472383" },
-                    { name: "Liceo RAAC", ext: "394", detail: "472394" }
-                ]
-            },
-            {
-                group: "salud",
-                category: "Otros Centros",
-                headerClass: "header-salud",
-                badgeClass: "badge-salud",
-                contacts: [
-                    { name: "SAR", ext: "502", detail: "325002" },
-                    { name: "CECOSF Los Lagos", ext: "211", detail: "472211" },
-                    { name: "CECOSF Irene Daiber", ext: "307", detail: "472307" }
-                ]
-            },
+    // ===== STATE =====
+    let favorites = JSON.parse(localStorage.getItem('linksFavorites')) || [];
+    let recents = JSON.parse(localStorage.getItem('linksRecents')) || [];
+    let currentGroup = 'all';
 
-            // ================= GRUPO: DAEM =================
-            {
-                group: "daem",
-                category: "Administración DAEM",
-                headerClass: "header-daem",
-                badgeClass: "badge-daem",
-                contacts: [
-                    { name: "Secretaria Dirección", ext: "601", detail: "472361" },
-                    { name: "Recursos Humanos", ext: "607", detail: "472363" },
-                    { name: "Secretaria RRHH", ext: "608", detail: "472362" },
-                    { name: "Remuneraciones", ext: "609", detail: "472249" },
-                    { name: "Finanzas Secretario", ext: "604", detail: "472365" },
-                    { name: "Licencias Médicas", ext: "610", detail: "472364" },
-                    { name: "Oficina de Partes", ext: "611", detail: "472360" },
-                    { name: "Evaluación Docente", ext: "612", detail: "322012" },
-                    { name: "Unidad Académica", ext: "613", detail: "322019" },
-                    { name: "Coord. Acad. Básica", ext: "615", detail: "322617" },
-                    { name: "JUNAEB", ext: "617", detail: "472218" },
-                    { name: "Encargada de Pagos", ext: "618", detail: "472380" },
-                    { name: "Extraescolar", ext: "620", detail: "322002" },
-                    { name: "Adquisiciones", ext: "621", detail: "472367" },
-                    { name: "Compras", ext: "622", detail: "472379" },
-                    { name: "Planif./Infraestructura", ext: "623", detail: "472201" },
-                    { name: "Transporte", ext: "625", detail: "472368" },
-                    { name: "Bodega", ext: "626", detail: "321928" },
-                    { name: "Inventario", ext: "605", detail: "472371" }
-                ]
-            },
-            {
-                group: "daem",
-                category: "Establecimientos Educ.",
-                headerClass: "header-daem",
-                badgeClass: "badge-daem",
-                contacts: [
-                    { name: "Escuela N° 1 La Unión", ext: "140", detail: "322723" },
-                    { name: "Escuela N° 2 La Unión", ext: "136", detail: "322372" },
-                    { name: "Escuela 4 Pdte. Alessandri", ext: "138", detail: "322623" },
-                    { name: "Escuela Radimadi", ext: "139", detail: "322721" },
-                    { name: "Escuela El Maitén", ext: "345", detail: "472345" },
-                    { name: "Escuela Aldea Campesina", ext: "132", detail: "321098" },
-                    { name: "Escuela Dif. Villa San José", ext: "137", detail: "322392" },
-                    { name: "Escuela Lenguaje Municipal", ext: "472302", detail: "Directo" },
-                    { name: "Liceo Rector Andrade C.", ext: "133", detail: "322437" },
-                    { name: "Colegio Cultura y Difusión", ext: "570320", detail: "Directo" }
-                ]
+    const GROUP_COLORS = { muni:'#374151', salud:'#0066cc', daem:'#d97706' };
+    const GROUP_LABELS = { muni:'Municipal', salud:'Salud', daem:'DAEM' };
+
+    function escapeHtml(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+        const total = directoryData.reduce((s,c) => s + c.contacts.length, 0);
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+        document.getElementById('statCategories').textContent = directoryData.length;
+        document.getElementById('statContacts').textContent = total;
+        document.getElementById('countAll').textContent = total;
+        document.getElementById('countMuni').textContent = directoryData.filter(c=>c.group==='muni').reduce((s,c)=>s+c.contacts.length,0);
+        document.getElementById('countSalud').textContent = directoryData.filter(c=>c.group==='salud').reduce((s,c)=>s+c.contacts.length,0);
+        document.getElementById('countDaem').textContent = directoryData.filter(c=>c.group==='daem').reduce((s,c)=>s+c.contacts.length,0);
+        renderDirectory(directoryData);
+        renderFavorites();
+        renderRecents();
+
+        document.addEventListener('click', event => {
+            const copyButton = event.target.closest('.js-copy-contact');
+            if (copyButton) {
+                handleAction(
+                    copyButton.dataset.ext || '',
+                    {
+                        name: copyButton.dataset.name || '',
+                        ext: copyButton.dataset.ext || '',
+                        detail: copyButton.dataset.detail || '',
+                        group: copyButton.dataset.group || ''
+                    }
+                );
+                return;
             }
-        ];
 
-        // --- STATE ---
-        let favorites = JSON.parse(localStorage.getItem('linksFavorites')) || [];
-        let recents = JSON.parse(localStorage.getItem('linksRecents')) || [];
-        let currentGroup = 'all';
-
-        // --- INIT ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderDirectory(directoryData);
-            renderFavorites();
-            renderRecents();
-            // Mantener preferencia de tema
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
+            const favoriteButton = event.target.closest('.js-toggle-favorite');
+            if (favoriteButton) {
+                toggleFavorite(
+                    favoriteButton.dataset.name || '',
+                    favoriteButton.dataset.ext || '',
+                    favoriteButton.dataset.detail || '',
+                    favoriteButton.dataset.group || ''
+                );
+            }
         });
+    });
 
-        // --- RENDER CORE ---
-        function renderDirectory(data) {
-            const container = document.getElementById('directoryContainer');
-            container.innerHTML = '';
+    // ===== RENDER =====
+    function renderDirectory(data) {
+        const el = document.getElementById('directoryContainer');
+        el.innerHTML = '';
+        data.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'dir-card';
+            card.dataset.group = cat.group;
+            const color = GROUP_COLORS[cat.group];
+            card.innerHTML = `
+                <div class="dir-card-head" onclick="toggleCategory(this)" style="--accent:${color}">
+                    <span class="dir-card-accent" style="background:${color}"></span>
+                    <span class="dir-card-title">${cat.category}</span>
+                    <span class="dir-card-tag" style="background:${color}15;color:${color}">${GROUP_LABELS[cat.group]}</span>
+                    <span class="dir-card-count">${cat.contacts.length}</span>
+                    <svg class="dir-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+                <ul class="dir-contacts">
+                    ${cat.contacts.map(c => contactHTML(c, cat.group)).join('')}
+                </ul>`;
+            el.appendChild(card);
+        });
+        applyFilter();
+    }
 
-            data.forEach((cat, index) => {
-                const section = document.createElement('div');
-                section.className = 'category-card fade-in';
-                // Dataset for filtering logic
-                section.dataset.group = cat.group;
-                
-                // Lista colapsada por defecto
-                section.innerHTML = `
-                    <div class="category-header ${cat.headerClass}" onclick="toggleCategory(this)">
-                        <span>${cat.category}</span>
-                        <i class="fas fa-chevron-down" style="transform: rotate(-90deg); transition: transform 0.3s"></i>
-                    </div>
-                    <ul class="contact-list" style="display:none">
-                        ${cat.contacts.map(c => createContactHTML(c, index, cat.badgeClass)).join('')}
-                    </ul>
-                `;
-                container.appendChild(section);
+    function contactHTML(c, group) {
+        const isFav = favorites.some(f => f.ext === c.ext);
+        const ext = c.ext.length > 5 ? 'Directo' : c.ext;
+        const color = GROUP_COLORS[group] || '#6b7280';
+        const safeName = escapeHtml(c.name);
+        const safeExt = escapeHtml(c.ext);
+        const safeDetail = escapeHtml(c.detail);
+        const safeGroup = escapeHtml(group);
+        return `
+        <li class="dir-row" data-search="${escapeHtml(`${c.name.toLowerCase()} ${c.ext} ${c.detail.toLowerCase()}`)}">
+            <span class="dir-avatar" style="background:${color}18;color:${color}">${c.name.charAt(0)}</span>
+            <div class="dir-row-info">
+                <span class="dir-row-name">${safeName}</span>
+                <span class="dir-row-detail">${safeDetail}</span>
+            </div>
+            <span class="dir-ext" style="background:${color}12;color:${color}">${escapeHtml(ext)}</span>
+            <div class="dir-row-actions">
+                <button
+                    class="dir-btn-copy js-copy-contact"
+                    type="button"
+                    title="Copiar anexo"
+                    data-name="${safeName}"
+                    data-ext="${safeExt}"
+                    data-detail="${safeDetail}"
+                    data-group="${safeGroup}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </button>
+                <button
+                    class="dir-btn-fav js-toggle-favorite${isFav?' active':''}"
+                    type="button"
+                    title="Favorito"
+                    data-name="${safeName}"
+                    data-ext="${safeExt}"
+                    data-detail="${safeDetail}"
+                    data-group="${safeGroup}">
+                    <svg fill="${isFav?'currentColor':'none'}" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                </button>
+            </div>
+        </li>`;
+    }
+
+    // ===== FILTER =====
+    function filterByGroup(group, btn) {
+        document.querySelectorAll('.dir-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentGroup = group;
+        applyFilter();
+    }
+
+    function handleSearch() {
+        const v = document.getElementById('searchInput').value;
+        document.getElementById('clearSearch').classList.toggle('hidden', v.length === 0);
+        applyFilter();
+    }
+
+    function clearSearchInput() {
+        document.getElementById('searchInput').value = '';
+        handleSearch();
+    }
+
+    function applyFilter() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        let any = false;
+        document.querySelectorAll('.dir-card[data-group]').forEach(card => {
+            const show = currentGroup === 'all' || currentGroup === card.dataset.group;
+            if (!show) { card.style.display = 'none'; return; }
+            const contactsList = card.querySelector('.dir-contacts');
+            const chevron = card.querySelector('.dir-chevron');
+            let vis = false;
+            card.querySelectorAll('.dir-row').forEach(row => {
+                const match = row.dataset.search.includes(q);
+                row.style.display = match ? '' : 'none';
+                if (match) vis = true;
             });
-            
-            applyFilterVisibility();
-        }
-
-        function createContactHTML(contact, catIndex, badgeClass) {
-            const isFav = favorites.some(f => f.ext === contact.ext);
-            const contactObj = JSON.stringify({
-                name: contact.name, 
-                ext: contact.ext, 
-                detail: contact.detail, 
-                badgeClass 
-            }).replace(/"/g, '&quot;');
-            
-            const displayExt = contact.ext.length > 5 ? 'Directo' : contact.ext;
-            
-            return `
-                <li class="contact-item" data-search="${contact.name.toLowerCase()} ${contact.ext} ${contact.detail.toLowerCase()}">
-                    <div class="contact-info">
-                        <strong>${contact.name} <span class="badge ${badgeClass}">${displayExt}</span></strong>
-                        <span>${contact.detail}</span>
-                    </div>
-                    <div class="contact-actions">
-                        <button class="btn-action btn-call" title="Copiar" onclick="handleAction('${contact.ext}', ${contactObj})">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="btn-action btn-fav ${isFav ? 'active' : ''}" 
-                                onclick="toggleFavorite('${contact.name}', '${contact.ext}', '${contact.detail}', '${badgeClass}')">
-                            <i class="fas fa-star"></i>
-                        </button>
-                    </div>
-                </li>
-            `;
-        }
-
-        // --- FILTER LOGIC ---
-        function filterByGroup(group, btn) {
-            document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentGroup = group;
-            applyFilterVisibility();
-        }
-
-        function handleSearch() {
-            const input = document.getElementById('searchInput');
-            const clearBtn = document.getElementById('clearSearch');
-            
-            if (input.value.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
+            card.style.display = vis ? '' : 'none';
+            if (vis && q) {
+                contactsList.style.display = 'block';
+                chevron.classList.add('open');
+            } else if (!q) {
+                contactsList.style.display = 'none';
+                chevron.classList.remove('open');
             }
-            
-            applyFilterVisibility();
-        }
-        
-        function clearSearchInput() {
-            const input = document.getElementById('searchInput');
-            input.value = '';
-            handleSearch();
-        }
+            if (vis) any = true;
+        });
+        document.getElementById('emptyState').style.display = any ? 'none' : '';
+    }
 
-        function applyFilterVisibility() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.category-card');
-            let globalHasResults = false;
+    // ===== ACTIONS =====
+    function handleAction(ext, obj) { copyToClipboard(ext); addToRecents(obj); }
 
-            cards.forEach(card => {
-                const cardGroup = card.dataset.group;
-                const items = card.querySelectorAll('.contact-item');
-                let cardHasVisibleItems = false;
+    function addToRecents(c) {
+        recents = recents.filter(r => r.ext !== c.ext);
+        recents.unshift(c);
+        if (recents.length > 3) recents.pop();
+        localStorage.setItem('linksRecents', JSON.stringify(recents));
+        renderRecents();
+    }
 
-                const belongsToGroup = (currentGroup === 'all') || (currentGroup === cardGroup);
+    function renderRecents() {
+        const el = document.getElementById('recentsSection');
+        const list = document.getElementById('recentsList');
+        if (!recents.length) { el.style.display = 'none'; return; }
+        el.style.display = '';
+        list.innerHTML = recents.map(c => contactHTML(c, c.group)).join('');
+    }
 
-                if (!belongsToGroup) {
-                    card.style.display = 'none';
-                    return; 
-                }
+    function clearRecents() { recents = []; localStorage.removeItem('linksRecents'); renderRecents(); }
 
-                items.forEach(item => {
-                    const text = item.getAttribute('data-search');
-                    const matchesSearch = text.includes(query);
-                    
-                    if (matchesSearch) {
-                        item.style.display = 'flex';
-                        cardHasVisibleItems = true;
-                        globalHasResults = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
+    function toggleFavorite(name, ext, detail, group) {
+        const i = favorites.findIndex(f => f.ext === ext);
+        if (i === -1) { favorites.push({name,ext,detail,group}); showToast('Favorito agregado'); }
+        else { favorites.splice(i,1); showToast('Favorito eliminado'); }
+        localStorage.setItem('linksFavorites', JSON.stringify(favorites));
+        renderDirectory(directoryData);
+        handleSearch();
+        renderFavorites();
+        renderRecents();
+    }
 
-                if (cardHasVisibleItems) {
-                    card.style.display = 'block';
-                    if (query !== '') {
-                        card.querySelector('.contact-list').style.display = 'block';
-                        card.querySelector('.category-header i').style.transform = 'rotate(0deg)';
-                    }
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+    function renderFavorites() {
+        const el = document.getElementById('favoritesSection');
+        const list = document.getElementById('favoritesList');
+        if (!favorites.length) { el.style.display = 'none'; return; }
+        el.style.display = '';
+        list.innerHTML = favorites.map(f => contactHTML(f, f.group)).join('');
+    }
 
-            document.getElementById('emptyState').style.display = globalHasResults ? 'none' : 'block';
-        }
+    // ===== UTILS =====
+    function toggleCategory(head) {
+        const list = head.nextElementSibling;
+        const chev = head.querySelector('.dir-chevron');
+        const open = getComputedStyle(list).display !== 'none';
+        list.style.display = open ? 'none' : 'block';
+        chev.classList.toggle('open', !open);
+    }
 
-        // --- LOGIC: RECENTS, FAVORITES, ACTIONS ---
-        function handleAction(ext, contactObj) {
-            copyToClipboard(ext);
-            addToRecents(contactObj);
-        }
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => showToast('Copiado: ' + text)).catch(() => {
+            const ta = document.createElement('textarea'); ta.value = text;
+            document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+            document.body.removeChild(ta); showToast('Copiado: ' + text);
+        });
+    }
 
-        function addToRecents(contact) {
-            recents = recents.filter(r => r.ext !== contact.ext);
-            recents.unshift(contact);
-            if (recents.length > 3) recents.pop();
-            localStorage.setItem('linksRecents', JSON.stringify(recents));
-            renderRecents();
-        }
-
-        function renderRecents() {
-            const section = document.getElementById('recentsSection');
-            const list = document.getElementById('recentsList');
-            if (recents.length === 0) { section.style.display = 'none'; return; }
-            section.style.display = 'block';
-            list.innerHTML = recents.map(c => createContactHTML(c, 0, c.badgeClass)).join('');
-        }
-
-        function clearRecents() {
-            recents = [];
-            localStorage.removeItem('linksRecents');
-            renderRecents();
-        }
-
-        function toggleFavorite(name, ext, detail, badgeClass) {
-            const index = favorites.findIndex(f => f.ext === ext);
-            if (index === -1) {
-                favorites.push({ name, ext, detail, badgeClass });
-                showToast(`Favorito agregado`);
-            } else {
-                favorites.splice(index, 1);
-            }
-            localStorage.setItem('linksFavorites', JSON.stringify(favorites));
-            renderFavorites();
-            
-            // Sync UI
-            const btns = document.querySelectorAll(`.contact-item[data-search*="${ext}"] .btn-fav`);
-            btns.forEach(b => b.classList.toggle('active'));
-            renderRecents();
-        }
-
-        function renderFavorites() {
-            const favSection = document.getElementById('favoritesSection');
-            const favList = document.getElementById('favoritesList');
-            if (favorites.length === 0) { favSection.style.display = 'none'; return; }
-            favSection.style.display = 'block';
-            favList.innerHTML = favorites.map(f => createContactHTML(f, 0, f.badgeClass)).join('');
-        }
-
-        // --- UTILS ---
-        function toggleCategory(header) {
-            const list = header.nextElementSibling;
-            const icon = header.querySelector('i');
-            const isOpen = list.style.display !== 'none';
-            list.style.display = isOpen ? 'none' : 'block';
-            icon.style.transform = isOpen ? 'rotate(-90deg)' : 'rotate(0deg)';
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast(`Copiado: ${text}`);
-            }).catch(() => {
-                const ta = document.createElement("textarea");
-                ta.value = text;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand("copy");
-                document.body.removeChild(ta);
-                showToast(`Copiado: ${text}`);
-            });
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
     </script>
 </body>
 </html>

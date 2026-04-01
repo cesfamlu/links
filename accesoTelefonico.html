@@ -49,6 +49,13 @@
                         <p class="dir-brand-subtitle">Anexos y contactos institucionales</p>
                     </div>
                 </div>
+                <div class="dir-search dir-search-hero">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="searchInput" placeholder="Buscar funcionario, unidad o anexo..." oninput="handleSearch()">
+                    <button class="dir-search-clear hidden" id="clearSearch" onclick="clearSearchInput()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -57,13 +64,6 @@
     <!-- ===== TOOLBAR: Search + Filters + Stats ===== -->
     <div class="dir-toolbar">
         <div class="dir-toolbar-inner">
-            <div class="dir-search">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="searchInput" placeholder="Buscar funcionario, unidad o anexo..." oninput="handleSearch()">
-                <button class="dir-search-clear hidden" id="clearSearch" onclick="clearSearchInput()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
             <div class="dir-filters">
                 <button class="dir-chip active" data-group="all" onclick="filterByGroup('all', this)">
                     Todos <span class="dir-chip-n" id="countAll">0</span>

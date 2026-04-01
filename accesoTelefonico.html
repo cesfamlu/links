@@ -13,14 +13,54 @@
 </head>
 <body class="page-dir">
 
-    <!-- ===== HEADER COMPACTO ===== -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-info">
+                    <div class="info-item">
+                        <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span id="currentDateTime">Cargando...</span>
+                    </div>
+                </div>
+                <div class="header-user">
+                    <a class="action-btn" href="index.html">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"></path></svg>
+                        <span>Inicio</span>
+                    </a>
+                    <a class="action-btn" href="https://cesfamtic.com" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z"></path></svg>
+                        <span>Intranet TI</span>
+                    </a>
+                    <a class="action-btn primary" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z"></path></svg>
+                        <span>Mesa de Ayuda TI</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-main-content">
+                <div class="logo-section">
+                    <div class="logo-wrap">
+                        <img src="img/1.png" alt="CESFAM" class="logo-image" onerror="this.style.display='none'">
+                    </div>
+                    <div class="dir-brand-copy">
+                        <h1 class="dir-brand-title">Directorio Telefonico</h1>
+                        <p class="dir-brand-subtitle">Anexos y contactos institucionales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HEADER ===== -->
     <header class="dir-header">
         <div class="dir-header-inner">
             <div class="dir-header-left">
                 <img src="img/1.png" alt="CESFAM" class="dir-logo" onerror="this.style.display='none'">
                 <div class="dir-header-text">
                     <h1 class="dir-h1">Directorio Telefónico</h1>
-                    <p class="dir-h1-sub" id="currentDateTime">Cargando...</p>
+                    <p class="dir-h1-sub" id="currentDateTimeLegacy">Cargando...</p>
                 </div>
             </div>
             <nav class="dir-nav">

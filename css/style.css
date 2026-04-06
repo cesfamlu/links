@@ -1095,9 +1095,17 @@ body {
   --sk-highlight: #30363d;
 }
 
+.skeleton-wrapper {
+  position: relative;
+  height: 0;
+}
+
 .skeleton-grid {
   /* Se superpone encima del cards-grid mientras carga */
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 /* Estado de salida: el skeleton se desvanece y sube */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,8 +65,19 @@
     </svg>
     <span>TEAMS CESFAM</span>
 </a>
+                    <!-- Dark mode toggle -->
+                    <button id="themeToggle" class="btn-theme-toggle" aria-label="Cambiar tema claro/oscuro">
+                        <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                        </svg>
+                    </button>
                 </div>
-                
+
             </div>
         </div>
         <div class="header-main">
@@ -112,6 +123,19 @@
                         <span id="toggleAllText">Mostrar Enlaces</span>
                     </button>
                 </div>
+            </div>
+
+            <!-- ═══ SKELETON LOADERS (se ocultan tras init) ═══ -->
+            <div id="skeletonGrid" class="cards-grid skeleton-grid" aria-hidden="true">
+                <!-- 8 cards placeholder → misma proporción que las reales -->
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
             </div>
 
             <div id="noResults" class="no-results hidden">
@@ -562,16 +586,27 @@
                 <section class="footer-section">
                     <h3 class="footer-title">Contactos</h3>
                     <p class="footer-text">
-                        <a href="mailto:informacionescesfamlaunión@gmail.cl" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-envelope text-xl"></i></a>
-                        informacionescesfamlaunión@gmail.cl
+                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <a href="mailto:informacionescesfamlaunion@gmail.com" class="footer-text-link">informacionescesfamlaunion@gmail.com</a>
                     </p>
                     <p class="footer-text">
-                        <a href="mailto:some@munilaunion.cl" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="ph-fill ph-envelope text-xl"></i></a>
-                        some@munilaunion.cl
+                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <a href="mailto:some@munilaunion.cl" class="footer-text-link">some@munilaunion.cl</a>
                     </p>
                     <p class="footer-text">
-                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l1.89 1.89a2 2 0 002.83 0L12 7l4.28 4.28a2 2 0 002.83 0L21 10"></path></svg>
-                        La Unión, Región de Los Ríos
+                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>La Unión, Región de Los Ríos</span>
                     </p>
                 </section>
 
@@ -580,8 +615,8 @@
                 <section class="footer-section">
                     <h3 class="footer-title">CESFAM La Unión</h3>
                     <ul class="footer-links">
-                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA target="_blank">Facebook</a></li>
-                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu"" target="_blank">Youtube</a></li>
+                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank">Facebook</a></li>
+                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank">Youtube</a></li>
                         <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank">Instagram</a></li>
                     </ul>
                 </section>
@@ -605,10 +640,35 @@
         </div>
     </footer>
 
-    <div id="toast" class="toast hidden" role="status" aria-live="polite">
+    <!-- Toast multi-variante -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite" data-type="success">
         <div class="toast-content">
-            <svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <!-- Ícono success -->
+            <svg class="toast-icon" data-icon="success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <!-- Ícono error -->
+            <svg class="toast-icon" data-icon="error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <!-- Ícono warning -->
+            <svg class="toast-icon" data-icon="warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <!-- Ícono info -->
+            <svg class="toast-icon" data-icon="info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
             <span class="toast-message" id="toastMessage">Acción realizada</span>
+            <button class="toast-close" id="toastClose" aria-label="Cerrar notificación">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
     </div>
 

@@ -126,6 +126,7 @@
             </div>
 
             <!-- ═══ SKELETON LOADERS (se ocultan tras init) ═══ -->
+            <div id="skeletonWrapper" class="skeleton-wrapper">
             <div id="skeletonGrid" class="cards-grid skeleton-grid" aria-hidden="true">
                 <!-- 8 cards placeholder → misma proporción que las reales -->
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
@@ -137,6 +138,7 @@
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
             </div>
+            </div><!-- /skeletonWrapper -->
 
             <div id="noResults" class="no-results hidden">
                 <svg class="no-results-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -667,11 +669,4 @@
             <button class="toast-close" id="toastClose" aria-label="Cerrar notificación">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script src="js/fcn.js"></script>
-</body>
-</html>
+                <

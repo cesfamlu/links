@@ -3,11 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CESFAM La Unión</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="1.5.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="1.5.png">
-    <link rel="shortcut icon" href="img/1.5.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ═══ SEO & Social ═══ -->
+    <title>CESFAM La Unión — Portal de Herramientas Digitales</title>
+    <meta name="description" content="Portal de acceso rápido a herramientas clínicas, administrativas y de soporte para el equipo de salud del CESFAM La Unión. Área de Informática.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#003d82">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="CESFAM La Unión — Portal de Herramientas Digitales">
+    <meta property="og:description" content="Acceso rápido a sistemas clínicos, administrativos y de soporte para el equipo CESFAM La Unión.">
+    <meta property="og:locale"      content="es_CL">
+
+    <!-- ═══ Favicon ═══ -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="shortcut icon"                        href="img/favicon.ico">
+    <link rel="apple-touch-icon"                     href="img/apple-touch-icon.png">
+
+    <!-- ═══ Fuentes — carga no bloqueante ═══ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+
+    <!-- ═══ CSS ═══ -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -86,7 +113,9 @@
             <div class="container header-main-content">
                 <div class="logo-section">
                     <div class="logo-wrap">
-                        <img id="siteLogo" src="img/1.png" alt="CESFAM La Unión" class="logo-image">
+                        <img id="siteLogo" src="img/logo.png" alt="CESFAM La Unión" class="logo-image"
+                             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex'">
+                        <span id="logoFallback" class="logo-fallback" style="display:none">CESFAM<br>La Unión</span>
                     </div>
                 </div>
                 <div class="search-section">
@@ -125,8 +154,83 @@
                 </div>
             </div>
 
+            <!-- ═══ DASHBOARD DE MÉTRICAS — Fase 4 ═══ -->
+            <div class="metrics-bar" id="metricsBar" aria-label="Estadísticas de herramientas">
+
+                <!-- Total -->
+                <button class="metric-card metric-card--all" data-metric="all" aria-pressed="true">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--all">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricAll">0</span>
+                    </div>
+                    <span class="metric-label">Total herramientas</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--all" id="fillAll" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- Clínico -->
+                <button class="metric-card metric-card--clinical" data-metric="clinical" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--clinical">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricClinical">0</span>
+                    </div>
+                    <span class="metric-label">Clínico</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--clinical" id="fillClinical" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- CESFAM -->
+                <button class="metric-card metric-card--admin" data-metric="admin" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--admin">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricAdmin">0</span>
+                    </div>
+                    <span class="metric-label">CESFAM</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--admin" id="fillAdmin" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- Soporte -->
+                <button class="metric-card metric-card--support" data-metric="support" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--support">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricSupport">0</span>
+                    </div>
+                    <span class="metric-label">Soporte</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--support" id="fillSupport" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- ═══ CARDS STACK: skeleton + cards se superponen sin doblar altura ═══ -->
+            <div class="cards-stack">
+
             <!-- ═══ SKELETON LOADERS (se ocultan tras init) ═══ -->
-            <div id="skeletonWrapper" class="skeleton-wrapper">
             <div id="skeletonGrid" class="cards-grid skeleton-grid" aria-hidden="true">
                 <!-- 8 cards placeholder → misma proporción que las reales -->
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
@@ -138,7 +242,6 @@
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
                 <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
             </div>
-            </div><!-- /skeletonWrapper -->
 
             <div id="noResults" class="no-results hidden">
                 <svg class="no-results-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -560,87 +663,177 @@
                     </div>
                 </article>
 
-            </div>
+            </div><!-- /cardsContainer -->
 
-            <!-- Footer spacing anchor --> 
-        </div>
+            </div><!-- /cards-stack -->
+
+        </div><!-- /container -->
     </main>
 
     <footer class="main-footer">
         <div class="container">
+            <div class="footer-inner">
+                <div class="footer-content">
 
+                    <!-- Col 1: Brand -->
+                    <section class="footer-section footer-brand">
+                        <span class="footer-brand-name">CESFAM La Unión</span>
+                        <p class="footer-brand-desc">Portal de herramientas digitales para el equipo de salud. Área de Informática.</p>
+                        <div class="footer-badge">
+                            <span class="footer-badge-dot"></span>
+                            Sistemas operativos
+                        </div>
+                    </section>
 
+                    <!-- Col 2: Contacto -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">Contacto</h3>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <a href="mailto:informacionescesfamlaunion@gmail.com" class="footer-text-link">informaciones<wbr>cesfamlaunion<wbr>@gmail.com</a>
+                        </p>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <a href="mailto:some@munilaunion.cl" class="footer-text-link">some@munilaunion.cl</a>
+                        </p>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>La Unión, Los Ríos</span>
+                        </p>
+                    </section>
 
-            <div class="footer-content">
-                <section class="footer-section">
-                    <h3 class="footer-title">Enlaces</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'});return false;">Volver arriba</a></li>
-                        <li><a class="footer-link" href="https://www.minsal.cl" target="_blank">Ministerio de Salud</a></li>
-                        <li><a class="footer-link" href="https://www.gob.cl" target="_blank">Gobierno de Chile</a></li>
-                         <li><a class="footer-link" href="https://www.cesfamtic.com" target="_blank">Intranet TI</a></li>
-                    </ul>
-                </section>
+                    <!-- Col 3: Institucional -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">Institucional</h3>
+                        <ul class="footer-links">
+                            <li><a class="footer-link" href="https://www.minsal.cl" target="_blank" rel="noopener">Ministerio de Salud</a></li>
+                            <li><a class="footer-link" href="https://www.fonasa.cl" target="_blank" rel="noopener">FONASA</a></li>
+                            <li><a class="footer-link" href="https://www.gob.cl" target="_blank" rel="noopener">Gobierno de Chile</a></li>
+                            <li><a class="footer-link" href="https://www.cesfamtic.com" target="_blank" rel="noopener">Intranet TI</a></li>
+                        </ul>
+                    </section>
+                    <!-- Col 4: CESFAM -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">CESFAM</h3>
+                        <ul class="footer-links">
+                            <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank" rel="noopener">Facebook</a></li>
+                            <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank" rel="noopener">Youtube</a></li>
+                            <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank" rel="noopener">Instagram</a></li>
+                            <li><a class="footer-link" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">Soporte TI</a></li>
+                        </ul>
+                    </section>
 
+                </div><!-- /.footer-content -->
 
-
-                
-                <section class="footer-section">
-                    <h3 class="footer-title">Contactos</h3>
-                    <p class="footer-text">
-                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                <!-- Footer bottom bar -->
+                <div class="footer-bottom">
+                    <div class="footer-bottom-left">
+                        <span class="footer-copyright">© <span id="year"></span> CESFAM La Unión · Área de Informática</span>
+                        <span class="footer-meta">
+                            <span>Versión 4.0</span>
+                            <span class="footer-meta-dot"></span>
+                            <span>Herramientas digitales</span>
+                        </span>
+                    </div>
+                    <a href="#" class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
                         </svg>
-                        <a href="mailto:informacionescesfamlaunion@gmail.com" class="footer-text-link">informacionescesfamlaunion@gmail.com</a>
-                    </p>
-                    <p class="footer-text">
-                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        <a href="mailto:some@munilaunion.cl" class="footer-text-link">some@munilaunion.cl</a>
-                    </p>
-                    <p class="footer-text">
-                        <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        <span>La Unión, Región de Los Ríos</span>
-                    </p>
-                </section>
+                        Volver arriba
+                    </a>
+                </div>
 
+            </div><!-- /.footer-inner -->
+        </div><!-- /.container -->
+    </footer>
 
+    <!-- ═══ DETAIL DRAWER — Fase 6 ═══ -->
+    <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+    <aside id="detailDrawer" class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
 
-                <section class="footer-section">
-                    <h3 class="footer-title">CESFAM La Unión</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank">Facebook</a></li>
-                        <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank">Youtube</a></li>
-                        <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank">Instagram</a></li>
-                    </ul>
-                </section>
-                <section class="footer-section">
-                    <h3 class="footer-title">Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank">Soporte Informatica</a></li>
-                        <li><a class="footer-link" href="https://www.fonasa.cl" target="_blank">FONASA</a></li>
-                          <li><a class="footer-link" href="https://www.cesfamtic.com" target="_blank">Intranet TI</a></li>
-                    </ul>
-                </section>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-copyright">© <span id="year"></span> CESFAM La Unión. Area de Informática.</div>
-                <div class="footer-meta">
-                    <span>Versión 3.0</span>
-                    <span class="footer-separator"></span>
-                    
+        <div class="drawer-header">
+            <div class="drawer-header-left">
+                <div class="drawer-icon" id="drawerIcon"></div>
+                <div>
+                    <span class="drawer-category" id="drawerCategory"></span>
+                    <h2 class="drawer-title" id="drawerTitle"></h2>
                 </div>
             </div>
+            <button class="drawer-close" id="drawerClose" aria-label="Cerrar panel">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
-    </footer>
+
+        <div class="drawer-body">
+
+            <p class="drawer-description" id="drawerDescription"></p>
+
+            <!-- Sección de enlaces -->
+            <div class="drawer-section" id="drawerLinksSection">
+                <h3 class="drawer-section-title" id="drawerLinksTitle">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                    </svg>
+                    <span id="drawerLinksSectionLabel">Accesos directos</span>
+                </h3>
+                <ul class="drawer-links-list" id="drawerLinksList"></ul>
+            </div>
+
+            <!-- Sección de información -->
+            <div class="drawer-section drawer-info-section">
+                <h3 class="drawer-section-title">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Información
+                </h3>
+                <div class="drawer-info-grid">
+                    <div class="drawer-info-item">
+                        <span class="drawer-info-label">Categoría</span>
+                        <span class="drawer-info-value" id="drawerInfoCategory"></span>
+                    </div>
+                    <div class="drawer-info-item">
+                        <span class="drawer-info-label">Palabras clave</span>
+                        <span class="drawer-info-value" id="drawerInfoKeywords"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="drawer-footer">
+            <button class="drawer-copy-btn" id="drawerCopyBtn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span id="drawerCopyLabel">Copiar enlace principal</span>
+            </button>
+            <a class="drawer-open-btn" id="drawerOpenBtn" href="#" target="_blank" rel="noopener">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                Abrir sitio
+            </a>
+        </div>
+
+    </aside>
 
     <!-- Toast multi-variante -->
     <div id="toast" class="toast hidden" role="status" aria-live="polite" data-type="success">
@@ -674,6 +867,6 @@
         </div>
     </div>
 
-    <script src="js/fcn.js"></script>
+    <script src="js/fcn.js?v=7"></script>
 </body>
 </html>

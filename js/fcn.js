@@ -24,6 +24,12 @@
     const toastCloseBtn     = document.getElementById('toastClose');
     const themeToggleBtn    = document.getElementById('themeToggle');
     const htmlEl            = document.documentElement;
+    const favoritesSection  = document.getElementById('favoritesSection');
+    const favoritesContainer= document.getElementById('favoritesContainer');
+    const favoritesCountEl  = document.getElementById('favoritesCount');
+    const clearFavoritesBtn = document.getElementById('clearFavorites');
+    const itNotice          = document.getElementById('itNotice');
+    const dismissNoticeBtn  = document.getElementById('dismissNotice');
 
     /* ----------------------------------------------------------
        Estado
@@ -31,6 +37,18 @@
     let currentFilter   = 'all';
     let linksExpanded   = false;
     let skeletonDone    = false;   // bloquea applyStagger hasta que el skeleton salga
+    const FAVORITES_KEY = 'cesfam-favorite-tools';
+    const FEATURED_TOOLS = new Set(['ras', 'sigges', 'core', 'hospital-digital']);
+    const SYSTEM_STATUS = {
+        ras: { state: 'ok', label: 'Operativo' },
+        sigges: { state: 'ok', label: 'Operativo' },
+        core: { state: 'ok', label: 'Operativo' },
+        'visor-de-examenes': { state: 'ok', label: 'Operativo' },
+        fonasa: { state: 'degraded', label: 'Lento' },
+        'bot-some': { state: 'ok', label: 'Operativo' },
+        bloqueapp: { state: 'ok', label: 'Operativo' }
+    };
+    let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
 
     /* ----------------------------------------------------------
        Dark mode
@@ -58,6 +76,186 @@
     }
 
     initTheme();
+
+    /* ----------------------------------------------------------
+       Productividad: ids, favoritos, estados y avisos
+       ---------------------------------------------------------- */
+    function slugify(text) {
+        return normalizeText(text)
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
+    function getCardId(card) {
+        if (!card) return '';
+        if (!card.dataset.id) {
+            const title = card.querySelector('.card-title')?.textContent?.trim() || '';
+            card.dataset.id = slugify(title);
+        }
+        return card.dataset.id;
+    }
+
+    function saveFavorites() {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    }
+
+    function getPrimaryHref(card) {
+        const sublink = card.querySelector('.sublink-item');
+        const direct = card.querySelector('a.btn-primary.btn-direct');
+        return sublink?.href || direct?.href || '#';
+    }
+
+    function getCategoryLabel(category) {
+        return CATEGORY_LABELS[category] || category || 'Herramienta';
+    }
+
+    function setupCardsMetadata() {
+        cards.forEach(card => {
+            const id = getCardId(card);
+            if (FEATURED_TOOLS.has(id)) card.classList.add('card--featured');
+        });
+    }
+
+    function applySystemStatus() {
+        cards.forEach(card => {
+            const id = getCardId(card);
+            const status = SYSTEM_STATUS[id] || { state: 'unknown', label: 'Sin estado' };
+            card.dataset.status = status.state;
+
+            let badge = card.querySelector('.system-status');
+            if (!badge) {
+                badge = document.createElement('span');
+                card.querySelector('.card-header')?.appendChild(badge);
+            }
+            badge.className = `system-status system-status--${status.state}`;
+            badge.textContent = status.label;
+        });
+    }
+
+    function injectFavoriteButtons() {
+        cards.forEach(card => {
+            if (card.querySelector('.card-pin')) return;
+            const btn = document.createElement('button');
+            btn.className = 'card-pin';
+            btn.type = 'button';
+            btn.setAttribute('data-action', 'toggle-favorite');
+            btn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11.48 3.499a.6.6 0 011.04 0l2.12 4.294a.6.6 0 00.452.328l4.74.689a.6.6 0 01.332 1.023l-3.43 3.344a.6.6 0 00-.173.531l.81 4.721a.6.6 0 01-.87.632l-4.24-2.23a.6.6 0 00-.558 0l-4.24 2.23a.6.6 0 01-.87-.632l.81-4.721a.6.6 0 00-.173-.531L3.8 9.833a.6.6 0 01.332-1.023l4.74-.689a.6.6 0 00.452-.328l2.155-4.294z"/>
+            </svg>`;
+            card.appendChild(btn);
+        });
+        syncFavoriteButtons();
+    }
+
+    function syncFavoriteButtons() {
+        cards.forEach(card => {
+            const active = favorites.includes(getCardId(card));
+            const btn = card.querySelector('.card-pin');
+            if (!btn) return;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-label', active ? 'Quitar de favoritos' : 'Agregar a favoritos');
+            btn.setAttribute('aria-pressed', String(active));
+        });
+    }
+
+    function cardMatchesCurrentView(card) {
+        const query = normalizeText(searchInput.value);
+        const category = card.getAttribute('data-category');
+        const matchCategory = currentFilter === 'all' || currentFilter === category;
+        const matchQuery = query.length === 0 || normalizeText(getCardSearchText(card)).includes(query);
+        return matchCategory && matchQuery;
+    }
+
+    function renderFavorites() {
+        if (!favoritesSection || !favoritesContainer) return;
+
+        const favoriteCards = favorites
+            .map(id => cards.find(card => getCardId(card) === id))
+            .filter(Boolean)
+            .filter(cardMatchesCurrentView);
+
+        favoritesContainer.innerHTML = '';
+        favoriteCards.forEach(card => {
+            const id = getCardId(card);
+            const title = card.querySelector('.card-title')?.textContent?.trim() || '';
+            const description = card.querySelector('.card-description')?.textContent?.trim() || '';
+            const category = card.getAttribute('data-category') || '';
+            const status = SYSTEM_STATUS[id] || { state: 'unknown', label: 'Sin estado' };
+
+            const item = document.createElement('article');
+            item.className = 'favorite-card';
+            item.dataset.id = id;
+            item.innerHTML = `
+                <div class="favorite-card__meta">
+                    <span class="favorite-card__category">${getCategoryLabel(category)}</span>
+                    <span class="system-status system-status--${status.state}">${status.label}</span>
+                </div>
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <div class="favorite-card__actions">
+                    <a href="${getPrimaryHref(card)}" target="_blank" rel="noopener noreferrer">Abrir</a>
+                    <button type="button" data-action="toggle-favorite" data-id="${id}" aria-label="Quitar ${title} de favoritos">Quitar</button>
+                </div>`;
+            favoritesContainer.appendChild(item);
+        });
+
+        const hasFavorites = favoriteCards.length > 0;
+        favoritesSection.classList.toggle('hidden', !hasFavorites);
+        if (favoritesCountEl) {
+            favoritesCountEl.textContent = `${favoriteCards.length} favorita${favoriteCards.length === 1 ? '' : 's'}`;
+        }
+    }
+
+    function toggleFavoriteById(id) {
+        if (!id) return;
+        favorites = favorites.includes(id)
+            ? favorites.filter(item => item !== id)
+            : [...favorites, id];
+        saveFavorites();
+        syncFavoriteButtons();
+        renderFavorites();
+        showToast(favorites.includes(id) ? 'Herramienta agregada a favoritos' : 'Herramienta quitada de favoritos', 'info');
+    }
+
+    function initNotice() {
+        if (!itNotice) return;
+        const noticeId = itNotice.dataset.noticeId || 'default';
+        const storageKey = `cesfam-notice-dismissed-${noticeId}`;
+        itNotice.classList.toggle('hidden', localStorage.getItem(storageKey) === 'true');
+        dismissNoticeBtn?.addEventListener('click', () => {
+            localStorage.setItem(storageKey, 'true');
+            itNotice.classList.add('hidden');
+        });
+    }
+
+    function initSearchShortcuts() {
+        document.addEventListener('keydown', event => {
+            const tag = document.activeElement?.tagName;
+            const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable;
+
+            if (event.key === '/' && !isTyping) {
+                event.preventDefault();
+                searchInput.focus();
+            }
+
+            if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+                event.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            }
+
+            if (event.key === 'Escape' && document.activeElement === searchInput) {
+                if (searchInput.value) {
+                    searchInput.value = '';
+                    applyFilters();
+                    showToast('Busqueda limpiada', 'info');
+                } else {
+                    searchInput.blur();
+                }
+            }
+        });
+    }
 
     /* ----------------------------------------------------------
        Fecha y hora
@@ -322,6 +520,29 @@
         if (card) openDrawer(card);
     });
 
+    cardsContainer.addEventListener('click', e => {
+        const btn = e.target.closest('[data-action="toggle-favorite"]');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavoriteById(getCardId(btn.closest('.card')));
+    });
+
+    favoritesContainer?.addEventListener('click', e => {
+        const btn = e.target.closest('[data-action="toggle-favorite"]');
+        if (!btn) return;
+        e.preventDefault();
+        toggleFavoriteById(btn.dataset.id);
+    });
+
+    clearFavoritesBtn?.addEventListener('click', () => {
+        favorites = [];
+        saveFavorites();
+        syncFavoriteButtons();
+        renderFavorites();
+        showToast('Favoritos limpiados', 'info');
+    });
+
     /* ----------------------------------------------------------
        Dashboard de métricas — Fase 4
        ---------------------------------------------------------- */
@@ -467,6 +688,7 @@
 
         // Dispara animación escalonada solo en los visibles
         applyStagger(visibleCards);
+        renderFavorites();
     }
 
     function setFilter(filter) {
@@ -545,6 +767,12 @@
        3. buildCategoryCounters + setFilter configuran estado sin animar
        4. Callback del skeleton revela todo y dispara animaciones juntas
        ---------------------------------------------------------- */
+    setupCardsMetadata();
+    applySystemStatus();
+    injectFavoriteButtons();
+    initNotice();
+    initSearchShortcuts();
+
     const metricRefs = buildMetrics();
 
     initSkeleton(() => {

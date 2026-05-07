@@ -1,137 +1,930 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isikha | Mejorando el sistema</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ═══ SEO & Social ═══ -->
+    <title>CESFAM La Unión — Portal de Herramientas Digitales</title>
+    <meta name="description" content="Portal de acceso rápido a herramientas clínicas, administrativas y de soporte para el equipo de salud del CESFAM La Unión. Área de Informática.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#003d82">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="CESFAM La Unión — Portal de Herramientas Digitales">
+    <meta property="og:description" content="Acceso rápido a sistemas clínicos, administrativos y de soporte para el equipo CESFAM La Unión.">
+    <meta property="og:locale"      content="es_CL">
+
+    <!-- ═══ Favicon ═══ -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="shortcut icon"                        href="img/favicon.ico">
+    <link rel="apple-touch-icon"                     href="img/apple-touch-icon.png">
+
+    <!-- ═══ Fuentes — carga no bloqueante ═══ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-bg: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --accent-blue: #3b82f6;
-        }
+    <link rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
 
-        body {
-            background-color: var(--primary-bg);
-            color: #f9fafb;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-        }
-
-        /* Fondo animado estilo Isikha */
-        .bg-mesh {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.15) 0%, transparent 50%);
-            filter: blur(80px);
-        }
-
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .glow-button {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .dots-loader::after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60% { content: '...'; }
-            80%, 100% { content: ''; }
-        }
-    </style>
+    <!-- ═══ CSS ═══ -->
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="bg-mesh"></div>
-
-    <div class="w-full max-w-md glass-card rounded-[2.5rem] p-8 text-center relative overflow-hidden">
-        <!-- Efecto de brillo superior -->
-        <div class="absolute top-0 left-0 w-full h-1 shimmer"></div>
-
-        <!-- Logo Area -->
-        <div class="mb-10 flex justify-center">
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition"></div>
-                <div class="relative bg-black rounded-2xl p-4 border border-white/10">
-                    <!-- Intenta cargar tu logo real -->
-                    <img src="img/Isikha.png" alt="Logo" class="h-10 w-auto" onerror="this.style.display='none'; document.getElementById('txt-logo').style.display='block'">
-                    <span id="txt-logo" class="hidden text-2xl font-extrabold tracking-tighter">Hub Digital CESFAM La Union</span>
+<body>
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-info">
+                    <div class="info-item">
+                        <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span id="currentDateTime">Cargando fecha y hora...</span>
+                    </div>
                 </div>
+                <div class="header-user" id="headerNav">
+
+                    <!-- 1. Introducción al Sistema — destacado dorado -->
+                    <a class="action-btn action-btn--golden" href="https://cesfamtic.com/introduccionsuite" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span>Introducción al Sistema</span>
+                    </a>
+
+                    <!-- 2. Directorio Telefónico -->
+                    <a class="action-btn" href="https://cesfamlu.github.io/links/accesoTelefonico.html" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <span>Directorio</span>
+                    </a>
+
+                    <!-- 3. Mesa de Ayuda TI -->
+                    <a class="action-btn" href="https://cesfamtic.com/soporte/" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <span>Mesa de Ayuda TI</span>
+                    </a>
+
+                    <!-- 4. BloqueApp -->
+                    <a class="action-btn" href="https://cesfamtic.com/BloqueAPP/login.html" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span>BloqueApp</span>
+                    </a>
+
+                    <!-- 5. Intranet TI -->
+                    <a class="action-btn" href="https://cesfamtic.com" target="_blank" rel="noopener">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                        <span>Intranet TI</span>
+                    </a>
+
+                    <!-- Dark mode toggle -->
+                    <button id="themeToggle" class="btn-theme-toggle" aria-label="Cambiar tema claro/oscuro">
+                        <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                        </svg>
+                    </button>
+                </div>
+
             </div>
         </div>
+        <div class="header-main">
 
-        <!-- Main Content -->
-        <div class="space-y-6">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20">
-                <p class="text-blue-400 text-xs font-bold uppercase tracking-widest dots-loader">Actualizando sistema</p>
+    
+            <div class="container header-main-content">
+                <div class="logo-section">
+                    <div class="logo-wrap">
+                        <img id="siteLogo" src="img/1.png" alt="CESFAM La Unión" class="logo-image"
+                             onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex'">
+                        <span id="logoFallback" class="logo-fallback" style="display:none">CESFAM<br>La Unión</span>
+                    </div>
+                </div>
+                <div class="search-section">
+                    <div class="search-box">
+                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="searchInput" placeholder="Buscar en todas las herramientas...">
+                        <button id="clearSearch" class="clear-btn hidden" aria-label="Limpiar búsqueda">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                
+           
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div id="itNotice" class="it-notice" data-notice-id="portal-operativo-2026-05" data-type="info">
+                <div class="it-notice__content">
+                    <strong>Portal operativo</strong>
+                    <span>Ante lentitud en RAS, usa los accesos de contingencia disponibles en la tarjeta.</span>
+                </div>
+                <a class="it-notice__link" href="https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" target="_blank" rel="noopener">Abrir contingencia</a>
+                <button id="dismissNotice" class="it-notice__close" type="button" aria-label="Cerrar aviso">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
 
-            <h1 class="text-3xl font-extrabold leading-tight tracking-tight px-2">
-                Estamos mejorando la <span class="text-blue-500">plataforma</span> para ti.
-            </h1>
-
-            <p class="text-gray-400 text-sm leading-relaxed px-4">
-                Estamos aplicando mejoras en el rendimiento y nuevas funciones. No tardaremos mucho.
-            </p>
-
-            <!-- Time Display -->
-            <div class="py-6 px-4 bg-white/5 rounded-3xl border border-white/5">
-                <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Volvemos a las</p>
-                <h2 class="text-4xl font-bold text-white tracking-tight">12:30 <span class="text-blue-500 text-2xl">PM</span></h2>
+            <div class="controls-bar">
+                <div class="controls-left">
+                    <h2 class="page-title">Herramientas</h2>
+                    <span id="itemsCount" class="items-count"></span>
+                </div>
+                <div class="controls-right">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="clinical">Clínico</button>
+                        <button class="filter-btn" data-filter="admin">CESFAM</button>
+                        <button class="filter-btn" data-filter="support">Soporte</button>
+                    </div>
+                    <button id="toggleAllLinks" class="btn-toggle-all">
+                        <svg class="icon-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <span id="toggleAllText">Mostrar Enlaces</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Botón falso/informativo -->
-            <button class="w-full py-4 rounded-2xl glow-button text-white font-bold text-sm uppercase tracking-widest">
-                Reintentar pronto
+            <!-- ═══ DASHBOARD DE MÉTRICAS — Fase 4 ═══ -->
+            <div class="metrics-bar" id="metricsBar" aria-label="Estadísticas de herramientas">
+
+                <!-- Total -->
+                <button class="metric-card metric-card--all" data-metric="all" aria-pressed="true">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--all">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricAll">0</span>
+                    </div>
+                    <span class="metric-label">Total herramientas</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--all" id="fillAll" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- Clínico -->
+                <button class="metric-card metric-card--clinical" data-metric="clinical" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--clinical">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricClinical">0</span>
+                    </div>
+                    <span class="metric-label">Clínico</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--clinical" id="fillClinical" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- CESFAM -->
+                <button class="metric-card metric-card--admin" data-metric="admin" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--admin">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricAdmin">0</span>
+                    </div>
+                    <span class="metric-label">CESFAM</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--admin" id="fillAdmin" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+                <!-- Soporte -->
+                <button class="metric-card metric-card--support" data-metric="support" aria-pressed="false">
+                    <div class="metric-top">
+                        <div class="metric-icon metric-icon--support">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <span class="metric-value" id="metricSupport">0</span>
+                    </div>
+                    <span class="metric-label">Soporte</span>
+                    <div class="metric-track">
+                        <div class="metric-fill metric-fill--support" id="fillSupport" style="--fill-pct: 0%"></div>
+                    </div>
+                </button>
+
+            </div>
+
+            <section id="favoritesSection" class="favorites-section hidden" aria-label="Mis herramientas favoritas">
+                <div class="section-header">
+                    <div>
+                        <h2>Mis herramientas</h2>
+                        <span id="favoritesCount">0 favoritas</span>
+                    </div>
+                    <button id="clearFavorites" class="section-action" type="button">Limpiar</button>
+                </div>
+                <div id="favoritesContainer" class="favorites-grid"></div>
+            </section>
+
+            <!-- ═══ CARDS STACK: skeleton + cards se superponen sin doblar altura ═══ -->
+            <div class="cards-stack">
+
+            <!-- ═══ SKELETON LOADERS (se ocultan tras init) ═══ -->
+            <div id="skeletonGrid" class="cards-grid skeleton-grid" aria-hidden="true">
+                <!-- 8 cards placeholder → misma proporción que las reales -->
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+                <div class="card-skeleton"><div class="sk-header"><div class="sk-icon"></div><div class="sk-badge"></div></div><div class="sk-body"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line sk-line--short"></div></div><div class="sk-footer"><div class="sk-btn"></div></div></div>
+            </div>
+
+            <div id="noResults" class="no-results hidden">
+                <svg class="no-results-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta con otras palabras clave o revisa los filtros aplicados.</p>
+            </div>
+            
+            <div id="cardsContainer" class="cards-grid">
+                
+                <!-- CATEGORÍA: CLÍNICO -->
+                <!-- 1. RAS -->
+                <article class="card" data-category="clinical" data-keywords="ras registro atencion salud urgencia some valdivia">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">RAS</h3>
+                        <p class="card-description">Registro de Atenciones de Salud - Múltiples servidores disponibles.</p>
+                         <div class="sublinks hidden" id="sublinks-ras">
+                            <h4 class="sublinks-label">Servidores Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://www.rasvaldivia.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS Principal</a></li>
+                                <li><a href="https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS Contingencia</a></li>
+                                <li><a href="http://10.8.102.72" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 1</a></li>
+                                <li><a href="http://10.8.102.74" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 2</a></li>
+                                <li><a href="http://10.8.102.104" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> RAS IP 3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-ras" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 2. SIGGES -->
+                <article class="card" data-category="clinical" data-keywords="sigges ges garantias explicitas salud minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SIGGES</h3>
+                        <p class="card-description">Sistema de Información para la Gestión de Garantías en Salud.</p>
+                         <div class="sublinks hidden" id="sublinks-sigges">
+                            <h4 class="sublinks-label">Versiones Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://nuevo.sigges.cl/#/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Nuevo SIGGES</a></li>
+                                <li><a href="https://www.sigges.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> SIGGES </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-sigges" aria-expanded="false">
+                            <span class="btn-text">Ver Versiones</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>  
+
+                <!-- 3. CORE -->
+                <article class="card" data-category="clinical" data-keywords="core examenes laboratorio imagenes resultados valdivia">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">CORE</h3>
+                        <p class="card-description">Sistema de gestión de exámenes médicos.</p>
+                        <div class="sublinks hidden" id="sublinks-core">
+                            <h4 class="sublinks-label">Servidores</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://www.hbvaldivia.cl/core/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> CORE Principal</a></li>
+                                <li><a href="https://10.6.206.62/core" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> CORE IP</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                         <button class="btn-primary" data-target="sublinks-core" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 4. Visor de Exámenes -->
+                <article class="card" data-category="clinical" data-keywords="examenes laboratorio resultados pruebas clinicas">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Visor de Exámenes</h3>
+                        <p class="card-description">Acceso a resultados de exámenes de laboratorio.</p>
+                        <div class="sublinks hidden" id="sublinks-examenes">
+                            <h4 class="sublinks-label">Servidores</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="http://10.66.50.47/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Exámenes Principal</a></li>
+                                <li><a href="http://10.4.59.246:90/" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Exámenes Contingencia</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                         <button class="btn-primary" data-target="sublinks-examenes" aria-expanded="false">
+                            <span class="btn-text">Ver Enlaces</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 5. Hospital Digital -->
+                <article class="card" data-category="clinical" data-keywords="hospital digital interconsulta derivaciones telemedicina minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Hospital Digital</h3>
+                        <p class="card-description">Plataforma de interconsultas y telemedicina.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://interconsulta.minsal.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 6. FONASA -->
+                <article class="card" data-category="clinical" data-keywords="fonasa aseguradora salud minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">FONASA</h3>
+                        <p class="card-description">Fondo Nacional de Salud e información pública para prestadores.</p>
+                        <div class="sublinks hidden" id="sublinks-fonasa">
+                            <h4 class="sublinks-label">Versiones Disponibles</h4>
+                            <ul class="sublinks-list">
+                                <li><a href="https://fonasa.cl" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> FONASA</a></li>
+                                <li><a href="https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" class="sublink-item" target="_blank"><span class="sublink-arrow">›</span> Front Integrado</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary" data-target="sublinks-fonasa" aria-expanded="false">
+                            <span class="btn-text">Ver Opciones</span>
+                            <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 7. Imed -->
+                <article class="card" data-category="clinical" data-keywords="imed licencias medicas certificados electronicas">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Imed</h3>
+                        <p class="card-description">Sistema de licencias médicas electrónicas.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.licencia.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 8. DART -->
+                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DART</h3>
+                        <p class="card-description">Teleoftalmología y retinopatía diabética.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://teleoftalmologia.minsal.cl/es/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                 <!-- 8. DART -->
+                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DESAM</h3>
+                        <p class="card-description">Compras DESAM.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://compras.desamlu.cl/login.php" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                 <!-- 8. DART -->
+                <article class="card" data-category="clinical" data-keywords="dart teleoftalmologia retinopatia diabetica minsal ojos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DESAM</h3>
+                        <p class="card-description">Bodega CESFAM</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://bodega.desamlu.cl/login.php" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 9. SURVIH MINSAL -->
+                <article class="card" data-category="clinical" data-keywords="survih vih registro minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SURVIH MINSAL</h3>
+                        <p class="card-description">Sistema de registro único de VIH.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://survih.minsal.cl/Login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 10. Chile Crece Contigo -->
+                <article class="card" data-category="clinical" data-keywords="chile crece contigo infancia desarrollo infantil ninos bebes">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Chile Crece Contigo</h3>
+                        <p class="card-description">Programa de desarrollo infantil temprano.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://srdm.crececontigo.gob.cl/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 11. Centro Integral -->
+                <article class="card" data-category="clinical" data-keywords="centro integral salud mental atencion psicologica">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Centro Integral</h3>
+                        <p class="card-description">Atención integral de salud mental.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tinyurl.com/centro-integral" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 12. Epivigilia -->
+                <article class="card" data-category="clinical" data-keywords="epivigilia epidemiologia registro minsal">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Epivigilia</h3>
+                        <p class="card-description">Plataforma de vigilancia epidemiológica MINSAL.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://epivigila.minsal.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 13. Prescripción receta MINSAL -->
+                <article class="card" data-category="clinical" data-keywords="prescripcion receta minsal medicamentos">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Prescripción MINSAL</h3>
+                        <p class="card-description">Plataforma Prescripción de receta MINSAL.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://prescripcion-receta.minsal.cl/auth/login" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 14. Isis View -->
+                <article class="card" data-category="clinical" data-keywords="isis view imagenes medicas radiologia pacs">
+                    <div class="card-header">
+                        <div class="card-icon clinical"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                        <span class="card-badge clinical">Clínico</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isis View</h3>
+                        <p class="card-description">Visor de imágenes médicas y radiología.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="http://10.6.67.166" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                <!-- CATEGORÍA: CESFAM / ADMIN -->
+
+                <!-- 15. DESAMLU -->
+                <article class="card" data-category="admin" data-keywords="desamlu municipalidad salud municipal department">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">DESAMLU</h3>
+                        <p class="card-description">Plataforma Departamento de salud municipal.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://desamlu.cl/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 16. Intranet -->
+                <article class="card" data-category="admin" data-keywords="intranet la union interna red privada smc">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Intranet</h3>
+                        <p class="card-description">Red interna de comunicación institucional SMC.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://intranetlaunion.smc.cl/login.aspx" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 17. Datos de Derivación -->
+                <article class="card" data-category="admin" data-keywords="derivaciones datos directorio">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Datos de Derivación</h3>
+                        <p class="card-description">Plataforma digital para funcionarios con datos útiles de derivación.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://cesfamtic.com/derivar/" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 18. Biblioteca CESFAM -->
+                <article class="card" data-category="admin" data-keywords="biblioteca recursos manuales documentos drive">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Biblioteca CESFAM</h3>
+                        <p class="card-description">Repositorio de biblioteca con recursos en Google Drive para funcionarios.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 19. Muni La Unión -->
+                <article class="card" data-category="admin" data-keywords="municipalidad la union municipal tramites comunal">
+                    <div class="card-header">
+                        <div class="card-icon admin"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+                        <span class="card-badge admin">CESFAM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Muni La Unión</h3>
+                        <p class="card-description">Portal de información y trámites municipal de La Unión.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.munilaunioninfo.com" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+
+                <!-- CATEGORÍA: SOPORTE -->
+
+                <!-- 20. BloqueApp -->
+                <article class="card card-featured" data-category="support" data-keywords="bloqueapp bloqueo agenda citas horarios cesfam">
+                    <div class="card-header">
+                        <div class="card-icon support">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <span class="card-badge support">Soporte</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">BloqueApp</h3>
+                        <p class="card-description">Sistema de gestión para bloqueos de agenda en CESFAM.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://cesfamtic.com/BloqueAPP/login.html" target="_blank" class="btn-primary btn-direct btn-glow">
+                            Ir al Sitio 
+                            <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 21. BOT SOME -->
+                <article class="card" data-category="support" data-keywords="bot some atencion consultas chatbot">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge support">Soporte</span>
+                        <span class="badge-new">NUEVO</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">BOT SOME</h3>
+                        <p class="card-description">BOT de apoyo a agentes SOME para seguimiento rápido.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://bot.desamlu.cl/login.php" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+                <!-- 22. Isatec -->
+                <article class="card" data-category="support" data-keywords="isatec clientes portal soporte soporte tecnico averias">
+                    <div class="card-header">
+                        <div class="card-icon support"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                        <span class="card-badge support">Soporte</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Isatec</h3>
+                        <p class="card-description">Portal de clientes Isatec para soporte técnico.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://clientes.isatec.cl" target="_blank" class="btn-primary btn-direct">Ir al Sitio <svg class="btn-icon-right" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+                    </div>
+                </article>
+
+            </div><!-- /cardsContainer -->
+
+            </div><!-- /cards-stack -->
+
+        </div><!-- /container -->
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-content">
+
+                    <!-- Col 1: Brand -->
+                    <section class="footer-section footer-brand">
+                        <span class="footer-brand-name">CESFAM La Unión</span>
+                        <p class="footer-brand-desc">Portal de herramientas digitales para el equipo de salud. Área de Informática.</p>
+                        <div class="footer-badge">
+                            <span class="footer-badge-dot"></span>
+                            Sistemas operativos
+                        </div>
+                    </section>
+
+                    <!-- Col 2: Contacto -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">Contacto</h3>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <a href="mailto:informacionescesfamlaunion@gmail.com" class="footer-text-link">informaciones<wbr>cesfamlaunion<wbr>@gmail.com</a>
+                        </p>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <a href="mailto:some@munilaunion.cl" class="footer-text-link">some@munilaunion.cl</a>
+                        </p>
+                        <p class="footer-text">
+                            <svg class="footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>La Unión, Los Ríos</span>
+                        </p>
+                    </section>
+
+                    <!-- Col 3: Institucional -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">Institucional</h3>
+                        <ul class="footer-links">
+                            <li><a class="footer-link" href="https://www.minsal.cl" target="_blank" rel="noopener">Ministerio de Salud</a></li>
+                            <li><a class="footer-link" href="https://www.fonasa.cl" target="_blank" rel="noopener">FONASA</a></li>
+                            <li><a class="footer-link" href="https://www.gob.cl" target="_blank" rel="noopener">Gobierno de Chile</a></li>
+                            <li><a class="footer-link" href="https://www.cesfamtic.com" target="_blank" rel="noopener">Intranet TI</a></li>
+                        </ul>
+                    </section>
+                    <!-- Col 4: CESFAM -->
+                    <section class="footer-section">
+                        <h3 class="footer-title">CESFAM</h3>
+                        <ul class="footer-links">
+                            <li><a class="footer-link" href="https://www.facebook.com/cesfamlu/?locale=es_LA" target="_blank" rel="noopener">Facebook</a></li>
+                            <li><a class="footer-link" href="https://www.youtube.com/@cesfamlu" target="_blank" rel="noopener">Youtube</a></li>
+                            <li><a class="footer-link" href="https://www.instagram.com/cesfamlu/?hl=es" target="_blank" rel="noopener">Instagram</a></li>
+                            <li><a class="footer-link" href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener">Soporte TI</a></li>
+                        </ul>
+                    </section>
+
+                </div><!-- /.footer-content -->
+
+                <!-- Footer bottom bar -->
+                <div class="footer-bottom">
+                    <div class="footer-bottom-left">
+                        <span class="footer-copyright">© <span id="year"></span> CESFAM La Unión · Área de Informática</span>
+                        <span class="footer-meta">
+                            <span>Versión 4.0</span>
+                            <span class="footer-meta-dot"></span>
+                            <span>Herramientas digitales</span>
+                        </span>
+                    </div>
+                    <a href="#" class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                        </svg>
+                        Volver arriba
+                    </a>
+                </div>
+
+            </div><!-- /.footer-inner -->
+        </div><!-- /.container -->
+    </footer>
+
+    <!-- ═══ DETAIL DRAWER — Fase 6 ═══ -->
+    <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+    <aside id="detailDrawer" class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+
+        <div class="drawer-header">
+            <div class="drawer-header-left">
+                <div class="drawer-icon" id="drawerIcon"></div>
+                <div>
+                    <span class="drawer-category" id="drawerCategory"></span>
+                    <h2 class="drawer-title" id="drawerTitle"></h2>
+                </div>
+            </div>
+            <button class="drawer-close" id="drawerClose" aria-label="Cerrar panel">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
             </button>
         </div>
 
-        <!-- Footer -->
-        <div class="mt-10 pt-6 border-t border-white/5 text-[10px] text-gray-600 flex justify-between items-center px-2">
-            <span>© 2024 ISIKHA PROJECT</span>
-            <div class="flex space-x-3">
-                <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                <span class="text-blue-500/50">SERVER ON</span>
+        <div class="drawer-body">
+
+            <p class="drawer-description" id="drawerDescription"></p>
+
+            <!-- Sección de enlaces -->
+            <div class="drawer-section" id="drawerLinksSection">
+                <h3 class="drawer-section-title" id="drawerLinksTitle">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                    </svg>
+                    <span id="drawerLinksSectionLabel">Accesos directos</span>
+                </h3>
+                <ul class="drawer-links-list" id="drawerLinksList"></ul>
             </div>
+
+            <!-- Sección de información -->
+            <div class="drawer-section drawer-info-section">
+                <h3 class="drawer-section-title">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Información
+                </h3>
+                <div class="drawer-info-grid">
+                    <div class="drawer-info-item">
+                        <span class="drawer-info-label">Categoría</span>
+                        <span class="drawer-info-value" id="drawerInfoCategory"></span>
+                    </div>
+                    <div class="drawer-info-item">
+                        <span class="drawer-info-label">Palabras clave</span>
+                        <span class="drawer-info-value" id="drawerInfoKeywords"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="drawer-footer">
+            <button class="drawer-copy-btn" id="drawerCopyBtn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span id="drawerCopyLabel">Copiar enlace principal</span>
+            </button>
+            <a class="drawer-open-btn" id="drawerOpenBtn" href="#" target="_blank" rel="noopener">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                Abrir sitio
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- Toast multi-variante -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite" data-type="success">
+        <div class="toast-content">
+            <!-- Ícono success -->
+            <svg class="toast-icon" data-icon="success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <!-- Ícono error -->
+            <svg class="toast-icon" data-icon="error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <!-- Ícono warning -->
+            <svg class="toast-icon" data-icon="warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <!-- Ícono info -->
+            <svg class="toast-icon" data-icon="info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="toast-message" id="toastMessage">Acción realizada</span>
+            <button class="toast-close" id="toastClose" aria-label="Cerrar notificación">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
     </div>
 
-    <script>
-        // Animación de entrada suave
-        document.body.style.opacity = '0';
-        window.onload = () => {
-            document.body.style.transition = 'opacity 0.8s ease-out';
-            document.body.style.opacity = '1';
-        };
-    </script>
+    <script src="js/fcn.js?v=8"></script>
+    <script src="js/isikha.js?v=7"></script>
 </body>
 </html>

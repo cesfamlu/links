@@ -31,8 +31,7 @@
       }
     ]
   },
-
-{
+  {
     "id": "visor",
     "title": "Visor de Exámenes",
     "icon": "fileSearch",
@@ -52,7 +51,6 @@
       }
     ]
   },
-  
   {
     "id": "core",
     "title": "CORE",
@@ -73,6 +71,17 @@
       }
     ]
   },
+{
+    "id": "imed",
+    "title": "Imed",
+    "icon": "fileText",
+    "desc": "Licencias médicas electrónicas",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://www.licencia.cl"
+  },
   {
     "id": "derivacion",
     "title": "Datos de Derivación",
@@ -84,8 +93,7 @@
     "type": "single",
     "url": "https://cesfamtic.com/derivar/"
   },
-  
-{
+  {
     "id": "bloqueapp",
     "title": "BloqueApp",
     "icon": "calendarX",
@@ -107,7 +115,20 @@
     "type": "single",
     "url": "https://www.cesfamtic.com/controles/"
   },
-{
+  {
+    "id": "nuevo-1780346950855",
+    "title": "Informatica Gestión",
+    "icon": "globe",
+    "desc": "Ingresa una descripción para el nuevo servicio",
+    "category": "support",
+    "badge": "TI",
+    "highlight": true,
+    "type": "single",
+    "url": "https://cesfamtic.com"
+  },
+
+  
+  {
     "id": "sigges",
     "title": "SIGGES",
     "icon": "shield",
@@ -127,21 +148,6 @@
       }
     ]
   },
-  {
-    "id": "bot-some",
-    "title": "BOT SOME",
-    "icon": "messageBot",
-    "desc": "Apoyo a agentes SOME",
-    "category": "support",
-    "badge": "NUEVO",
-    "highlight": false,
-    "type": "single",
-    "url": "https://bot.desamlu.cl/login.php"
-  },
-
-
-
-
   {
     "id": "hospital-digital",
     "title": "Hospital Digital",
@@ -173,17 +179,19 @@
       }
     ]
   },
-  {
-    "id": "imed",
-    "title": "Imed",
-    "icon": "fileText",
-    "desc": "Licencias médicas electrónicas",
-    "category": "clinico",
-    "badge": null,
+
+{
+    "id": "bot-some",
+    "title": "BOT SOME",
+    "icon": "messageBot",
+    "desc": "Apoyo a agentes SOME",
+    "category": "support",
+    "badge": "NUEVO",
     "highlight": false,
     "type": "single",
-    "url": "https://www.licencia.cl"
+    "url": "https://bot.desamlu.cl/login.php"
   },
+  
   {
     "id": "dart",
     "title": "DART",
@@ -305,7 +313,6 @@
     "type": "single",
     "url": "https://intranetlaunion.smc.cl/login.aspx"
   },
-
   {
     "id": "biblioteca",
     "title": "Biblioteca CESFAM",
@@ -328,7 +335,6 @@
     "type": "single",
     "url": "https://www.munilaunioninfo.com"
   },
-  
   {
     "id": "isatec",
     "title": "Isatec",
@@ -340,4 +346,5 @@
     "type": "single",
     "url": "https://clientes.isatec.cl"
   }
+
 ]

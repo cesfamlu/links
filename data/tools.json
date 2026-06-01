@@ -31,26 +31,28 @@
       }
     ]
   },
-  {
-    "id": "sigges",
-    "title": "SIGGES",
-    "icon": "shield",
-    "desc": "Gestión de Garantías en Salud",
+
+{
+    "id": "visor",
+    "title": "Visor de Exámenes",
+    "icon": "fileSearch",
+    "desc": "Resultados de laboratorio",
     "category": "clinico",
     "badge": null,
     "highlight": false,
     "type": "multi",
     "links": [
       {
-        "label": "Nuevo SIGGES",
-        "url": "https://nuevo.sigges.cl/#/login"
+        "label": "Exámenes Principal",
+        "url": "http://10.66.50.47/"
       },
       {
-        "label": "SIGGES",
-        "url": "https://www.sigges.cl"
+        "label": "Exámenes Contingencia",
+        "url": "http://10.4.59.246:90/"
       }
     ]
   },
+  
   {
     "id": "core",
     "title": "CORE",
@@ -72,24 +74,27 @@
     ]
   },
   {
-    "id": "visor",
-    "title": "Visor de Exámenes",
-    "icon": "fileSearch",
-    "desc": "Resultados de laboratorio",
-    "category": "clinico",
-    "badge": null,
+    "id": "derivacion",
+    "title": "Datos de Derivación",
+    "icon": "send",
+    "desc": "Datos útiles de derivación",
+    "category": "admin",
+    "badge": "NUEVO",
     "highlight": false,
-    "type": "multi",
-    "links": [
-      {
-        "label": "Exámenes Principal",
-        "url": "http://10.66.50.47/"
-      },
-      {
-        "label": "Exámenes Contingencia",
-        "url": "http://10.4.59.246:90/"
-      }
-    ]
+    "type": "single",
+    "url": "https://cesfamtic.com/derivar/"
+  },
+  
+{
+    "id": "bloqueapp",
+    "title": "BloqueApp",
+    "icon": "calendarX",
+    "desc": "Gestión para bloqueos de agenda",
+    "category": "support",
+    "badge": "NUEVO",
+    "highlight": true,
+    "type": "single",
+    "url": "https://bloqueapp-f3a22.web.app/"
   },
   {
     "id": "nuevo-1780339326033",
@@ -102,6 +107,41 @@
     "type": "single",
     "url": "https://www.cesfamtic.com/controles/"
   },
+{
+    "id": "sigges",
+    "title": "SIGGES",
+    "icon": "shield",
+    "desc": "Gestión de Garantías en Salud",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "multi",
+    "links": [
+      {
+        "label": "Nuevo SIGGES",
+        "url": "https://nuevo.sigges.cl/#/login"
+      },
+      {
+        "label": "SIGGES",
+        "url": "https://www.sigges.cl"
+      }
+    ]
+  },
+  {
+    "id": "bot-some",
+    "title": "BOT SOME",
+    "icon": "messageBot",
+    "desc": "Apoyo a agentes SOME",
+    "category": "support",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://bot.desamlu.cl/login.php"
+  },
+
+
+
+
   {
     "id": "hospital-digital",
     "title": "Hospital Digital",
@@ -265,17 +305,7 @@
     "type": "single",
     "url": "https://intranetlaunion.smc.cl/login.aspx"
   },
-  {
-    "id": "derivacion",
-    "title": "Datos de Derivación",
-    "icon": "send",
-    "desc": "Datos útiles de derivación",
-    "category": "admin",
-    "badge": "NUEVO",
-    "highlight": false,
-    "type": "single",
-    "url": "https://cesfamtic.com/derivar/"
-  },
+
   {
     "id": "biblioteca",
     "title": "Biblioteca CESFAM",
@@ -298,28 +328,7 @@
     "type": "single",
     "url": "https://www.munilaunioninfo.com"
   },
-  {
-    "id": "bloqueapp",
-    "title": "BloqueApp",
-    "icon": "calendarX",
-    "desc": "Gestión para bloqueos de agenda",
-    "category": "support",
-    "badge": "NUEVO",
-    "highlight": true,
-    "type": "single",
-    "url": "https://bloqueapp-f3a22.web.app/"
-  },
-  {
-    "id": "bot-some",
-    "title": "BOT SOME",
-    "icon": "messageBot",
-    "desc": "Apoyo a agentes SOME",
-    "category": "support",
-    "badge": "NUEVO",
-    "highlight": false,
-    "type": "single",
-    "url": "https://bot.desamlu.cl/login.php"
-  },
+  
   {
     "id": "isatec",
     "title": "Isatec",

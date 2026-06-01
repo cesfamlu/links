@@ -19,7 +19,7 @@
       },
       {
         "label": "RAS IP 1",
-        "url": "http://10.8.102.72"
+        "url": "http://10.8.102.73"
       },
       {
         "label": "RAS IP 2",
@@ -28,6 +28,26 @@
       {
         "label": "RAS IP 3",
         "url": "http://10.8.102.104"
+      }
+    ]
+  },
+  {
+    "id": "sigges",
+    "title": "SIGGES",
+    "icon": "shield",
+    "desc": "Gestión de Garantías en Salud",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "multi",
+    "links": [
+      {
+        "label": "Nuevo SIGGES",
+        "url": "https://nuevo.sigges.cl/#/login"
+      },
+      {
+        "label": "SIGGES",
+        "url": "https://www.sigges.cl"
       }
     ]
   },
@@ -81,26 +101,6 @@
     "highlight": true,
     "type": "single",
     "url": "https://www.cesfamtic.com/controles/"
-  },
-  {
-    "id": "sigges",
-    "title": "SIGGES",
-    "icon": "shield",
-    "desc": "Gestión de Garantías en Salud",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "multi",
-    "links": [
-      {
-        "label": "Nuevo SIGGES",
-        "url": "https://nuevo.sigges.cl/#/login"
-      },
-      {
-        "label": "SIGGES",
-        "url": "https://www.sigges.cl"
-      }
-    ]
   },
   {
     "id": "hospital-digital",
@@ -178,17 +178,6 @@
     "url": "https://bodega.desamlu.cl/login.php"
   },
   {
-    "id": "chile-crece",
-    "title": "Chile Crece Contigo",
-    "icon": "smile",
-    "desc": "Desarrollo infantil temprano",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "single",
-    "url": "https://srdm.crececontigo.gob.cl/login"
-  },
-  {
     "id": "survih",
     "title": "SURVIH MINSAL",
     "icon": "heartPulse",
@@ -198,6 +187,17 @@
     "highlight": false,
     "type": "single",
     "url": "https://survih.minsal.cl/Login.aspx"
+  },
+  {
+    "id": "chile-crece",
+    "title": "Chile Crece Contigo",
+    "icon": "smile",
+    "desc": "Desarrollo infantil temprano",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://srdm.crececontigo.gob.cl/login"
   },
   {
     "id": "centro-integral",

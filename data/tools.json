@@ -1,171 +1,334 @@
 [
   {
-    "id": "ras", "title": "RAS", "icon": "clipboard",
+    "id": "ras",
+    "title": "RAS",
+    "icon": "clipboard",
     "desc": "Registro de Atenciones de Salud",
-    "category": "clinico", "badge": null, "highlight": false,
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
     "type": "multi",
     "links": [
-      { "label": "Principal",     "url": "https://www.rasvaldivia.cl" },
-      { "label": "Contingencia",  "url": "https://contingencia.rasvaldivia.cl/rasvaldivia/index.php" },
-      { "label": "RAS IP 1",      "url": "http://10.8.102.72" },
-      { "label": "RAS IP 2",      "url": "http://10.8.102.74" },
-      { "label": "RAS IP 3",      "url": "http://10.8.102.104" }
+      {
+        "label": "Principal",
+        "url": "https://www.rasvaldivia.cl"
+      },
+      {
+        "label": "Contingencia",
+        "url": "https://contingencia.rasvaldivia.cl/rasvaldivia/index.php"
+      },
+      {
+        "label": "RAS IP 1",
+        "url": "http://10.8.102.72"
+      },
+      {
+        "label": "RAS IP 2",
+        "url": "http://10.8.102.74"
+      },
+      {
+        "label": "RAS IP 3",
+        "url": "http://10.8.102.104"
+      }
     ]
   },
   {
-    "id": "sigges", "title": "SIGGES", "icon": "shield",
-    "desc": "Gestión de Garantías en Salud",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "multi",
-    "links": [
-      { "label": "Nuevo SIGGES", "url": "https://nuevo.sigges.cl/#/login" },
-      { "label": "SIGGES",       "url": "https://www.sigges.cl" }
-    ]
-  },
-  {
-    "id": "core", "title": "CORE", "icon": "flask",
+    "id": "core",
+    "title": "CORE",
+    "icon": "flask",
     "desc": "Gestión de exámenes médicos",
-    "category": "clinico", "badge": null, "highlight": false,
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
     "type": "multi",
     "links": [
-      { "label": "CORE Principal", "url": "https://www.hbvaldivia.cl/core/" },
-      { "label": "CORE IP",        "url": "https://10.6.206.62/core" }
+      {
+        "label": "CORE Principal",
+        "url": "https://www.hbvaldivia.cl/core/"
+      },
+      {
+        "label": "CORE IP",
+        "url": "https://10.6.206.62/core"
+      }
     ]
   },
   {
-    "id": "visor", "title": "Visor de Exámenes", "icon": "fileSearch",
+    "id": "visor",
+    "title": "Visor de Exámenes",
+    "icon": "fileSearch",
     "desc": "Resultados de laboratorio",
-    "category": "clinico", "badge": null, "highlight": false,
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
     "type": "multi",
     "links": [
-      { "label": "Exámenes Principal",    "url": "http://10.66.50.47/" },
-      { "label": "Exámenes Contingencia", "url": "http://10.4.59.246:90/" }
+      {
+        "label": "Exámenes Principal",
+        "url": "http://10.66.50.47/"
+      },
+      {
+        "label": "Exámenes Contingencia",
+        "url": "http://10.4.59.246:90/"
+      }
     ]
   },
   {
-    "id": "hospital-digital", "title": "Hospital Digital", "icon": "monitor",
+    "id": "nuevo-1780339326033",
+    "title": "Controles Infantiles",
+    "icon": "globe",
+    "desc": "Ingresa una descripción para el nuevo servicio",
+    "category": "clinico",
+    "badge": "NUEVO",
+    "highlight": true,
+    "type": "single",
+    "url": "https://www.cesfamtic.com/controles/"
+  },
+  {
+    "id": "sigges",
+    "title": "SIGGES",
+    "icon": "shield",
+    "desc": "Gestión de Garantías en Salud",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "multi",
+    "links": [
+      {
+        "label": "Nuevo SIGGES",
+        "url": "https://nuevo.sigges.cl/#/login"
+      },
+      {
+        "label": "SIGGES",
+        "url": "https://www.sigges.cl"
+      }
+    ]
+  },
+  {
+    "id": "hospital-digital",
+    "title": "Hospital Digital",
+    "icon": "monitor",
     "desc": "Interconsultas y telemedicina",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://interconsulta.minsal.cl/"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://interconsulta.minsal.cl/"
   },
   {
-    "id": "fonasa", "title": "FONASA", "icon": "landmark",
+    "id": "fonasa",
+    "title": "FONASA",
+    "icon": "landmark",
     "desc": "Fondo Nacional de Salud",
-    "category": "clinico", "badge": null, "highlight": false,
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
     "type": "multi",
     "links": [
-      { "label": "FONASA",          "url": "https://fonasa.cl" },
-      { "label": "Front Integrado", "url": "https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login" }
+      {
+        "label": "FONASA",
+        "url": "https://fonasa.cl"
+      },
+      {
+        "label": "Front Integrado",
+        "url": "https://frontintegrado.fonasa.cl/FrontIntegradoLogin/#!/login"
+      }
     ]
   },
   {
-    "id": "imed", "title": "Imed", "icon": "fileText",
+    "id": "imed",
+    "title": "Imed",
+    "icon": "fileText",
     "desc": "Licencias médicas electrónicas",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://www.licencia.cl"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://www.licencia.cl"
   },
   {
-    "id": "dart", "title": "DART", "icon": "eye",
+    "id": "dart",
+    "title": "DART",
+    "icon": "eye",
     "desc": "Teleoftalmología y retinopatía",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://teleoftalmologia.minsal.cl/es/login"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://teleoftalmologia.minsal.cl/es/login"
   },
   {
-    "id": "desam-compras", "title": "DESAM Compras", "icon": "shoppingBag",
+    "id": "desam-compras",
+    "title": "DESAM Compras",
+    "icon": "shoppingBag",
     "desc": "Compras DESAM",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://compras.desamlu.cl/login.php"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://compras.desamlu.cl/login.php"
   },
   {
-    "id": "desam-bodega", "title": "DESAM Bodega", "icon": "packageIcon",
+    "id": "desam-bodega",
+    "title": "DESAM Bodega",
+    "icon": "packageIcon",
     "desc": "Bodega CESFAM",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://bodega.desamlu.cl/login.php"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://bodega.desamlu.cl/login.php"
   },
   {
-    "id": "survih", "title": "SURVIH MINSAL", "icon": "heartPulse",
-    "desc": "Sistema de registro único de VIH",
-    "category": "clinico", "badge": "NUEVO", "highlight": false,
-    "type": "single", "url": "https://survih.minsal.cl/Login.aspx"
-  },
-  {
-    "id": "chile-crece", "title": "Chile Crece Contigo", "icon": "smile",
+    "id": "chile-crece",
+    "title": "Chile Crece Contigo",
+    "icon": "smile",
     "desc": "Desarrollo infantil temprano",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://srdm.crececontigo.gob.cl/login"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://srdm.crececontigo.gob.cl/login"
   },
   {
-    "id": "centro-integral", "title": "Centro Integral", "icon": "brain",
+    "id": "survih",
+    "title": "SURVIH MINSAL",
+    "icon": "heartPulse",
+    "desc": "Sistema de registro único de VIH",
+    "category": "clinico",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://survih.minsal.cl/Login.aspx"
+  },
+  {
+    "id": "centro-integral",
+    "title": "Centro Integral",
+    "icon": "brain",
     "desc": "Atención integral de salud mental",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://tinyurl.com/centro-integral"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://tinyurl.com/centro-integral"
   },
   {
-    "id": "epivigilia", "title": "Epivigilia", "icon": "activity",
+    "id": "epivigilia",
+    "title": "Epivigilia",
+    "icon": "activity",
     "desc": "Vigilancia epidemiológica MINSAL",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "https://epivigila.minsal.cl/"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://epivigila.minsal.cl/"
   },
   {
-    "id": "prescripcion", "title": "Prescripción MINSAL", "icon": "pill",
+    "id": "prescripcion",
+    "title": "Prescripción MINSAL",
+    "icon": "pill",
     "desc": "Plataforma Prescripción de receta MINSAL",
-    "category": "clinico", "badge": "NUEVO", "highlight": false,
-    "type": "single", "url": "https://prescripcion-receta.minsal.cl/auth/login"
+    "category": "clinico",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://prescripcion-receta.minsal.cl/auth/login"
   },
   {
-    "id": "isis-view", "title": "Isis View", "icon": "scanIcon",
+    "id": "isis-view",
+    "title": "Isis View",
+    "icon": "scanIcon",
     "desc": "Visor de imágenes médicas y radiología",
-    "category": "clinico", "badge": null, "highlight": false,
-    "type": "single", "url": "http://10.6.67.166"
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "http://10.6.67.166"
   },
-
   {
-    "id": "desamlu", "title": "DESAMLU", "icon": "building2",
+    "id": "desamlu",
+    "title": "DESAMLU",
+    "icon": "building2",
     "desc": "Plataforma Departamento de salud municipal",
-    "category": "admin", "badge": null, "highlight": false,
-    "type": "single", "url": "https://desamlu.cl/"
+    "category": "admin",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://desamlu.cl/"
   },
   {
-    "id": "intranet-smc", "title": "Intranet", "icon": "globe",
+    "id": "intranet-smc",
+    "title": "Intranet",
+    "icon": "globe",
     "desc": "Red interna de comunicación institucional SMC",
-    "category": "admin", "badge": null, "highlight": false,
-    "type": "single", "url": "https://intranetlaunion.smc.cl/login.aspx"
+    "category": "admin",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://intranetlaunion.smc.cl/login.aspx"
   },
   {
-    "id": "derivacion", "title": "Datos de Derivación", "icon": "send",
+    "id": "derivacion",
+    "title": "Datos de Derivación",
+    "icon": "send",
     "desc": "Datos útiles de derivación",
-    "category": "admin", "badge": "NUEVO", "highlight": false,
-    "type": "single", "url": "https://cesfamtic.com/derivar/"
+    "category": "admin",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://cesfamtic.com/derivar/"
   },
   {
-    "id": "biblioteca", "title": "Biblioteca CESFAM", "icon": "bookOpen",
+    "id": "biblioteca",
+    "title": "Biblioteca CESFAM",
+    "icon": "bookOpen",
     "desc": "Repositorio en Google Drive",
-    "category": "admin", "badge": "NUEVO", "highlight": false,
-    "type": "single", "url": "https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing"
+    "category": "admin",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://drive.google.com/drive/folders/1bpBIxsCke_ICx_e3T2d7iy3wWngUABLl?usp=sharing"
   },
   {
-    "id": "muni", "title": "Muni La Unión", "icon": "mapFlag",
+    "id": "muni",
+    "title": "Muni La Unión",
+    "icon": "mapFlag",
     "desc": "Portal de información y trámites municipal",
-    "category": "admin", "badge": null, "highlight": false,
-    "type": "single", "url": "https://www.munilaunioninfo.com"
+    "category": "admin",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://www.munilaunioninfo.com"
   },
-
   {
-    "id": "bloqueapp", "title": "BloqueApp", "icon": "calendarX",
+    "id": "bloqueapp",
+    "title": "BloqueApp",
+    "icon": "calendarX",
     "desc": "Gestión para bloqueos de agenda",
-    "category": "support", "badge": "NUEVO", "highlight": true,
-    "type": "single", "url": "https://bloqueapp-f3a22.web.app/"
+    "category": "support",
+    "badge": "NUEVO",
+    "highlight": true,
+    "type": "single",
+    "url": "https://bloqueapp-f3a22.web.app/"
   },
   {
-    "id": "bot-some", "title": "BOT SOME", "icon": "messageBot",
+    "id": "bot-some",
+    "title": "BOT SOME",
+    "icon": "messageBot",
     "desc": "Apoyo a agentes SOME",
-    "category": "support", "badge": "NUEVO", "highlight": false,
-    "type": "single", "url": "https://bot.desamlu.cl/login.php"
+    "category": "support",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://bot.desamlu.cl/login.php"
   },
   {
-    "id": "isatec", "title": "Isatec", "icon": "headphones",
+    "id": "isatec",
+    "title": "Isatec",
+    "icon": "headphones",
     "desc": "Portal de clientes Isatec para soporte técnico",
-    "category": "support", "badge": null, "highlight": false,
-    "type": "single", "url": "https://clientes.isatec.cl"
+    "category": "support",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://clientes.isatec.cl"
   }
 ]

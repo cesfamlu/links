@@ -71,7 +71,7 @@
       }
     ]
   },
-{
+  {
     "id": "imed",
     "title": "Imed",
     "icon": "fileText",
@@ -126,8 +126,17 @@
     "type": "single",
     "url": "https://cesfamtic.com"
   },
-
-  
+  {
+    "id": "nuevo-1780346950855",
+    "title": "MIDAS",
+    "icon": "globe",
+    "desc": "Módulo Establecimientos de Salud",
+    "category": "clinico",
+    "badge": "NUEVO",
+    "highlight": true,
+    "type": "single",
+    "url": "https://midas.minsal.cl/establecimientos_salud"
+  },
   {
     "id": "sigges",
     "title": "SIGGES",
@@ -179,8 +188,7 @@
       }
     ]
   },
-
-{
+  {
     "id": "bot-some",
     "title": "BOT SOME",
     "icon": "messageBot",
@@ -191,7 +199,6 @@
     "type": "single",
     "url": "https://bot.desamlu.cl/login.php"
   },
-  
   {
     "id": "dart",
     "title": "DART",
@@ -346,5 +353,4 @@
     "type": "single",
     "url": "https://clientes.isatec.cl"
   }
-
 ]

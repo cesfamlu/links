@@ -86,6 +86,17 @@
     "type": "single",
     "url": "https://www.licencia.cl"
   },
+    {
+    "id": "inventarioVacunas",
+    "title": "Inventario PNI",
+    "icon": "fileText",
+    "desc": "Inventario Vacuna",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://pni.minsal.cl/logueo.aspx"
+  },
   {
     "id": "derivacion",
     "title": "Datos de Derivación",

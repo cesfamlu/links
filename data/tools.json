@@ -30,7 +30,7 @@
         "url": "http://10.8.102.104"
       }
     ]
-  },
+  },       https://10.4.59.192:8445/login
   {
     "id": "visor",
     "title": "Visor de Exámenes",
@@ -41,12 +41,20 @@
     "highlight": false,
     "type": "multi",
     "links": [
-      {
-        "label": "Exámenes Principal",
+       {
+        "label": "Exámenes HLU Nueva (Desde 04-08-2026 a la fecha)",
+        "url": "https://10.4.59.192:8445/login"
+      },
+       {
+        "label": "Exámenes Antiguo",
         "url": "http://10.66.50.47/"
       },
       {
-        "label": "Exámenes Contingencia",
+        "label": "Examenes HLU Antiguo Contingencia",
+        "url": "http://10.4.59.246:90"
+      },
+      {
+        "label": "Examenes HRB (Desde 15-07-2026 a la fecha)",
         "url": "https://10.4.57.97:8445/login"
       }
     ]

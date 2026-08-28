@@ -3,7 +3,7 @@
    Design System · v2.0 · Mayo 2026
    ============================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Quantico:wght@400;700&display=swap');
 
 /* ── Reset ── */
 *,
@@ -13,6 +13,838 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* ============================================================
+   PORTAL SHELL 2026 — lenguaje visual unificado CESFAM La Unión
+   Conserva los componentes y el comportamiento del portal existente.
+   ============================================================ */
+
+:root {
+  --bg-body: #F2F1F0;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F7F6F8;
+  --bg-header: #FFFFFF;
+  --bg-nav: #F7F6F8;
+  --bg-input: #F7F6F8;
+  --bg-overlay: rgba(15, 22, 32, 0.62);
+  --text-primary: #16202A;
+  --text-secondary: #6B6F72;
+  --text-tertiary: #8A9096;
+  --text-on-dark: #EEF2F6;
+  --text-on-accent: #17202A;
+  --accent: #E2A32B;
+  --accent-hover: #F5B942;
+  --accent-subtle: rgba(226, 163, 43, 0.14);
+  --gold: #E2A32B;
+  --gold-hover: #F5B942;
+  --gold-subtle: rgba(226, 163, 43, 0.14);
+  --success: #0E8A5F;
+  --warning: #E2A32B;
+  --danger: #DC4C4C;
+  --border: rgba(16, 24, 32, 0.09);
+  --border-hover: rgba(16, 24, 32, 0.18);
+  --banner-bg: #FFFFFF;
+  --banner-border: rgba(226, 163, 43, 0.55);
+  --banner-text: #6B521C;
+  --banner-icon: #8A5A0B;
+  --tag-clinico-bg: rgba(226, 163, 43, 0.12);
+  --tag-clinico-text: #8A5A0B;
+  --tag-clinico-icon: #8A5A0B;
+  --tag-admin-bg: rgba(16, 24, 32, 0.06);
+  --tag-admin-text: #5B6268;
+  --tag-admin-icon: #5B6268;
+  --tag-support-bg: rgba(14, 138, 95, 0.09);
+  --tag-support-text: #0E7655;
+  --tag-support-icon: #0E7655;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-glow-accent: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
+  --shadow-glow-gold: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
+  --font: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Quantico', 'Arial Narrow', sans-serif;
+  --max-w: 1400px;
+  --shell-pad: clamp(18px, 4vw, 48px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --chamfer-12: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  --chamfer-18: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+[data-theme="dark"] {
+  --bg-body: #0F1620;
+  --bg-surface: #16202C;
+  --bg-elevated: #1C2734;
+  --bg-header: #131B26;
+  --bg-nav: #1A2431;
+  --bg-input: #1C2734;
+  --text-primary: #EEF2F6;
+  --text-secondary: #98A3AE;
+  --text-tertiary: #717D89;
+  --accent: #F5B942;
+  --accent-hover: #FFD06C;
+  --accent-subtle: rgba(245, 185, 66, 0.10);
+  --gold: #F5B942;
+  --gold-hover: #FFD06C;
+  --gold-subtle: rgba(245, 185, 66, 0.10);
+  --success: #34D399;
+  --border: rgba(255, 255, 255, 0.075);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --banner-bg: #16202C;
+  --banner-border: rgba(245, 185, 66, 0.45);
+  --banner-text: #D8C28E;
+  --banner-icon: #F5B942;
+  --tag-clinico-bg: rgba(245, 185, 66, 0.10);
+  --tag-clinico-text: #F5B942;
+  --tag-clinico-icon: #F5B942;
+  --tag-admin-bg: rgba(255, 255, 255, 0.06);
+  --tag-admin-text: #B6C0C9;
+  --tag-admin-icon: #B6C0C9;
+  --tag-support-bg: rgba(52, 211, 153, 0.10);
+  --tag-support-text: #61DDAA;
+  --tag-support-icon: #61DDAA;
+}
+
+/* Superficie plana: el sistema prohíbe gradientes y tramas decorativas (CLAUDE.md §4).
+   La jerarquía la dan las superficies y las hairlines, no una cuadrícula de fondo. */
+body {
+  background-color: var(--bg-body);
+  background-image: none;
+}
+
+body::before { content: none; }
+
+button,
+input {
+  font-family: var(--font);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Header: el mismo ritmo y material del shell de referencia. */
+.header,
+[data-theme="dark"] .header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-top-bar,
+[data-theme="dark"] .header-top-bar {
+  position: relative;
+  height: 56px;
+  background: color-mix(in srgb, var(--bg-header) 92%, transparent);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.header-top-inner,
+.navbar-inner,
+.header-main-inner,
+.banner-inner,
+.filters-inner,
+.dashboard-inner,
+.footer-inner,
+.footer-bottom {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--shell-pad);
+}
+
+.header-clock {
+  gap: 14px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+
+.clock-separator {
+  height: 18px;
+  background: var(--border-hover);
+}
+
+.clock-time {
+  color: var(--text-primary);
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.theme-toggle {
+  width: 62px;
+  height: 31px;
+  padding: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hover);
+}
+
+.theme-toggle:hover { background: var(--bg-surface); }
+
+.toggle-thumb,
+[data-theme="dark"] .toggle-thumb {
+  top: 2px;
+  left: 2px;
+  width: 25px;
+  height: 25px;
+  background: var(--gold);
+  color: #17202A;
+  transform: none;
+  box-shadow: none;
+}
+
+[data-theme="light"] .toggle-thumb { transform: translateX(31px); }
+.toggle-thumb svg,
+[data-theme="dark"] .toggle-thumb svg { color: #17202A; }
+
+.admin-btn {
+  width: 31px;
+  height: 31px;
+  margin-left: 10px;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hover);
+  border-radius: 50%;
+}
+
+.admin-btn:hover {
+  color: var(--gold);
+  border-color: var(--banner-border);
+  background: var(--gold-subtle);
+}
+
+.navbar {
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  min-height: 66px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 6px;
+}
+
+.nav-btn {
+  gap: 10px;
+  padding: 11px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+  background: var(--border);
+  transform: translateY(-1px);
+}
+
+.nav-btn--gold {
+  color: var(--gold);
+  background: var(--gold-subtle);
+  border-color: var(--banner-border);
+  box-shadow: none;
+}
+
+.nav-btn--gold:hover {
+  color: var(--gold-hover);
+  background: var(--gold-subtle);
+  box-shadow: none;
+}
+
+/* El padding lateral lo pone SOLO .header-main-inner (junto al resto de los -inner).
+   Tenerlo aquí también dejaba el bloque de marca con 2× shell-pad y desalineado
+   respecto de la navbar, los filtros y la retícula. */
+.header-main,
+[data-theme="dark"] .header-main {
+  padding: 27px 0 31px;
+  background: var(--bg-header);
+}
+
+.header-main-inner {
+  display: grid;
+  grid-template-columns: minmax(440px, 1fr) minmax(390px, 620px);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.5vw, 32px);
+  min-width: 0;
+}
+
+.header-logo {
+  width: 98px;
+  height: 98px;
+  flex: 0 0 98px;
+  padding: 14px;
+  object-fit: contain;
+  background: #1B2634;
+  border: 1px solid var(--border-hover);
+  border-radius: 22px;
+  filter: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .header-logo { filter: none; }
+.header-logo:hover { transform: none; }
+
+.header-identity { min-width: 0; }
+
+.header-eyebrow,
+.filters-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.header-identity h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(25px, 2.8vw, 38px);
+  line-height: 1;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+
+.header-identity p {
+  margin-top: 9px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+
+.header-right {
+  display: grid;
+  grid-template-columns: auto minmax(260px, 1fr);
+  justify-content: stretch;
+  gap: 14px;
+}
+
+.system-status-pill {
+  gap: 9px;
+  padding: 9px 14px;
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 10%, transparent);
+  border-color: color-mix(in srgb, var(--success) 26%, transparent);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.status-dot { background: var(--success); }
+
+.header-search-container {
+  max-width: none;
+  min-width: 0;
+}
+
+.header-search-container .search-input {
+  min-height: 50px;
+  padding: 13px 66px 13px 48px;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border-hover);
+  border-radius: 0;
+  font-size: 14px;
+  clip-path: var(--chamfer-12);
+  box-shadow: none;
+}
+
+.header-search-container .search-input::placeholder { color: var(--text-secondary); }
+.header-search-container .search-icon { color: var(--text-secondary); }
+
+.header-search-container .search-input:focus {
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.search-kbd-hint {
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border-color: var(--border-hover);
+  border-radius: 4px;
+}
+
+.search-dropdown {
+  top: calc(100% + 8px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hover);
+  border-radius: 0;
+  clip-path: var(--chamfer-12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .24);
+}
+
+.search-result:hover { background: var(--gold-subtle); }
+
+/* Aviso operativo y navegación por categorías. */
+.banner {
+  max-height: 150px;
+  background: var(--banner-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.banner-inner {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* El filete ámbar del callout va pegado al texto, no al borde del viewport:
+   ahí quedaba fuera de la columna de contenido y rompía la alineación vertical. */
+.banner-content {
+  padding-left: 14px;
+  border-left: 2px solid var(--gold);
+}
+
+.banner-content p { color: var(--text-primary); }
+
+.banner-btn {
+  padding: 9px 13px;
+  border-radius: 0;
+  color: var(--gold);
+  border-color: var(--banner-border);
+  clip-path: var(--chamfer-12);
+}
+
+.banner-btn--primary {
+  color: #17202A;
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.banner-btn--primary:hover {
+  color: #17202A;
+  background: var(--gold-hover);
+}
+
+.filters-section {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 0;
+  background: color-mix(in srgb, var(--bg-nav) 92%, transparent);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.filters-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.filters-heading { min-width: 0; }
+.filters-kicker { margin-bottom: 4px; }
+
+.filters-heading h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 27px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.filters-heading p {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.filter-pills {
+  flex-wrap: nowrap;
+  gap: 0;
+  border: 1px solid var(--border-hover);
+}
+
+.filter-pill {
+  min-height: 40px;
+  padding: 10px 16px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--border);
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.filter-pill:last-child { border-right: 0; }
+.filter-pill:hover { color: var(--text-primary); background: var(--border); }
+
+.filter-pill.active {
+  color: #17202A;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: none;
+}
+
+/* Directorio: retícula de trabajo, sin mosaico de tarjetas flotantes.
+   Padding lateral 0: lo aporta .dashboard-inner. Tenerlo en ambos dejaba la
+   retícula a 96px del borde mientras header, banner y footer iban a 48px. */
+.dashboard {
+  padding: clamp(40px, 5vw, 68px) 0 clamp(70px, 8vw, 110px);
+}
+
+/* La barra de filtros es sticky y a ancho completo: su contenido debe alinear
+   con la misma columna de 1400px que el resto, no con una caja de 680px. */
+.filters-inner {
+  max-width: var(--max-w);
+  margin-inline: auto;
+}
+
+.card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 22px);
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.card {
+  min-height: 236px;
+  padding: 24px;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  /* Sin chaflán: la retícula es de hairlines (gap:1px sobre --border) y el corte
+     diagonal abría un triángulo de fondo en cada esquina, lo que leía como
+     "descuadrado". El chaflán queda para botones, paneles y modales. */
+  transition: background .2s ease, border-color .2s ease, box-shadow .28s var(--ease), transform .28s var(--ease);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .28s var(--ease);
+}
+
+.card:hover,
+[data-theme="dark"] .card:hover {
+  z-index: 2;
+  background: var(--bg-elevated);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 44px -34px rgba(0, 0, 0, .72);
+  transform: translateY(-5px);
+}
+
+.card:hover::before { transform: scaleY(1); }
+
+.card--highlight,
+[data-theme="dark"] .card--highlight {
+  border-top: 2px solid var(--gold);
+  box-shadow: none;
+}
+
+.card-header { gap: 15px; margin-bottom: 14px; }
+
+.card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 0;
+  background: var(--gold-subtle);
+  color: var(--gold);
+  clip-path: var(--chamfer-12);
+}
+
+.card-title-row { margin-bottom: 5px; }
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.card-desc { min-height: 38px; margin-bottom: 10px; color: var(--text-secondary); }
+
+.card-tag {
+  padding: 0;
+  color: var(--text-tertiary);
+  background: transparent;
+  border-radius: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.card-badge {
+  color: #17202A;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.card-actions { padding-top: 20px; border-top: 1px solid var(--border); }
+
+.card-link-btn,
+.card-sublinks-toggle {
+  min-height: 42px;
+  padding: 11px 14px;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  clip-path: var(--chamfer-12);
+}
+
+.card-link-btn {
+  color: #17202A;
+  background: var(--gold);
+}
+
+.card-link-btn:hover { color: #17202A; background: var(--gold-hover); }
+
+.card-sublinks-toggle {
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--border-hover);
+}
+
+.card-sublinks-toggle:hover {
+  color: var(--gold);
+  background: var(--gold-subtle);
+  border-color: var(--banner-border);
+}
+
+.card-sublink {
+  padding: 12px 14px;
+  border-radius: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.card-sublink:hover { color: var(--gold); background: var(--gold-subtle); }
+
+.card-sublinks.expanded { margin-top: 12px; }
+
+.card-sublinks-list {
+  gap: 8px;
+  padding-top: 0;
+}
+
+.card.search-highlight {
+  border-color: var(--gold);
+  box-shadow: inset 0 0 0 2px var(--gold);
+}
+
+.no-results h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+/* Footer, paleta y modal heredan el mismo sistema de superficies. */
+.footer {
+  color: var(--text-secondary);
+  background: var(--bg-header);
+  border-top-color: var(--border);
+}
+
+.footer-inner { padding-top: 40px; padding-bottom: 34px; }
+.footer-brand img { max-height: 112px; filter: brightness(0); }
+[data-theme="dark"] .footer-brand img { filter: brightness(0) invert(1); }
+.footer h4 { color: var(--text-primary); letter-spacing: .14em; }
+.footer a { color: var(--text-secondary); }
+.footer a:hover { color: var(--gold); }
+.footer-bottom { border-top-color: var(--border); }
+
+.cmdk-panel,
+[data-theme="light"] .cmdk-panel,
+.admin-modal-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hover);
+  border-radius: 0;
+  clip-path: var(--chamfer-18);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .35);
+}
+
+.cmdk-search,
+[data-theme="light"] .cmdk-search,
+.cmdk-footer,
+[data-theme="light"] .cmdk-footer { border-color: var(--border); }
+
+.cmdk-input,
+[data-theme="light"] .cmdk-input,
+.admin-passcode-input {
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border-radius: 0;
+}
+
+.cmdk-item:hover,
+.cmdk-item[aria-selected="true"],
+[data-theme="light"] .cmdk-item:hover,
+[data-theme="light"] .cmdk-item[aria-selected="true"] { background: var(--gold-subtle); }
+
+.admin-modal-icon {
+  color: var(--gold);
+  background: var(--gold-subtle);
+  border-radius: 0;
+  clip-path: var(--chamfer-12);
+  box-shadow: none;
+}
+
+.admin-submit-btn {
+  color: #17202A;
+  background: var(--gold);
+  border-radius: 0;
+  clip-path: var(--chamfer-12);
+}
+
+.admin-submit-btn:hover { background: var(--gold-hover); }
+
+@media (max-width: 1180px) {
+  .header-main-inner { grid-template-columns: 1fr; gap: 24px; }
+  .header-right { max-width: 760px; }
+  .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 860px) {
+  .filters-inner { align-items: flex-start; flex-direction: column; }
+  .filter-pills { width: 100%; overflow-x: auto; }
+  .filter-pill { flex: 1 0 auto; }
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .header-top-inner { padding-inline: 16px; }
+  .navbar-inner { padding-inline: 12px; }
+  .nav-btn .nav-label { display: inline; }
+  .header-main { padding: 22px 18px 25px; }
+  .header-main-inner { padding-inline: 0; }
+  .header-brand { align-items: flex-start; gap: 15px; }
+  .header-logo { width: 72px; height: 72px; flex-basis: 72px; padding: 10px; border-radius: 17px; }
+  .header-identity h1 { font-size: clamp(21px, 7vw, 29px); }
+  .header-identity p { font-size: 12.5px; }
+  .header-right { display: flex; flex-direction: column-reverse; align-items: stretch; gap: 12px; }
+  .system-status-pill { display: inline-flex; align-self: flex-start; }
+  .filters-section { position: relative; }
+  .filters-inner { padding: 17px 18px; }
+  .filters-heading p { display: none; }
+  .dashboard-inner { padding-inline: 18px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .card { min-height: 0; }
+  .banner-inner { margin-left: 18px; margin-right: 18px; padding-inline: 14px; }
+  .footer-inner { padding-inline: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { scroll-behavior: auto; }
+  .card::before { transition: none; }
+}
+
+/* ============================================================
+   MOTION — reveals al scroll (CLAUDE.md §5)
+   Antes las tarjetas ya estaban visibles y la clase .animate-in
+   sólo provocaba un parpadeo. El estado inicial ahora lo pone JS
+   (html.js-reveal), así sin JS o con reduced-motion todo queda visible.
+   ============================================================ */
+@keyframes rv-in {
+  from { opacity: 0; transform: translateY(26px) scale(.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+html.js-reveal .card,
+html.js-reveal [data-rv] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+html.js-reveal .card.animate-in,
+html.js-reveal [data-rv].rv-in {
+  animation: rv-in .66s var(--ease) both;
+  animation-delay: var(--rv-delay, 0ms);
+  will-change: auto;
+}
+
+/* La tarjeta destacada no debe respirar mientras entra. */
+html.js-reveal .card--highlight { animation: none; }
+html.js-reveal .card--highlight.animate-in {
+  animation: rv-in .66s var(--ease) both, glow-breathe 3s ease-in-out 1.2s infinite;
+  animation-delay: var(--rv-delay, 0ms), 1.2s;
+}
+
+/* Entrada del encabezado al cargar. */
+@media (prefers-reduced-motion: no-preference) {
+  .header-logo,
+  .header-eyebrow,
+  .header-identity h1,
+  .header-identity p,
+  .header-right,
+  .navbar-inner .nav-btn,
+  .banner-inner > *,
+  .filters-inner > * { animation: rv-in .68s var(--ease) both; }
+  .header-logo       { animation-delay: 0ms; }
+  .header-eyebrow    { animation-delay: 40ms; }
+  .header-identity h1 { animation-delay: 90ms; }
+  .header-identity p  { animation-delay: 150ms; }
+  .header-right       { animation-delay: 210ms; }
+  .navbar-inner .nav-btn:nth-child(1) { animation-delay: 30ms; }
+  .navbar-inner .nav-btn:nth-child(2) { animation-delay: 70ms; }
+  .navbar-inner .nav-btn:nth-child(3) { animation-delay: 110ms; }
+  .navbar-inner .nav-btn:nth-child(4) { animation-delay: 150ms; }
+  .navbar-inner .nav-btn:nth-child(5) { animation-delay: 190ms; }
+  .banner-inner > * { animation-delay: 260ms; }
+  .filters-inner > :nth-child(1) { animation-delay: 320ms; }
+  .filters-inner > :nth-child(2) { animation-delay: 380ms; }
+}
+
+.card-icon {
+  transition: color .2s ease, background .2s ease, transform .3s var(--ease);
+}
+
+.card:hover .card-icon { transform: translateY(-2px) scale(1.06); }
+
+.card-sublinks {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: max-height var(--t-slow), opacity .22s ease, transform .32s var(--ease), margin .22s ease;
+}
+
+.card-sublinks.expanded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .card,
+  html.js-reveal [data-rv] { opacity: 1; animation: none; }
+  .header-logo,
+  .header-eyebrow,
+  .header-identity h1,
+  .header-identity p,
+  .header-right,
+  .navbar-inner .nav-btn,
+  .banner-inner > *,
+  .filters-inner > * { animation: none; }
+  .card-sublinks { transition: none; }
+}
+
+@layer legacy {
 
 /* ══════════════════════════════════════════════
    DESIGN TOKENS — Light Mode (Default)
@@ -1884,3 +2716,284 @@ button {
     display: none;
   }
 }
+
+/* ══════════════════════════════════════════════
+   ADMIN BUTTON AND MODAL STYLES
+   ══════════════════════════════════════════════ */
+
+/* --- Admin Button in Header --- */
+.admin-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all var(--t-fast);
+  cursor: pointer;
+  padding: 0;
+  margin-left: var(--sp-2);
+}
+
+.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.admin-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.admin-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--t-base);
+}
+
+.admin-btn:hover svg {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+/* Add spacing in header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* --- Admin Modal Dialog --- */
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+}
+
+.admin-modal[hidden] {
+  display: none !important;
+}
+
+.admin-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 14, 26, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: adminFadeIn var(--t-fast) forwards;
+}
+
+@keyframes adminFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.admin-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  z-index: 10;
+  animation: adminScaleUp var(--t-base) var(--ease-spring) forwards;
+}
+
+@keyframes adminScaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.admin-modal-close {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid transparent;
+  transition: all var(--t-fast);
+}
+
+[data-theme="dark"] .admin-modal-close {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.admin-modal-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .admin-modal-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-modal-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.admin-modal-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.admin-modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-2);
+  box-shadow: var(--shadow-glow-accent);
+}
+
+.admin-modal-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.admin-modal-header h3 {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.admin-modal-header p {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 0 var(--sp-2);
+}
+
+.admin-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.passcode-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.admin-passcode-input {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-12) var(--sp-3) var(--sp-4);
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--fs-base);
+  transition: all var(--t-fast);
+}
+
+.admin-passcode-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+  background: var(--bg-surface);
+}
+
+.passcode-toggle-btn {
+  position: absolute;
+  right: var(--sp-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--t-fast);
+}
+
+.passcode-toggle-btn:hover {
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .passcode-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.admin-error-msg {
+  font-size: var(--fs-xs);
+  color: var(--danger);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-top: -2px;
+  animation: adminShake 0.3s ease-in-out;
+}
+
+@keyframes adminShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.admin-submit-btn {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  transition: all var(--t-fast);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+}
+
+.admin-submit-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-glow-accent), 0 4px 12px rgba(37, 99, 235, 0.2);
+  transform: translateY(-1px);
+}
+
+.admin-submit-btn:active {
+  transform: translateY(0);
+}
+
+.admin-submit-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--t-fast);
+}
+
+.admin-submit-btn:hover svg {
+  transform: translateX(3px);
+}
+
+} /* legacy */

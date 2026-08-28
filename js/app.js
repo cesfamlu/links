@@ -80,6 +80,8 @@ const ICONS = {
   wrench:       '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
   mail:         '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
   mapPin:       '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  lock:         '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  eyeOff:       '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>',
 };
 
 function icon(name, size = 24) {
@@ -391,7 +393,8 @@ function createCard(tool, index) {
   el.dataset.id = tool.id;
   el.dataset.category = tool.category;
   el.dataset.keywords = buildKeywords(tool);
-  el.style.animationDelay = `${index * 50}ms`;
+  // El escalonado lo decide el observer (--rv-delay); un delay inline aquí
+  // ganaba sobre la hoja de estilos y rompía el reveal.
 
   let actionsHTML = '';
 
@@ -622,7 +625,9 @@ function initFilters() {
     pill.addEventListener('click', () => {
       // Update active state
       pills.forEach(p => p.classList.remove('active'));
+      pills.forEach(p => p.setAttribute('aria-selected', 'false'));
       pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
 
       activeFilter = pill.dataset.filter;
       applyFilters();
@@ -677,13 +682,25 @@ function initScrollAnimations() {
   // Check for reduced motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // Marca el documento para que el CSS aplique el estado inicial oculto.
+  // Sin JS o con reduced-motion la clase nunca se pone y todo queda visible.
+  document.documentElement.classList.add('js-reveal');
+
   const cards = $$('.card');
+  let batchStart = 0;
+  let batchCount = 0;
+
   const observer = new IntersectionObserver((entries) => {
+    // Escalonar sólo dentro de una misma tanda visible; tope 360ms (CLAUDE.md §5).
+    const now = performance.now();
+    if (now - batchStart > 220) { batchStart = now; batchCount = 0; }
+
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
+      if (!entry.isIntersecting) return;
+      entry.target.style.setProperty('--rv-delay', `${Math.min(batchCount * 45, 360)}ms`);
+      batchCount++;
+      entry.target.classList.add('animate-in');
+      observer.unobserve(entry.target);
     });
   }, {
     threshold: 0.1,
@@ -691,6 +708,19 @@ function initScrollAnimations() {
   });
 
   cards.forEach(card => observer.observe(card));
+
+  // Red de seguridad: si la pestaña carga en segundo plano el observer no
+  // dispara y las tarjetas quedarían en opacity:0. Pasado el margen, se revelan.
+  setTimeout(() => {
+    // Si alguna alcanzó a animarse, el observer funciona: no tocar nada.
+    if (document.querySelector('.card.animate-in')) return;
+    cards.forEach(card => {
+      if (!card.classList.contains('animate-in')) {
+        observer.unobserve(card);
+        card.classList.add('animate-in');
+      }
+    });
+  }, 1500);
 }
 
 // ══════════════════════════════════════════════
@@ -857,6 +887,98 @@ function initCmdK() {
   });
 }
 
+// ══════════════════════════════════════════════
+//  ADMIN SECURITY MODAL
+// ══════════════════════════════════════════════
+function initAdmin() {
+  const adminBtn = $('#admin-btn');
+  const modal = $('#admin-modal');
+  const backdrop = $('#admin-modal-backdrop');
+  const closeBtn = $('#admin-modal-close');
+  const form = $('#admin-modal-form');
+  const input = $('#admin-passcode');
+  const errorMsg = $('#admin-error-msg');
+  const toggleBtn = $('#passcode-toggle');
+
+  if (!adminBtn || !modal) return;
+
+  const validPasscodes = ['cesfam2026', 'cesfam123'];
+  const redirectUrl = 'admin/gestorLinks.html';
+
+  function openModal() {
+    // If already authenticated, redirect immediately
+    if (sessionStorage.getItem('cesfam-admin-authenticated') === 'true') {
+      window.location.href = redirectUrl;
+      return;
+    }
+
+    modal.hidden = false;
+    input.value = '';
+    input.type = 'password';
+    if (errorMsg) errorMsg.hidden = true;
+    updateToggleIcon(false);
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function updateToggleIcon(showText) {
+    if (!toggleBtn) return;
+    toggleBtn.innerHTML = showText ? icon('eyeOff', 16) : icon('eye', 16);
+  }
+
+  // Open modal click
+  adminBtn.addEventListener('click', openModal);
+
+  // Close modal clicks
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+
+  // Close on Esc key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
+
+  // Toggle passcode visibility
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const showText = input.type === 'password';
+      input.type = showText ? 'text' : 'password';
+      updateToggleIcon(showText);
+    });
+  }
+
+  // Handle authentication form submit
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = input.value.trim();
+
+      if (validPasscodes.includes(code)) {
+        sessionStorage.setItem('cesfam-admin-authenticated', 'true');
+        if (errorMsg) errorMsg.hidden = true;
+        closeModal();
+        window.location.href = redirectUrl;
+      } else {
+        if (errorMsg) {
+          errorMsg.hidden = false;
+          // Trigger shake animation
+          errorMsg.style.animation = 'none';
+          errorMsg.offsetHeight; /* trigger reflow */
+          errorMsg.style.animation = null;
+        }
+        input.select();
+      }
+    });
+  }
+}
+
 async function init() {
   initClock();
   initTheme();
@@ -866,6 +988,7 @@ async function init() {
   initSearch();
   initFilters();
   initCmdK();
+  initAdmin();
 }
 
 document.addEventListener('DOMContentLoaded', init);

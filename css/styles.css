@@ -1,3 +1,7 @@
+/* ==============================================
+   CESFAM La Unión — Portal de Herramientas Digitales
+   Design System · v2.0 · Mayo 2026
+   ============================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Quantico:wght@400;700&display=swap');
 
@@ -10,7 +14,10 @@
   box-sizing: border-box;
 }
 
-
+/* ============================================================
+   PORTAL SHELL 2026 — lenguaje visual unificado CESFAM La Unión
+   Conserva los componentes y el comportamiento del portal existente.
+   ============================================================ */
 
 :root {
   --bg-body: #F2F1F0;
@@ -98,7 +105,8 @@
   --tag-support-icon: #61DDAA;
 }
 
-
+/* Superficie plana: el sistema prohíbe gradientes y tramas decorativas (CLAUDE.md §4).
+   La jerarquía la dan las superficies y las hairlines, no una cuadrícula de fondo. */
 body {
   background-color: var(--bg-body);
   background-image: none;
@@ -248,11 +256,33 @@ input:focus-visible {
   box-shadow: none;
 }
 
-
+/* El padding lateral lo pone SOLO .header-main-inner (junto al resto de los -inner).
+   Tenerlo aquí también dejaba el bloque de marca con 2× shell-pad y desalineado
+   respecto de la navbar, los filtros y la retícula. */
 .header-main,
 [data-theme="dark"] .header-main {
+  position: relative;
   padding: 27px 0 31px;
   background: var(--bg-header);
+  overflow: hidden;
+}
+
+/* Constelación generativa detrás de la banda del buscador (portada del
+   directorio). Es el motion permanente del portal. */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .95;
+  pointer-events: none;
+}
+
+/* El contenido va por encima del canvas. */
+.header-main-inner { position: relative; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-canvas { display: none; }
 }
 
 .header-main-inner {
@@ -378,7 +408,7 @@ input:focus-visible {
 
 .search-result:hover { background: var(--gold-subtle); }
 
-
+/* Aviso operativo y navegación por categorías. */
 .banner {
   max-height: 150px;
   background: var(--banner-bg);
@@ -390,7 +420,8 @@ input:focus-visible {
   padding-bottom: 15px;
 }
 
-
+/* El filete ámbar del callout va pegado al texto, no al borde del viewport:
+   ahí quedaba fuera de la columna de contenido y rompía la alineación vertical. */
 .banner-content {
   padding-left: 14px;
   border-left: 2px solid var(--gold);
@@ -483,12 +514,15 @@ input:focus-visible {
   box-shadow: none;
 }
 
-
+/* Directorio: retícula de trabajo, sin mosaico de tarjetas flotantes.
+   Padding lateral 0: lo aporta .dashboard-inner. Tenerlo en ambos dejaba la
+   retícula a 96px del borde mientras header, banner y footer iban a 48px. */
 .dashboard {
   padding: clamp(40px, 5vw, 68px) 0 clamp(70px, 8vw, 110px);
 }
 
-
+/* La barra de filtros es sticky y a ancho completo: su contenido debe alinear
+   con la misma columna de 1400px que el resto, no con una caja de 680px. */
 .filters-inner {
   max-width: var(--max-w);
   margin-inline: auto;
@@ -510,7 +544,9 @@ input:focus-visible {
   border: 1px solid var(--border);
   border-radius: 0;
   box-shadow: none;
-  
+  /* Sin chaflán: la retícula es de hairlines (gap:1px sobre --border) y el corte
+     diagonal abría un triángulo de fondo en cada esquina, lo que leía como
+     "descuadrado". El chaflán queda para botones, paneles y modales. */
   transition: background .2s ease, border-color .2s ease, box-shadow .28s var(--ease), transform .28s var(--ease);
 }
 
@@ -742,91 +778,111 @@ input:focus-visible {
 }
 
 /* ============================================================
-   MOTION — reveals al scroll (CLAUDE.md §5)
-   Antes las tarjetas ya estaban visibles y la clase .animate-in
-   sólo provocaba un parpadeo. El estado inicial ahora lo pone JS
-   (html.js-reveal), así sin JS o con reduced-motion todo queda visible.
+   MOTION — mismo sistema que cesfamtic.com/directorio (CLAUDE.md §5)
+   Tres capas, cada una con un trabajo distinto:
+     A. [data-rv]  → reveal de BLOQUE al entrar en viewport (lento, .85s)
+     B. cardIn     → entrada de las TARJETAS en cada render/filtro (.5s)
+     C. hover      → respuesta a la interacción
    ============================================================ */
-@keyframes rv-in {
-  from { opacity: 0; transform: translateY(26px) scale(.985); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
 
-html.js-reveal .card,
-html.js-reveal [data-rv] {
+/* ── A. Reveal de bloque ──
+   Va sobre contenedores, no sobre cada tarjeta. Es una transición, no una
+   animación: así el estado final es estable y no depende del fill-mode. */
+[data-rv] {
   opacity: 0;
-  will-change: opacity, transform;
+  transform: translateY(24px);
+  transition: opacity .85s var(--ease), transform .85s var(--ease);
 }
 
-html.js-reveal .card.animate-in,
-html.js-reveal [data-rv].rv-in {
-  animation: rv-in .66s var(--ease) both;
-  animation-delay: var(--rv-delay, 0ms);
-  will-change: auto;
-}
-
-/* La tarjeta destacada no debe respirar mientras entra. */
-html.js-reveal .card--highlight { animation: none; }
-html.js-reveal .card--highlight.animate-in {
-  animation: rv-in .66s var(--ease) both, glow-breathe 3s ease-in-out 1.2s infinite;
-  animation-delay: var(--rv-delay, 0ms), 1.2s;
-}
-
-/* Entrada del encabezado al cargar. */
-@media (prefers-reduced-motion: no-preference) {
-  .header-logo,
-  .header-eyebrow,
-  .header-identity h1,
-  .header-identity p,
-  .header-right,
-  .navbar-inner .nav-btn,
-  .banner-inner > *,
-  .filters-inner > * { animation: rv-in .68s var(--ease) both; }
-  .header-logo       { animation-delay: 0ms; }
-  .header-eyebrow    { animation-delay: 40ms; }
-  .header-identity h1 { animation-delay: 90ms; }
-  .header-identity p  { animation-delay: 150ms; }
-  .header-right       { animation-delay: 210ms; }
-  .navbar-inner .nav-btn:nth-child(1) { animation-delay: 30ms; }
-  .navbar-inner .nav-btn:nth-child(2) { animation-delay: 70ms; }
-  .navbar-inner .nav-btn:nth-child(3) { animation-delay: 110ms; }
-  .navbar-inner .nav-btn:nth-child(4) { animation-delay: 150ms; }
-  .navbar-inner .nav-btn:nth-child(5) { animation-delay: 190ms; }
-  .banner-inner > * { animation-delay: 260ms; }
-  .filters-inner > :nth-child(1) { animation-delay: 320ms; }
-  .filters-inner > :nth-child(2) { animation-delay: 380ms; }
-}
-
-.card-icon {
-  transition: color .2s ease, background .2s ease, transform .3s var(--ease);
-}
-
-.card:hover .card-icon { transform: translateY(-2px) scale(1.06); }
-
-.card-sublinks {
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: max-height var(--t-slow), opacity .22s ease, transform .32s var(--ease), margin .22s ease;
-}
-
-.card-sublinks.expanded {
+[data-rv].rv-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
+
+/* ── B. Entrada de tarjetas ──
+   Se dispara en cada render y en cada cambio de filtro (replayAnimation),
+   que es lo que hace que el directorio se sienta vivo al filtrar. */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Estado inicial de la tarjeta aún no revelada. La clase js-motion la pone el
+   JS: sin JS, o con reduced-motion, nunca se aplica y nada queda invisible. */
+html.js-motion .card:not(.card-in) { opacity: 0; }
+
+/* Freno de emergencia: si el navegador no compone cuadros, las animaciones se
+   congelan en su primer fotograma y el contenido quedaría invisible para
+   siempre. Esta clase devuelve todo a su estado final, sin motion. */
+html.motion-off .card,
+html.motion-off .card:not(.card-in),
+html.motion-off [data-rv] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.card.card-in {
+  animation: cardIn .5s var(--ease) both;
+  animation-delay: var(--rv-delay, 0ms);
+}
+
+/* La destacada entra primero y sólo después retoma su respiración ámbar;
+   si no, ambas animaciones compiten por la misma propiedad y una se pierde. */
+.card--highlight.card-in {
+  animation: cardIn .5s var(--ease) both,
+             glow-breathe 3s ease-in-out infinite;
+  animation-delay: var(--rv-delay, 0ms), 1s;
+}
+
+/* ── C. Interacción ──
+   Elevación + filete ámbar que crece desde abajo + borde que se enciende. */
+.card {
+  transition: background .22s ease, border-color .22s ease,
+              box-shadow .3s var(--ease), transform .3s var(--ease);
+}
+
+.card::before { width: 3px; }
+
+.card:hover,
+.card:focus-within {
+  background: var(--bg-elevated);
+  border-color: var(--banner-border);
+  box-shadow: 0 18px 38px -30px rgba(0, 0, 0, .9);
+  transform: translateY(-3px);
+}
+
+.card:hover::before,
+.card:focus-within::before { transform: scaleY(1); }
+
+/* El icono de la tarjeta acompaña la elevación. */
+.card .card-icon,
+.card .card-logo {
+  transition: border-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+
+.card:hover .card-icon,
+.card:hover .card-logo {
+  border-color: var(--banner-border);
+  transform: translateY(-2px);
+}
+
+/* ── Texto de resultados que se refresca al filtrar ── */
+@keyframes freshIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.is-fresh { animation: freshIn .45s var(--ease) both; }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js-reveal .card,
-  html.js-reveal [data-rv] { opacity: 1; animation: none; }
-  .header-logo,
-  .header-eyebrow,
-  .header-identity h1,
-  .header-identity p,
-  .header-right,
-  .navbar-inner .nav-btn,
-  .banner-inner > *,
-  .filters-inner > * { animation: none; }
-  .card-sublinks { transition: none; }
+  [data-rv] { opacity: 1; transform: none; transition: none; }
+  .card.card-in { animation: none; }
+  .is-fresh { animation: none; }
+  .card:hover, .card:focus-within { transform: none; }
 }
+
 
 @layer legacy {
 
@@ -2190,13 +2246,7 @@ button {
   }
 }
 
-.card.animate-in {
-  animation: fade-in-up 0.45s var(--ease) both;
-}
-
-.card--highlight.animate-in {
-  animation: fade-in-up 0.45s var(--ease) both;
-}
+/* .animate-in reemplazado por .card-in (sistema de motion unificado). */
 
 .card--highlight {
   animation: glow-breathe 3s ease-in-out infinite;

@@ -382,8 +382,7 @@ function renderCards() {
     grid.appendChild(card);
   });
 
-  // Trigger stagger animations via Intersection Observer
-  initScrollAnimations();
+  observeCards();
 }
 
 function createCard(tool, index) {
@@ -653,6 +652,12 @@ function applyFilters() {
   if (noResults) {
     noResults.classList.toggle('visible', visibleCount === 0);
   }
+
+  // Las tarjetas que quedan visibles vuelven a entrar, y el encabezado del
+  // directorio se refresca: eso es lo que hace que filtrar se sienta vivo.
+  animateCards();
+  replayAnimation($('.filters-heading h2'), 'is-fresh');
+  replayAnimation($('.filters-heading p'), 'is-fresh');
 }
 
 // ══════════════════════════════════════════════
@@ -676,51 +681,254 @@ function initBanner() {
 }
 
 // ══════════════════════════════════════════════
-//  SCROLL ANIMATIONS (Intersection Observer)
+//  MOTION — mismo sistema que cesfamtic.com/directorio
+//  A. Reveals de bloque [data-rv] -> .rv-in (IntersectionObserver)
+//  B. Entrada de tarjetas .card-in, re-disparada en cada filtro
+//  C. Texto de resultados .is-fresh
 // ══════════════════════════════════════════════
-function initScrollAnimations() {
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let revealObserver = null;
+let firstPaint = true;
 
-  // Marca el documento para que el CSS aplique el estado inicial oculto.
-  // Sin JS o con reduced-motion la clase nunca se pone y todo queda visible.
-  document.documentElement.classList.add('js-reveal');
+function revealAllPending() {
+  $$('[data-rv]:not(.rv-in)').forEach(el => el.classList.add('rv-in'));
+}
 
-  const cards = $$('.card');
-  let batchStart = 0;
-  let batchCount = 0;
+/* Revela sólo lo que ya está en pantalla. La red de seguridad no puede
+   destapar el pie de página antes de que el usuario baje: eso mataría el
+   reveal al scroll, que es justamente el efecto que se busca. */
+function revealVisiblePending() {
+  // Sin viewport medible (pestaña oculta, iframe colapsado) no hay "visible"
+  // que valga: se destapa todo antes que arriesgar contenido invisible.
+  if (!window.innerHeight) { revealAllPending(); return; }
+  $$('[data-rv]:not(.rv-in)').forEach(el => {
+    const box = el.getBoundingClientRect();
+    if (box.top < window.innerHeight && box.bottom > 0) el.classList.add('rv-in');
+  });
+}
 
-  const observer = new IntersectionObserver((entries) => {
-    // Escalonar sólo dentro de una misma tanda visible; tope 360ms (CLAUDE.md §5).
+function initReveals() {
+  if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
+    revealAllPending();
+    return;
+  }
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('rv-in');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  applyReveals();
+}
+
+function applyReveals() {
+  const pending = $$('[data-rv]:not(.rv-in)');
+  if (!revealObserver || !firstPaint) {
+    pending.forEach(el => el.classList.add('rv-in'));
+    return;
+  }
+  pending.forEach(el => revealObserver.observe(el));
+  // Red de seguridad: si la pestaña carga en segundo plano el observador no
+  // dispara y el contenido visible quedaría invisible al volver a ella.
+  window.setTimeout(revealVisiblePending, 1400);
+}
+
+/* Repite una animación de entrada en un elemento que ya está en el DOM. */
+function replayAnimation(element, className) {
+  if (!element || reducedMotionQuery.matches) return;
+  element.classList.remove(className);
+  void element.offsetWidth;
+  element.classList.add(className);
+}
+
+/* Entrada de las tarjetas.
+
+   Antes se disparaban las 24 de golpe al terminar el render: la animación
+   ocurría antes de que el usuario alcanzara a mirar y, al bajar por el
+   directorio, ya no quedaba nada por animar. Ahora cada tarjeta entra cuando
+   asoma en pantalla, escalonada por tanda (tope 360ms, §5), y el conjunto
+   vuelve a entrar al cambiar de filtro. */
+let cardObserver = null;
+let batchStart = 0;
+let batchIndex = 0;
+let lastVisibleSignature = null;
+
+/* Garantía de contenido visible.
+
+   Todo el sistema de reveals parte de opacity:0 y confía en que una animación
+   lo lleve a 1. Si el navegador no compone cuadros, esa animación se congela
+   en su primer fotograma y el contenido NO SE VE NUNCA. El rAF resultó mal
+   detector (dispara igual estando congelado), así que aquí se mide el síntoma
+   directamente: una tarjeta que está en pantalla y sigue en opacidad 0 pasado
+   el margen es una tarjeta rota. Se pierde la animación, nunca el contenido. */
+function guardAgainstFrozenMotion() {
+  window.setTimeout(() => {
+    const atascada = [...document.querySelectorAll('.card')].some(card => {
+      const caja = card.getBoundingClientRect();
+      const enPantalla = !window.innerHeight || (caja.top < window.innerHeight && caja.bottom > 0);
+      return enPantalla && parseFloat(getComputedStyle(card).opacity) === 0;
+    });
+    if (!atascada) return;
+    document.documentElement.classList.add('motion-off');
+    revealAllPending();
+  }, 2500);
+}
+
+function initCardMotion() {
+  if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) return;
+
+  // Marca el documento para que el CSS oculte las tarjetas aún no reveladas.
+  // Sin JS la clase nunca se pone y todo queda visible: nunca se pierde contenido.
+  document.documentElement.classList.add('js-motion');
+  guardAgainstFrozenMotion();
+
+  cardObserver = new IntersectionObserver((entries) => {
     const now = performance.now();
-    if (now - batchStart > 220) { batchStart = now; batchCount = 0; }
+    // Las que entran juntas comparten tanda y se escalonan entre sí.
+    if (now - batchStart > 220) { batchStart = now; batchIndex = 0; }
 
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.style.setProperty('--rv-delay', `${Math.min(batchCount * 45, 360)}ms`);
-      batchCount++;
-      entry.target.classList.add('animate-in');
-      observer.unobserve(entry.target);
+      entry.target.style.setProperty('--rv-delay', `${Math.min(batchIndex * 45, 360)}ms`);
+      batchIndex++;
+      entry.target.classList.add('card-in');
+      cardObserver.unobserve(entry.target);
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  observeCards();
+}
+
+function observeCards() {
+  if (!cardObserver) return;
+  $$('.card:not(.card-in)').forEach(card => cardObserver.observe(card));
+  // Red de seguridad: sin viewport medible (pestaña en segundo plano) el
+  // observador no dispara nunca y las tarjetas quedarían invisibles.
+  window.setTimeout(() => {
+    if (window.innerHeight) return;
+    $$('.card:not(.card-in)').forEach(card => card.classList.add('card-in'));
+  }, 1400);
+}
+
+/* Al filtrar, las tarjetas que quedan vuelven a entrar. */
+function animateCards() {
+  if (reducedMotionQuery.matches) return;
+  const visibles = $$('.card:not(.hidden-filter)');
+  const signature = visibles.map(c => c.dataset.id).join('|');
+  if (signature === lastVisibleSignature) return;
+  lastVisibleSignature = signature;
+
+  visibles.forEach((card, i) => {
+    card.style.setProperty('--rv-delay', `${Math.min(i * 35, 360)}ms`);
+    replayAnimation(card, 'card-in');
+  });
+}
+
+
+// ══════════════════════════════════════════════
+//  HERO CANVAS — constelación generativa
+//  Portado desde portal-shell.js del directorio: nodos a la deriva, líneas
+//  entre vecinos cercanos, pulsos ámbar cruzando y parallax de puntero.
+//  Es el motion permanente del portal; los reveals son de una sola pasada.
+// ══════════════════════════════════════════════
+function initHeroCanvas() {
+  const canvas = document.querySelector('[data-hero-canvas]');
+  if (!canvas || reducedMotionQuery.matches) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const pointer = { x: 0, y: 0 };
+  window.addEventListener('pointermove', (event) => {
+    pointer.x = event.clientX / window.innerWidth - 0.5;
+    pointer.y = event.clientY / window.innerHeight - 0.5;
   });
 
-  cards.forEach(card => observer.observe(card));
-
-  // Red de seguridad: si la pestaña carga en segundo plano el observer no
-  // dispara y las tarjetas quedarían en opacity:0. Pasado el margen, se revelan.
-  setTimeout(() => {
-    // Si alguna alcanzó a animarse, el observer funciona: no tocar nada.
-    if (document.querySelector('.card.animate-in')) return;
-    cards.forEach(card => {
-      if (!card.classList.contains('animate-in')) {
-        observer.unobserve(card);
-        card.classList.add('animate-in');
-      }
+  const nodes = [];
+  for (let i = 0; i < 54; i++) {
+    nodes.push({
+      x: Math.random(),
+      y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.00035,
+      vy: (Math.random() - 0.5) * 0.00035,
+      r: 0.7 + Math.random() * 1.6,
+      gold: Math.random() < 0.22
     });
-  }, 1500);
+  }
+  const pulses = [0, 1, 2].map(i => ({ t: i / 3, y: 0.25 + i * 0.25 }));
+
+  let w = 0;
+  let h = 0;
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    w = rect.width;
+    h = rect.height;
+    canvas.width = Math.max(1, Math.round(w * dpr));
+    canvas.height = Math.max(1, Math.round(h * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function draw() {
+    if (w < 1) resize();
+    // Aquí el tema claro es el de partida (el oscuro se marca con data-theme),
+    // al revés que en el directorio: la condición va invertida a propósito.
+    const oscuro = document.documentElement.getAttribute('data-theme') === 'dark';
+    const line = oscuro ? 'rgba(255,255,255,' : 'rgba(22,32,42,';
+    const ox = pointer.x * 26;
+    const oy = pointer.y * 16;
+    ctx.clearRect(0, 0, w, h);
+    ctx.lineWidth = 1;
+
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      a.x += a.vx;
+      a.y += a.vy;
+      if (a.x < 0 || a.x > 1) a.vx *= -1;
+      if (a.y < 0 || a.y > 1) a.vy *= -1;
+      const ax = a.x * w + ox * (a.gold ? 1.8 : 1);
+      const ay = a.y * h + oy * (a.gold ? 1.8 : 1);
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const bx = b.x * w + ox;
+        const by = b.y * h + oy;
+        const d = Math.hypot(ax - bx, ay - by);
+        if (d < 150) {
+          ctx.strokeStyle = line + (0.16 * (1 - d / 150)).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
+          ctx.stroke();
+        }
+      }
+
+      ctx.fillStyle = a.gold ? 'rgba(245,185,66,.85)' : line + '0.35)';
+      ctx.beginPath();
+      ctx.arc(ax, ay, a.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    pulses.forEach(p => {
+      p.t += 0.0018;
+      if (p.t > 1.15) p.t = -0.15;
+      const px = p.t * w + ox;
+      const py = p.y * h + oy;
+      const grad = ctx.createRadialGradient(px, py, 0, px, py, 90);
+      grad.addColorStop(0, 'rgba(245,185,66,.26)');
+      grad.addColorStop(1, 'rgba(245,185,66,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(px, py, 90, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
 }
 
 // ══════════════════════════════════════════════
@@ -989,6 +1197,10 @@ async function init() {
   initFilters();
   initCmdK();
   initAdmin();
+  initReveals();
+  initCardMotion();
+  initHeroCanvas();
+  firstPaint = false;
 }
 
 document.addEventListener('DOMContentLoaded', init);

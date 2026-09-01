@@ -30,7 +30,7 @@
         "url": "http://10.8.102.104"
       }
     ]
-  },      
+  },
   {
     "id": "visor",
     "title": "Visor de Exámenes",
@@ -41,11 +41,11 @@
     "highlight": false,
     "type": "multi",
     "links": [
-       {
+      {
         "label": "Exámenes HLU Nueva (Desde 04-08-2026 a la fecha)",
         "url": "https://10.4.59.192:8445/login"
       },
-       {
+      {
         "label": "Exámenes Antiguo",
         "url": "http://10.66.50.47/"
       },
@@ -73,7 +73,7 @@
         "label": "CORE Principal",
         "url": "https://www.hbvaldivia.cl/core/"
       },
-            {
+      {
         "label": "CORE Alternativo",
         "url": "https://www.hbvaldivia.cl/core/"
       },
@@ -82,6 +82,17 @@
         "url": "https://10.6.206.62/core"
       }
     ]
+  },
+  {
+    "id": "biblioteca",
+    "title": "Biblioteca CESFAM",
+    "icon": "bookOpen",
+    "desc": "Repositorio en Google Drive",
+    "category": "admin",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://cesfamtic.com/BibliotecaCESFAM/"
   },
   {
     "id": "imed",
@@ -93,17 +104,6 @@
     "highlight": false,
     "type": "single",
     "url": "https://www.licencia.cl"
-  },
-    {
-    "id": "inventarioVacunas",
-    "title": "Inventario PNI",
-    "icon": "fileText",
-    "desc": "Inventario Vacuna",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "single",
-    "url": "https://pni.minsal.cl/logueo.aspx"
   },
   {
     "id": "derivacion",
@@ -148,6 +148,17 @@
     "highlight": true,
     "type": "single",
     "url": "https://cesfamtic.com"
+  },
+  {
+    "id": "inventarioVacunas",
+    "title": "Inventario PNI",
+    "icon": "fileText",
+    "desc": "Inventario Vacuna",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://pni.minsal.cl/logueo.aspx"
   },
   {
     "id": "nuevo-1780346950855",
@@ -342,17 +353,6 @@
     "highlight": false,
     "type": "single",
     "url": "https://intranetlaunion.smc.cl/login.aspx"
-  },
-  {
-    "id": "biblioteca",
-    "title": "Biblioteca CESFAM",
-    "icon": "bookOpen",
-    "desc": "Repositorio en Google Drive",
-    "category": "admin",
-    "badge": "NUEVO",
-    "highlight": false,
-    "type": "single",
-    "url": "https://cesfamtic.com/BibliotecaCESFAM/"
   },
   {
     "id": "muni",

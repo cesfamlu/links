@@ -87,7 +87,7 @@
     "id": "biblioteca",
     "title": "Biblioteca CESFAM",
     "icon": "bookOpen",
-    "desc": "Repositorio en Google Drive",
+    "desc": "Repositorio web con documentos útiles para el CESFAM",
     "category": "admin",
     "badge": "NUEVO",
     "highlight": false,

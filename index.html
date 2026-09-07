@@ -323,13 +323,23 @@
 <!-- JavaScript principal de GitHub Pages -->
 <script src="js/app.js?v=20260831-hero1"></script>
 
-<!-- Visor de cupos -->
-<script
-  src="https://www.cesfamtic.com/cupos-cesfam/widget.js?v=6"
-  data-api="https://www.cesfamtic.com/cupos-cesfam/api.php"
-  data-position="right"
-  data-refresh="60000">
-  </script>
+
+<!-- Visor de cupos CESFAM -->
+<script>
+window.addEventListener("load", function () {
+  if (document.querySelector("cesfam-cupos-widget")) return;
+
+  const cuposScript = document.createElement("script");
+  cuposScript.src =
+    "https://www.cesfamtic.com/cupos-cesfam/widget.js?v=7";
+  cuposScript.dataset.api =
+    "https://www.cesfamtic.com/cupos-cesfam/api.php";
+  cuposScript.dataset.position = "right";
+  cuposScript.dataset.refresh = "60000";
+
+  document.body.appendChild(cuposScript);
+});
+</script>
 
 </body>
 

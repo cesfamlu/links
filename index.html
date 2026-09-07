@@ -323,24 +323,16 @@
 <!-- JavaScript principal de GitHub Pages -->
 <script src="js/app.js?v=20260831-hero1"></script>
 
-
-<!-- Visor de cupos CESFAM -->
-<script>
-window.addEventListener("load", function () {
-  if (document.querySelector("cesfam-cupos-widget")) return;
-
-  const cuposScript = document.createElement("script");
-  cuposScript.src =
-    "https://www.cesfamtic.com/cupos-cesfam/widget.js?v=7";
-  cuposScript.dataset.api =
-    "https://www.cesfamtic.com/cupos-cesfam/api.php";
-  cuposScript.dataset.position = "right";
-  cuposScript.dataset.refresh = "60000";
-
-  document.body.appendChild(cuposScript);
-});
-</script>
-
+<!-- Visor de cupos CESFAM: aislado del JavaScript del portal -->
+  <style>
+    .cupos-cesfam-frame { position: fixed; right: 20px; bottom: 20px; z-index: 2147483000; width: min(390px, calc(100vw - 28px)); height: 355px; border: 0; background: transparent; }
+    @media (max-width: 480px) { .cupos-cesfam-frame { right: 14px; bottom: 14px; width: calc(100vw - 28px); } }
+  </style>
+  <iframe
+    class="cupos-cesfam-frame"
+    title="Disponibilidad de cupos CESFAM"
+    src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.html?v=1"
+    loading="eager">
+  </iframe>
 </body>
-
 </html>

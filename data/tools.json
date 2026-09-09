@@ -66,12 +66,12 @@
     "desc": "Gestión de exámenes médicos",
     "category": "clinico",
     "badge": null,
-    "highlight": false,
+    "highlight": true,
     "type": "multi",
     "links": [
       {
         "label": "CORE Principal",
-        "url": "https://www.hbvaldivia.cl/core/"
+        "url": "https://xero.hbvaldivia.cl/"
       },
       {
         "label": "CORE Alternativo",

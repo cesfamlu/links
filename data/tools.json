@@ -285,17 +285,6 @@
     "url": "https://srdm.crececontigo.gob.cl/login"
   },
   {
-    "id": "centro-integral",
-    "title": "Centro Integral",
-    "icon": "brain",
-    "desc": "Atención integral de salud mental",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "single",
-    "url": "https://tinyurl.com/centro-integral"
-  },
-  {
     "id": "epivigilia",
     "title": "Epivigilia",
     "icon": "activity",
@@ -316,17 +305,6 @@
     "highlight": false,
     "type": "single",
     "url": "https://prescripcion-receta.minsal.cl/auth/login"
-  },
-  {
-    "id": "isis-view",
-    "title": "Isis View",
-    "icon": "scanIcon",
-    "desc": "Visor de imágenes médicas y radiología",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "single",
-    "url": "http://10.6.67.166"
   },
   {
     "id": "desamlu",

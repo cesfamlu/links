@@ -91,17 +91,6 @@
     "url": "https://cesfamtic.com/BibliotecaCESFAM/"
   },
   {
-    "id": "imed",
-    "title": "Imed",
-    "icon": "fileText",
-    "desc": "Licencias médicas electrónicas",
-    "category": "clinico",
-    "badge": null,
-    "highlight": false,
-    "type": "single",
-    "url": "https://www.licencia.cl"
-  },
-  {
     "id": "derivacion",
     "title": "Datos de Derivación",
     "icon": "send",
@@ -111,6 +100,17 @@
     "highlight": false,
     "type": "single",
     "url": "https://cesfamtic.com/derivar/"
+  },
+  {
+    "id": "imed",
+    "title": "Imed",
+    "icon": "fileText",
+    "desc": "Licencias médicas electrónicas",
+    "category": "clinico",
+    "badge": null,
+    "highlight": false,
+    "type": "single",
+    "url": "https://www.licencia.cl"
   },
   {
     "id": "bloqueapp",
@@ -133,6 +133,17 @@
     "highlight": true,
     "type": "single",
     "url": "https://www.cesfamtic.com/controles/"
+  },
+  {
+    "id": "nuevo-1790276632927",
+    "title": "Kratos",
+    "icon": "mapFlag",
+    "desc": "Ingresa una descripción para el nuevo servicio",
+    "category": "clinico",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "http://10.2.151.251"
   },
   {
     "id": "nuevo-1780346950855",

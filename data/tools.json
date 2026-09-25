@@ -124,6 +124,17 @@
     "url": "https://www.licencia.cl"
   },
   {
+    "id": "nuevo-1790346370945",
+    "title": "Admin CUPOS",
+    "icon": "shield",
+    "desc": "Ingresa una descripción para el nuevo servicio",
+    "category": "support",
+    "badge": "NUEVO",
+    "highlight": false,
+    "type": "single",
+    "url": "https://www.cesfamtic.com/cupos-cesfam/"
+  },
+  {
     "id": "bloqueapp",
     "title": "BloqueApp",
     "icon": "calendarX",

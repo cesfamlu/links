@@ -770,13 +770,16 @@ function observeCards() {
 
 /* Inclinación 3D de las tarjetas según el puntero.
    Sólo con mouse (en táctil no hay "hover" que seguir) y sin reduced-motion.
-   Escribe --rx/--ry (ángulos) y --gx/--gy (punto del brillo); el CSS hace el resto. */
+   Escribe --rx/--ry (ángulos), --gx/--gy (punto del brillo) y --sx/--sy
+   (desplazamiento de la sombra); el CSS hace el resto. La intensidad sale de
+   la variable CSS --tilt-max, así se ajusta todo desde la hoja de estilos. */
 function initCardTilt() {
   const grid = $('#card-grid');
   if (!grid || reducedMotionQuery.matches) return;
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-  const MAX = 7; // grados
+  const MAX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tilt-max')) || 13;
+  const SHADOW = 26; // px que se corre la sombra en el borde
   let frame = 0;
   let pending = null;
 
@@ -793,6 +796,9 @@ function initCardTilt() {
     card.style.setProperty('--rx', `${((0.5 - py) * 2 * MAX * k).toFixed(2)}deg`);
     card.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
     card.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
+    // La sombra cae del lado opuesto al puntero.
+    card.style.setProperty('--sx', `${((0.5 - px) * 2 * SHADOW).toFixed(1)}px`);
+    card.style.setProperty('--sy', `${((0.5 - py) * 2 * SHADOW * k).toFixed(1)}px`);
   }
 
   grid.addEventListener('pointermove', (e) => {
@@ -810,6 +816,8 @@ function initCardTilt() {
     card.classList.remove('is-tilting');
     card.style.setProperty('--rx', '0deg');
     card.style.setProperty('--ry', '0deg');
+    card.style.setProperty('--sx', '0px');
+    card.style.setProperty('--sy', '0px');
   });
 }
 

@@ -20,67 +20,18 @@
    ============================================================ */
 
 :root {
-  --bg-body: #F2F1F0;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #F7F6F8;
-  --bg-header: #FFFFFF;
-  --bg-nav: #F7F6F8;
-  --bg-input: #F7F6F8;
-  --bg-overlay: rgba(15, 22, 32, 0.62);
-  --text-primary: #16202A;
-  --text-secondary: #6B6F72;
-  --text-tertiary: #8A9096;
-  --text-on-dark: #EEF2F6;
-  --text-on-accent: #17202A;
-  --accent: #E2A32B;
-  --accent-hover: #F5B942;
-  --accent-subtle: rgba(226, 163, 43, 0.14);
-  --gold: #E2A32B;
-  --gold-hover: #F5B942;
-  --gold-subtle: rgba(226, 163, 43, 0.14);
-  --success: #0E8A5F;
-  --warning: #E2A32B;
-  --danger: #DC4C4C;
-  --border: rgba(16, 24, 32, 0.09);
-  --border-hover: rgba(16, 24, 32, 0.18);
-  --banner-bg: #FFFFFF;
-  --banner-border: rgba(226, 163, 43, 0.55);
-  --banner-text: #6B521C;
-  --banner-icon: #8A5A0B;
-  --tag-clinico-bg: rgba(226, 163, 43, 0.12);
-  --tag-clinico-text: #8A5A0B;
-  --tag-clinico-icon: #8A5A0B;
-  --tag-admin-bg: rgba(16, 24, 32, 0.06);
-  --tag-admin-text: #5B6268;
-  --tag-admin-icon: #5B6268;
-  --tag-support-bg: rgba(14, 138, 95, 0.09);
-  --tag-support-text: #0E7655;
-  --tag-support-icon: #0E7655;
-  --shadow-xs: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-glow-accent: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
-  --shadow-glow-gold: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
-  --font: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Quantico', 'Arial Narrow', sans-serif;
-  --max-w: 1400px;
-  --shell-pad: clamp(18px, 4vw, 48px);
-  --ease: cubic-bezier(.16, 1, .3, 1);
-  --chamfer-12: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  --chamfer-18: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-}
-
-[data-theme="dark"] {
   --bg-body: #0F1620;
   --bg-surface: #16202C;
   --bg-elevated: #1C2734;
   --bg-header: #131B26;
   --bg-nav: #1A2431;
   --bg-input: #1C2734;
+  --bg-overlay: rgba(15, 22, 32, 0.62);
   --text-primary: #EEF2F6;
   --text-secondary: #98A3AE;
   --text-tertiary: #717D89;
+  --text-on-dark: #EEF2F6;
+  --text-on-accent: #17202A;
   --accent: #F5B942;
   --accent-hover: #FFD06C;
   --accent-subtle: rgba(245, 185, 66, 0.10);
@@ -88,6 +39,8 @@
   --gold-hover: #FFD06C;
   --gold-subtle: rgba(245, 185, 66, 0.10);
   --success: #34D399;
+  --warning: #E2A32B;
+  --danger: #DC4C4C;
   --border: rgba(255, 255, 255, 0.075);
   --border-hover: rgba(255, 255, 255, 0.16);
   --banner-bg: #16202C;
@@ -103,6 +56,19 @@
   --tag-support-bg: rgba(52, 211, 153, 0.10);
   --tag-support-text: #61DDAA;
   --tag-support-icon: #61DDAA;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-glow-accent: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
+  --shadow-glow-gold: 0 12px 34px -18px rgba(226, 163, 43, 0.72);
+  --font: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Quantico', 'Arial Narrow', sans-serif;
+  --max-w: 1400px;
+  --shell-pad: clamp(18px, 4vw, 48px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --chamfer-12: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  --chamfer-18: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
 /* Superficie plana: el sistema prohíbe gradientes y tramas decorativas (CLAUDE.md §4).
@@ -173,32 +139,6 @@ input:focus-visible {
   font-weight: 700;
   letter-spacing: .02em;
 }
-
-.theme-toggle {
-  width: 62px;
-  height: 31px;
-  padding: 0;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-hover);
-}
-
-.theme-toggle:hover { background: var(--bg-surface); }
-
-.toggle-thumb,
-[data-theme="dark"] .toggle-thumb {
-  top: 2px;
-  left: 2px;
-  width: 25px;
-  height: 25px;
-  background: var(--gold);
-  color: #17202A;
-  transform: none;
-  box-shadow: none;
-}
-
-[data-theme="light"] .toggle-thumb { transform: translateX(31px); }
-.toggle-thumb svg,
-[data-theme="dark"] .toggle-thumb svg { color: #17202A; }
 
 .admin-btn {
   width: 31px;
@@ -693,7 +633,6 @@ input:focus-visible {
 .footer-bottom { border-top-color: var(--border); }
 
 .cmdk-panel,
-[data-theme="light"] .cmdk-panel,
 .admin-modal-panel {
   background: var(--bg-surface);
   border: 1px solid var(--border-hover);
@@ -703,12 +642,9 @@ input:focus-visible {
 }
 
 .cmdk-search,
-[data-theme="light"] .cmdk-search,
-.cmdk-footer,
-[data-theme="light"] .cmdk-footer { border-color: var(--border); }
+.cmdk-footer { border-color: var(--border); }
 
 .cmdk-input,
-[data-theme="light"] .cmdk-input,
 .admin-passcode-input {
   color: var(--text-primary);
   background: var(--bg-input);
@@ -716,9 +652,7 @@ input:focus-visible {
 }
 
 .cmdk-item:hover,
-.cmdk-item[aria-selected="true"],
-[data-theme="light"] .cmdk-item:hover,
-[data-theme="light"] .cmdk-item[aria-selected="true"] { background: var(--gold-subtle); }
+.cmdk-item[aria-selected="true"] { background: var(--gold-subtle); }
 
 .admin-modal-icon {
   color: var(--gold);
@@ -884,75 +818,171 @@ html.motion-off [data-rv] {
 }
 
 
+/* ============================================================
+   PROFUNDIDAD 3D — sólo en el cuerpo (header y navbar no se tocan)
+     1. Tarjetas: se inclinan siguiendo el puntero; icono, título y
+        acción flotan a distinta profundidad; un brillo ámbar sigue la luz.
+     2. Entrada: las tarjetas se levantan desde el plano al aparecer.
+     3. Sub-accesos: se despliegan como láminas que bajan una a una.
+     4. Filtros: la categoría activa gira como un letrero split-flap.
+   La inclinación la alimenta initCardTilt() (variables --rx, --ry, --gx, --gy).
+   ============================================================ */
+
+/* ── 1. Inclinación y capas ──
+   overflow visible: con hidden el navegador aplana el 3D de los hijos.
+   El selector .card-grid .card gana a "[data-theme] .card:hover" del sistema
+   anterior, que fijaba un translateY y dejaba fuera la rotación. */
+.card-grid .card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift: 0px;
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--lift), 0);
+}
+
+.card-grid .card:hover,
+.card-grid .card:focus-within {
+  --lift: -5px;
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--lift), 0);
+  box-shadow: 0 28px 50px -30px rgba(0, 0, 0, .95), 0 0 0 1px rgba(245, 185, 66, .06);
+}
+
+/* Mientras el puntero se mueve, la rotación responde rápido; al salir,
+   vuelve al plano con la curva lenta de siempre. */
+.card-grid .card.is-tilting {
+  transition: background .22s ease, border-color .22s ease,
+              box-shadow .3s var(--ease), transform .12s linear;
+}
+
+.card-grid .card .card-header,
+.card-grid .card .card-info,
+.card-grid .card .card-title-row {
+  transform-style: preserve-3d;
+}
+
+.card-grid .card .card-icon,
+.card-grid .card .card-title,
+.card-grid .card .card-actions {
+  transform: translateZ(0);
+  transition: transform .45s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+
+.card-grid .card:hover .card-icon { transform: translateZ(38px); }
+.card-grid .card:hover .card-title { transform: translateZ(22px); }
+.card-grid .card:hover .card-actions { transform: translateZ(14px); }
+
+/* Brillo: un halo ámbar tenue en el punto donde "pega la luz". */
+.card-grid .card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(520px circle at var(--gx, 50%) var(--gy, 0%),
+              rgba(245, 185, 66, .09), transparent 42%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.card-grid .card:hover::after { opacity: 1; }
+
+/* ── 2. Entrada desde el plano ──
+   fill-mode "backwards" (no "both"): con "both" el último fotograma
+   (transform:none) quedaba pegado y anulaba para siempre el hover. */
+@keyframes cardIn3d {
+  from {
+    opacity: 0;
+    transform: perspective(1100px) rotateX(18deg) translate3d(0, 28px, -60px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1100px) rotateX(0) translate3d(0, 0, 0);
+  }
+}
+
+.card-grid .card.card-in {
+  animation: cardIn3d .75s var(--ease) backwards;
+  animation-delay: var(--rv-delay, 0ms);
+}
+
+.card-grid .card--highlight.card-in {
+  animation: cardIn3d .75s var(--ease) backwards,
+             glow-breathe 3s ease-in-out infinite;
+  animation-delay: var(--rv-delay, 0ms), 1s;
+}
+
+/* ── 3. Sub-accesos en láminas ── */
+.card-grid .card-sublinks-list { perspective: 700px; }
+
+.card-grid .card-sublinks .card-sublink {
+  transform-origin: 50% 0;
+  transform: rotateX(-82deg);
+  opacity: 0;
+  transition: transform .5s var(--ease), opacity .3s ease,
+              background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.card-grid .card-sublinks.expanded .card-sublink {
+  transform: none;
+  opacity: 1;
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+.card-grid .card-sublinks.expanded .card-sublink:hover { transition-delay: 0ms; }
+
+.card-sublink:nth-child(2) { --i: 1; }
+.card-sublink:nth-child(3) { --i: 2; }
+.card-sublink:nth-child(4) { --i: 3; }
+.card-sublink:nth-child(5) { --i: 4; }
+.card-sublink:nth-child(6) { --i: 5; }
+.card-sublink:nth-child(n+7) { --i: 6; }
+
+/* ── 4. Filtro activo tipo split-flap ── */
+@keyframes flapIn {
+  0%   { transform: perspective(500px) rotateX(-90deg); }
+  60%  { transform: perspective(500px) rotateX(12deg); }
+  100% { transform: perspective(500px) rotateX(0); }
+}
+
+.filter-pills .filter-pill.active {
+  transform-origin: 50% 0;
+  animation: flapIn .55s var(--ease) both;
+}
+
+.filter-pills .filter-pill:active {
+  transform: perspective(500px) rotateX(14deg) translateY(1px);
+}
+
+@media (hover: none) {
+  .card-grid .card:hover .card-icon,
+  .card-grid .card:hover .card-title,
+  .card-grid .card:hover .card-actions { transform: translateZ(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-grid .card,
+  .card-grid .card:hover,
+  .card-grid .card:focus-within { transform: none; }
+  .card-grid .card.card-in,
+  .card-grid .card--highlight.card-in,
+  .filter-pills .filter-pill.active { animation: none; }
+  .card-grid .card:hover .card-icon,
+  .card-grid .card:hover .card-title,
+  .card-grid .card:hover .card-actions { transform: none; }
+  .card-grid .card-sublinks .card-sublink { transform: none; opacity: 1; transition: none; }
+}
+
+
 @layer legacy {
 
 /* ══════════════════════════════════════════════
-   DESIGN TOKENS — Light Mode (Default)
+   DESIGN TOKENS — escalas (los colores viven en el :root principal)
    ══════════════════════════════════════════════ */
 :root {
-  /* ─ Backgrounds ─ */
-  --bg-body: #F1F5F9;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #FFFFFF;
-  --bg-header: #0F172A;
-  --bg-nav: #1E293B;
-  --bg-input: #F8FAFC;
-  --bg-overlay: rgba(15, 23, 42, 0.5);
-
-  /* ─ Text ─ */
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-tertiary: #94A3B8;
-  --text-on-dark: #F1F5F9;
-  --text-on-accent: #FFFFFF;
-
-  /* ─ Accent Colors ─ */
-  --accent: #2563EB;
-  --accent-hover: #1D4ED8;
-  --accent-subtle: #DBEAFE;
-  --gold: #D97706;
-  --gold-hover: #B45309;
-  --gold-subtle: #FEF3C7;
-
-  /* ─ Category Tags ─ */
-  --tag-clinico-bg: #D1FAE5;
-  --tag-clinico-text: #065F46;
-  --tag-clinico-icon: #059669;
-  --tag-admin-bg: #EDE9FE;
-  --tag-admin-text: #5B21B6;
-  --tag-admin-icon: #7C3AED;
-  --tag-support-bg: #DBEAFE;
-  --tag-support-text: #1E40AF;
-  --tag-support-icon: #2563EB;
-
-  /* ─ Status ─ */
-  --success: #059669;
-  --warning: #D97706;
-  --danger: #DC2626;
-
   /* ─ Badge ─ */
   --badge-bg: #EF4444;
   --badge-text: #FFFFFF;
-
-  /* ─ Border ─ */
-  --border: #E2E8F0;
-  --border-hover: #CBD5E1;
-
-  /* ─ Banner ─ */
-  --banner-bg: #FFFBEB;
-  --banner-border: #FDE68A;
-  --banner-text: #92400E;
-  --banner-icon: #D97706;
-
-  /* ─ Shadows (layered for realism) ─ */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02),
-    0 4px 8px rgba(0, 0, 0, 0.03), 0 8px 16px rgba(0, 0, 0, 0.03),
-    0 16px 32px rgba(0, 0, 0, 0.03);
-  --shadow-glow-accent: 0 0 20px rgba(37, 99, 235, 0.15);
-  --shadow-glow-gold: 0 0 20px rgba(217, 119, 6, 0.2);
 
   /* ─ Spacing (4px scale) ─ */
   --sp-1: 4px;
@@ -974,7 +1004,6 @@ html.motion-off [data-rv] {
   --radius-pill: 9999px;
 
   /* ─ Typography ─ */
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --fs-2xs: 0.625rem;
   --fs-xs: 0.6875rem;
   --fs-sm: 0.8125rem;
@@ -985,66 +1014,13 @@ html.motion-off [data-rv] {
   --fs-2xl: 1.5rem;
 
   /* ─ Motion ─ */
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --t-fast: 150ms var(--ease);
   --t-base: 250ms var(--ease);
   --t-slow: 350ms var(--ease);
 
   /* ─ Layout ─ */
-  --max-w: 1400px;
   --header-h: 60px;
-}
-
-/* ══════════════════════════════════════════════
-   DESIGN TOKENS — Dark Mode
-   ══════════════════════════════════════════════ */
-[data-theme="dark"] {
-  --bg-body: #0B1120;
-  --bg-surface: #151D2E;
-  --bg-elevated: #1C2640;
-  --bg-header: #080E1A;
-  --bg-nav: #0F1629;
-  --bg-input: #1C2640;
-  --bg-overlay: rgba(0, 0, 0, 0.6);
-
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-tertiary: #64748B;
-
-  --accent: #3B82F6;
-  --accent-hover: #60A5FA;
-  --accent-subtle: rgba(59, 130, 246, 0.12);
-  --gold: #F59E0B;
-  --gold-hover: #FBBF24;
-  --gold-subtle: rgba(245, 158, 11, 0.12);
-
-  --tag-clinico-bg: rgba(16, 185, 129, 0.12);
-  --tag-clinico-text: #34D399;
-  --tag-clinico-icon: #10B981;
-  --tag-admin-bg: rgba(167, 139, 250, 0.12);
-  --tag-admin-text: #A78BFA;
-  --tag-admin-icon: #8B5CF6;
-  --tag-support-bg: rgba(96, 165, 250, 0.12);
-  --tag-support-text: #60A5FA;
-  --tag-support-icon: #3B82F6;
-
-  --badge-bg: #EF4444;
-
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.16);
-
-  --banner-bg: rgba(245, 158, 11, 0.08);
-  --banner-border: rgba(245, 158, 11, 0.25);
-  --banner-text: #FBBF24;
-  --banner-icon: #F59E0B;
-
-  --shadow-xs: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-glow-accent: 0 0 24px rgba(59, 130, 246, 0.12);
-  --shadow-glow-gold: 0 0 24px rgba(245, 158, 11, 0.12);
 }
 
 /* ══════════════════════════════════════════════
@@ -1169,7 +1145,6 @@ button {
   align-items: center;
 }
 
-
 /* --- Main Branding Header (Logo Left-aligned & Large) --- */
 .header-main {
   background: #0F172A;
@@ -1245,53 +1220,6 @@ button {
 /* ══════════════════════════════════════════════
    THEME TOGGLE
    ══════════════════════════════════════════════ */
-.theme-toggle {
-  position: relative;
-  width: 52px;
-  height: 28px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: background var(--t-base);
-  display: flex;
-  align-items: center;
-  padding: 3px;
-  flex-shrink: 0;
-}
-
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.toggle-thumb {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #FBBF24;
-  left: 3px;
-  transition: transform var(--t-base), background var(--t-base);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.toggle-thumb svg {
-  width: 12px;
-  height: 12px;
-  color: #78350F;
-  transition: color var(--t-base);
-}
-
-[data-theme="dark"] .toggle-thumb {
-  transform: translateX(24px);
-  background: #334155;
-}
-
-[data-theme="dark"] .toggle-thumb svg {
-  color: #CBD5E1;
-}
 
 /* ══════════════════════════════════════════════
    NAVBAR
@@ -2374,13 +2302,11 @@ button {
    PRINT
    ══════════════════════════════════════════════ */
 @media print {
-
   .header,
   .navbar,
   .banner,
   .search-section,
   .footer,
-  .theme-toggle,
   .card-link-btn,
   .card-sublinks-toggle,
   .card-sublinks,
@@ -2501,11 +2427,6 @@ button {
   animation: cmdk-pop-in 180ms cubic-bezier(.2, .9, .3, 1.2);
 }
 
-[data-theme="light"] .cmdk-panel {
-  background: #FFFFFF;
-  border-color: rgba(15, 23, 42, 0.10);
-}
-
 @keyframes cmdk-fade-in {
   from {
     opacity: 0
@@ -2537,11 +2458,6 @@ button {
   color: rgba(255, 255, 255, 0.75);
 }
 
-[data-theme="light"] .cmdk-search {
-  border-bottom-color: rgba(15, 23, 42, 0.08);
-  color: rgba(15, 23, 42, 0.65);
-}
-
 .cmdk-input {
   flex: 1;
   background: transparent;
@@ -2553,16 +2469,8 @@ button {
   padding: 4px 0;
 }
 
-[data-theme="light"] .cmdk-input {
-  color: #0F172A;
-}
-
 .cmdk-input::placeholder {
   color: rgba(255, 255, 255, 0.45);
-}
-
-[data-theme="light"] .cmdk-input::placeholder {
-  color: rgba(15, 23, 42, 0.45);
 }
 
 .cmdk-esc {
@@ -2574,12 +2482,6 @@ button {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.75);
-}
-
-[data-theme="light"] .cmdk-esc {
-  background: rgba(15, 23, 42, 0.06);
-  border-color: rgba(15, 23, 42, 0.15);
-  color: rgba(15, 23, 42, 0.7);
 }
 
 .cmdk-list {
@@ -2597,10 +2499,6 @@ button {
   padding: 12px 12px 6px;
 }
 
-[data-theme="light"] .cmdk-group-label {
-  color: rgba(15, 23, 42, 0.5);
-}
-
 .cmdk-item {
   display: flex;
   align-items: center;
@@ -2612,18 +2510,9 @@ button {
   transition: background 80ms ease;
 }
 
-[data-theme="light"] .cmdk-item {
-  color: #0F172A;
-}
-
 .cmdk-item:hover,
 .cmdk-item[aria-selected="true"] {
   background: rgba(37, 99, 235, 0.18);
-}
-
-[data-theme="light"] .cmdk-item:hover,
-[data-theme="light"] .cmdk-item[aria-selected="true"] {
-  background: rgba(37, 99, 235, 0.10);
 }
 
 .cmdk-item-icon {
@@ -2636,11 +2525,6 @@ button {
   background: rgba(255, 255, 255, 0.06);
   color: #FFFFFF;
   flex-shrink: 0;
-}
-
-[data-theme="light"] .cmdk-item-icon {
-  background: rgba(15, 23, 42, 0.05);
-  color: #0F172A;
 }
 
 .cmdk-item-body {
@@ -2690,10 +2574,6 @@ button {
   font-size: 13px;
 }
 
-[data-theme="light"] .cmdk-empty {
-  color: rgba(15, 23, 42, 0.55);
-}
-
 .cmdk-footer {
   display: flex;
   gap: 16px;
@@ -2702,12 +2582,6 @@ button {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.02);
-}
-
-[data-theme="light"] .cmdk-footer {
-  border-top-color: rgba(15, 23, 42, 0.08);
-  color: rgba(15, 23, 42, 0.55);
-  background: rgba(15, 23, 42, 0.02);
 }
 
 .cmdk-footer kbd {
@@ -2721,11 +2595,6 @@ button {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: inherit;
-}
-
-[data-theme="light"] .cmdk-footer kbd {
-  background: rgba(15, 23, 42, 0.05);
-  border-color: rgba(15, 23, 42, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {

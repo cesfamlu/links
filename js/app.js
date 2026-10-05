@@ -71,8 +71,6 @@ const ICONS = {
   arrowRight:   '<path d="M5 12h14M12 5l7 7-7 7"/>',
   alertTri:     '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/>',
   x:            '<path d="M18 6 6 18M6 6l12 12"/>',
-  sun:          '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>',
-  moon:         '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
   searchX:      '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M13.5 8.5l-5 5M8.5 8.5l5 5"/>',
   facebook:     '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
   youtube:      '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>',
@@ -324,48 +322,6 @@ function initClock() {
       timer = setInterval(update, 1000);
     }
   });
-}
-
-// ══════════════════════════════════════════════
-//  THEME MANAGER
-// ══════════════════════════════════════════════
-function initTheme() {
-  const toggle = $('#theme-toggle');
-  if (!toggle) return;
-
-  // Read saved preference or system preference
-  const saved = localStorage.getItem('cesfam-theme');
-  if (saved) {
-    document.documentElement.setAttribute('data-theme', saved);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-
-  // Update toggle icon
-  updateThemeIcon();
-
-  toggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('cesfam-theme', next);
-    updateThemeIcon();
-  });
-
-  // Listen for system changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('cesfam-theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-      updateThemeIcon();
-    }
-  });
-}
-
-function updateThemeIcon() {
-  const thumb = $('.toggle-thumb');
-  if (!thumb) return;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  thumb.innerHTML = isDark ? icon('moon', 12) : icon('sun', 12);
 }
 
 // ══════════════════════════════════════════════
@@ -812,6 +768,51 @@ function observeCards() {
   }, 1400);
 }
 
+/* Inclinación 3D de las tarjetas según el puntero.
+   Sólo con mouse (en táctil no hay "hover" que seguir) y sin reduced-motion.
+   Escribe --rx/--ry (ángulos) y --gx/--gy (punto del brillo); el CSS hace el resto. */
+function initCardTilt() {
+  const grid = $('#card-grid');
+  if (!grid || reducedMotionQuery.matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const MAX = 7; // grados
+  let frame = 0;
+  let pending = null;
+
+  function apply() {
+    frame = 0;
+    if (!pending) return;
+    const { card, x, y } = pending;
+    const r = card.getBoundingClientRect();
+    const px = Math.min(Math.max((x - r.left) / r.width, 0), 1);
+    const py = Math.min(Math.max((y - r.top) / r.height, 0), 1);
+    // Una tarjeta con los accesos desplegados es alta: se inclina menos en vertical.
+    const k = card.querySelector('.card-sublinks.expanded') ? 0.35 : 1;
+    card.style.setProperty('--ry', `${((px - 0.5) * 2 * MAX).toFixed(2)}deg`);
+    card.style.setProperty('--rx', `${((0.5 - py) * 2 * MAX * k).toFixed(2)}deg`);
+    card.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
+    card.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
+  }
+
+  grid.addEventListener('pointermove', (e) => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    card.classList.add('is-tilting');
+    pending = { card, x: e.clientX, y: e.clientY };
+    if (!frame) frame = requestAnimationFrame(apply);
+  }, { passive: true });
+
+  grid.addEventListener('pointerout', (e) => {
+    const card = e.target.closest('.card');
+    if (!card || card.contains(e.relatedTarget)) return;
+    if (pending && pending.card === card) pending = null;
+    card.classList.remove('is-tilting');
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  });
+}
+
 /* Al filtrar, las tarjetas que quedan vuelven a entrar. */
 function animateCards() {
   if (reducedMotionQuery.matches) return;
@@ -874,10 +875,8 @@ function initHeroCanvas() {
 
   function draw() {
     if (w < 1) resize();
-    // Aquí el tema claro es el de partida (el oscuro se marca con data-theme),
-    // al revés que en el directorio: la condición va invertida a propósito.
-    const oscuro = document.documentElement.getAttribute('data-theme') === 'dark';
-    const line = oscuro ? 'rgba(255,255,255,' : 'rgba(22,32,42,';
+    // Tema único oscuro: líneas claras sobre fondo oscuro.
+    const line = 'rgba(255,255,255,';
     const ox = pointer.x * 26;
     const oy = pointer.y * 16;
     ctx.clearRect(0, 0, w, h);
@@ -1189,7 +1188,6 @@ function initAdmin() {
 
 async function init() {
   initClock();
-  initTheme();
   initBanner();
   await loadTools();
   renderCards();
@@ -1199,6 +1197,7 @@ async function init() {
   initAdmin();
   initReveals();
   initCardMotion();
+  initCardTilt();
   initHeroCanvas();
   firstPaint = false;
 }

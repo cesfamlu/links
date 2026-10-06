@@ -1211,3 +1211,8 @@ async function init() {
   initReveals();
   initCardMotion();
   initCardTilt();
+  initHeroCanvas();
+  firstPaint = false;
+}
+
+document.addEventListener('DOMContentLoaded', init);

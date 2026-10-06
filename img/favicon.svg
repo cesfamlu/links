@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Placa oscura con chaflán (mismo corte que botones y paneles del portal) -->
+  <path d="M0 0H50L64 14V64H14L0 50Z" fill="#0F1620"/>
+  <path d="M1.5 1.5H49.4L62.5 14.6V62.5H14.6L1.5 49.4Z" fill="none" stroke="#F5B942" stroke-opacity=".35" stroke-width="3"/>
+  <!-- M dorada, geométrica, con remates rectos -->
+  <path d="M13 50V14H23L32 30L41 14H51V50H42V30L35 42H29L22 30V50Z" fill="#F5B942"/>
+</svg>

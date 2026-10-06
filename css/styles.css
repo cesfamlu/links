@@ -829,14 +829,15 @@ html.motion-off [data-rv] {
    --sx, --sy). Para subir o bajar la intensidad basta con tocar estas perillas.
    ============================================================ */
 :root {
-  --tilt-max: 13;            /* grados máximos de inclinación (lo lee el JS) */
-  --tilt-persp: 760px;       /* menos = 3D más marcado */
-  --tilt-lift: -12px;        /* cuánto sube la tarjeta en hover */
-  --tilt-pop: 34px;          /* cuánto se acerca la tarjeta completa */
-  --depth-icon: 78px;        /* profundidad de cada capa */
-  --depth-title: 46px;
-  --depth-desc: 24px;
-  --depth-actions: 36px;
+  --tilt-max: 15;            /* grados máximos de inclinación (lo lee el JS) */
+  --tilt-persp: 700px;       /* menos = 3D más marcado */
+  --tilt-lift: -14px;        /* cuánto sube la tarjeta en hover */
+  --tilt-pop: 40px;          /* cuánto se acerca la tarjeta completa */
+  --depth-icon: 92px;        /* profundidad de cada capa */
+  --depth-title: 56px;
+  --depth-desc: 30px;
+  --depth-actions: 44px;
+  --dim-others: .72;         /* opacidad del resto mientras una tarjeta está en foco */
 }
 
 /* ── 1. Inclinación y capas ──
@@ -868,11 +869,25 @@ html.motion-off [data-rv] {
     0 0 46px -14px rgba(245, 185, 66, .22);
 }
 
+/* Foco: mientras una tarjeta flota, las demás retroceden un paso. */
+.card-grid .card.card-in {
+  transition: background .22s ease, border-color .22s ease,
+              box-shadow .3s var(--ease), transform .3s var(--ease),
+              opacity .35s ease, filter .35s ease;
+}
+
+.card-grid:has(.card:hover) .card.card-in:not(:hover) {
+  opacity: var(--dim-others);
+  filter: saturate(.75);
+}
+
 /* Mientras el puntero se mueve, la rotación responde rápido; al salir,
    vuelve al plano con la curva lenta de siempre. */
-.card-grid .card.is-tilting {
+.card-grid .card.is-tilting,
+.card-grid .card.card-in.is-tilting {
   transition: background .22s ease, border-color .22s ease,
-              box-shadow .12s linear, transform .12s linear;
+              box-shadow .12s linear, transform .12s linear,
+              opacity .35s ease, filter .35s ease;
 }
 
 .card-grid .card .card-header,
@@ -919,6 +934,33 @@ html.motion-off [data-rv] {
 }
 
 .card-grid .card:hover::after { opacity: 1; }
+
+/* ── 1b. Accesos abiertos: la tarjeta se asienta ──
+   Con las capas separadas en Z, Chrome resuelve mal el clic dentro de la
+   lista desplegada (overflow:hidden) y el enlace no se puede pinchar. Al
+   abrir la lista la tarjeta sigue inclinándose (menos), pero en un solo
+   plano: así cada clic cae exactamente sobre el acceso. */
+.card-grid .card.is-open,
+.card-grid .card.is-open .card-header,
+.card-grid .card.is-open .card-info,
+.card-grid .card.is-open .card-title-row,
+.card-grid .card.is-open .card-actions {
+  transform-style: flat;
+}
+
+.card-grid .card.is-open:hover .card-icon,
+.card-grid .card.is-open:hover .card-title,
+.card-grid .card.is-open:hover .card-desc,
+.card-grid .card.is-open:hover .card-badge,
+.card-grid .card.is-open:hover .card-actions {
+  transform: none;
+}
+
+.card-grid .card.is-open:hover {
+  --pop: 14px;
+}
+
+.card-grid .card.is-open .card-sublinks-list { perspective: none; }
 
 /* ── 2. Entrada desde el plano ──
    fill-mode "backwards" (no "both"): con "both" el último fotograma
@@ -968,7 +1010,8 @@ html.motion-off [data-rv] {
 
 .card-grid .card-sublinks.expanded .card-sublink:hover {
   transition-delay: 0ms;
-  transform: translateZ(18px) translateX(4px);
+  transform: translateX(5px);
+  box-shadow: inset 2px 0 0 var(--gold);
 }
 
 .card-sublink:nth-child(2) { --i: 1; }
@@ -1017,6 +1060,7 @@ html.motion-off [data-rv] {
   .card-grid .card:hover .card-badge,
   .card-grid .card:hover .card-actions { transform: none; }
   .card-grid .card-sublinks .card-sublink { transform: none; opacity: 1; transition: none; }
+  .card-grid:has(.card:hover) .card.card-in:not(:hover) { opacity: 1; filter: none; }
 }
 
 
@@ -2902,47 +2946,3 @@ button {
   margin-top: -2px;
   animation: adminShake 0.3s ease-in-out;
 }
-
-@keyframes adminShake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
-}
-
-.admin-submit-btn {
-  width: 100%;
-  padding: var(--sp-3) var(--sp-4);
-  background: var(--accent);
-  color: var(--text-on-accent);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: var(--fs-base);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-2);
-  transition: all var(--t-fast);
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
-}
-
-.admin-submit-btn:hover {
-  background: var(--accent-hover);
-  box-shadow: var(--shadow-glow-accent), 0 4px 12px rgba(37, 99, 235, 0.2);
-  transform: translateY(-1px);
-}
-
-.admin-submit-btn:active {
-  transform: translateY(0);
-}
-
-.admin-submit-btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform var(--t-fast);
-}
-
-.admin-submit-btn:hover svg {
-  transform: translateX(3px);
-}
-
-} /* legacy */

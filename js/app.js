@@ -409,6 +409,8 @@ function createCard(tool, index) {
       toggleBtn.classList.toggle('expanded');
       sublinks.classList.toggle('expanded');
       toggleBtn.setAttribute('aria-expanded', !isExpanded);
+      // Con la lista abierta la tarjeta pasa a un solo plano (ver CSS 1b).
+      el.classList.toggle('is-open', !isExpanded);
     });
   }
 
@@ -790,9 +792,12 @@ function initCardTilt() {
     const r = card.getBoundingClientRect();
     const px = Math.min(Math.max((x - r.left) / r.width, 0), 1);
     const py = Math.min(Math.max((y - r.top) / r.height, 0), 1);
-    // Una tarjeta con los accesos desplegados es alta: se inclina menos en vertical.
-    const k = card.querySelector('.card-sublinks.expanded') ? 0.35 : 1;
-    card.style.setProperty('--ry', `${((px - 0.5) * 2 * MAX).toFixed(2)}deg`);
+    // Con los accesos abiertos la tarjeta es alta y hay que apuntar a una
+    // lista: se inclina bastante menos para que elegir sea cómodo.
+    const open = card.classList.contains('is-open');
+    const k = open ? 0.3 : 1;
+    const kx = open ? 0.35 : 1;
+    card.style.setProperty('--ry', `${((px - 0.5) * 2 * MAX * kx).toFixed(2)}deg`);
     card.style.setProperty('--rx', `${((0.5 - py) * 2 * MAX * k).toFixed(2)}deg`);
     card.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
     card.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
@@ -1206,8 +1211,3 @@ async function init() {
   initReveals();
   initCardMotion();
   initCardTilt();
-  initHeroCanvas();
-  firstPaint = false;
-}
-
-document.addEventListener('DOMContentLoaded', init);

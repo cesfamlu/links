@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /* ==============================================
    CESFAM La Unión — Portal de Herramientas Digitales
@@ -29,57 +29,57 @@ function normalize(str) {
     .trim();
 }
 
-
+// ══════════════════════════════════════════════
+//  SVG ICONS (Lucide-style, 24×24 viewBox)
+// ══════════════════════════════════════════════
 const ICONS = {
   // ─ Tool Icons ─
-  clipboard: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6m-6 4h6"/>',
-  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
-  flask: '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/>',
-  fileSearch: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/>',
-  monitor: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 13l2.5-3L12 13l2.5-3L17 13"/>',
-  landmark: '<path d="M3 22h18M6 18v4M10 18v4M14 18v4M18 18v4M4 18h16M12 2l8 8H4z"/>',
-  fileText: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
-  eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
-  shoppingBag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
-  packageIcon: '<path d="m16.5 9.4-9-5.19M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/>',
-  heartPulse: '<path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 0 1 12 6.006a5 5 0 0 1 7.5 6.572"/><path d="M5 12h2l2 3 4-6 2 3h2"/>',
-  smile: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
-  brain: '<path d="M12 2C9 2 6.5 4 6 7c-1.5.5-3 2-3 4 0 1.5 1 3 2 3.5-.5 1.5 0 3 1 4 1.5 1.5 3 2 5 2h2c2 0 3.5-.5 5-2 1-1 1.5-2.5 1-4 1-.5 2-2 2-3.5 0-2-1.5-3.5-3-4-.5-3-3-5-6-5z"/><path d="M12 2v20"/>',
-  activity: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
-  pill: '<path d="m10.5 1.5-8.03 8.03a5.68 5.68 0 0 0 8.03 8.03l8.03-8.03a5.68 5.68 0 0 0-8.03-8.03z"/><path d="m7.5 10.5 5-5"/>',
-  scanIcon: '<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/>',
-  building2: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4m-4 4h4m-4 4h4"/>',
-  globe: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
-  send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/>',
-  bookOpen: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
-  mapFlag: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
-  calendarX: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M10 14l4 4M14 14l-4 4"/>',
-  messageBot: '<path d="M12 2a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-4l-3 3-3-3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>',
-  headphones: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+  clipboard:    '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6m-6 4h6"/>',
+  shield:       '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
+  flask:        '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/>',
+  fileSearch:   '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/>',
+  monitor:      '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 13l2.5-3L12 13l2.5-3L17 13"/>',
+  landmark:     '<path d="M3 22h18M6 18v4M10 18v4M14 18v4M18 18v4M4 18h16M12 2l8 8H4z"/>',
+  fileText:     '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
+  eye:          '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  shoppingBag:  '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  packageIcon:  '<path d="m16.5 9.4-9-5.19M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/>',
+  heartPulse:   '<path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 0 1 12 6.006a5 5 0 0 1 7.5 6.572"/><path d="M5 12h2l2 3 4-6 2 3h2"/>',
+  smile:        '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  brain:        '<path d="M12 2C9 2 6.5 4 6 7c-1.5.5-3 2-3 4 0 1.5 1 3 2 3.5-.5 1.5 0 3 1 4 1.5 1.5 3 2 5 2h2c2 0 3.5-.5 5-2 1-1 1.5-2.5 1-4 1-.5 2-2 2-3.5 0-2-1.5-3.5-3-4-.5-3-3-5-6-5z"/><path d="M12 2v20"/>',
+  activity:     '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+  pill:         '<path d="m10.5 1.5-8.03 8.03a5.68 5.68 0 0 0 8.03 8.03l8.03-8.03a5.68 5.68 0 0 0-8.03-8.03z"/><path d="m7.5 10.5 5-5"/>',
+  scanIcon:     '<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/>',
+  building2:    '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4m-4 4h4m-4 4h4"/>',
+  globe:        '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  send:         '<path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/>',
+  bookOpen:     '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  mapFlag:      '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
+  calendarX:    '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M10 14l4 4M14 14l-4 4"/>',
+  messageBot:   '<path d="M12 2a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-4l-3 3-3-3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>',
+  headphones:   '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
 
   // ─ Nav Icons ─
-  sparkles: '<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>',
-  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
-  lifeBuoy: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>',
+  sparkles:     '<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>',
+  phone:        '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  lifeBuoy:     '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>',
 
   // ─ UI Icons ─
-  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>',
-  chevronDown: '<polyline points="6 9 12 15 18 9"/>',
+  search:       '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>',
+  chevronDown:  '<polyline points="6 9 12 15 18 9"/>',
   externalLink: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>',
-  arrowRight: '<path d="M5 12h14M12 5l7 7-7 7"/>',
-  alertTri: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/>',
-  x: '<path d="M18 6 6 18M6 6l12 12"/>',
-  sun: '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>',
-  moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
-  searchX: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M13.5 8.5l-5 5M8.5 8.5l5 5"/>',
-  facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
-  youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>',
-  instagram: '<rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
-  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
-  mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
-  mapPin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
-  lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-  eyeOff: '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>',
+  arrowRight:   '<path d="M5 12h14M12 5l7 7-7 7"/>',
+  alertTri:     '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/>',
+  x:            '<path d="M18 6 6 18M6 6l12 12"/>',
+  searchX:      '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M13.5 8.5l-5 5M8.5 8.5l5 5"/>',
+  facebook:     '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+  youtube:      '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>',
+  instagram:    '<rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
+  wrench:       '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  mail:         '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  mapPin:       '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  lock:         '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  eyeOff:       '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>',
 };
 
 function icon(name, size = 24) {
@@ -91,7 +91,7 @@ function icon(name, size = 24) {
 // ══════════════════════════════════════════════
 const CATEGORIES = {
   clinico: { label: 'Clínico', tagClass: 'card-tag--clinico', iconClass: 'card-icon--clinico' },
-  admin: { label: 'CESFAM', tagClass: 'card-tag--admin', iconClass: 'card-icon--admin' },
+  admin:   { label: 'CESFAM',  tagClass: 'card-tag--admin',   iconClass: 'card-icon--admin' },
   support: { label: 'Soporte', tagClass: 'card-tag--support', iconClass: 'card-icon--support' },
 };
 
@@ -295,7 +295,7 @@ function initClock() {
     const now = new Date();
     const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
     const day = days[now.getDay()];
     const d = now.getDate();
@@ -322,48 +322,6 @@ function initClock() {
       timer = setInterval(update, 1000);
     }
   });
-}
-
-// ══════════════════════════════════════════════
-//  THEME MANAGER
-// ══════════════════════════════════════════════
-function initTheme() {
-  const toggle = $('#theme-toggle');
-  if (!toggle) return;
-
-  // Read saved preference or system preference
-  const saved = localStorage.getItem('cesfam-theme');
-  if (saved) {
-    document.documentElement.setAttribute('data-theme', saved);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-
-  // Update toggle icon
-  updateThemeIcon();
-
-  toggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('cesfam-theme', next);
-    updateThemeIcon();
-  });
-
-  // Listen for system changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('cesfam-theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-      updateThemeIcon();
-    }
-  });
-}
-
-function updateThemeIcon() {
-  const thumb = $('.toggle-thumb');
-  if (!thumb) return;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  thumb.innerHTML = isDark ? icon('moon', 12) : icon('sun', 12);
 }
 
 // ══════════════════════════════════════════════
@@ -451,6 +409,8 @@ function createCard(tool, index) {
       toggleBtn.classList.toggle('expanded');
       sublinks.classList.toggle('expanded');
       toggleBtn.setAttribute('aria-expanded', !isExpanded);
+      // Con la lista abierta la tarjeta pasa a un solo plano (ver CSS 1b).
+      el.classList.toggle('is-open', !isExpanded);
     });
   }
 
@@ -589,8 +549,8 @@ function highlightMatch(text, query) {
   if (idx < 0) return safe;
   // Map normalized index back to original (NFD strips marks but preserves base char positions for our latin alphabet).
   const before = escapeHtml(text.slice(0, idx));
-  const match = escapeHtml(text.slice(idx, idx + token.length));
-  const after = escapeHtml(text.slice(idx + token.length));
+  const match  = escapeHtml(text.slice(idx, idx + token.length));
+  const after  = escapeHtml(text.slice(idx + token.length));
   return `${before}<mark>${match}</mark>${after}`;
 }
 
@@ -810,6 +770,62 @@ function observeCards() {
   }, 1400);
 }
 
+/* Inclinación 3D de las tarjetas según el puntero.
+   Sólo con mouse (en táctil no hay "hover" que seguir) y sin reduced-motion.
+   Escribe --rx/--ry (ángulos), --gx/--gy (punto del brillo) y --sx/--sy
+   (desplazamiento de la sombra); el CSS hace el resto. La intensidad sale de
+   la variable CSS --tilt-max, así se ajusta todo desde la hoja de estilos. */
+function initCardTilt() {
+  const grid = $('#card-grid');
+  if (!grid || reducedMotionQuery.matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const MAX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tilt-max')) || 13;
+  const SHADOW = 26; // px que se corre la sombra en el borde
+  let frame = 0;
+  let pending = null;
+
+  function apply() {
+    frame = 0;
+    if (!pending) return;
+    const { card, x, y } = pending;
+    const r = card.getBoundingClientRect();
+    const px = Math.min(Math.max((x - r.left) / r.width, 0), 1);
+    const py = Math.min(Math.max((y - r.top) / r.height, 0), 1);
+    // Con los accesos abiertos la tarjeta es alta y hay que apuntar a una
+    // lista: se inclina bastante menos para que elegir sea cómodo.
+    const open = card.classList.contains('is-open');
+    const k = open ? 0.3 : 1;
+    const kx = open ? 0.35 : 1;
+    card.style.setProperty('--ry', `${((px - 0.5) * 2 * MAX * kx).toFixed(2)}deg`);
+    card.style.setProperty('--rx', `${((0.5 - py) * 2 * MAX * k).toFixed(2)}deg`);
+    card.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
+    card.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
+    // La sombra cae del lado opuesto al puntero.
+    card.style.setProperty('--sx', `${((0.5 - px) * 2 * SHADOW).toFixed(1)}px`);
+    card.style.setProperty('--sy', `${((0.5 - py) * 2 * SHADOW * k).toFixed(1)}px`);
+  }
+
+  grid.addEventListener('pointermove', (e) => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    card.classList.add('is-tilting');
+    pending = { card, x: e.clientX, y: e.clientY };
+    if (!frame) frame = requestAnimationFrame(apply);
+  }, { passive: true });
+
+  grid.addEventListener('pointerout', (e) => {
+    const card = e.target.closest('.card');
+    if (!card || card.contains(e.relatedTarget)) return;
+    if (pending && pending.card === card) pending = null;
+    card.classList.remove('is-tilting');
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+    card.style.setProperty('--sx', '0px');
+    card.style.setProperty('--sy', '0px');
+  });
+}
+
 /* Al filtrar, las tarjetas que quedan vuelven a entrar. */
 function animateCards() {
   if (reducedMotionQuery.matches) return;
@@ -872,10 +888,8 @@ function initHeroCanvas() {
 
   function draw() {
     if (w < 1) resize();
-    // Aquí el tema claro es el de partida (el oscuro se marca con data-theme),
-    // al revés que en el directorio: la condición va invertida a propósito.
-    const oscuro = document.documentElement.getAttribute('data-theme') === 'dark';
-    const line = oscuro ? 'rgba(255,255,255,' : 'rgba(22,32,42,';
+    // Tema único oscuro: líneas claras sobre fondo oscuro.
+    const line = 'rgba(255,255,255,';
     const ox = pointer.x * 26;
     const oy = pointer.y * 16;
     ctx.clearRect(0, 0, w, h);
@@ -1061,9 +1075,9 @@ const cmdk = {
 };
 
 function initCmdK() {
-  cmdk.el = $('#cmdk');
+  cmdk.el    = $('#cmdk');
   cmdk.input = $('#cmdk-input');
-  cmdk.list = $('#cmdk-list');
+  cmdk.list  = $('#cmdk-list');
   if (!cmdk.el) return;
 
   // Open with Ctrl+K / Cmd+K from anywhere.
@@ -1083,12 +1097,12 @@ function initCmdK() {
   cmdk.input.addEventListener('input', () => cmdk.render(cmdk.input.value));
   cmdk.input.addEventListener('keydown', (e) => {
     switch (e.key) {
-      case 'Escape': e.preventDefault(); cmdk.close(); break;
+      case 'Escape':    e.preventDefault(); cmdk.close(); break;
       case 'ArrowDown': e.preventDefault(); cmdk.move(1); break;
-      case 'ArrowUp': e.preventDefault(); cmdk.move(-1); break;
-      case 'Enter': e.preventDefault(); cmdk.openSelected(); break;
-      case 'Home': e.preventDefault(); cmdk.selected = 0; cmdk.highlight(); break;
-      case 'End': e.preventDefault(); cmdk.selected = cmdk.items.length - 1; cmdk.highlight(); break;
+      case 'ArrowUp':   e.preventDefault(); cmdk.move(-1); break;
+      case 'Enter':     e.preventDefault(); cmdk.openSelected(); break;
+      case 'Home':      e.preventDefault(); cmdk.selected = 0; cmdk.highlight(); break;
+      case 'End':       e.preventDefault(); cmdk.selected = cmdk.items.length - 1; cmdk.highlight(); break;
     }
   });
 }
@@ -1187,7 +1201,6 @@ function initAdmin() {
 
 async function init() {
   initClock();
-  initTheme();
   initBanner();
   await loadTools();
   renderCards();
@@ -1197,6 +1210,7 @@ async function init() {
   initAdmin();
   initReveals();
   initCardMotion();
+  initCardTilt();
   initHeroCanvas();
   firstPaint = false;
 }

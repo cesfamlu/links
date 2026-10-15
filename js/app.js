@@ -1,15 +1,8 @@
 'use strict'
 
-/* ==============================================
-   CESFAM La Unión — Portal de Herramientas Digitales
-   Application Logic · v2.0 · Mayo 2026
-   ============================================== */
-
-// ── Utilities ──
 const $ = (s, p = document) => p.querySelector(s);
 const $$ = (s, p = document) => [...p.querySelectorAll(s)];
 
-// Escape HTML to prevent XSS when injecting dynamic data via innerHTML.
 function escapeHtml(str) {
   if (str == null) return '';
   return String(str)
@@ -20,7 +13,6 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-// Normalize text for accent/case-insensitive search.
 function normalize(str) {
   return String(str || '')
     .normalize('NFD')
@@ -29,11 +21,7 @@ function normalize(str) {
     .trim();
 }
 
-// ══════════════════════════════════════════════
-//  SVG ICONS (Lucide-style, 24×24 viewBox)
-// ══════════════════════════════════════════════
 const ICONS = {
-  // ─ Tool Icons ─
   clipboard:    '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6m-6 4h6"/>',
   shield:       '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
   flask:        '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/>',
@@ -58,13 +46,9 @@ const ICONS = {
   calendarX:    '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M10 14l4 4M14 14l-4 4"/>',
   messageBot:   '<path d="M12 2a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-4l-3 3-3-3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>',
   headphones:   '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
-
-  // ─ Nav Icons ─
   sparkles:     '<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>',
   phone:        '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
   lifeBuoy:     '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>',
-
-  // ─ UI Icons ─
   search:       '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>',
   chevronDown:  '<polyline points="6 9 12 15 18 9"/>',
   externalLink: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>',
@@ -86,23 +70,13 @@ function icon(name, size = 24) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ''}</svg>`;
 }
 
-// ══════════════════════════════════════════════
-//  CATEGORY CONFIG
-// ══════════════════════════════════════════════
 const CATEGORIES = {
   clinico: { label: 'Clínico', tagClass: 'card-tag--clinico', iconClass: 'card-icon--clinico' },
   admin:   { label: 'CESFAM',  tagClass: 'card-tag--admin',   iconClass: 'card-icon--admin' },
   support: { label: 'Soporte', tagClass: 'card-tag--support', iconClass: 'card-icon--support' },
 };
 
-// ══════════════════════════════════════════════
-//  TOOLS DATA MODEL
-//  Loaded at runtime from data/tools.json (see loadTools()).
-//  The inline array below is the fallback used when the fetch fails
-//  (e.g. opened via file://) so the portal always renders.
-// ══════════════════════════════════════════════
 let TOOLS = [
-  // ─── CLÍNICO (16) ───
   {
     id: 'ras', title: 'RAS', icon: 'clipboard',
     desc: 'Registro de Atenciones de Salud',
@@ -222,8 +196,6 @@ let TOOLS = [
     category: 'clinico', badge: null, highlight: false,
     type: 'single', url: 'http://10.6.67.166'
   },
-
-  // ─── ADMIN / CESFAM (5) ───
   {
     id: 'desamlu', title: 'DESAMLU', icon: 'building2',
     desc: 'Plataforma Departamento de salud municipal',
@@ -254,8 +226,6 @@ let TOOLS = [
     category: 'admin', badge: null, highlight: false,
     type: 'single', url: 'https://www.munilaunioninfo.com'
   },
-
-  // ─── SOPORTE (3) ───
   {
     id: 'bloqueapp', title: 'BloqueApp', icon: 'calendarX',
     desc: 'Gestión para bloqueos de agenda',
@@ -276,16 +246,10 @@ let TOOLS = [
   },
 ];
 
-// ══════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════
 let activeFilter = 'all';
 let searchQuery = '';
 let searchTimeout = null;
 
-// ══════════════════════════════════════════════
-//  CLOCK
-// ══════════════════════════════════════════════
 function initClock() {
   const dateEl = $('#clock-date');
   const timeEl = $('#clock-time');
@@ -312,7 +276,6 @@ function initClock() {
   update();
   let timer = setInterval(update, 1000);
 
-  // Pause ticking when the tab is hidden to save CPU/battery.
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       clearInterval(timer);
@@ -324,9 +287,6 @@ function initClock() {
   });
 }
 
-// ══════════════════════════════════════════════
-//  CARD RENDERING
-// ══════════════════════════════════════════════
 function renderCards() {
   const grid = $('#card-grid');
   if (!grid) return;
@@ -348,8 +308,6 @@ function createCard(tool, index) {
   el.dataset.id = tool.id;
   el.dataset.category = tool.category;
   el.dataset.keywords = buildKeywords(tool);
-  // El escalonado lo decide el observer (--rv-delay); un delay inline aquí
-  // ganaba sobre la hoja de estilos y rompía el reveal.
 
   let actionsHTML = '';
 
@@ -371,8 +329,7 @@ function createCard(tool, index) {
         <div class="card-sublinks-list">
           ${tool.links.map(l => `
             <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" class="card-sublink">
-              <span>${escapeHtml(l.label)}</span>
-              ${icon('arrowRight', 14)}
+              <span>${escapeHtml(l.label)}</span>${icon('arrowRight', 14)}
             </a>
           `).join('')}
         </div>
@@ -398,7 +355,6 @@ function createCard(tool, index) {
     </div>
   `;
 
-  // Attach sub-links toggle handler
   const toggleBtn = el.querySelector('.card-sublinks-toggle');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
@@ -409,7 +365,6 @@ function createCard(tool, index) {
       toggleBtn.classList.toggle('expanded');
       sublinks.classList.toggle('expanded');
       toggleBtn.setAttribute('aria-expanded', !isExpanded);
-      // Con la lista abierta la tarjeta pasa a un solo plano (ver CSS 1b).
       el.classList.toggle('is-open', !isExpanded);
     });
   }
@@ -425,22 +380,17 @@ function buildKeywords(tool) {
   return normalize(parts.join(' '));
 }
 
-// Token-based matching: every token in the query must appear somewhere in keywords.
 function matchesQuery(keywords, query) {
   if (!query) return true;
   const tokens = query.split(/\s+/).filter(Boolean);
   return tokens.every(t => keywords.includes(t));
 }
 
-// ══════════════════════════════════════════════
-//  SEARCH ENGINE
-// ══════════════════════════════════════════════
 function initSearch() {
   const input = $('#search-input');
   const dropdown = $('#search-dropdown');
   if (!input || !dropdown) return;
 
-  // Debounced search
   input.addEventListener('input', () => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
@@ -450,14 +400,12 @@ function initSearch() {
     }, 200);
   });
 
-  // Close dropdown on click outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-bar')) {
       dropdown.classList.remove('active');
     }
   });
 
-  // Close dropdown on Escape
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       dropdown.classList.remove('active');
@@ -465,14 +413,12 @@ function initSearch() {
     }
   });
 
-  // Focus shows dropdown if there's a query
   input.addEventListener('focus', () => {
     if (searchQuery.length >= 2) {
       updateDropdown(searchQuery);
     }
   });
 
-  // Global "/" shortcut to focus the search (ignored while typing in a field).
   document.addEventListener('keydown', (e) => {
     if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
     const tag = (e.target.tagName || '').toLowerCase();
@@ -482,7 +428,6 @@ function initSearch() {
     input.select();
   });
 
-  // First-load "attract" pulse — only once per browser.
   const container = input.closest('.header-search-container');
   if (container && !localStorage.getItem('cesfam-search-seen')) {
     container.classList.add('attract');
@@ -528,7 +473,6 @@ function updateDropdown(query) {
 
   dropdown.classList.add('active');
 
-  // Click handlers for results
   $$('.search-result', dropdown).forEach(result => {
     result.addEventListener('click', () => {
       const cardId = result.dataset.id;
@@ -541,13 +485,11 @@ function updateDropdown(query) {
 function highlightMatch(text, query) {
   const safe = escapeHtml(text);
   if (!query) return safe;
-  // Use the first token, normalize-aware: match the original text by case/accent-insensitive position.
   const token = query.split(/\s+/).filter(Boolean)[0];
   if (!token) return safe;
   const normText = normalize(text);
   const idx = normText.indexOf(token);
   if (idx < 0) return safe;
-  // Map normalized index back to original (NFD strips marks but preserves base char positions for our latin alphabet).
   const before = escapeHtml(text.slice(0, idx));
   const match  = escapeHtml(text.slice(idx, idx + token.length));
   const after  = escapeHtml(text.slice(idx + token.length));
@@ -562,38 +504,16 @@ function scrollToCard(cardId) {
   const card = $(`.card[data-id="${cardId}"]`);
   if (!card) return;
 
-  // Show card if hidden by filter
   card.classList.remove('hidden-filter');
 
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  // Highlight briefly
   card.classList.add('search-highlight');
   setTimeout(() => card.classList.remove('search-highlight'), 2000);
 }
 
-// ══════════════════════════════════════════════
-//  CATEGORY FILTERS
-// ══════════════════════════════════════════════
 function initFilters() {
-  const pills = $$('.filter-pill');
-
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      // Update active state
-      pills.forEach(p => p.classList.remove('active'));
-      pills.forEach(p => p.setAttribute('aria-selected', 'false'));
-      pill.classList.add('active');
-      pill.setAttribute('aria-selected', 'true');
-
-      activeFilter = pill.dataset.filter;
-      applyFilters();
-    });
-  });
-}
-
-function applyFilters() {
-  const cards = $$('.card');
+  const pills = $$('.filter-pill');    pills.forEach(pill => { pill.addEventListener('click', () => { pills.forEach(p => p.classList.remove('active')); pills.forEach(p => p.setAttribute('aria-selected', 'false')); pill.classList.add('active'); pill.setAttribute('aria-selected', 'true');        activeFilter = pill.dataset.filter; applyFilters(); }); }); }  function applyFilters() { const cards = $$('.card');
   let visibleCount = 0;
 
   cards.forEach(card => {
@@ -605,95 +525,33 @@ function applyFilters() {
     if (visible) visibleCount++;
   });
 
-  // Show/hide no-results message
   const noResults = $('#no-results');
   if (noResults) {
     noResults.classList.toggle('visible', visibleCount === 0);
   }
 
-  // Las tarjetas que quedan visibles vuelven a entrar, y el encabezado del
-  // directorio se refresca: eso es lo que hace que filtrar se sienta vivo.
   animateCards();
   replayAnimation($('.filters-heading h2'), 'is-fresh');
   replayAnimation($('.filters-heading p'), 'is-fresh');
 }
 
-// ══════════════════════════════════════════════
-//  CONTINGENCY BANNER
-// ══════════════════════════════════════════════
 function initBanner() {
   const banner = $('#contingency-banner');
-  const closeBtn = $('#banner-close');
-  if (!banner || !closeBtn) return;
-
-  // Check if already dismissed this session
-  if (sessionStorage.getItem('cesfam-banner-dismissed')) {
-    banner.classList.add('hidden');
-    return;
-  }
-
-  closeBtn.addEventListener('click', () => {
-    banner.classList.add('hidden');
-    sessionStorage.setItem('cesfam-banner-dismissed', 'true');
-  });
+  const closeBtn = $('#banner-close'); if (!banner \vert{}\vert{} !closeBtn) return;    if (sessionStorage.getItem('cesfam-banner-dismissed')) { banner.classList.add('hidden'); return; }    closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); sessionStorage.setItem('cesfam-banner-dismissed', 'true'); }); }  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)'); let revealObserver = null; let firstPaint = true;  function revealAllPending() { $$('[data-rv]:not(.rv-in)').forEach(el => el.classList.add('rv-in'));
 }
 
-// ══════════════════════════════════════════════
-//  MOTION — mismo sistema que cesfamtic.com/directorio
-//  A. Reveals de bloque [data-rv] -> .rv-in (IntersectionObserver)
-//  B. Entrada de tarjetas .card-in, re-disparada en cada filtro
-//  C. Texto de resultados .is-fresh
-// ══════════════════════════════════════════════
-const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-let revealObserver = null;
-let firstPaint = true;
-
-function revealAllPending() {
-  $$('[data-rv]:not(.rv-in)').forEach(el => el.classList.add('rv-in'));
-}
-
-/* Revela sólo lo que ya está en pantalla. La red de seguridad no puede
-   destapar el pie de página antes de que el usuario baje: eso mataría el
-   reveal al scroll, que es justamente el efecto que se busca. */
 function revealVisiblePending() {
-  // Sin viewport medible (pestaña oculta, iframe colapsado) no hay "visible"
-  // que valga: se destapa todo antes que arriesgar contenido invisible.
   if (!window.innerHeight) { revealAllPending(); return; }
-  $$('[data-rv]:not(.rv-in)').forEach(el => {
-    const box = el.getBoundingClientRect();
-    if (box.top < window.innerHeight && box.bottom > 0) el.classList.add('rv-in');
-  });
-}
-
-function initReveals() {
-  if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
-    revealAllPending();
-    return;
-  }
-  revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('rv-in');
-      revealObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.12 });
-
-  applyReveals();
-}
-
-function applyReveals() {
-  const pending = $$('[data-rv]:not(.rv-in)');
+  $$('[data-rv]:not(.rv-in)').forEach(el => { const box = el.getBoundingClientRect(); if (box.top < window.innerHeight && box.bottom > 0) el.classList.add('rv-in'); }); }  function initReveals() { if (reducedMotionQuery.matches \vert{}\vert{} !('IntersectionObserver' in window)) { revealAllPending(); return; } revealObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (!entry.isIntersecting) return; entry.target.classList.add('rv-in'); revealObserver.unobserve(entry.target); }); }, { threshold: 0.12 });    applyReveals(); }  function applyReveals() { const pending = $$
+('[data-rv]:not(.rv-in)');
   if (!revealObserver || !firstPaint) {
     pending.forEach(el => el.classList.add('rv-in'));
     return;
   }
   pending.forEach(el => revealObserver.observe(el));
-  // Red de seguridad: si la pestaña carga en segundo plano el observador no
-  // dispara y el contenido visible quedaría invisible al volver a ella.
   window.setTimeout(revealVisiblePending, 1400);
 }
 
-/* Repite una animación de entrada en un elemento que ya está en el DOM. */
 function replayAnimation(element, className) {
   if (!element || reducedMotionQuery.matches) return;
   element.classList.remove(className);
@@ -701,26 +559,11 @@ function replayAnimation(element, className) {
   element.classList.add(className);
 }
 
-/* Entrada de las tarjetas.
-
-   Antes se disparaban las 24 de golpe al terminar el render: la animación
-   ocurría antes de que el usuario alcanzara a mirar y, al bajar por el
-   directorio, ya no quedaba nada por animar. Ahora cada tarjeta entra cuando
-   asoma en pantalla, escalonada por tanda (tope 360ms, §5), y el conjunto
-   vuelve a entrar al cambiar de filtro. */
 let cardObserver = null;
 let batchStart = 0;
 let batchIndex = 0;
 let lastVisibleSignature = null;
 
-/* Garantía de contenido visible.
-
-   Todo el sistema de reveals parte de opacity:0 y confía en que una animación
-   lo lleve a 1. Si el navegador no compone cuadros, esa animación se congela
-   en su primer fotograma y el contenido NO SE VE NUNCA. El rAF resultó mal
-   detector (dispara igual estando congelado), así que aquí se mide el síntoma
-   directamente: una tarjeta que está en pantalla y sigue en opacidad 0 pasado
-   el margen es una tarjeta rota. Se pierde la animación, nunca el contenido. */
 function guardAgainstFrozenMotion() {
   window.setTimeout(() => {
     const atascada = [...document.querySelectorAll('.card')].some(card => {
@@ -737,14 +580,11 @@ function guardAgainstFrozenMotion() {
 function initCardMotion() {
   if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) return;
 
-  // Marca el documento para que el CSS oculte las tarjetas aún no reveladas.
-  // Sin JS la clase nunca se pone y todo queda visible: nunca se pierde contenido.
   document.documentElement.classList.add('js-motion');
   guardAgainstFrozenMotion();
 
   cardObserver = new IntersectionObserver((entries) => {
     const now = performance.now();
-    // Las que entran juntas comparten tanda y se escalonan entre sí.
     if (now - batchStart > 220) { batchStart = now; batchIndex = 0; }
 
     entries.forEach(entry => {
@@ -761,27 +601,18 @@ function initCardMotion() {
 
 function observeCards() {
   if (!cardObserver) return;
-  $$('.card:not(.card-in)').forEach(card => cardObserver.observe(card));
-  // Red de seguridad: sin viewport medible (pestaña en segundo plano) el
-  // observador no dispara nunca y las tarjetas quedarían invisibles.
-  window.setTimeout(() => {
-    if (window.innerHeight) return;
-    $$('.card:not(.card-in)').forEach(card => card.classList.add('card-in'));
+  $$('.card:not(.card-in)').forEach(card => cardObserver.observe(card)); window.setTimeout(() => { if (window.innerHeight) return; $$
+('.card:not(.card-in)').forEach(card => card.classList.add('card-in'));
   }, 1400);
 }
 
-/* Inclinación 3D de las tarjetas según el puntero.
-   Sólo con mouse (en táctil no hay "hover" que seguir) y sin reduced-motion.
-   Escribe --rx/--ry (ángulos), --gx/--gy (punto del brillo) y --sx/--sy
-   (desplazamiento de la sombra); el CSS hace el resto. La intensidad sale de
-   la variable CSS --tilt-max, así se ajusta todo desde la hoja de estilos. */
 function initCardTilt() {
   const grid = $('#card-grid');
   if (!grid || reducedMotionQuery.matches) return;
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
   const MAX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tilt-max')) || 13;
-  const SHADOW = 26; // px que se corre la sombra en el borde
+  const SHADOW = 26;
   let frame = 0;
   let pending = null;
 
@@ -792,8 +623,6 @@ function initCardTilt() {
     const r = card.getBoundingClientRect();
     const px = Math.min(Math.max((x - r.left) / r.width, 0), 1);
     const py = Math.min(Math.max((y - r.top) / r.height, 0), 1);
-    // Con los accesos abiertos la tarjeta es alta y hay que apuntar a una
-    // lista: se inclina bastante menos para que elegir sea cómodo.
     const open = card.classList.contains('is-open');
     const k = open ? 0.3 : 1;
     const kx = open ? 0.35 : 1;
@@ -801,7 +630,6 @@ function initCardTilt() {
     card.style.setProperty('--rx', `${((0.5 - py) * 2 * MAX * k).toFixed(2)}deg`);
     card.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
     card.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
-    // La sombra cae del lado opuesto al puntero.
     card.style.setProperty('--sx', `${((0.5 - px) * 2 * SHADOW).toFixed(1)}px`);
     card.style.setProperty('--sy', `${((0.5 - py) * 2 * SHADOW * k).toFixed(1)}px`);
   }
@@ -826,7 +654,6 @@ function initCardTilt() {
   });
 }
 
-/* Al filtrar, las tarjetas que quedan vuelven a entrar. */
 function animateCards() {
   if (reducedMotionQuery.matches) return;
   const visibles = $$('.card:not(.hidden-filter)');
@@ -840,13 +667,6 @@ function animateCards() {
   });
 }
 
-
-// ══════════════════════════════════════════════
-//  HERO CANVAS — constelación generativa
-//  Portado desde portal-shell.js del directorio: nodos a la deriva, líneas
-//  entre vecinos cercanos, pulsos ámbar cruzando y parallax de puntero.
-//  Es el motion permanente del portal; los reveals son de una sola pasada.
-// ══════════════════════════════════════════════
 function initHeroCanvas() {
   const canvas = document.querySelector('[data-hero-canvas]');
   if (!canvas || reducedMotionQuery.matches) return;
@@ -888,7 +708,6 @@ function initHeroCanvas() {
 
   function draw() {
     if (w < 1) resize();
-    // Tema único oscuro: líneas claras sobre fondo oscuro.
     const line = 'rgba(255,255,255,';
     const ox = pointer.x * 26;
     const oy = pointer.y * 16;
@@ -943,9 +762,6 @@ function initHeroCanvas() {
   requestAnimationFrame(draw);
 }
 
-// ══════════════════════════════════════════════
-//  INITIALIZATION
-// ══════════════════════════════════════════════
 async function loadTools() {
   try {
     const res = await fetch('data/tools.json', { cache: 'no-cache' });
@@ -957,12 +773,9 @@ async function loadTools() {
   }
 }
 
-// ══════════════════════════════════════════════
-//  COMMAND PALETTE (Ctrl+K / Cmd+K)
-// ══════════════════════════════════════════════
 const cmdk = {
   el: null, input: null, list: null,
-  items: [],   // flat list of {tool, link?} entries currently rendered
+  items: [],
   selected: 0,
 
   open() {
@@ -988,7 +801,6 @@ const cmdk = {
       ? TOOLS.filter(t => matchesQuery(buildKeywords(t), q))
       : TOOLS.slice();
 
-    // Flatten: each tool becomes one entry; multi-link tools expand into sublinks too.
     const entries = [];
     matched.forEach(t => {
       if (t.type === 'single') {
@@ -1009,7 +821,6 @@ const cmdk = {
       return;
     }
 
-    // Group by category for non-query view, flat list when filtering.
     let html = '';
     if (!q) {
       const groups = { clinico: [], admin: [], support: [] };
@@ -1026,7 +837,6 @@ const cmdk = {
     this.list.innerHTML = html;
     this.highlight();
 
-    // Wire clicks
     $$('.cmdk-item', this.list).forEach(el => {
       el.addEventListener('mouseenter', () => {
         this.selected = Number(el.dataset.idx);
@@ -1080,7 +890,6 @@ function initCmdK() {
   cmdk.list  = $('#cmdk-list');
   if (!cmdk.el) return;
 
-  // Open with Ctrl+K / Cmd+K from anywhere.
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
       e.preventDefault();
@@ -1088,12 +897,10 @@ function initCmdK() {
     }
   });
 
-  // Backdrop click closes.
   cmdk.el.querySelectorAll('[data-cmdk-close]').forEach(el => {
     el.addEventListener('click', () => cmdk.close());
   });
 
-  // Input events.
   cmdk.input.addEventListener('input', () => cmdk.render(cmdk.input.value));
   cmdk.input.addEventListener('keydown', (e) => {
     switch (e.key) {
@@ -1107,9 +914,6 @@ function initCmdK() {
   });
 }
 
-// ══════════════════════════════════════════════
-//  ADMIN SECURITY MODAL
-// ══════════════════════════════════════════════
 function initAdmin() {
   const adminBtn = $('#admin-btn');
   const modal = $('#admin-modal');
@@ -1126,7 +930,6 @@ function initAdmin() {
   const redirectUrl = 'admin/gestorLinks.html';
 
   function openModal() {
-    // If already authenticated, redirect immediately
     if (sessionStorage.getItem('cesfam-admin-authenticated') === 'true') {
       window.location.href = redirectUrl;
       return;
@@ -1151,21 +954,17 @@ function initAdmin() {
     toggleBtn.innerHTML = showText ? icon('eyeOff', 16) : icon('eye', 16);
   }
 
-  // Open modal click
   adminBtn.addEventListener('click', openModal);
 
-  // Close modal clicks
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (backdrop) backdrop.addEventListener('click', closeModal);
 
-  // Close on Esc key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.hidden) {
       closeModal();
     }
   });
 
-  // Toggle passcode visibility
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       const showText = input.type === 'password';
@@ -1174,7 +973,6 @@ function initAdmin() {
     });
   }
 
-  // Handle authentication form submit
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -1188,9 +986,8 @@ function initAdmin() {
       } else {
         if (errorMsg) {
           errorMsg.hidden = false;
-          // Trigger shake animation
           errorMsg.style.animation = 'none';
-          errorMsg.offsetHeight; /* trigger reflow */
+          errorMsg.offsetHeight;
           errorMsg.style.animation = null;
         }
         input.select();

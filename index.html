@@ -1,143 +1,353 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07152d">
-  <title>Cupos CESFAM — Administración</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="absence.css">
+  <meta name="description"
+    content="Portal de Herramientas Digitales del CESFAM La Unión. Acceso centralizado a sistemas clínicos, administrativos y de soporte del Departamento de Salud Municipal.">
+  <meta name="author" content="Área de Informática - CESFAM La Unión">
+  <meta name="theme-color" content="#0F172A">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CESFAM La Unión — Portal de Herramientas Digitales">
+  <meta property="og:description" content="Acceso centralizado a sistemas clínicos, administrativos y de soporte.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+
+  <title>CESFAM La Unión — Portal de Herramientas Digitales</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css?v=20260831-hero1">
 </head>
+
 <body>
-  <header class="site-header">
-    <a class="brand" href="#" aria-label="Cupos CESFAM, inicio">
-      <span class="brand-cross"><i></i><b></b></span>
-      <span><strong>Cupos CESFAM</strong><small>Centro de administración</small></span>
-    </a>
-    <div class="header-meta">
-      <span class="api-state" id="apiState"><i></i> Conectando</span>
-      <span class="header-rule"></span>
-      <time id="liveClock">--:--</time>
-      <button class="user-chip" type="button" aria-label="Cuenta administradora">AM</button>
+
+  <!-- ════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <!-- Top Bar: Clock and Theme Toggle -->
+    <div class="header-top-bar">
+      <div class="header-top-inner">
+        <div class="header-clock">
+          <span class="clock-date" id="clock-date"></span>
+          <span class="clock-separator"></span>
+          <span class="clock-time" id="clock-time"></span>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar entre modo claro y oscuro"
+            title="Cambiar tema">
+            <div class="toggle-thumb">
+              <!-- Icon injected by JS -->
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         NAVBAR — 5 Quick Actions
+         ════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar" aria-label="Accesos rápidos">
+      <div class="navbar-inner">
+        <a href="https://cesfamtic.com/universo/" target="_blank" rel="noopener" class="nav-btn nav-btn--gold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path
+              d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+          </svg>
+          <span class="nav-label">Introducción a mundoCESFAM</span>
+        </a>
+        <a href="https://cesfamtic.com/directorio" target="_blank" rel="noopener" class="nav-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span class="nav-label">Teléfonos</span>
+        </a>
+        <a href="https://cesfamtic.com/soporte/" target="_blank" rel="noopener" class="nav-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="4" />
+            <path d="M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24" />
+          </svg>
+          <span class="nav-label">Mesa de Ayuda TI</span>
+        </a>
+        <a href="https://bloqueapp-f3a22.web.app" target="_blank" rel="noopener" class="nav-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18M10 14l4 4M14 14l-4 4" />
+          </svg>
+          <span class="nav-label">BloqueApp</span>
+        </a>
+        <a href="https://cesfamtic.com" target="_blank" rel="noopener" class="nav-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span class="nav-label">Intranet TI</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Branding: Left-aligned & Large Logo + Integrated Search and KPIs -->
+    <div class="header-main">
+      <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+      <div class="header-main-inner">
+        <div class="header-brand">
+          <img src="img/cesfam-logo-720.webp" alt="CESFAM La Unión — Centro de Salud Familiar Dr. Alfredo Gantz Mann"
+            class="header-logo" width="720" height="720" decoding="async">
+          <div class="header-identity">
+            <span class="header-eyebrow">Portal institucional</span>
+            <h1>Herramientas Digitales</h1>
+            <p>CESFAM Dr. Alfredo Gantz Mann · La Unión</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Live KPI / Status dot -->
+          <div class="system-status-pill">
+            <span class="status-dot"></span>
+            <span class="status-text">Sistemas Operativos</span>
+          </div>
+
+          <!-- Integrated Search bar in Header -->
+          <div class="header-search-container">
+            <div class="search-bar">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              <input type="text" id="search-input" class="search-input" placeholder="Buscar herramientas (Ctrl+K)"
+                autocomplete="off" aria-label="Buscar herramientas. Atajo: Control K o tecla barra">
+              <kbd class="search-kbd-hint" aria-hidden="true">Ctrl K</kbd>
+              <div class="search-dropdown" id="search-dropdown" role="listbox" aria-label="Resultados de búsqueda">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="intro reveal reveal-one">
-      <div>
-        <span class="kicker">Disponibilidad diaria</span>
-        <h1>Actualiza los cupos<br>en un solo lugar.</h1>
-        <p>Los cambios publicados aparecerán automáticamente en Mundo CESFAM.</p>
+  <!-- ════════════════════════════════════════
+       CONTINGENCY BANNER
+       ════════════════════════════════════════ -->
+  <div class="banner" id="contingency-banner" role="alert">
+    <div class="banner-inner">
+      <div class="banner-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+          <path d="M12 9v4M12 17h.01" />
+        </svg>
+        <p>Atención: para claves de acceso, comunícate con tu referente o jefatura SOME. La fecha de toma del examen determina la plataforma que debes utilizar.</p>
       </div>
-      <div class="intro-actions">
-        <span class="save-state" id="saveState"><i></i> Sin cambios pendientes</span>
-        <button class="primary-action" id="publishButton" type="button">
-          <span>Publicar cambios</span>
-          <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+      <div class="banner-actions">
+        <a href="https://10.4.59.192:8445/login" target="_blank" rel="noopener" class="banner-btn">Exámenes HLU</a>
+        <a href="https://10.4.57.97:8445/login" target="_blank" rel="noopener"
+          class="banner-btn banner-btn--primary">Exámenes HRB</a>
+        <button class="banner-close" id="banner-close" aria-label="Cerrar aviso">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
         </button>
       </div>
-    </section>
-
-    <section class="workbench reveal reveal-two">
-      <div class="editor-pane">
-        <div class="section-head">
-          <div><span class="section-number">01</span><h2>Información del día</h2></div>
-          <label class="date-field" for="publishDate">
-            <span>Fecha de publicación</span>
-            <input type="date" id="publishDate" value="2026-08-26">
-          </label>
-        </div>
-
-        <div class="sector-editor" id="sectorList">
-          <article class="sector-line is-yellow" data-sector="yellow">
-            <div class="sector-name"><span class="sector-dot"></span><div><small>Sector</small><strong>Amarillo</strong></div></div>
-            <label class="number-control"><span>Cupos disponibles</span><div><button type="button" data-step="-1" aria-label="Restar cupo amarillo">−</button><input type="number" min="0" max="99" value="7" aria-label="Cupos Sector Amarillo"><button type="button" data-step="1" aria-label="Sumar cupo amarillo">+</button></div></label>
-            <label class="absence-control"><span>Ausencias programadas</span><input type="text" value="" placeholder="Sin ausencias programadas"><small class="helper is-clear">Sin ausencias programadas</small></label>
-          </article>
-
-          <article class="sector-line is-blue" data-sector="blue">
-            <div class="sector-name"><span class="sector-dot"></span><div><small>Sector</small><strong>Azul</strong></div></div>
-            <label class="number-control"><span>Cupos disponibles</span><div><button type="button" data-step="-1" aria-label="Restar cupo azul">−</button><input type="number" min="0" max="99" value="6" aria-label="Cupos Sector Azul"><button type="button" data-step="1" aria-label="Sumar cupo azul">+</button></div></label>
-            <label class="absence-control"><span>Ausencias programadas</span><input type="text" value="Dra. Díaz y Dr. Mascareña" placeholder="Sin ausencias programadas"><small class="helper">Visible en el aviso público</small></label>
-          </article>
-
-          <article class="sector-line is-green" data-sector="green">
-            <div class="sector-name"><span class="sector-dot"></span><div><small>Sector</small><strong>Verde</strong></div></div>
-            <label class="number-control"><span>Cupos disponibles</span><div><button type="button" data-step="-1" aria-label="Restar cupo verde">−</button><input type="number" min="0" max="99" value="7" aria-label="Cupos Sector Verde"><button type="button" data-step="1" aria-label="Sumar cupo verde">+</button></div></label>
-            <label class="absence-control"><span>Ausencias programadas</span><input type="text" value="EU Cifuentes" placeholder="Sin ausencias programadas"><small class="helper">Visible en el aviso público</small></label>
-          </article>
-        </div>
-
-        <div class="editor-bottom">
-          <button class="quiet-action" id="reloadButton" type="button">
-            <svg viewBox="0 0 24 24"><path d="M20 6v5h-5M4 18v-5h5M18 9a7 7 0 0 0-12-2l-2 4m2 4a7 7 0 0 0 12 2l2-4"/></svg>
-            Recuperar datos publicados
-          </button>
-          <span id="lastUpdate">Sin publicaciones registradas</span>
-        </div>
-      </div>
-
-      <aside class="preview-pane">
-        <div class="section-head preview-head">
-          <div><span class="section-number">02</span><h2>Vista pública</h2></div>
-          <span class="live-state"><i></i> Previsualización</span>
-        </div>
-
-        <div class="preview-stage">
-          <div class="stage-light stage-light-one"></div>
-          <div class="stage-light stage-light-two"></div>
-          <div class="hub-ghost" aria-hidden="true">
-            <span class="ghost-logo"></span><span class="ghost-line"></span><span class="ghost-line short"></span>
-          </div>
-
-          <section class="public-card" id="publicCard" aria-live="polite">
-            <header class="public-head">
-              <div class="public-icon"><span></span></div>
-              <div><span>Disponibilidad de atención</span><h3>Cupos de morbilidad</h3></div>
-              <button id="collapsePreview" type="button" aria-label="Contraer información"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></button>
-            </header>
-            <div class="public-body">
-              <div class="public-date"><svg viewBox="0 0 24 24"><path d="M6 3v3m12-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg><span id="previewDate">Miércoles, 26 de agosto de 2026</span></div>
-              <div class="public-sectors">
-                <article class="public-sector yellow">
-                  <span class="public-dot"></span><div class="public-copy"><strong>Sector Amarillo</strong><span class="public-absence is-clear"><em>Sin ausencias programadas</em><small></small></span></div><div class="public-count"><b>07</b><span>cupos</span></div>
-                </article>
-                <article class="public-sector blue">
-                  <span class="public-dot"></span><div class="public-copy"><strong>Sector Azul</strong><span class="public-absence"><em>Profesionales ausentes</em><small>Dra. Díaz y Dr. Mascareña</small></span></div><div class="public-count"><b>06</b><span>cupos</span></div>
-                </article>
-                <article class="public-sector green">
-                  <span class="public-dot"></span><div class="public-copy"><strong>Sector Verde</strong><span class="public-absence"><em>Profesional ausente</em><small>EU Cifuentes</small></span></div><div class="public-count"><b>07</b><span>cupos</span></div>
-                </article>
-              </div>
-              <footer><span><i></i> Información vigente</span><time id="previewTime">--:--</time></footer>
-            </div>
-          </section>
-        </div>
-
-        <p class="preview-caption">Este componente será idéntico al que se instalará en GitHub Pages.</p>
-      </aside>
-    </section>
-  </main>
-
-  <dialog class="auth-dialog" id="authDialog">
-    <form method="dialog" id="authForm">
-      <button class="dialog-close" value="cancel" aria-label="Cerrar">×</button>
-      <span class="dialog-icon"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5V11Z"/></svg></span>
-      <span class="kicker">Acceso administrativo</span>
-      <h2>Autoriza la publicación</h2>
-      <p>Ingresa la clave configurada en el servidor. Se guardará sólo durante esta sesión.</p>
-      <label for="adminKey">Clave de administración</label>
-      <input id="adminKey" type="password" autocomplete="current-password" required placeholder="••••••••••••">
-      <small class="auth-error" id="authError"></small>
-      <button class="primary-action full" value="default" type="submit">Autorizar y publicar</button>
-    </form>
-  </dialog>
-
-  <div class="toast" id="toast" role="status">
-    <span><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
-    <div><strong>Información publicada</strong><small>El widget público ya tiene los nuevos datos.</small></div>
+    </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- ════════════════════════════════════════
+       FILTERS
+       ════════════════════════════════════════ -->
+  <section class="filters-section" id="filters-section" aria-label="Filtros de herramientas">
+    <div class="filters-inner">
+      <div class="filters-heading" data-rv>
+        <span class="filters-kicker">Directorio operativo</span>
+        <h2>Accesos del sistema</h2>
+        <p>Selecciona una categoría o busca una herramienta por nombre.</p>
+      </div>
+      <div class="filter-pills" id="filter-pills" role="tablist" aria-label="Filtrar por categoría">
+        <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+        <button class="filter-pill" data-filter="clinico" role="tab" aria-selected="false">Clínico</button>
+        <button class="filter-pill" data-filter="admin" role="tab" aria-selected="false">CESFAM</button>
+        <button class="filter-pill" data-filter="support" role="tab" aria-selected="false">Soporte</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DASHBOARD — Card Grid
+       ════════════════════════════════════════ -->
+  <main class="dashboard" id="dashboard">
+    <div class="dashboard-inner">
+      <div class="card-grid" id="card-grid" role="list">
+        <!-- Cards rendered dynamically by JS -->
+      </div>
+
+      <div class="no-results" id="no-results" aria-live="polite">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35M13.5 8.5l-5 5M8.5 8.5l5 5" />
+        </svg>
+        <h3>Sin resultados</h3>
+        <p>No se encontraron herramientas con ese criterio de búsqueda.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <!-- Col 1: Brand -->
+      <div class="footer-brand" data-rv>
+        <img src="img/cesfam-logo-720.webp" alt="CESFAM La Unión — Centro de Salud Familiar Dr. Alfredo Gantz Mann"
+          class="footer-logo" width="720" height="720" loading="lazy" decoding="async">
+        <p>Portal de herramientas digitales.<br>Área de Informática.</p>
+      </div>
+
+      <!-- Col 2: Contacto -->
+      <div class="footer-col" data-rv>
+        <h4>Contacto</h4>
+        <ul>
+          <li>
+            <a href="mailto:informacionescesfamlaunion@gmail.com">informacionescesfamlaunion@gmail.com</a>
+          </li>
+          <li>
+            <a href="mailto:some@munilaunion.cl">some@munilaunion.cl</a>
+          </li>
+          <li><span>La Unión, Los Ríos</span></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Institucional -->
+      <div class="footer-col" data-rv>
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="https://minsal.cl" target="_blank" rel="noopener">minsal.cl</a></li>
+          <li><a href="https://fonasa.cl" target="_blank" rel="noopener">fonasa.cl</a></li>
+          <li><a href="https://gob.cl" target="_blank" rel="noopener">gob.cl</a></li>
+          <li><a href="https://cesfamtic.com" target="_blank" rel="noopener">cesfamtic.com</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Redes -->
+      <div class="footer-col" data-rv>
+        <h4>CESFAM Redes</h4>
+        <div class="footer-social-links">
+          <a href="https://facebook.com/cesfamlu" target="_blank" rel="noopener" class="footer-social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+            Facebook
+          </a>
+          <a href="https://youtube.com/@cesfamlu" target="_blank" rel="noopener" class="footer-social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+            </svg>
+            YouTube
+          </a>
+          <a href="https://instagram.com/cesfamlu" target="_blank" rel="noopener" class="footer-social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            Instagram
+          </a>
+          <a href="https://cesfamlu.github.io/FormularioSoporte" target="_blank" rel="noopener"
+            class="footer-social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+            Soporte TI
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 CESFAM La Unión · Departamento de Salud Municipal · Área de Informática</p>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       COMMAND PALETTE (Ctrl+K)
+       ════════════════════════════════════════ -->
+  <div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
+    <div class="cmdk-backdrop" data-cmdk-close></div>
+    <div class="cmdk-panel" role="document">
+      <div class="cmdk-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" id="cmdk-input" class="cmdk-input"
+          placeholder="Buscar herramientas, accesos, contingencias..." autocomplete="off"
+          aria-label="Buscar herramienta" aria-controls="cmdk-list">
+        <kbd class="cmdk-esc">Esc</kbd>
+      </div>
+      <div class="cmdk-list" id="cmdk-list" role="listbox" aria-label="Resultados"></div>
+      <div class="cmdk-footer">
+        <span><kbd>↑</kbd><kbd>↓</kbd> navegar</span>
+        <span><kbd>Enter</kbd> abrir</span>
+        <span><kbd>Esc</kbd> cerrar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+<!-- JavaScript principal de GitHub Pages -->
+<script src="js/app.js?v=20260831-hero1"></script>
+
+<!-- Visor de cupos CESFAM: controles guardados por navegador -->
+  <section class="cupos-widget" id="cupos-widget" data-position="bottom-right" aria-label="Disponibilidad de cupos CESFAM">
+    <div class="cupos-widget__panel" id="cupos-widget-panel">
+      <button class="cupos-widget__toggle" id="cupos-widget-toggle" type="button" aria-expanded="false" aria-controls="cupos-widget-controls" aria-label="Opciones del visor de cupos">
+        <span aria-hidden="true">⋮</span><span>Opciones</span>
+      </button>
+      <div class="cupos-widget__controls" id="cupos-widget-controls" hidden>
+        <label for="cupos-widget-position">Ubicación</label>
+        <select id="cupos-widget-position">
+          <option value="bottom-right">Abajo a la derecha</option>
+          <option value="bottom-left">Abajo a la izquierda</option>
+          <option value="top-right">Arriba a la derecha</option>
+          <option value="top-left">Arriba a la izquierda</option>
+        </select>
+        <button class="cupos-widget__hide" id="cupos-widget-close" type="button">Ocultar visor</button>
+      </div>
+      <iframe
+        class="cupos-cesfam-frame"
+        title="Disponibilidad de cupos CESFAM"
+        src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=8"
+        loading="eager">
+      </iframe>
+    </div>
+    <button class="cupos-widget__restore" id="cupos-widget-restore" type="button" hidden>Mostrar cupos</button>
+  </section>
+  <script src="js/cupos-widget-controls.js?v=1"></script>
 </body>
 </html>

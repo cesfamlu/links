@@ -8,8 +8,6 @@
   box-sizing: border-box;
 }
 
-
-
 :root {
   --bg-body: #0F1620;
   --bg-surface: #16202C;
@@ -62,8 +60,6 @@
   --chamfer-18: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
-/* Superficie plana: el sistema prohíbe gradientes y tramas decorativas (CLAUDE.md §4).
-   La jerarquía la dan las superficies y las hairlines, no una cuadrícula de fondo. */
 body {
   background-color: var(--bg-body);
   background-image: none;
@@ -85,7 +81,6 @@ input:focus-visible {
   outline-offset: 3px;
 }
 
-/* Header: el mismo ritmo y material del shell de referencia. */
 .header,
 [data-theme="dark"] .header {
   background: var(--bg-header);
@@ -189,9 +184,6 @@ input:focus-visible {
   box-shadow: none;
 }
 
-/* El padding lateral lo pone SOLO .header-main-inner (junto al resto de los -inner).
-   Tenerlo aquí también dejaba el bloque de marca con 2× shell-pad y desalineado
-   respecto de la navbar, los filtros y la retícula. */
 .header-main,
 [data-theme="dark"] .header-main {
   position: relative;
@@ -200,8 +192,6 @@ input:focus-visible {
   overflow: hidden;
 }
 
-/* Constelación generativa detrás de la banda del buscador (portada del
-   directorio). Es el motion permanente del portal. */
 .hero-canvas {
   position: absolute;
   inset: 0;
@@ -211,7 +201,6 @@ input:focus-visible {
   pointer-events: none;
 }
 
-/* El contenido va por encima del canvas. */
 .header-main-inner {
   position: relative;
 }
@@ -361,7 +350,6 @@ input:focus-visible {
   background: var(--gold-subtle);
 }
 
-/* Aviso operativo y navegación por categorías. */
 .banner {
   max-height: 150px;
   background: var(--banner-bg);
@@ -373,8 +361,6 @@ input:focus-visible {
   padding-bottom: 15px;
 }
 
-/* El filete ámbar del callout va pegado al texto, no al borde del viewport:
-   ahí quedaba fuera de la columna de contenido y rompía la alineación vertical. */
 .banner-content {
   padding-left: 14px;
   border-left: 2px solid var(--gold);
@@ -480,15 +466,10 @@ input:focus-visible {
   box-shadow: none;
 }
 
-/* Directorio: retícula de trabajo, sin mosaico de tarjetas flotantes.
-   Padding lateral 0: lo aporta .dashboard-inner. Tenerlo en ambos dejaba la
-   retícula a 96px del borde mientras header, banner y footer iban a 48px. */
 .dashboard {
   padding: clamp(40px, 5vw, 68px) 0 clamp(70px, 8vw, 110px);
 }
 
-/* La barra de filtros es sticky y a ancho completo: su contenido debe alinear
-   con la misma columna de 1400px que el resto, no con una caja de 680px. */
 .filters-inner {
   max-width: var(--max-w);
   margin-inline: auto;
@@ -510,9 +491,6 @@ input:focus-visible {
   border: 1px solid var(--border);
   border-radius: 0;
   box-shadow: none;
-  /* Sin chaflán: la retícula es de hairlines (gap:1px sobre --border) y el corte
-     diagonal abría un triángulo de fondo en cada esquina, lo que leía como
-     "descuadrado". El chaflán queda para botones, paneles y modales. */
   transition: background .2s ease, border-color .2s ease, box-shadow .28s var(--ease), transform .28s var(--ease);
 }
 
@@ -665,7 +643,6 @@ input:focus-visible {
   text-transform: uppercase;
 }
 
-/* Footer, paleta y modal heredan el mismo sistema de superficies. */
 .footer {
   color: var(--text-secondary);
   background: var(--bg-header);
@@ -882,17 +859,6 @@ input:focus-visible {
   }
 }
 
-/* ============================================================
-   MOTION — mismo sistema que cesfamtic.com/directorio (CLAUDE.md §5)
-   Tres capas, cada una con un trabajo distinto:
-     A. [data-rv]  → reveal de BLOQUE al entrar en viewport (lento, .85s)
-     B. cardIn     → entrada de las TARJETAS en cada render/filtro (.5s)
-     C. hover      → respuesta a la interacción
-   ============================================================ */
-
-/* ── A. Reveal de bloque ──
-   Va sobre contenedores, no sobre cada tarjeta. Es una transición, no una
-   animación: así el estado final es estable y no depende del fill-mode. */
 [data-rv] {
   opacity: 0;
   transform: translateY(24px);
@@ -904,9 +870,6 @@ input:focus-visible {
   transform: none;
 }
 
-/* ── B. Entrada de tarjetas ──
-   Se dispara en cada render y en cada cambio de filtro (replayAnimation),
-   que es lo que hace que el directorio se sienta vivo al filtrar. */
 @keyframes cardIn {
   from {
     opacity: 0;
@@ -919,15 +882,10 @@ input:focus-visible {
   }
 }
 
-/* Estado inicial de la tarjeta aún no revelada. La clase js-motion la pone el
-   JS: sin JS, o con reduced-motion, nunca se aplica y nada queda invisible. */
 html.js-motion .card:not(.card-in) {
   opacity: 0;
 }
 
-/* Freno de emergencia: si el navegador no compone cuadros, las animaciones se
-   congelan en su primer fotograma y el contenido quedaría invisible para
-   siempre. Esta clase devuelve todo a su estado final, sin motion. */
 html.motion-off .card,
 html.motion-off .card:not(.card-in),
 html.motion-off [data-rv] {
@@ -942,16 +900,12 @@ html.motion-off [data-rv] {
   animation-delay: var(--rv-delay, 0ms);
 }
 
-/* La destacada entra primero y sólo después retoma su respiración ámbar;
-   si no, ambas animaciones compiten por la misma propiedad y una se pierde. */
 .card--highlight.card-in {
   animation: cardIn .5s var(--ease) both,
     glow-breathe 3s ease-in-out infinite;
   animation-delay: var(--rv-delay, 0ms), 1s;
 }
 
-/* ── C. Interacción ──
-   Elevación + filete ámbar que crece desde abajo + borde que se enciende. */
 .card {
   transition: background .22s ease, border-color .22s ease,
     box-shadow .3s var(--ease), transform .3s var(--ease);
@@ -974,7 +928,6 @@ html.motion-off [data-rv] {
   transform: scaleY(1);
 }
 
-/* El icono de la tarjeta acompaña la elevación. */
 .card .card-icon,
 .card .card-logo {
   transition: border-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
@@ -986,7 +939,6 @@ html.motion-off [data-rv] {
   transform: translateY(-2px);
 }
 
-/* ── Texto de resultados que se refresca al filtrar ── */
 @keyframes freshIn {
   from {
     opacity: 0;
@@ -1024,39 +976,18 @@ html.motion-off [data-rv] {
   }
 }
 
-
-/* ============================================================
-   PROFUNDIDAD 3D — sólo en el cuerpo (header y navbar no se tocan)
-     1. Tarjetas: se inclinan siguiendo el puntero; icono, título y
-        acción flotan a distinta profundidad; un brillo ámbar sigue la luz.
-     2. Entrada: las tarjetas se levantan desde el plano al aparecer.
-     3. Sub-accesos: se despliegan como láminas que bajan una a una.
-     4. Filtros: la categoría activa gira como un letrero split-flap.
-   La inclinación la alimenta initCardTilt() (variables --rx, --ry, --gx, --gy,
-   --sx, --sy). Para subir o bajar la intensidad basta con tocar estas perillas.
-   ============================================================ */
 :root {
   --tilt-max: 15;
-  /* grados máximos de inclinación (lo lee el JS) */
   --tilt-persp: 700px;
-  /* menos = 3D más marcado */
   --tilt-lift: -14px;
-  /* cuánto sube la tarjeta en hover */
   --tilt-pop: 40px;
-  /* cuánto se acerca la tarjeta completa */
   --depth-icon: 92px;
-  /* profundidad de cada capa */
   --depth-title: 56px;
   --depth-desc: 30px;
   --depth-actions: 44px;
   --dim-others: .72;
-  /* opacidad del resto mientras una tarjeta está en foco */
 }
 
-/* ── 1. Inclinación y capas ──
-   overflow visible: con hidden el navegador aplana el 3D de los hijos.
-   El selector .card-grid .card gana a "[data-theme] .card:hover" del sistema
-   anterior, que fijaba un translateY y dejaba fuera la rotación. */
 .card-grid .card {
   --rx: 0deg;
   --ry: 0deg;
@@ -1073,8 +1004,6 @@ html.motion-off [data-rv] {
   --pop: var(--tilt-pop);
   z-index: 3;
   transform: perspective(var(--tilt-persp)) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--lift), var(--pop));
-  /* La sombra se corre al lado contrario de la inclinación: la tarjeta
-     "flota" de verdad sobre la retícula. */
   box-shadow:
     var(--sx, 0px) calc(var(--sy, 0px) + 46px) 70px -26px rgba(0, 0, 0, .95),
     calc(var(--sx, 0px) * .4) calc(var(--sy, 0px) * .4 + 18px) 30px -18px rgba(0, 0, 0, .7),
@@ -1082,7 +1011,6 @@ html.motion-off [data-rv] {
     0 0 46px -14px rgba(245, 185, 66, .22);
 }
 
-/* Foco: mientras una tarjeta flota, las demás retroceden un paso. */
 .card-grid .card.card-in {
   transition: background .22s ease, border-color .22s ease,
     box-shadow .3s var(--ease), transform .3s var(--ease),
@@ -1094,8 +1022,6 @@ html.motion-off [data-rv] {
   filter: saturate(.75);
 }
 
-/* Mientras el puntero se mueve, la rotación responde rápido; al salir,
-   vuelve al plano con la curva lenta de siempre. */
 .card-grid .card.is-tilting,
 .card-grid .card.card-in.is-tilting {
   transition: background .22s ease, border-color .22s ease,
@@ -1122,7 +1048,6 @@ html.motion-off [data-rv] {
 
 .card-grid .card:hover .card-icon {
   transform: translateZ(var(--depth-icon)) rotateY(calc(var(--ry) * -1.4)) rotateX(calc(var(--rx) * -1.4));
-  /* clip-path (chaflán) recorta cualquier sombra: el realce va por brillo. */
   filter: brightness(1.35) saturate(1.2);
 }
 
@@ -1146,7 +1071,6 @@ html.motion-off [data-rv] {
   filter: drop-shadow(0 14px 14px rgba(0, 0, 0, .55));
 }
 
-/* Brillo: un halo ámbar tenue en el punto donde "pega la luz". */
 .card-grid .card::after {
   content: '';
   position: absolute;
@@ -1165,11 +1089,6 @@ html.motion-off [data-rv] {
   opacity: 1;
 }
 
-/* ── 1b. Accesos abiertos: la tarjeta se asienta ──
-   Con las capas separadas en Z, Chrome resuelve mal el clic dentro de la
-   lista desplegada (overflow:hidden) y el enlace no se puede pinchar. Al
-   abrir la lista la tarjeta sigue inclinándose (menos), pero en un solo
-   plano: así cada clic cae exactamente sobre el acceso. */
 .card-grid .card.is-open,
 .card-grid .card.is-open .card-header,
 .card-grid .card.is-open .card-info,
@@ -1194,9 +1113,6 @@ html.motion-off [data-rv] {
   perspective: none;
 }
 
-/* ── 2. Entrada desde el plano ──
-   fill-mode "backwards" (no "both"): con "both" el último fotograma
-   (transform:none) quedaba pegado y anulaba para siempre el hover. */
 @keyframes cardIn3d {
   from {
     opacity: 0;
@@ -1225,7 +1141,6 @@ html.motion-off [data-rv] {
   animation-delay: var(--rv-delay, 0ms), 1s;
 }
 
-/* ── 3. Sub-accesos en láminas ── */
 .card-grid .card-sublinks-list {
   perspective: 420px;
 }
@@ -1274,7 +1189,6 @@ html.motion-off [data-rv] {
   --i: 6;
 }
 
-/* ── 4. Filtro activo tipo split-flap ── */
 @keyframes flapIn {
   0% {
     transform: perspective(260px) rotateX(-100deg);
@@ -1303,7 +1217,6 @@ html.motion-off [data-rv] {
 }
 
 @media (hover: none) {
-
   .card-grid .card:hover .card-icon,
   .card-grid .card:hover .card-title,
   .card-grid .card:hover .card-desc,
@@ -1318,7 +1231,6 @@ html.motion-off [data-rv] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .card-grid .card,
   .card-grid .card:hover,
   .card-grid .card:focus-within {
@@ -1351,18 +1263,10 @@ html.motion-off [data-rv] {
   }
 }
 
-
 @layer legacy {
-
-  /* ══════════════════════════════════════════════
-   DESIGN TOKENS — escalas (los colores viven en el :root principal)
-   ══════════════════════════════════════════════ */
   :root {
-    /* ─ Badge ─ */
     --badge-bg: #EF4444;
     --badge-text: #FFFFFF;
-
-    /* ─ Spacing (4px scale) ─ */
     --sp-1: 4px;
     --sp-2: 8px;
     --sp-3: 12px;
@@ -1373,15 +1277,11 @@ html.motion-off [data-rv] {
     --sp-10: 40px;
     --sp-12: 48px;
     --sp-16: 64px;
-
-    /* ─ Border Radius ─ */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-xl: 20px;
     --radius-pill: 9999px;
-
-    /* ─ Typography ─ */
     --fs-2xs: 0.625rem;
     --fs-xs: 0.6875rem;
     --fs-sm: 0.8125rem;
@@ -1390,20 +1290,13 @@ html.motion-off [data-rv] {
     --fs-lg: 1.125rem;
     --fs-xl: 1.25rem;
     --fs-2xl: 1.5rem;
-
-    /* ─ Motion ─ */
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --t-fast: 150ms var(--ease);
     --t-base: 250ms var(--ease);
     --t-slow: 350ms var(--ease);
-
-    /* ─ Layout ─ */
     --header-h: 60px;
   }
 
-  /* ══════════════════════════════════════════════
-   BASE STYLES
-   ══════════════════════════════════════════════ */
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -1445,9 +1338,6 @@ html.motion-off [data-rv] {
     color: inherit;
   }
 
-  /* ══════════════════════════════════════════════
-   HEADER
-   ══════════════════════════════════════════════ */
   .header {
     position: relative;
     z-index: 100;
@@ -1523,7 +1413,6 @@ html.motion-off [data-rv] {
     align-items: center;
   }
 
-  /* --- Main Branding Header (Logo Left-aligned & Large) --- */
   .header-main {
     background: #0F172A;
     padding: var(--sp-5) var(--sp-6);
@@ -1595,13 +1484,6 @@ html.motion-off [data-rv] {
     align-items: center;
   }
 
-  /* ══════════════════════════════════════════════
-   THEME TOGGLE
-   ══════════════════════════════════════════════ */
-
-  /* ══════════════════════════════════════════════
-   NAVBAR
-   ══════════════════════════════════════════════ */
   .navbar {
     background: var(--bg-nav);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -1664,9 +1546,6 @@ html.motion-off [data-rv] {
     box-shadow: var(--shadow-glow-gold);
   }
 
-  /* ══════════════════════════════════════════════
-   CONTINGENCY BANNER
-   ══════════════════════════════════════════════ */
   .banner {
     background: var(--banner-bg);
     border-bottom: 1px solid var(--banner-border);
@@ -1772,9 +1651,6 @@ html.motion-off [data-rv] {
     background: rgba(217, 119, 6, 0.15);
   }
 
-  /* ══════════════════════════════════════════════
-   HEADER INTEGRATED SEARCH & KPIs
-   ══════════════════════════════════════════════ */
   .header-right {
     display: flex;
     align-items: center;
@@ -1783,7 +1659,6 @@ html.motion-off [data-rv] {
     width: 100%;
   }
 
-  /* KPI Live status pill */
   .system-status-pill {
     display: inline-flex;
     align-items: center;
@@ -1826,7 +1701,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* Header Search Container */
   .header-search-container {
     flex: 1;
     max-width: 640px;
@@ -1874,7 +1748,6 @@ html.motion-off [data-rv] {
     z-index: 1;
   }
 
-  /* Keyboard shortcut hint (press "/" to focus) */
   .search-kbd-hint {
     position: absolute;
     right: 10px;
@@ -1902,9 +1775,7 @@ html.motion-off [data-rv] {
     opacity: 0;
   }
 
-  /* First-load pulse to draw the eye to the search input */
   @keyframes search-attract {
-
     0%,
     100% {
       box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
@@ -1925,9 +1796,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* ══════════════════════════════════════════════
-   FILTERS SECTION
-   ══════════════════════════════════════════════ */
   .filters-section {
     padding: var(--sp-6) var(--sp-6) var(--sp-2);
   }
@@ -1937,7 +1805,6 @@ html.motion-off [data-rv] {
     margin: 0 auto;
   }
 
-  /* ─ Search Dropdown ─ */
   .search-dropdown {
     position: absolute;
     top: calc(100% + var(--sp-2));
@@ -2028,7 +1895,6 @@ html.motion-off [data-rv] {
     flex-shrink: 0;
   }
 
-  /* ─ Filter Pills ─ */
   .filter-pills {
     display: flex;
     justify-content: center;
@@ -2060,9 +1926,6 @@ html.motion-off [data-rv] {
     box-shadow: var(--shadow-glow-accent);
   }
 
-  /* ══════════════════════════════════════════════
-   DASHBOARD & CARD GRID
-   ══════════════════════════════════════════════ */
   .dashboard {
     padding: var(--sp-6) var(--sp-6) var(--sp-16);
   }
@@ -2078,9 +1941,6 @@ html.motion-off [data-rv] {
     gap: var(--sp-5);
   }
 
-  /* ══════════════════════════════════════════════
-   CARD COMPONENT
-   ══════════════════════════════════════════════ */
   .card {
     position: relative;
     background: var(--bg-surface);
@@ -2100,7 +1960,6 @@ html.motion-off [data-rv] {
     transform: translateY(-3px);
   }
 
-  /* ─ Card Highlight (BloqueApp glow) ─ */
   .card--highlight {
     border-color: var(--accent);
     box-shadow: var(--shadow-glow-accent);
@@ -2110,7 +1969,6 @@ html.motion-off [data-rv] {
     box-shadow: var(--shadow-glow-accent), var(--shadow-lg);
   }
 
-  /* Dark mode card adjustments */
   [data-theme="dark"] .card:hover {
     background: var(--bg-elevated);
   }
@@ -2119,7 +1977,6 @@ html.motion-off [data-rv] {
     border-color: rgba(59, 130, 246, 0.35);
   }
 
-  /* ─ Card Header ─ */
   .card-header {
     display: flex;
     align-items: flex-start;
@@ -2177,7 +2034,6 @@ html.motion-off [data-rv] {
     letter-spacing: -0.01em;
   }
 
-  /* ─ Badge "NUEVO" ─ */
   .card-badge {
     display: inline-flex;
     align-items: center;
@@ -2200,7 +2056,6 @@ html.motion-off [data-rv] {
     margin-bottom: var(--sp-2);
   }
 
-  /* ─ Category Tag ─ */
   .card-tag {
     display: inline-flex;
     align-items: center;
@@ -2227,13 +2082,11 @@ html.motion-off [data-rv] {
     color: var(--tag-support-text);
   }
 
-  /* ─ Card Actions ─ */
   .card-actions {
     margin-top: auto;
     padding-top: var(--sp-3);
   }
 
-  /* Single link button */
   .card-link-btn {
     display: flex;
     align-items: center;
@@ -2264,7 +2117,6 @@ html.motion-off [data-rv] {
     height: 14px;
   }
 
-  /* ─ Sub-links Toggle ─ */
   .card-sublinks-toggle {
     display: flex;
     align-items: center;
@@ -2297,7 +2149,6 @@ html.motion-off [data-rv] {
     transform: rotate(180deg);
   }
 
-  /* ─ Collapsible Sub-links ─ */
   .card-sublinks {
     max-height: 0;
     overflow: hidden;
@@ -2345,7 +2196,6 @@ html.motion-off [data-rv] {
     transform: translateX(0);
   }
 
-  /* ── Card Filter States ── */
   .card.hidden-filter {
     display: none;
   }
@@ -2355,9 +2205,6 @@ html.motion-off [data-rv] {
     box-shadow: 0 0 0 3px var(--accent-subtle), var(--shadow-md);
   }
 
-  /* ══════════════════════════════════════════════
-   NO RESULTS STATE
-   ══════════════════════════════════════════════ */
   .no-results {
     text-align: center;
     padding: var(--sp-16) var(--sp-6);
@@ -2386,9 +2233,6 @@ html.motion-off [data-rv] {
     font-size: var(--fs-sm);
   }
 
-  /* ══════════════════════════════════════════════
-   FOOTER
-   ══════════════════════════════════════════════ */
   .footer {
     background: var(--bg-header);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -2499,9 +2343,6 @@ html.motion-off [data-rv] {
     opacity: 0.35;
   }
 
-  /* ══════════════════════════════════════════════
-   ANIMATIONS
-   ══════════════════════════════════════════════ */
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -2515,7 +2356,6 @@ html.motion-off [data-rv] {
   }
 
   @keyframes badge-pulse {
-
     0%,
     100% {
       opacity: 1;
@@ -2527,7 +2367,6 @@ html.motion-off [data-rv] {
   }
 
   @keyframes glow-breathe {
-
     0%,
     100% {
       box-shadow: 0 0 8px rgba(59, 130, 246, 0.15), var(--shadow-sm);
@@ -2552,8 +2391,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* .animate-in reemplazado por .card-in (sistema de motion unificado). */
-
   .card--highlight {
     animation: glow-breathe 3s ease-in-out infinite;
   }
@@ -2562,9 +2399,6 @@ html.motion-off [data-rv] {
     animation: slide-down 0.2s var(--ease);
   }
 
-  /* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
   @media (max-width: 1100px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
@@ -2627,7 +2461,6 @@ html.motion-off [data-rv] {
   }
 
   @media (max-width: 480px) {
-
     .clock-date,
     .clock-separator {
       display: none;
@@ -2676,11 +2509,7 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* ══════════════════════════════════════════════
-   PRINT
-   ══════════════════════════════════════════════ */
   @media print {
-
     .header,
     .navbar,
     .banner,
@@ -2718,9 +2547,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* ══════════════════════════════════════════════
-   SCROLLBAR
-   ══════════════════════════════════════════════ */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -2739,16 +2565,12 @@ html.motion-off [data-rv] {
     background: var(--text-secondary);
   }
 
-  /* ══════════════════════════════════════════════
-   ACCESSIBILITY
-   ══════════════════════════════════════════════ */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -2766,9 +2588,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* ══════════════════════════════════════════════
-   COMMAND PALETTE (Ctrl+K)
-   ══════════════════════════════════════════════ */
   .cmdk[hidden] {
     display: none;
   }
@@ -2977,7 +2796,6 @@ html.motion-off [data-rv] {
   }
 
   @media (prefers-reduced-motion: reduce) {
-
     .cmdk-backdrop,
     .cmdk-panel {
       animation: none;
@@ -2999,11 +2817,6 @@ html.motion-off [data-rv] {
     }
   }
 
-  /* ══════════════════════════════════════════════
-   ADMIN BUTTON AND MODAL STYLES
-   ══════════════════════════════════════════════ */
-
-  /* --- Admin Button in Header --- */
   .admin-btn {
     width: 34px;
     height: 34px;
@@ -3042,14 +2855,12 @@ html.motion-off [data-rv] {
     transform: rotate(-15deg) scale(1.1);
   }
 
-  /* Add spacing in header actions */
   .header-actions {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
   }
 
-  /* --- Admin Modal Dialog --- */
   .admin-modal {
     position: fixed;
     inset: 0;
@@ -3249,7 +3060,6 @@ html.motion-off [data-rv] {
   }
 
   @keyframes adminShake {
-
     0%,
     100% {
       transform: translateX(0);
@@ -3299,5 +3109,4 @@ html.motion-off [data-rv] {
   .admin-submit-btn:hover svg {
     transform: translateX(3px);
   }
-
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   <meta name="author" content="Área de Informática - CESFAM La Unión">
   <meta name="theme-color" content="#0F172A">
 
-  <!-- Open Graph -->
+
   <meta property="og:title" content="CESFAM La Unión — Portal de Herramientas Digitales">
   <meta property="og:description" content="Acceso centralizado a sistemas clínicos, administrativos y de soporte.">
   <meta property="og:type" content="website">
@@ -17,21 +17,20 @@
 
   <title>CESFAM La Unión — Portal de Herramientas Digitales</title>
 
-  <!-- Favicon -->
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=20260831-hero1">
+
+  <link rel="stylesheet" href="css/styles.css?v=20261005-dark3d4">
 </head>
 
 <body>
 
-  <!-- ════════════════════════════════════════
-       HEADER
-       ════════════════════════════════════════ -->
+
   <header class="header" id="header">
-    <!-- Top Bar: Clock and Theme Toggle -->
+    <!-- Top Bar: Clock (tema único oscuro, sin selector de tema) -->
     <div class="header-top-bar">
       <div class="header-top-inner">
         <div class="header-clock">
@@ -39,14 +38,7 @@
           <span class="clock-separator"></span>
           <span class="clock-time" id="clock-time"></span>
         </div>
-        <div class="header-actions">
-          <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar entre modo claro y oscuro"
-            title="Cambiar tema">
-            <div class="toggle-thumb">
-              <!-- Icon injected by JS -->
-            </div>
-          </button>
-        </div>
+        <div class="header-actions"></div>
       </div>
     </div>
 
@@ -55,13 +47,13 @@
          ════════════════════════════════════════ -->
     <nav class="navbar" id="navbar" aria-label="Accesos rápidos">
       <div class="navbar-inner">
-        <a href="https://cesfamtic.com/universo/" target="_blank" rel="noopener" class="nav-btn nav-btn--gold">
+        <a href="https://cesfamtic.com/Universo/" target="_blank" rel="noopener" class="nav-btn nav-btn--gold">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path
               d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
           </svg>
-          <span class="nav-label">Introducción a mundoCESFAM</span>
+          <span class="nav-label">UNIVERSO CESFAM</span>
         </a>
         <a href="https://cesfamtic.com/directorio" target="_blank" rel="noopener" class="nav-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -71,7 +63,7 @@
           </svg>
           <span class="nav-label">Teléfonos</span>
         </a>
-        <a href="https://cesfamtic.com/soporte/" target="_blank" rel="noopener" class="nav-btn">
+        <a href="https://soporte.cesfamtic.com/" target="_blank" rel="noopener" class="nav-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
@@ -88,7 +80,7 @@
           </svg>
           <span class="nav-label">BloqueApp</span>
         </a>
-        <a href="https://cesfamtic.com" target="_blank" rel="noopener" class="nav-btn">
+        <a href="https://cesfamtic.com/eterniti" target="_blank" rel="noopener" class="nav-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
@@ -97,10 +89,19 @@
           </svg>
           <span class="nav-label">Intranet TI</span>
         </a>
+           <a href="https://cesfamtic.com/cupos-cesfam" target="_blank" rel="noopener" class="nav-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span class="nav-label">Cupos</span>
+        </a>
       </div>
     </nav>
 
-    <!-- Main Branding: Left-aligned & Large Logo + Integrated Search and KPIs -->
+   
     <div class="header-main">
       <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
       <div class="header-main-inner">
@@ -142,9 +143,7 @@
     </div>
   </header>
 
-  <!-- ════════════════════════════════════════
-       CONTINGENCY BANNER
-       ════════════════════════════════════════ -->
+  
   <div class="banner" id="contingency-banner" role="alert">
     <div class="banner-inner">
       <div class="banner-content">
@@ -169,9 +168,7 @@
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       FILTERS
-       ════════════════════════════════════════ -->
+  
   <section class="filters-section" id="filters-section" aria-label="Filtros de herramientas">
     <div class="filters-inner">
       <div class="filters-heading" data-rv>
@@ -209,9 +206,7 @@
     </div>
   </main>
 
-  <!-- ════════════════════════════════════════
-       FOOTER
-       ════════════════════════════════════════ -->
+
   <footer class="footer" id="footer">
     <div class="footer-inner">
       <!-- Col 1: Brand -->
@@ -221,7 +216,7 @@
         <p>Portal de herramientas digitales.<br>Área de Informática.</p>
       </div>
 
-      <!-- Col 2: Contacto -->
+   
       <div class="footer-col" data-rv>
         <h4>Contacto</h4>
         <ul>
@@ -235,7 +230,7 @@
         </ul>
       </div>
 
-      <!-- Col 3: Institucional -->
+      
       <div class="footer-col" data-rv>
         <h4>Institucional</h4>
         <ul>
@@ -246,7 +241,7 @@
         </ul>
       </div>
 
-      <!-- Col 4: Redes -->
+      
       <div class="footer-col" data-rv>
         <h4>CESFAM Redes</h4>
         <div class="footer-social-links">
@@ -319,35 +314,19 @@
     </div>
   </div>
 
-  <!-- JavaScript -->
-<!-- JavaScript principal de GitHub Pages -->
-<script src="js/app.js?v=20260831-hero1"></script>
 
-<!-- Visor de cupos CESFAM: controles guardados por navegador -->
-  <section class="cupos-widget" id="cupos-widget" data-position="bottom-right" aria-label="Disponibilidad de cupos CESFAM">
-    <div class="cupos-widget__panel" id="cupos-widget-panel">
-      <button class="cupos-widget__toggle" id="cupos-widget-toggle" type="button" aria-expanded="false" aria-controls="cupos-widget-controls" aria-label="Opciones del visor de cupos">
-        <span aria-hidden="true">⋮</span><span>Opciones</span>
-      </button>
-      <div class="cupos-widget__controls" id="cupos-widget-controls" hidden>
-        <label for="cupos-widget-position">Ubicación</label>
-        <select id="cupos-widget-position">
-          <option value="bottom-right">Abajo a la derecha</option>
-          <option value="bottom-left">Abajo a la izquierda</option>
-          <option value="top-right">Arriba a la derecha</option>
-          <option value="top-left">Arriba a la izquierda</option>
-        </select>
-        <button class="cupos-widget__hide" id="cupos-widget-close" type="button">Ocultar visor</button>
-      </div>
-      <iframe
-        class="cupos-cesfam-frame"
-        title="Disponibilidad de cupos CESFAM"
-        src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=8"
-        loading="eager">
-      </iframe>
-    </div>
-    <button class="cupos-widget__restore" id="cupos-widget-restore" type="button" hidden>Mostrar cupos</button>
-  </section>
-  <script src="js/cupos-widget-controls.js?v=1"></script>
+<script src="js/app.js?v=20261005-dark3d4"></script>
+
+
+  <style>
+    .cupos-cesfam-frame { position: fixed; right: 20px; bottom: 20px; z-index: 2147483000; width: min(390px, calc(100vw - 28px)); height: 355px; border: 0; background: transparent; }
+    @media (max-width: 480px) { .cupos-cesfam-frame { right: 14px; bottom: 14px; width: calc(100vw - 28px); height: 150px; } }
+  </style>
+  <iframe
+    class="cupos-cesfam-frame"
+    title="Disponibilidad de cupos CESFAM"
+    src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=6"
+    loading="eager">
+  </iframe>
 </body>
 </html>

@@ -318,15 +318,234 @@
 <script src="js/app.js?v=20261005-dark3d4"></script>
 
 
-  <style>
-    .cupos-cesfam-frame { position: fixed; right: 20px; bottom: 20px; z-index: 2147483000; width: min(390px, calc(100vw - 28px)); height: 355px; border: 0; background: transparent; }
-    @media (max-width: 480px) { .cupos-cesfam-frame { right: 14px; bottom: 14px; width: calc(100vw - 28px); height: 150px; } }
-  </style>
-  <iframe
-    class="cupos-cesfam-frame"
-    title="Disponibilidad de cupos CESFAM"
-    src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=6"
-    loading="eager">
-  </iframe>
+<!-- Visor flotante de cupos CESFAM -->
+<style>
+  .cupos-widget {
+    --gap: 20px;
+    position: fixed;
+    z-index: 2147483000;
+    right: var(--gap);
+    bottom: var(--gap);
+    width: min(400px, calc(100vw - 32px));
+  }
+
+  .cupos-widget[data-position="bottom-left"] {
+    right: auto;
+    left: var(--gap);
+  }
+
+  .cupos-widget[data-position="top-right"] {
+    top: var(--gap);
+    bottom: auto;
+  }
+
+  .cupos-widget[data-position="top-left"] {
+    top: var(--gap);
+    right: auto;
+    bottom: auto;
+    left: var(--gap);
+  }
+
+  .cupos-widget__toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+
+  .cupos-widget__options {
+    position: relative;
+  }
+
+  .cupos-widget__button,
+  .cupos-widget__restore {
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    color: #fff;
+    background: #0b315f;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+    font: 700 12px/1 system-ui, sans-serif;
+    cursor: pointer;
+  }
+
+  .cupos-widget__button {
+    min-height: 32px;
+    padding: 0 12px;
+  }
+
+  .cupos-widget__button:hover,
+  .cupos-widget__restore:hover {
+    background: #15579f;
+  }
+
+  .cupos-widget__menu {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    z-index: 5;
+    width: 205px;
+    padding: 12px;
+    border: 1px solid #aabed7;
+    border-radius: 12px;
+    color: #14233c;
+    background: #fff;
+    box-shadow: 0 16px 38px rgba(0,0,0,.28);
+    font: 600 12px system-ui, sans-serif;
+  }
+
+  .cupos-widget__menu label {
+    display: block;
+    margin-bottom: 6px;
+    color: #38506f;
+  }
+
+  .cupos-widget__menu select,
+  .cupos-widget__hide {
+    width: 100%;
+    min-height: 34px;
+    border-radius: 7px;
+    font: 600 12px system-ui, sans-serif;
+  }
+
+  .cupos-widget__menu select {
+    padding: 0 8px;
+    border: 1px solid #b8c9df;
+    color: #14233c;
+    background: #fff;
+  }
+
+  .cupos-widget__hide {
+    margin-top: 8px;
+    border: 1px solid #b43b3b;
+    color: #922525;
+    background: #fff7f7;
+    cursor: pointer;
+  }
+
+  .cupos-widget__hide:hover {
+    color: #fff;
+    background: #a52b2b;
+  }
+
+  .cupos-cesfam-frame {
+    display: block;
+    width: 100%;
+    height: 382px;
+    border: 0;
+    background: transparent;
+  }
+
+  .cupos-widget.is-hidden .cupos-widget__panel {
+    display: none;
+  }
+
+  .cupos-widget.is-hidden {
+    width: auto;
+  }
+
+  .cupos-widget__restore {
+    min-height: 40px;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 480px) {
+    .cupos-widget {
+      --gap: 12px;
+      width: calc(100vw - 24px);
+    }
+
+    .cupos-cesfam-frame {
+      height: 174px;
+    }
+  }
+</style>
+
+<section class="cupos-widget" id="cupos-widget" data-position="bottom-right">
+  <div class="cupos-widget__panel">
+    <div class="cupos-widget__toolbar">
+      <div class="cupos-widget__options">
+        <button class="cupos-widget__button" id="cupos-options" type="button">
+          Opciones
+        </button>
+
+        <div class="cupos-widget__menu" id="cupos-menu" hidden>
+          <label for="cupos-position">Ubicación del visor</label>
+
+          <select id="cupos-position">
+            <option value="bottom-right">Abajo a la derecha</option>
+            <option value="bottom-left">Abajo a la izquierda</option>
+            <option value="top-right">Arriba a la derecha</option>
+            <option value="top-left">Arriba a la izquierda</option>
+          </select>
+
+          <button class="cupos-widget__hide" id="cupos-hide" type="button">
+            Ocultar visor
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <iframe
+      class="cupos-cesfam-frame"
+      title="Disponibilidad de cupos CESFAM"
+      src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=8"
+      loading="eager">
+    </iframe>
+  </div>
+
+  <button class="cupos-widget__restore" id="cupos-restore" type="button" hidden>
+    Mostrar cupos
+  </button>
+</section>
+
+<script>
+  (() => {
+    const key = 'cesfam-cupos-widget-settings';
+    const widget = document.getElementById('cupos-widget');
+    const options = document.getElementById('cupos-options');
+    const menu = document.getElementById('cupos-menu');
+    const position = document.getElementById('cupos-position');
+    const hide = document.getElementById('cupos-hide');
+    const restore = document.getElementById('cupos-restore');
+
+    const settings = JSON.parse(
+      localStorage.getItem(key) ||
+      '{"position":"bottom-right","hidden":false}'
+    );
+
+    function apply() {
+      widget.dataset.position = settings.position;
+      widget.classList.toggle('is-hidden', settings.hidden);
+      position.value = settings.position;
+      restore.hidden = !settings.hidden;
+      menu.hidden = true;
+    }
+
+    function save() {
+      localStorage.setItem(key, JSON.stringify(settings));
+      apply();
+    }
+
+    options.addEventListener('click', () => {
+      menu.hidden = !menu.hidden;
+    });
+
+    position.addEventListener('change', () => {
+      settings.position = position.value;
+      save();
+    });
+
+    hide.addEventListener('click', () => {
+      settings.hidden = true;
+      save();
+    });
+
+    restore.addEventListener('click', () => {
+      settings.hidden = false;
+      save();
+    });
+
+    apply();
+  })();
+</script>
 </body>
 </html>

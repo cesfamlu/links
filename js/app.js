@@ -534,21 +534,85 @@ function initFilters() {
   replayAnimation($('.filters-heading h2'), 'is-fresh');
   replayAnimation($('.filters-heading p'), 'is-fresh');
 }
-
 function initBanner() {
   const banner = $('#contingency-banner');
-  const closeBtn = $('#banner-close'); if (!banner \vert{}\vert{} !closeBtn) return;    if (sessionStorage.getItem('cesfam-banner-dismissed')) { banner.classList.add('hidden'); return; }    closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); sessionStorage.setItem('cesfam-banner-dismissed', 'true'); }); }  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)'); let revealObserver = null; let firstPaint = true;  function revealAllPending() { $$('[data-rv]:not(.rv-in)').forEach(el => el.classList.add('rv-in'));
+  const closeBtn = $('#banner-close');
+
+  if (!banner || !closeBtn) return;
+
+  if (sessionStorage.getItem('cesfam-banner-dismissed')) {
+    banner.classList.add('hidden');
+    return;
+  }
+
+  closeBtn.addEventListener('click', () => {
+    banner.classList.add('hidden');
+    sessionStorage.setItem('cesfam-banner-dismissed', 'true');
+  });
+}
+
+const reducedMotionQuery = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+);
+
+let revealObserver = null;
+let firstPaint = true;
+
+function revealAllPending() {
+  $$('[data-rv]:not(.rv-in)').forEach((element) => {
+    element.classList.add('rv-in');
+  });
 }
 
 function revealVisiblePending() {
-  if (!window.innerHeight) { revealAllPending(); return; }
-  $$('[data-rv]:not(.rv-in)').forEach(el => { const box = el.getBoundingClientRect(); if (box.top < window.innerHeight && box.bottom > 0) el.classList.add('rv-in'); }); }  function initReveals() { if (reducedMotionQuery.matches \vert{}\vert{} !('IntersectionObserver' in window)) { revealAllPending(); return; } revealObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (!entry.isIntersecting) return; entry.target.classList.add('rv-in'); revealObserver.unobserve(entry.target); }); }, { threshold: 0.12 });    applyReveals(); }  function applyReveals() { const pending = $$
-('[data-rv]:not(.rv-in)');
-  if (!revealObserver || !firstPaint) {
-    pending.forEach(el => el.classList.add('rv-in'));
+  if (!window.innerHeight) {
+    revealAllPending();
     return;
   }
-  pending.forEach(el => revealObserver.observe(el));
+
+  $$('[data-rv]:not(.rv-in)').forEach((element) => {
+    const box = element.getBoundingClientRect();
+
+    if (box.top < window.innerHeight && box.bottom > 0) {
+      element.classList.add('rv-in');
+    }
+  });
+}
+
+function initReveals() {
+  if (
+    reducedMotionQuery.matches ||
+    !('IntersectionObserver' in window)
+  ) {
+    revealAllPending();
+    return;
+  }
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('rv-in');
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  applyReveals();
+}
+
+function applyReveals() {
+  const pending = $$('[data-rv]:not(.rv-in)');
+
+  if (!revealObserver || !firstPaint) {
+    pending.forEach((element) => element.classList.add('rv-in'));
+    return;
+  }
+
+  pending.forEach((element) => revealObserver.observe(element));
+
   window.setTimeout(revealVisiblePending, 1400);
 }
 

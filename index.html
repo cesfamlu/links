@@ -9,6 +9,7 @@
   <meta name="author" content="Área de Informática - CESFAM La Unión">
   <meta name="theme-color" content="#0F172A">
 
+
   <meta property="og:title" content="CESFAM La Unión — Portal de Herramientas Digitales">
   <meta property="og:description" content="Acceso centralizado a sistemas clínicos, administrativos y de soporte.">
   <meta property="og:type" content="website">
@@ -16,16 +17,20 @@
 
   <title>CESFAM La Unión — Portal de Herramientas Digitales</title>
 
+
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="css/styles.css?v=20261005-dark3d4">
+
+  <link rel="stylesheet" href="css/styles.css?v=20261005-dark3d5">
 </head>
 
 <body>
 
+
   <header class="header" id="header">
+    <!-- Top Bar: Clock (tema único oscuro, sin selector de tema) -->
     <div class="header-top-bar">
       <div class="header-top-inner">
         <div class="header-clock">
@@ -33,10 +38,25 @@
           <span class="clock-separator"></span>
           <span class="clock-time" id="clock-time"></span>
         </div>
-        <div class="header-actions"></div>
+        <div class="header-actions">
+          <a href="activar-2FA-CORE.pdf" target="_blank" rel="noopener" class="header-alert"
+            aria-label="Atención: activa la verificación en 2 pasos de tu cuenta CORE. Abrir guía">
+            <span class="header-alert-dot" aria-hidden="true"></span>
+            <span class="header-alert-kicker">Atención</span>
+            <span class="header-alert-text">Activa el 2FA en <strong>CORE</strong></span>
+            <span class="header-alert-cta">Ver guía
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
 
+    <!-- ════════════════════════════════════════
+         NAVBAR — 5 Quick Actions
+         ════════════════════════════════════════ -->
     <nav class="navbar" id="navbar" aria-label="Accesos rápidos">
       <div class="navbar-inner">
         <a href="https://cesfamtic.com/Universo/" target="_blank" rel="noopener" class="nav-btn nav-btn--gold">
@@ -93,6 +113,7 @@
       </div>
     </nav>
 
+
     <div class="header-main">
       <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
       <div class="header-main-inner">
@@ -107,11 +128,13 @@
         </div>
 
         <div class="header-right">
+          <!-- Live KPI / Status dot -->
           <div class="system-status-pill">
             <span class="status-dot"></span>
             <span class="status-text">Sistemas Operativos</span>
           </div>
 
+          <!-- Integrated Search bar in Header -->
           <div class="header-search-container">
             <div class="search-bar">
               <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -132,6 +155,7 @@
     </div>
   </header>
 
+
   <div class="banner" id="contingency-banner" role="alert">
     <div class="banner-inner">
       <div class="banner-content">
@@ -140,7 +164,8 @@
           <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
           <path d="M12 9v4M12 17h.01" />
         </svg>
-        <p>Atención: para claves de acceso, comunícate con tu referente o jefatura SOME. La fecha de toma del examen determina la plataforma que debes utilizar.</p>
+        <p>Atención: para claves de acceso, comunícate con tu referente o jefatura SOME. La fecha de toma del examen
+          determina la plataforma que debes utilizar.</p>
       </div>
       <div class="banner-actions">
         <a href="https://10.4.59.192:8445/login" target="_blank" rel="noopener" class="banner-btn">Exámenes HLU</a>
@@ -155,6 +180,7 @@
       </div>
     </div>
   </div>
+
 
   <section class="filters-section" id="filters-section" aria-label="Filtros de herramientas">
     <div class="filters-inner">
@@ -172,9 +198,13 @@
     </div>
   </section>
 
+  <!-- ════════════════════════════════════════
+       DASHBOARD — Card Grid
+       ════════════════════════════════════════ -->
   <main class="dashboard" id="dashboard">
     <div class="dashboard-inner">
       <div class="card-grid" id="card-grid" role="list">
+        <!-- Cards rendered dynamically by JS -->
       </div>
 
       <div class="no-results" id="no-results" aria-live="polite">
@@ -189,13 +219,16 @@
     </div>
   </main>
 
+
   <footer class="footer" id="footer">
     <div class="footer-inner">
+      <!-- Col 1: Brand -->
       <div class="footer-brand" data-rv>
         <img src="img/cesfam-logo-720.webp" alt="CESFAM La Unión — Centro de Salud Familiar Dr. Alfredo Gantz Mann"
           class="footer-logo" width="720" height="720" loading="lazy" decoding="async">
         <p>Portal de herramientas digitales.<br>Área de Informática.</p>
       </div>
+
 
       <div class="footer-col" data-rv>
         <h4>Contacto</h4>
@@ -210,6 +243,7 @@
         </ul>
       </div>
 
+
       <div class="footer-col" data-rv>
         <h4>Institucional</h4>
         <ul>
@@ -219,6 +253,7 @@
           <li><a href="https://cesfamtic.com" target="_blank" rel="noopener">cesfamtic.com</a></li>
         </ul>
       </div>
+
 
       <div class="footer-col" data-rv>
         <h4>CESFAM Redes</h4>
@@ -266,6 +301,9 @@
     </div>
   </footer>
 
+  <!-- ════════════════════════════════════════
+       COMMAND PALETTE (Ctrl+K)
+       ════════════════════════════════════════ -->
   <div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
     <div class="cmdk-backdrop" data-cmdk-close></div>
     <div class="cmdk-panel" role="document">
@@ -289,235 +327,236 @@
     </div>
   </div>
 
-<script src="js/app.js?v=20261005-dark3d4"></script>
 
-<style>
-  .cupos-widget {
-    --gap: 20px;
-    position: fixed;
-    z-index: 2147483000;
-    right: var(--gap);
-    bottom: var(--gap);
-    width: min(400px, calc(100vw - 32px));
-  }
+  <script src="js/app.js?v=20261005-dark3d5"></script>
 
-  .cupos-widget[data-position="bottom-left"] {
-    right: auto;
-    left: var(--gap);
-  }
 
-  .cupos-widget[data-position="top-right"] {
-    top: var(--gap);
-    bottom: auto;
-  }
-
-  .cupos-widget[data-position="top-left"] {
-    top: var(--gap);
-    right: auto;
-    bottom: auto;
-    left: var(--gap);
-  }
-
-  .cupos-widget__toolbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 6px;
-  }
-
-  .cupos-widget__options {
-    position: relative;
-  }
-
-  .cupos-widget__button,
-  .cupos-widget__restore {
-    border: 1px solid rgba(255,255,255,.22);
-    border-radius: 999px;
-    color: #fff;
-    background: #0b315f;
-    box-shadow: 0 8px 22px rgba(0,0,0,.25);
-    font: 700 12px/1 system-ui, sans-serif;
-    cursor: pointer;
-  }
-
-  .cupos-widget__button {
-    min-height: 32px;
-    padding: 0 12px;
-  }
-
-  .cupos-widget__button:hover,
-  .cupos-widget__restore:hover {
-    background: #15579f;
-  }
-
-  .cupos-widget__menu {
-    position: absolute;
-    top: 38px;
-    right: 0;
-    z-index: 5;
-    width: 205px;
-    padding: 12px;
-    border: 1px solid #aabed7;
-    border-radius: 12px;
-    color: #14233c;
-    background: #fff;
-    box-shadow: 0 16px 38px rgba(0,0,0,.28);
-    font: 600 12px system-ui, sans-serif;
-  }
-
-  .cupos-widget__menu label {
-    display: block;
-    margin-bottom: 6px;
-    color: #38506f;
-  }
-
-  .cupos-widget__menu select,
-  .cupos-widget__hide {
-    width: 100%;
-    min-height: 34px;
-    border-radius: 7px;
-    font: 600 12px system-ui, sans-serif;
-  }
-
-  .cupos-widget__menu select {
-    padding: 0 8px;
-    border: 1px solid #b8c9df;
-    color: #14233c;
-    background: #fff;
-  }
-
-  .cupos-widget__hide {
-    margin-top: 8px;
-    border: 1px solid #b43b3b;
-    color: #922525;
-    background: #fff7f7;
-    cursor: pointer;
-  }
-
-  .cupos-widget__hide:hover {
-    color: #fff;
-    background: #a52b2b;
-  }
-
-  .cupos-cesfam-frame {
-    display: block;
-    width: 100%;
-    height: 382px;
-    border: 0;
-    background: transparent;
-  }
-
-  .cupos-widget.is-hidden .cupos-widget__panel {
-    display: none;
-  }
-
-  .cupos-widget.is-hidden {
-    width: auto;
-  }
-
-  .cupos-widget__restore {
-    min-height: 40px;
-    padding: 0 15px;
-  }
-
-  @media (max-width: 480px) {
+  <!-- Visor flotante de cupos CESFAM -->
+  <style>
     .cupos-widget {
-      --gap: 12px;
-      width: calc(100vw - 24px);
+      --gap: 20px;
+      position: fixed;
+      z-index: 2147483000;
+      right: var(--gap);
+      bottom: var(--gap);
+      width: min(400px, calc(100vw - 32px));
+    }
+
+    .cupos-widget[data-position="bottom-left"] {
+      right: auto;
+      left: var(--gap);
+    }
+
+    .cupos-widget[data-position="top-right"] {
+      top: var(--gap);
+      bottom: auto;
+    }
+
+    .cupos-widget[data-position="top-left"] {
+      top: var(--gap);
+      right: auto;
+      bottom: auto;
+      left: var(--gap);
+    }
+
+    .cupos-widget__toolbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 6px;
+    }
+
+    .cupos-widget__options {
+      position: relative;
+    }
+
+    .cupos-widget__button,
+    .cupos-widget__restore {
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 999px;
+      color: #fff;
+      background: #0b315f;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+      font: 700 12px/1 system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    .cupos-widget__button {
+      min-height: 32px;
+      padding: 0 12px;
+    }
+
+    .cupos-widget__button:hover,
+    .cupos-widget__restore:hover {
+      background: #15579f;
+    }
+
+    .cupos-widget__menu {
+      position: absolute;
+      top: 38px;
+      right: 0;
+      z-index: 5;
+      width: 205px;
+      padding: 12px;
+      border: 1px solid #aabed7;
+      border-radius: 12px;
+      color: #14233c;
+      background: #fff;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, .28);
+      font: 600 12px system-ui, sans-serif;
+    }
+
+    .cupos-widget__menu label {
+      display: block;
+      margin-bottom: 6px;
+      color: #38506f;
+    }
+
+    .cupos-widget__menu select,
+    .cupos-widget__hide {
+      width: 100%;
+      min-height: 34px;
+      border-radius: 7px;
+      font: 600 12px system-ui, sans-serif;
+    }
+
+    .cupos-widget__menu select {
+      padding: 0 8px;
+      border: 1px solid #b8c9df;
+      color: #14233c;
+      background: #fff;
+    }
+
+    .cupos-widget__hide {
+      margin-top: 8px;
+      border: 1px solid #b43b3b;
+      color: #922525;
+      background: #fff7f7;
+      cursor: pointer;
+    }
+
+    .cupos-widget__hide:hover {
+      color: #fff;
+      background: #a52b2b;
     }
 
     .cupos-cesfam-frame {
-      height: 174px;
+      display: block;
+      width: 100%;
+      height: 382px;
+      border: 0;
+      background: transparent;
     }
-  }
-</style>
 
-<section class="cupos-widget" id="cupos-widget" data-position="bottom-right">
-  <div class="cupos-widget__panel">
-    <div class="cupos-widget__toolbar">
-      <div class="cupos-widget__options">
-        <button class="cupos-widget__button" id="cupos-options" type="button">
-          Opciones
-        </button>
+    .cupos-widget.is-hidden .cupos-widget__panel {
+      display: none;
+    }
 
-        <div class="cupos-widget__menu" id="cupos-menu" hidden>
-          <label for="cupos-position">Ubicación del visor</label>
+    .cupos-widget.is-hidden {
+      width: auto;
+    }
 
-          <select id="cupos-position">
-            <option value="bottom-right">Abajo a la derecha</option>
-            <option value="bottom-left">Abajo a la izquierda</option>
-            <option value="top-right">Arriba a la derecha</option>
-            <option value="top-left">Arriba a la izquierda</option>
-          </select>
+    .cupos-widget__restore {
+      min-height: 40px;
+      padding: 0 15px;
+    }
 
-          <button class="cupos-widget__hide" id="cupos-hide" type="button">
-            Ocultar visor
+    @media (max-width: 480px) {
+      .cupos-widget {
+        --gap: 12px;
+        width: calc(100vw - 24px);
+      }
+
+      .cupos-cesfam-frame {
+        height: 174px;
+      }
+    }
+  </style>
+
+  <section class="cupos-widget" id="cupos-widget" data-position="bottom-right">
+    <div class="cupos-widget__panel">
+      <div class="cupos-widget__toolbar">
+        <div class="cupos-widget__options">
+          <button class="cupos-widget__button" id="cupos-options" type="button">
+            Opciones
           </button>
+
+          <div class="cupos-widget__menu" id="cupos-menu" hidden>
+            <label for="cupos-position">Ubicación del visor</label>
+
+            <select id="cupos-position">
+              <option value="bottom-right">Abajo a la derecha</option>
+              <option value="bottom-left">Abajo a la izquierda</option>
+              <option value="top-right">Arriba a la derecha</option>
+              <option value="top-left">Arriba a la izquierda</option>
+            </select>
+
+            <button class="cupos-widget__hide" id="cupos-hide" type="button">
+              Ocultar visor
+            </button>
+          </div>
         </div>
       </div>
+
+      <iframe class="cupos-cesfam-frame" title="Disponibilidad de cupos CESFAM"
+        src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=8" loading="eager">
+      </iframe>
     </div>
 
-    <iframe
-      class="cupos-cesfam-frame"
-      title="Disponibilidad de cupos CESFAM"
-      src="https://www.cesfamtic.com/cupos-cesfam/widget-frame.php?v=8"
-      loading="eager">
-    </iframe>
-  </div>
+    <button class="cupos-widget__restore" id="cupos-restore" type="button" hidden>
+      Mostrar cupos
+    </button>
+  </section>
 
-  <button class="cupos-widget__restore" id="cupos-restore" type="button" hidden>
-    Mostrar cupos
-  </button>
-</section>
+  <script>
+    (() => {
+      const key = 'cesfam-cupos-widget-settings';
+      const widget = document.getElementById('cupos-widget');
+      const options = document.getElementById('cupos-options');
+      const menu = document.getElementById('cupos-menu');
+      const position = document.getElementById('cupos-position');
+      const hide = document.getElementById('cupos-hide');
+      const restore = document.getElementById('cupos-restore');
 
-<script>
-  (() => {
-    const key = 'cesfam-cupos-widget-settings';
-    const widget = document.getElementById('cupos-widget');
-    const options = document.getElementById('cupos-options');
-    const menu = document.getElementById('cupos-menu');
-    const position = document.getElementById('cupos-position');
-    const hide = document.getElementById('cupos-hide');
-    const restore = document.getElementById('cupos-restore');
+      const settings = JSON.parse(
+        localStorage.getItem(key) ||
+        '{"position":"bottom-right","hidden":false}'
+      );
 
-    const settings = JSON.parse(
-      localStorage.getItem(key) ||
-      '{"position":"bottom-right","hidden":false}'
-    );
+      function apply() {
+        widget.dataset.position = settings.position;
+        widget.classList.toggle('is-hidden', settings.hidden);
+        position.value = settings.position;
+        restore.hidden = !settings.hidden;
+        menu.hidden = true;
+      }
 
-    function apply() {
-      widget.dataset.position = settings.position;
-      widget.classList.toggle('is-hidden', settings.hidden);
-      position.value = settings.position;
-      restore.hidden = !settings.hidden;
-      menu.hidden = true;
-    }
+      function save() {
+        localStorage.setItem(key, JSON.stringify(settings));
+        apply();
+      }
 
-    function save() {
-      localStorage.setItem(key, JSON.stringify(settings));
+      options.addEventListener('click', () => {
+        menu.hidden = !menu.hidden;
+      });
+
+      position.addEventListener('change', () => {
+        settings.position = position.value;
+        save();
+      });
+
+      hide.addEventListener('click', () => {
+        settings.hidden = true;
+        save();
+      });
+
+      restore.addEventListener('click', () => {
+        settings.hidden = false;
+        save();
+      });
+
       apply();
-    }
-
-    options.addEventListener('click', () => {
-      menu.hidden = !menu.hidden;
-    });
-
-    position.addEventListener('change', () => {
-      settings.position = position.value;
-      save();
-    });
-
-    hide.addEventListener('click', () => {
-      settings.hidden = true;
-      save();
-    });
-
-    restore.addEventListener('click', () => {
-      settings.hidden = false;
-      save();
-    });
-
-    apply();
-  })();
-</script>
+    })();
+  </script>
 </body>
+
 </html>

@@ -1,0 +1,204 @@
+/* Test de velocidad flotante (js/speedtest-widget.js). */
+.speed-widget {
+  position: fixed;
+  z-index: 2147482990;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font);
+}
+
+.speed-widget__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px 0 12px;
+  border: 1px solid var(--banner-border);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  clip-path: var(--chamfer-12);
+  box-shadow: var(--shadow-glow-gold);
+  font: 700 12px/1 var(--font-display);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+
+.speed-widget__toggle svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.speed-widget__toggle svg circle {
+  fill: var(--gold);
+  stroke: none;
+}
+
+.speed-widget__toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.speed-widget__toggle-kicker {
+  font: 600 10px/1 var(--font);
+  letter-spacing: .1em;
+  color: var(--gold);
+}
+
+.speed-widget__toggle:hover,
+.speed-widget__toggle[aria-expanded="true"] {
+  color: var(--gold);
+  background: var(--gold-subtle);
+  border-color: var(--gold);
+}
+
+.speed-widget__panel {
+  width: min(290px, calc(100vw - 24px));
+  padding: 14px;
+  border: 1px solid var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  clip-path: var(--chamfer-18);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.speed-widget__panel[hidden] {
+  display: none;
+}
+
+.speed-widget__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.speed-widget__title {
+  font: 700 13px/1 var(--font-display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.speed-widget__close {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  color: var(--text-secondary);
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.speed-widget__close:hover {
+  color: var(--text-primary);
+}
+
+.speed-widget__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.speed-widget__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  text-align: center;
+  transition: border-color .2s var(--ease);
+}
+
+.speed-widget__metric.is-active {
+  border-color: var(--banner-border);
+}
+
+.speed-widget__label,
+.speed-widget__unit {
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.speed-widget__value {
+  font: 700 20px/1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.speed-widget__bar {
+  height: 3px;
+  margin: 12px 0 8px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.speed-widget__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--gold);
+  transition: width .25s linear;
+}
+
+.speed-widget__status {
+  min-height: 18px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.speed-widget__status.is-good { color: var(--success); }
+.speed-widget__status.is-fair { color: var(--warning); }
+.speed-widget__status.is-slow { color: var(--danger); }
+
+.speed-widget__run {
+  width: 100%;
+  min-height: 36px;
+  border: 0;
+  color: var(--text-on-accent);
+  background: var(--gold);
+  clip-path: var(--chamfer-12);
+  font: 700 12px/1 var(--font-display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.speed-widget__run:hover:not(:disabled) {
+  background: var(--gold-hover);
+}
+
+.speed-widget__run:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.speed-widget__note {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .speed-widget {
+    left: 12px;
+  }
+}

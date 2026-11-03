@@ -142,8 +142,17 @@
     "category": "support",
     "badge": "NUEVO",
     "highlight": true,
-    "type": "single",
-    "url": "https://bloqueapp-f3a22.web.app/"
+    "type": "multi",
+    "links": [
+      {
+        "label": "Principal",
+        "url": "https://bloqueapp-f3a22.web.app/"
+      },
+      {
+        "label": "Nuevo Enlace",
+        "url": "https://bloqueapp.cesfamtic.com"
+      }
+    ]
   },
   {
     "id": "nuevo-1780339326033",
